@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Usuario, Obra
+from .models import Usuario, Obra, Tarea
 
 
 class UsuarioSerializer(serializers.ModelSerializer):
@@ -12,4 +12,10 @@ class UsuarioSerializer(serializers.ModelSerializer):
 class ObraSerializer(serializers.ModelSerializer):
     class Meta:
         model = Obra
+        fields = ('nombre', 'localidad', 'municipio', 'dependencia', 'fecha')
+
+
+class TareaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Tarea
         fields = '__all__'
