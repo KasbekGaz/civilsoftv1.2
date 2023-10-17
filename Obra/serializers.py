@@ -12,7 +12,7 @@ class UsuarioSerializer(serializers.ModelSerializer):
 class ObraSerializer(serializers.ModelSerializer):
     class Meta:
         model = Obra
-        fields = ('nombre', 'localidad', 'municipio', 'dependencia', 'fecha')
+        fields = '__all__'
 
 
 class TareaSerializer(serializers.ModelSerializer):
