@@ -11,9 +11,19 @@ class UsuarioViewSet(viewsets.ModelViewSet):
     serializer_class = UsuarioSerializer
 
 
-class Obra(viewsets.ModelViewSet):
-    queryset = Obra.objects.all()
+class ObraViewSet(viewsets.ModelViewSet):
+    # queryset = Obra.objects.all()
     serializer_class = ObraSerializer
+
+    def get_queryset(self):
+        # * aqui se obtiene el usuario que realiza la solicitud
+        usuario = self.request.user
+        # * Muestra todas las obras a Administradores
+        if usuario.rol == 'Administrador':
+            return Obra.objects.all()
+        # * Muestra solo las obras asociadas al consultor
+        elif usuario.rol == 'Consultor':
+            return usuario.obras.all()
 
 
 class TareaVista(viewsets.ModelViewSet):
