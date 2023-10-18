@@ -1,8 +1,11 @@
 from rest_framework import viewsets
 # * modelos
-from .models import Usuario, Obra, Tarea
+from .models import Usuario, Obra, Tarea, Gasto
 # * serializadores
-from .serializers import UsuarioSerializer, ObraSerializer, TareaSerializer
+from .serializers import UsuarioSerializer, ObraSerializer, TareaSerializer, GastoSerializer
+# * Otras importaciones necesarias
+from django.db import models
+
 # Create your views here.
 
 
@@ -12,20 +15,15 @@ class UsuarioViewSet(viewsets.ModelViewSet):
 
 
 class ObraViewSet(viewsets.ModelViewSet):
-    # queryset = Obra.objects.all()
+    queryset = Obra.objects.all()
     serializer_class = ObraSerializer
-
-    def get_queryset(self):
-        # * aqui se obtiene el usuario que realiza la solicitud
-        usuario = self.request.user
-        # * Muestra todas las obras a Administradores
-        if usuario.rol == 'Administrador':
-            return Obra.objects.all()
-        # * Muestra solo las obras asociadas al consultor
-        elif usuario.rol == 'Consultor':
-            return usuario.obras.all()
 
 
 class TareaVista(viewsets.ModelViewSet):
     queryset = Tarea.objects.all()
     serializer_class = TareaSerializer
+
+
+class GastoViewSet(viewsets.ModelViewSet):
+    queryset = Gasto.objects.all()
+    serializer_class = GastoSerializer
