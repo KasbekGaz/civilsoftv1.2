@@ -80,25 +80,23 @@ class Gasto(models.Model):
         ('Varios', 'Varios'),
     )
 
+    FACTU = (
+        ('Facturado', 'Facturado'),
+        ('No Facturado', 'No Facturado'),
+    )
+
     obra = models.ForeignKey(Obra, on_delete=models.CASCADE)
     fecha = models.DateField()
     descripcion = models.TextField()
     concepto = models.CharField(max_length=255)
     categoria = models.CharField(max_length=25, choices=CATEGORIAS)
     importe = models.DecimalField(max_digits=10, decimal_places=2)
+    facturado = models.CharField(
+        max_length=255, choices=FACTU, default='No Facturado')
     total_gastos = models.DecimalField(
         max_digits=10, decimal_places=2, default=0, editable=False)
 
     # * Aqui tenemos la forma de guardar los datos
-
-    '''
-    def save(self, *args, **kwargs):
-        super(Gasto, self).save(*args, **kwargs)  
-        total_gastos = Gasto.objects.aggregate(models.Sum('importe'))[
-            'importe__sum'] or 0
-        Gasto.objects.update(total_gastos=total_gastos)
-    '''
-
     def save(self, *args, **kwargs):
         super(Gasto, self).save(*args, **kwargs)  # Guarda el objeto primero
         self.actualizar_total_gastos()
@@ -115,3 +113,14 @@ class Gasto(models.Model):
 
     def __str__(self):
         return f"{self.concepto} ({self.categoria}) ({self.obra})"
+
+
+#! Modelo de Comparativa de Volumenes
+class Galeria(models.Model):
+    obra = models.ForeignKey(Obra, on_delete=models.CASCADE)
+    descripcion = models.TextField()
+    fecha = models.DateField()
+    archivo = models.ImageField(upload_to='galeria/')
+
+
+#! Modelo de Galeria
