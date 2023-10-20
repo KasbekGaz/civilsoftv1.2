@@ -1,10 +1,9 @@
 from rest_framework import viewsets
 # * modelos
-from .models import Usuario, Obra, Tarea, Gasto, Galeria
+from .models import Usuario, Obra, Tarea, Gasto, Galeria, Volumen
 # * serializadores
-from .serializers import UsuarioSerializer, ObraSerializer, TareaSerializer, GastoSerializer, GaleriaSerializer
-# * Otras importaciones necesarias
-from django.db import models
+from .serializers import UsuarioSerializer, ObraSerializer, TareaSerializer, GastoSerializer, GaleriaSerializer, VolumenSerializer
+
 
 # Create your views here.
 
@@ -32,3 +31,8 @@ class GastoViewSet(viewsets.ModelViewSet):
 class GaleriaViewSet(viewsets.ModelViewSet):
     queryset = Galeria.objects.all()
     serializer_class = GaleriaSerializer
+
+
+class VolumenViewSet(viewsets.ModelViewSet):
+    queryset = Volumen.objects.all()
+    serializer_class = VolumenSerializer

@@ -33,10 +33,12 @@ class Obra(models.Model):
     municipio = models.CharField(max_length=255)
     dependencia = models.CharField(max_length=255)
     fecha = models.DateField()
-    p_inicial = models.DecimalField(max_digits=10, decimal_places=2)
+    p_inicial = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    total_gastos = models.DecimalField(
+        max_digits=10, decimal_places=2, default=0, editable=False)
 
     def __str__(self):
-        return self.nombre
+        return f"{self.nombre} ({self.total_gastos})"
 
 #! Modelo Tarea
 
@@ -86,17 +88,14 @@ class Gasto(models.Model):
     )
 
     obra = models.ForeignKey(Obra, on_delete=models.CASCADE)
-    fecha = models.DateField()
+    fecha = models.DateField(default=timezone.now)
     descripcion = models.TextField()
     concepto = models.CharField(max_length=255)
     categoria = models.CharField(max_length=25, choices=CATEGORIAS)
     importe = models.DecimalField(max_digits=10, decimal_places=2)
     facturado = models.CharField(
         max_length=255, choices=FACTU, default='No Facturado')
-    total_gastos = models.DecimalField(
-        max_digits=10, decimal_places=2, default=0, editable=False)
 
-    # * Aqui tenemos la forma de guardar los datos
     def save(self, *args, **kwargs):
         super(Gasto, self).save(*args, **kwargs)  # Guarda el objeto primero
         self.actualizar_total_gastos()
@@ -106,21 +105,61 @@ class Gasto(models.Model):
         self.actualizar_total_gastos()
 
     def actualizar_total_gastos(self):
-        # Actualiza total_gastos sumando los importes de todos los gastos
-        total_gastos = Gasto.objects.aggregate(models.Sum('importe'))[
-            'importe__sum'] or 0
-        Gasto.objects.update(total_gastos=total_gastos)
+
+        total_gastos = Gasto.objects.filter(obra=self.obra).aggregate(
+            total_gastos=models.Sum('importe'))['total_gastos'] or 0
+        self.obra.total_gastos = total_gastos
+        self.obra.save()
 
     def __str__(self):
         return f"{self.concepto} ({self.categoria}) ({self.obra})"
 
+#! Modelo de Galeria
 
-#! Modelo de Comparativa de Volumenes
+
 class Galeria(models.Model):
     obra = models.ForeignKey(Obra, on_delete=models.CASCADE)
     descripcion = models.TextField()
     fecha = models.DateField()
     archivo = models.ImageField(upload_to='galeria/')
 
+    def __str__(self):
+        return f"{self.obra} ({self.archivo})"
 
-#! Modelo de Galeria
+
+#! Modelo de Comparativa de Volumenes
+class Volumen(models.Model):
+    status = {
+        ('Sin cambio', 'Sin cambio'),
+        ('Deduccion', 'Deduccion'),
+        ('Adicional', 'Adicional'),
+        ('Extraordinario', 'Extraordinario'),
+    }
+
+    codigo = models.CharField(max_length=255)
+    unidad = models.CharField(max_length=255)
+    concepto = models.CharField(max_length=255)
+    estado = models.CharField(
+        max_length=30, choices=status, default='Sin cambio')
+    # *datos numericos
+    volumen = models.DecimalField(max_digits=10, decimal_places=2)
+    precio = models.DecimalField(max_digits=10, decimal_places=2)
+    importe = models.DecimalField(
+        max_digits=10, decimal_places=2, editable=False)
+    # * campos para cantidad ejecutada
+    v_mod = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    importe_mod = models.DecimalField(
+        max_digits=10, decimal_places=2, editable=False)
+    # * relacion entre obra y volumen
+    obra = models.ForeignKey(
+        Obra, on_delete=models.CASCADE, related_name='volumenes')
+
+    def save(self, *args, **kwargs):
+        if not self.importe:
+            self.importe = self.volumen * self.precio
+        if not self.importe_mod:
+            self.importe_mod = self.v_mod * self.precio
+        super(Volumen, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return f"{self.codigo} ({self.concepto}) ({self.importe}) ({self.importe_mod})"

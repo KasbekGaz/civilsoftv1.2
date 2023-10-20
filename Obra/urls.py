@@ -1,6 +1,6 @@
 from rest_framework.routers import DefaultRouter
 from django.urls import path, include
-from .views import UsuarioViewSet, ObraViewSet, TareaVista, GastoViewSet, GaleriaViewSet
+from .views import UsuarioViewSet, ObraViewSet, TareaVista, GastoViewSet, GaleriaViewSet, VolumenViewSet
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -9,7 +9,8 @@ router.register(r'usuarios', UsuarioViewSet)
 router.register(r'obras', ObraViewSet)
 router.register(r'tareas', TareaVista)
 router.register(r'gastos', GastoViewSet, basename='gasto')
-router.register(r'galeria', GaleriaViewSet, basename='galeria')
+router.register(r'galeria', GaleriaViewSet, basename='galeria'),
+router.register(r'volumen', VolumenViewSet, basename='comparativa_volumen')
 
 
 urlpatterns = [
