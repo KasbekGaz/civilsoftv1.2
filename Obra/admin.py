@@ -9,5 +9,3 @@ admin.site.register(Tarea)
 admin.site.register(Gasto)
 admin.site.register(Galeria)
 admin.site.register(Volumen)
-
-# * para la obra de Proveedor
