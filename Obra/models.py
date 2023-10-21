@@ -155,11 +155,20 @@ class Volumen(models.Model):
         Obra, on_delete=models.CASCADE, related_name='volumenes')
 
     def save(self, *args, **kwargs):
-        if not self.importe:
-            self.importe = self.volumen * self.precio
-        if not self.importe_mod:
-            self.importe_mod = self.v_mod * self.precio
+
+        self.importe = self.volumen * self.precio
+        self.importe_mod = self.v_mod * self.precio
         super(Volumen, self).save(*args, **kwargs)
+
+        ''' Anterior
+        def save(self, *args, **kwargs):
+        
+            if not self.importe:
+                self.importe = self.volumen * self.precio
+            if not self.importe_mod:
+                self.importe_mod = self.v_mod * self.precio
+            super(Volumen, self).save(*args, **kwargs)
+        '''
 
     def __str__(self):
         return f"{self.codigo} ({self.concepto}) ({self.importe}) ({self.importe_mod})"
