@@ -1,7 +1,6 @@
-from django.db import models
-# * timezone es para poder tomar la fecha actual al momento de una accion.
 from django.utils import timezone
 from django.db import models
+
 # Create your models here.
 
 # ! modelo de Usuario
@@ -34,15 +33,16 @@ class Obra(models.Model):
     dependencia = models.CharField(max_length=255)
     fecha = models.DateField()
     p_inicial = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+
+    #! campo que se dirige a Gasto
     total_gastos = models.DecimalField(
         max_digits=10, decimal_places=2, default=0, editable=False)
 
     def __str__(self):
-        return f"{self.nombre} ({self.total_gastos})"
+        return f"{self.nombre} ({self.total_gastos})({self.total_contrato}) ({self.total_ejecutado}) ({self.diferencia})"
+
 
 #! Modelo Tarea
-
-
 class Tarea(models.Model):
     ESTADO_CHOICES = (
         ('completado', 'Completado'),
@@ -142,12 +142,13 @@ class Volumen(models.Model):
         ('Extraordinario', 'Extraordinario'),
     }
 
+    obra = models.ForeignKey(Obra, on_delete=models.CASCADE)
     codigo = models.CharField(max_length=255)
     unidad = models.CharField(max_length=255)
     concepto = models.CharField(max_length=255)
     estado = models.CharField(
         max_length=30, choices=status, default='Sin cambio')
-    # *datos numericos
+    # *Campos para cantidad contratada
     volumen = models.DecimalField(max_digits=10, decimal_places=2)
     precio = models.DecimalField(max_digits=10, decimal_places=2)
     importe = models.DecimalField(
@@ -156,25 +157,13 @@ class Volumen(models.Model):
     v_mod = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     importe_mod = models.DecimalField(
         max_digits=10, decimal_places=2, editable=False)
-    # * relacion entre obra y volumen
-    obra = models.ForeignKey(
-        Obra, on_delete=models.CASCADE, related_name='volumenes')
+
+    #! Aqui se guardan las modificaciones de importe_mod e importe
 
     def save(self, *args, **kwargs):
-
         self.importe = self.volumen * self.precio
         self.importe_mod = self.v_mod * self.precio
         super(Volumen, self).save(*args, **kwargs)
-
-        ''' Funcion de guardar importe anterior
-        def save(self, *args, **kwargs):
-        
-            if not self.importe:
-                self.importe = self.volumen * self.precio
-            if not self.importe_mod:
-                self.importe_mod = self.v_mod * self.precio
-            super(Volumen, self).save(*args, **kwargs)
-        '''
 
     def __str__(self):
         return f"{self.codigo} ({self.concepto}) ({self.importe}) ({self.importe_mod})"
