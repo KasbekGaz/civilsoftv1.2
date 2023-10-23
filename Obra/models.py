@@ -52,7 +52,7 @@ class Tarea(models.Model):
 
     Fvence = models.DateField(null=True, blank=True)
     Fcreado = models.DateField(default=timezone.now)
-    Fcompletado = models.DateField(null=True, blank=True)
+    Fcompletado = models.DateField(null=True, blank=True, editable=False)
     titulo = models.CharField(max_length=255)
     descripcion = models.TextField()
     estado = models.CharField(
@@ -86,15 +86,21 @@ class Gasto(models.Model):
         ('Facturado', 'Facturado'),
         ('No Facturado', 'No Facturado'),
     )
+    TIPOS = {
+        ('Efectivo', 'Efectivo'),
+        ('Transferencia', 'Transferencia'),
+    }
 
     obra = models.ForeignKey(Obra, on_delete=models.CASCADE)
     fecha = models.DateField(default=timezone.now)
+    proveedor = models.CharField(max_length=255, null=True)
     descripcion = models.TextField()
     concepto = models.CharField(max_length=255)
     categoria = models.CharField(max_length=25, choices=CATEGORIAS)
     importe = models.DecimalField(max_digits=10, decimal_places=2)
     facturado = models.CharField(
-        max_length=255, choices=FACTU, default='No Facturado')
+        max_length=50, choices=FACTU, default='No Facturado')
+    Tipo = models.CharField(max_length=50, choices=TIPOS, default='Efectivo')
 
     def save(self, *args, **kwargs):
         super(Gasto, self).save(*args, **kwargs)  # Guarda el objeto primero
@@ -160,7 +166,7 @@ class Volumen(models.Model):
         self.importe_mod = self.v_mod * self.precio
         super(Volumen, self).save(*args, **kwargs)
 
-        ''' Anterior
+        ''' Funcion de guardar importe anterior
         def save(self, *args, **kwargs):
         
             if not self.importe:
