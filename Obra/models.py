@@ -33,13 +33,17 @@ class Obra(models.Model):
     dependencia = models.CharField(max_length=255)
     fecha = models.DateField()
     p_inicial = models.DecimalField(max_digits=10, decimal_places=2, default=0)
-
-    #! campo que se dirige a Gasto
+    #! campo que se dllenan con modelo gasto
     total_gastos = models.DecimalField(
+        max_digits=10, decimal_places=2, default=0, editable=False)
+    #! campos que se llenan con modelo volumen
+    total_importes = models.DecimalField(
+        max_digits=10, decimal_places=2, default=0, editable=False)
+    total_importes_mod = models.DecimalField(
         max_digits=10, decimal_places=2, default=0, editable=False)
 
     def __str__(self):
-        return f"{self.nombre} ({self.total_gastos})({self.total_contrato}) ({self.total_ejecutado}) ({self.diferencia})"
+        return f"{self.nombre} ({self.total_gastos}) ({self.total_importes}) ({self.total_importes_mod})"
 
 
 #! Modelo Tarea
@@ -74,22 +78,23 @@ class Tarea(models.Model):
 
 
 class Gasto(models.Model):
-    CATEGORIAS = (
+    CATEGORIAS = [
         ('Administracion', 'Administración'),
         ('Mano de obra', 'Mano de obra'),
         ('Materiales', 'Materiales'),
         ('Viaticos', 'Viáticos'),
         ('Varios', 'Varios'),
-    )
+    ]
 
-    FACTU = (
+    FACTU = [
         ('Facturado', 'Facturado'),
         ('No Facturado', 'No Facturado'),
-    )
-    TIPOS = {
+    ]
+
+    TIPOS = [
         ('Efectivo', 'Efectivo'),
         ('Transferencia', 'Transferencia'),
-    }
+    ]
 
     obra = models.ForeignKey(Obra, on_delete=models.CASCADE)
     fecha = models.DateField(default=timezone.now)
@@ -135,12 +140,12 @@ class Galeria(models.Model):
 
 #! Modelo de Comparativa de Volumenes
 class Volumen(models.Model):
-    status = {
+    status = [
         ('Sin cambio', 'Sin cambio'),
         ('Deduccion', 'Deduccion'),
         ('Adicional', 'Adicional'),
         ('Extraordinario', 'Extraordinario'),
-    }
+    ]
 
     obra = models.ForeignKey(Obra, on_delete=models.CASCADE)
     codigo = models.CharField(max_length=255)
@@ -149,7 +154,7 @@ class Volumen(models.Model):
     estado = models.CharField(
         max_length=30, choices=status, default='Sin cambio')
     # *Campos para cantidad contratada
-    volumen = models.DecimalField(max_digits=10, decimal_places=2)
+    volumen = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     precio = models.DecimalField(max_digits=10, decimal_places=2)
     importe = models.DecimalField(
         max_digits=10, decimal_places=2, editable=False)
@@ -157,13 +162,84 @@ class Volumen(models.Model):
     v_mod = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     importe_mod = models.DecimalField(
         max_digits=10, decimal_places=2, editable=False)
+    diferencia = models.DecimalField(
+        max_digits=10, decimal_places=2, editable=False, default=0)
 
     #! Aqui se guardan las modificaciones de importe_mod e importe
-
     def save(self, *args, **kwargs):
+        # Calcula el importe base
         self.importe = self.volumen * self.precio
-        self.importe_mod = self.v_mod * self.precio
+
+        # Si es un registro existente
+        if self.pk is not None:
+            existing_record = Volumen.objects.get(pk=self.pk)
+            # Comprueba si v_mod ha cambiado
+            if self.v_mod != existing_record.v_mod:
+                # Calcula el importe_mod
+                self.importe_mod = self.v_mod * self.precio
+                # Verifica el estado
+                if self.importe == 0 and self.importe_mod != 0:
+                    self.estado = 'Extraordinario'
+                elif self.importe == self.importe_mod:
+                    self.estado = 'Sin cambio'
+                elif self.importe != 0 and self.importe_mod == 0:
+                    self.estado = 'Sin cambio'
+                else:
+                    if self.importe_mod > self.importe:
+                        self.estado = 'Adicional'
+                    elif self.importe_mod < self.importe:
+                        self.estado = 'Deduccion'
+            else:
+                # Si v_mod no ha cambiado
+                if self.v_mod == 0:
+                    self.estado = 'Sin cambio'
+
+            # Calcula la diferencia
+            self.diferencia = self.importe - self.importe_mod
+
+        else:
+            #! Si es un nuevo registro
+            # Calcula el importe_mod
+            self.importe_mod = self.v_mod * self.precio
+            # Verifica el estado
+            if self.importe == 0 and self.importe_mod != 0:
+                self.estado = 'Extraordinario'
+            elif self.importe == self.importe_mod:
+                self.estado = 'Sin cambio'
+            elif self.importe != 0 and self.importe_mod == 0:
+                self.estado = 'Sin cambio'
+            else:
+                if self.importe_mod > self.importe:
+                    self.estado = 'Adicional'
+                elif self.importe_mod < self.importe:
+                    self.estado = 'Deduccion'
+
+            # Calcula la diferencia
+            self.diferencia = self.importe - self.importe_mod
+
+        # Guarda el registro
         super(Volumen, self).save(*args, **kwargs)
 
+    def delete(self, *args, **kwargs):
+        super(Volumen, self).delete(*args, **kwargs)
+        self.actualizar_total_importes()
+        self.actualizar_total_importes_mod()
+
+    #! actualiza valores para la suma del total importe
+
+    def actualizar_total_importes(self):
+        total_importes = Volumen.objects.filter(obra=self.obra).aggregate(
+            total_importes=models.Sum('importe'))['total_importes'] or 0
+        self.obra.total_importes = total_importes
+        self.obra.save()
+
+    #! actualiza valores para la suma del total importe modificado
+
+    def actualizar_total_importes_mod(self):
+        total_importes_mod = Volumen.objects.filter(obra=self.obra).aggregate(
+            total_importes_mod=models.Sum('importe_mod'))['total_importes_mod'] or 0
+        self.obra.total_importes_mod = total_importes_mod
+        self.obra.save()
+
     def __str__(self):
-        return f"{self.codigo} ({self.concepto}) ({self.importe}) ({self.importe_mod})"
+        return f"{self.codigo} ({self.importe}) ({self.importe_mod}) ({self.diferencia})"
