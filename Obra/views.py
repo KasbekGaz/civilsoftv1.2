@@ -1,4 +1,7 @@
-from rest_framework import viewsets
+from rest_framework import viewsets, status
+from rest_framework.response import Response
+from rest_framework.views import APIView
+# * Arriba cosas para la vista personalizada
 # * modelos
 from .models import Usuario, Obra, Tarea, Gasto, Galeria, Volumen
 # * serializadores

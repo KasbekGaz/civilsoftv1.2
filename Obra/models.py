@@ -1,9 +1,11 @@
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.utils import timezone
 from django.db import models
 
 # Create your models here.
 
-# ! modelo de Usuario
+
+#! modelo de Usuario
 
 
 class Usuario(models.Model):
@@ -12,15 +14,17 @@ class Usuario(models.Model):
         ('Consultor', 'Consultor')
     )
 
-    nombre = models.CharField(max_length=255)
-    correo = models.CharField(max_length=255)
-    password = models.CharField(max_length=255)
+    nombre = models.CharField(max_length=100)
+    correo = models.CharField(max_length=100)
+    password = models.CharField(max_length=100)
+    confirm_password = models.CharField(max_length=100, null=True)
     rol = models.CharField(max_length=15, choices=ROLES)
     # * relacion de muchos a muchos de la tabla usuario a obras
     obras = models.ManyToManyField('Obra', related_name='usuarios')
 
     def __str__(self):
         return f"{self.nombre} ({self.rol})"
+
 
 #! Modelo Obra
 
