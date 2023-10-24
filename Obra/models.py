@@ -99,13 +99,13 @@ class Gasto(models.Model):
     obra = models.ForeignKey(Obra, on_delete=models.CASCADE)
     fecha = models.DateField(default=timezone.now)
     proveedor = models.CharField(max_length=255, null=True)
-    descripcion = models.TextField()
     concepto = models.CharField(max_length=255)
+    descripcion = models.TextField(blank=True)
     categoria = models.CharField(max_length=25, choices=CATEGORIAS)
-    importe = models.DecimalField(max_digits=10, decimal_places=2)
     facturado = models.CharField(
         max_length=50, choices=FACTU, default='No Facturado')
     Tipo = models.CharField(max_length=50, choices=TIPOS, default='Efectivo')
+    importe = models.DecimalField(max_digits=10, decimal_places=2)
 
     def save(self, *args, **kwargs):
         super(Gasto, self).save(*args, **kwargs)  # Guarda el objeto primero
@@ -219,6 +219,9 @@ class Volumen(models.Model):
 
         # Guarda el registro
         super(Volumen, self).save(*args, **kwargs)
+        # actualizamos totales:
+        self.actualizar_total_importes()
+        self.actualizar_total_importes_mod()
 
     def delete(self, *args, **kwargs):
         super(Volumen, self).delete(*args, **kwargs)

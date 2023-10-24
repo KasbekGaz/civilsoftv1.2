@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Proveedor, Material
+from .models import Proveedor, Material, Banca
 
 
 class ProveedorSerializer(serializers.ModelSerializer):
@@ -14,4 +14,10 @@ class MaterialSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Material
+        fields = '__all__'
+
+
+class BancaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Banca
         fields = '__all__'
