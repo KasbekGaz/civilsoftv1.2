@@ -6,7 +6,8 @@ from rest_framework.views import APIView
 from .models import Usuario, Obra, Tarea, Gasto, Galeria, Volumen
 # * serializadores
 from .serializers import UsuarioSerializer, ObraSerializer, TareaSerializer, GastoSerializer, GaleriaSerializer, VolumenSerializer
-
+# * Decorators para la gestion del rol
+from .decorators import es_administrador, es_consultor
 
 # Create your views here.
 
