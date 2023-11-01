@@ -27,12 +27,17 @@ class UsuarioManager(BaseUserManager):
 
 
 class Usuario(AbstractBaseUser, PermissionsMixin):
+    ROLES = (
+        ('administrador', 'Administrador'),
+        ('consultor', 'Consultor'),
+    )
+
     email = models.EmailField(unique=True)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
-
+    rol = models.CharField(max_length=12, choices=ROLES, default='consultor')
     objects = UsuarioManager()
 
     USERNAME_FIELD = 'email'
