@@ -10,7 +10,11 @@ from .decorators import es_administrador, es_consultor
 # * Manejo de sesiones Usuario
 from django.contrib.auth import login, logout
 from .forms import RegistroForm
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.decorators import login_required
 # Create your views here.
+
+#! registro usuario
 
 
 def registrar_usuario(request):
@@ -19,10 +23,33 @@ def registrar_usuario(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
-            return redirect('home')
+            return redirect('home')  # pagina de inicio
     else:
         form = RegistroForm()
     return render(request, 'registro.html', {'form': form})
+
+#! Login
+
+
+def iniciar_sesion(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            # * se validan las credenciales del usuario
+            user = form.get_user()
+            login(request, user)
+            return redirect('')  # pagina de obras
+    else:
+        form = AuthenticationForm()
+    return render(request, 'iniciar_sesion.html', {'form': form})
+
+#! Logout
+
+
+@login_required
+def cerrar_sesion(request):
+    logout(request)
+    return redirect('home')  # pagina inicio
 
 
 ''' El serializador del modelo usuario anterior
