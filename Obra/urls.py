@@ -5,7 +5,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 router = DefaultRouter()
-router.register(r'usuarios', UsuarioViewSet)
+# router.register(r'usuarios', UsuarioViewSet)
 router.register(r'obras', ObraViewSet)
 router.register(r'tareas', TareaVista)
 router.register(r'gastos', GastoViewSet, basename='gasto')
