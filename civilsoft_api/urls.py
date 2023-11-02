@@ -16,9 +16,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+# * rutas de obra app
+from Obra import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('users/', include('Obra.urls')),
-    path('contacs/', include('contactos.urls'))
+    path('contacs/', include('contactos.urls')),
+    # *Rutas de incio:
+    path("", views.home, name="home"),
+    path("registro/", views.registrar_usuario, name="registro"),
+    path("login/", views.iniciar_sesion, name="login"),
+    path("logout/", views.cerrar_sesion, name="logout"),
 ]
