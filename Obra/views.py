@@ -1,6 +1,5 @@
 from rest_framework import viewsets
 from django.shortcuts import redirect, render
-# * Arriba cosas para la vista personalizada
 # * modelos
 from .models import Obra, Tarea, Gasto, Galeria, Volumen
 # * serializadores
@@ -14,9 +13,13 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 # Create your views here.
 
+
+#! Pagina de inicio
+def home(request):
+    return render(request, 'home.html')
+
+
 #! registro usuario
-
-
 def registrar_usuario(request):
     if request.method == 'POST':
         form = RegistroForm(request.POST)
@@ -41,7 +44,7 @@ def iniciar_sesion(request):
             return redirect('')  # pagina de obras
     else:
         form = AuthenticationForm()
-    return render(request, 'iniciar_sesion.html', {'form': form})
+    return render(request, 'login.html', {'form': form})
 
 #! Logout
 
