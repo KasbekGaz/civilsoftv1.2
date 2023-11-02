@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CivilSoft App</title>
+  </head>
+  <body>
+    <nav>
+      <div>
+        <a href="/">CivilSoft App</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div>
+          <ul>
+            <li>
+              <a href="/">Inicio</a>
+              {% if user.is_authenticated %}
+            </li>
+            <li>
+              <a href="/logout">Cerrar Sesion</a>
+            </li>
+            {% else %}
+            <li>
+              <a href="/registro">Registrarse</a>
+            </li>
+            <li>
+              <a href="/Login">Iniciar Sesion</a>
+            </li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </nav>
+    {% block content %}{% endblock %}
+  </body>
+</html>
