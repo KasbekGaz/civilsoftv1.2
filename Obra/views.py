@@ -8,6 +8,7 @@ from .serializers import ObraSerializer, TareaSerializer, GastoSerializer, Galer
 from .decorators import es_administrador, es_consultor
 # * Manejo de sesiones Usuario
 from django.contrib.auth import login, logout
+# * formularios
 from .forms import RegistroForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
@@ -41,26 +42,17 @@ def iniciar_sesion(request):
             # * se validan las credenciales del usuario
             user = form.get_user()
             login(request, user)
-            return redirect('')  # pagina de obras
+            return redirect('home')  # pagina de obras
     else:
         form = AuthenticationForm()
     return render(request, 'login.html', {'form': form})
 
+
 #! Logout
-
-
 @login_required
 def cerrar_sesion(request):
     logout(request)
     return redirect('home')  # pagina inicio
-
-
-''' El serializador del modelo usuario anterior
-
-class UsuarioViewSet(viewsets.ModelViewSet):
-    queryset = Usuario.objects.all()
-    serializer_class = UsuarioSerializer
-'''
 
 
 class ObraViewSet(viewsets.ModelViewSet):

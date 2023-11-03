@@ -24,8 +24,8 @@ urlpatterns = [
     path('users/', include('Obra.urls')),
     path('contacs/', include('contactos.urls')),
     # *Rutas de incio:
-    path("", views.home, name="home"),
-    path("registro/", views.registrar_usuario, name="registro"),
-    path("login/", views.iniciar_sesion, name="login"),
-    path("logout/", views.cerrar_sesion, name="logout"),
+    path('', views.home, name='home'),
+    path('registro/', views.registrar_usuario, name='registro'),
+    path('login/', views.iniciar_sesion, name='login'),
+    path('logout/', views.cerrar_sesion, name='logout'),
 ]

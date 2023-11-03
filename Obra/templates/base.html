@@ -25,18 +25,12 @@
             <li>
               <a href="/">Inicio</a>
               {% if user.is_authenticated %}
-            </li>
-            <li>
-              <a href="/logout">Cerrar Sesion</a>
-            </li>
+                <a href="{% url 'logout' %}">Cerrar Sesion</a>
               {% else %}
-            <li>
-              <a href="/registro">Registrarse</a>
-            </li>
-            <li>
-              <a href="/login">Iniciar Sesion</a>
-            </li>
+                <a href="{% url 'registro' %}">Registrarse</a>
+                <a href="{% url 'login' %}">Iniciar Sesion</a>
               {% endif %}
+            </li>
           </ul>
         </div>
       </div>
