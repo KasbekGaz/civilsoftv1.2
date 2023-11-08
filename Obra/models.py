@@ -1,24 +1,54 @@
 from django.utils import timezone
 from django.db import models
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 
 # Create your models here.
 
 
-#! modelo de Usuario
+class CustomUserManager(BaseUserManager):
+    def create_user(self, username, email, password=None, telefono=None, rol='Consul'):
+        if not email:
+            raise ValueError('El correo electrónico es obligatorio')
+        email = self.normalize_email(email)
+        user = self.model(username=username, email=email,
+                          telefono=telefono, rol=rol)
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
 
-class Usuario(models.Model):
-    ROLES = (
-        ('Administrador', 'Administrador'),
-        ('Consultor', 'Consultor')
+    def create_superuser(self, username, password, telefono=None, rol='Admin'):
+        user = self.create_user(username, password, telefono, rol)
+        user.is_staff = True
+        user.is_superuser = True
+        user.save(using=self._db)
+        return user
+
+
+class CustomUser(AbstractBaseUser):
+
+    ROL_CHOICES = (
+        ('Admin', 'Admin'),
+        ('Consul', 'Consul'),
     )
 
-    nombre = models.CharField(max_length=100)
-    correo = models.CharField(max_length=100)
-    password = models.CharField(max_length=100)
-    confirm_password = models.CharField(max_length=100, null=True)
-    rol = models.CharField(max_length=15, choices=ROLES)
-    # * relacion de muchos a muchos de la tabla usuario a obras
-    obras = models.ManyToManyField('Obra', related_name='usuarios')
+    username = models.CharField(max_length=30, unique=True)
+    email = models.EmailField(unique=True)
+    telefono = models.CharField(max_length=15, blank=True, null=True)
+    is_active = models.BooleanField(default=True)
+    is_staff = models.BooleanField(default=False)
+    rol = models.CharField(
+        max_length=10, choices=ROL_CHOICES, default='Consul')
+
+    objects = CustomUserManager()
+
+    USERNAME_FIELD = 'username'
+    EMAIL_FIELD = 'email'
+
+    class Meta:
+        permissions = [
+            ("can_view_gastos", "Puede ver gastos"),
+            ("can_add_edit_delete_gastos", "Puede agregar, editar y eliminar gastos"),
+        ]
 
     def __str__(self):
         return f"{self.nombre} ({self.rol})"

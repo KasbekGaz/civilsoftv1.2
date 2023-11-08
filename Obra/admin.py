@@ -1,9 +1,9 @@
 from django.contrib import admin
-from .models import Usuario, Obra, Tarea, Gasto, Galeria, Volumen
+from .models import CustomUser, Obra, Tarea, Gasto, Galeria, Volumen
 # Register your models here.
 
 # * Para la app de obra
-admin.site.register(Usuario)
+admin.site.register(CustomUser)
 admin.site.register(Obra)
 admin.site.register(Tarea)
 admin.site.register(Gasto)
