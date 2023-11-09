@@ -68,7 +68,10 @@ class ObraViewSet(viewsets.ModelViewSet):
     def create(self, request, *args, **kwargs):
         if request.user.is_authenticated and request.user.rol == 'Admin':
             # Lógica para crear un gasto (para usuarios Admin)
-            return super().create(request, *args, **kwargs)
+            response = super().create(request, *args, **kwargs)
+            response.data['message'] = 'La obra se ha creado exitosamente.'
+            return response
+
         else:
             return Response({'detail': 'No tiene permiso para crear obras'}, status=status.HTTP_403_FORBIDDEN)
 
@@ -89,7 +92,9 @@ class ObraViewSet(viewsets.ModelViewSet):
     def destroy(self, request, *args, **kwargs):
         if request.user.is_authenticated and request.user.rol == 'Admin':
             # Lógica para eliminar un gasto (para usuarios Admin)
-            return super().destroy(request, *args, **kwargs)
+            response = super().destroy(request, *args, **kwargs)
+            response.data['message'] = 'La obra se ha eliminado exitosamente.'
+            return response
         else:
             return Response({'detail': 'No tiene permiso para eliminar obras'}, status=status.HTTP_403_FORBIDDEN)
 
