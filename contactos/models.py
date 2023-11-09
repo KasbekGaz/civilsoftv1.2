@@ -16,20 +16,20 @@ class Proveedor(models.Model):
 
 
 class Material(models.Model):
-    proovedor = models.ForeignKey(Proveedor, on_delete=models.CASCADE)
+    proveedor = models.ForeignKey(Proveedor, on_delete=models.CASCADE)
     unidad = models.CharField(max_length=255, null=True)
     material = models.CharField(max_length=255)
     precio = models.DecimalField(max_digits=10, decimal_places=2)
 
     def __str__(self):
-        return f"{self.material} ({self.proovedor})"
+        return f"{self.material} ({self.proveedor})"
 
 
 class Banca(models.Model):
-    proovedor = models.ForeignKey(Proveedor, on_delete=models.CASCADE)
+    proveedor = models.ForeignKey(Proveedor, on_delete=models.CASCADE)
     banco = models.CharField(max_length=255)
     cuenta_banco = models.CharField(max_length=20)
     clave_banco = models.CharField(max_length=20)
 
     def __str__(self):
-        return f"{self.banco} ({self.proovedor})"
+        return f"{self.banco} ({self.proveedor})"
