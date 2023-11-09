@@ -24,7 +24,7 @@ class CustomUserManager(BaseUserManager):
         return user
 
 
-class CustomUser(AbstractBaseUser, PermissionsMixin):
+class CustomUser(AbstractBaseUser):
 
     ROL_CHOICES = (
         ('Admin', 'Admin'),
@@ -44,6 +44,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = 'username'
     EMAIL_FIELD = 'email'
 
+    '''
     class Meta:
         permissions = [
             ("can_view_obras", "Puede ver obras"),
@@ -68,6 +69,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
             ("can_view_bancas", "Puede ver banca"),
             ("can_add_edit_delete_bancas", "Puede agregar, editar y eliminar banca"),
         ]
+    '''
 
     def __str__(self):
         return f"{self.nombre} ({self.rol})"
@@ -115,10 +117,15 @@ class Tarea(models.Model):
     obra = models.ForeignKey('Obra', on_delete=models.CASCADE)
 
     def save(self, *args, **kwargs):
+        # * si el estado es copmletado en Fcompletado pone la fecha de cuando se completa
         if self.estado == 'completado' and not self.Fcompletado:
             self.Fcompletado = timezone.now().date()
+            # * si no tiene nada Fvence y el estado es completado pone la fecha de cuando se crea
         if not self.Fvence and self.estado == 'completado':
             self.Fvence = timezone.now().date()
+            # * si Fvence es menor que la fecha actual y el estado es diferemte de completado se asigna como VENCIDA
+        if self.Fvence and self.Fvence < timezone.now().date() and self.estado != 'completado':
+            self.estado = 'vencida'
         super(Tarea, self).save(*args, **kwargs)
 
     def __str__(self):
