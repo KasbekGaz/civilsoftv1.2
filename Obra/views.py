@@ -54,6 +54,8 @@ class UserLogoutView(generics.DestroyAPIView):
 
 
 #! Vista de OBRA
+
+
 class ObraViewSet(viewsets.ModelViewSet):
     queryset = Obra.objects.all()
     serializer_class = ObraSerializer
@@ -101,13 +103,58 @@ class ObraViewSet(viewsets.ModelViewSet):
         else:
             return Response({'detail': 'No tiene permiso para ver obras'}, status=status.HTTP_403_FORBIDDEN)
 
+#! Vista Tarea
+
 
 class TareaVista(viewsets.ModelViewSet):
     queryset = Tarea.objects.all()
     serializer_class = TareaSerializer
+    # * Definimos metodos HTTP permitidos en la vista
+    http_method_names = ['get', 'post', 'put', 'patch', 'delete']
 
+    # * logica para el manejo de roles
+
+    def create(self, request, *args, **kwargs):
+        if request.user.is_authenticated and request.user.rol == 'Admin':
+            # Lógica para crear un gasto (para usuarios Admin)
+            return super().create(request, *args, **kwargs)
+        else:
+            return Response({'detail': 'No tiene permiso para crear Tareas'}, status=status.HTTP_403_FORBIDDEN)
+
+    def update(self, request, *args, **kwargs):
+        if request.user.is_authenticated and request.user.rol == 'Admin':
+            # Lógica para actualizar un gasto (para usuarios Admin)
+            return super().update(request, *args, **kwargs)
+        else:
+            return Response({'detail': 'No tiene permiso para actualizar Tareas'}, status=status.HTTP_403_FORBIDDEN)
+
+    def partial_update(self, request, *args, **kwargs):
+        if request.user.is_authenticated and request.user.rol == 'Admin':
+            # Lógica para actualizar parcialmente un gasto (para usuarios Admin)
+            return super().partial_update(request, *args, **kwargs)
+        else:
+            return Response({'detail': 'No tiene permiso para actualizar Tareas'}, status=status.HTTP_403_FORBIDDEN)
+
+    def destroy(self, request, *args, **kwargs):
+        if request.user.is_authenticated and request.user.rol == 'Admin':
+            # Lógica para eliminar un gasto (para usuarios Admin)
+            return super().destroy(request, *args, **kwargs)
+        else:
+            return Response({'detail': 'No tiene permiso para eliminar Tareas'}, status=status.HTTP_403_FORBIDDEN)
+
+    def list(self, request, *args, **kwargs):
+        if request.user.is_authenticated and request.user.rol == 'Admin':
+            # Lógica para listar gastos (para usuarios Admin)
+            return super().list(request, *args, **kwargs)
+        elif request.user.is_authenticated and request.user.rol == 'Consul':
+            # Lógica para listar gastos (para usuarios Consul)
+            return super().list(request, *args, **kwargs)
+        else:
+            return Response({'detail': 'No tiene permiso para ver Tareas'}, status=status.HTTP_403_FORBIDDEN)
 
 #! vistas GASTO
+
+
 class GastoViewSet(viewsets.ModelViewSet):
     queryset = Gasto.objects.all()
     serializer_class = GastoSerializer
@@ -154,12 +201,98 @@ class GastoViewSet(viewsets.ModelViewSet):
         else:
             return Response({'detail': 'No tiene permiso para ver gastos'}, status=status.HTTP_403_FORBIDDEN)
 
+#! Vista Galeria
+
 
 class GaleriaViewSet(viewsets.ModelViewSet):
     queryset = Galeria.objects.all()
     serializer_class = GaleriaSerializer
+    # * Definimos metodos HTTP permitidos en la vista
+    http_method_names = ['get', 'post', 'put', 'patch', 'delete']
+    # * logica para el manejo de roles
+
+    def create(self, request, *args, **kwargs):
+        if request.user.is_authenticated and request.user.rol == 'Admin':
+            # Lógica para crear un gasto (para usuarios Admin)
+            return super().create(request, *args, **kwargs)
+        else:
+            return Response({'detail': 'No tiene permiso para subir archivos'}, status=status.HTTP_403_FORBIDDEN)
+
+    def update(self, request, *args, **kwargs):
+        if request.user.is_authenticated and request.user.rol == 'Admin':
+            # Lógica para actualizar un gasto (para usuarios Admin)
+            return super().update(request, *args, **kwargs)
+        else:
+            return Response({'detail': 'No tiene permiso para actualizar archivos'}, status=status.HTTP_403_FORBIDDEN)
+
+    def partial_update(self, request, *args, **kwargs):
+        if request.user.is_authenticated and request.user.rol == 'Admin':
+            # Lógica para actualizar parcialmente un gasto (para usuarios Admin)
+            return super().partial_update(request, *args, **kwargs)
+        else:
+            return Response({'detail': 'No tiene permiso para actualizar archivos'}, status=status.HTTP_403_FORBIDDEN)
+
+    def destroy(self, request, *args, **kwargs):
+        if request.user.is_authenticated and request.user.rol == 'Admin':
+            # Lógica para eliminar un gasto (para usuarios Admin)
+            return super().destroy(request, *args, **kwargs)
+        else:
+            return Response({'detail': 'No tiene permiso para eliminar archivos'}, status=status.HTTP_403_FORBIDDEN)
+
+    def list(self, request, *args, **kwargs):
+        if request.user.is_authenticated and request.user.rol == 'Admin':
+            # Lógica para listar gastos (para usuarios Admin)
+            return super().list(request, *args, **kwargs)
+        elif request.user.is_authenticated and request.user.rol == 'Consul':
+            # Lógica para listar gastos (para usuarios Consul)
+            return super().list(request, *args, **kwargs)
+        else:
+            return Response({'detail': 'No tiene permiso para ver archivos'}, status=status.HTTP_403_FORBIDDEN)
+
+#! Vista Volumen
 
 
 class VolumenViewSet(viewsets.ModelViewSet):
     queryset = Volumen.objects.all()
     serializer_class = VolumenSerializer
+    # * Definimos metodos HTTP permitidos en la vista
+    http_method_names = ['get', 'post', 'put', 'patch', 'delete']
+    # * logica para el manejo de roles
+
+    def create(self, request, *args, **kwargs):
+        if request.user.is_authenticated and request.user.rol == 'Admin':
+            # Lógica para crear un gasto (para usuarios Admin)
+            return super().create(request, *args, **kwargs)
+        else:
+            return Response({'detail': 'No tiene permiso para crear volumenes'}, status=status.HTTP_403_FORBIDDEN)
+
+    def update(self, request, *args, **kwargs):
+        if request.user.is_authenticated and request.user.rol == 'Admin':
+            # Lógica para actualizar un gasto (para usuarios Admin)
+            return super().update(request, *args, **kwargs)
+        else:
+            return Response({'detail': 'No tiene permiso para actualizar volumenes'}, status=status.HTTP_403_FORBIDDEN)
+
+    def partial_update(self, request, *args, **kwargs):
+        if request.user.is_authenticated and request.user.rol == 'Admin':
+            # Lógica para actualizar parcialmente un gasto (para usuarios Admin)
+            return super().partial_update(request, *args, **kwargs)
+        else:
+            return Response({'detail': 'No tiene permiso para actualizar volumenes'}, status=status.HTTP_403_FORBIDDEN)
+
+    def destroy(self, request, *args, **kwargs):
+        if request.user.is_authenticated and request.user.rol == 'Admin':
+            # Lógica para eliminar un gasto (para usuarios Admin)
+            return super().destroy(request, *args, **kwargs)
+        else:
+            return Response({'detail': 'No tiene permiso para eliminar volumenes'}, status=status.HTTP_403_FORBIDDEN)
+
+    def list(self, request, *args, **kwargs):
+        if request.user.is_authenticated and request.user.rol == 'Admin':
+            # Lógica para listar gastos (para usuarios Admin)
+            return super().list(request, *args, **kwargs)
+        elif request.user.is_authenticated and request.user.rol == 'Consul':
+            # Lógica para listar gastos (para usuarios Consul)
+            return super().list(request, *args, **kwargs)
+        else:
+            return Response({'detail': 'No tiene permiso para ver volumenes'}, status=status.HTTP_403_FORBIDDEN)

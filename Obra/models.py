@@ -24,7 +24,7 @@ class CustomUserManager(BaseUserManager):
         return user
 
 
-class CustomUser(AbstractBaseUser):
+class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     ROL_CHOICES = (
         ('Admin', 'Admin'),
@@ -46,8 +46,27 @@ class CustomUser(AbstractBaseUser):
 
     class Meta:
         permissions = [
+            ("can_view_obras", "Puede ver obras"),
+            ("can_add_edit_delete_obras", "Puede agregar, editar y eliminar obras"),
+            ("can_view_tareas", "Puede ver tareas"),
+            ("can_add_edit_delete_tareas", "Puede agregar, editar y eliminar tareas"),
             ("can_view_gastos", "Puede ver gastos"),
             ("can_add_edit_delete_gastos", "Puede agregar, editar y eliminar gastos"),
+            ("can_view_galerias", "Puede ver archivos"),
+            ("can_add_edit_delete_galerias",
+             "Puede agregar, editar y eliminar archivos"),
+            ("can_view_volumenes", "Puede ver volumenes"),
+            ("can_add_edit_delete_volumenes",
+             "Puede agregar, editar y eliminar volumenes"),
+            # ! Contacs app permissions
+            ("can_view_proveedores", "Puede ver proveedores"),
+            ("can_add_edit_delete_proveedores",
+             "Puede agregar, editar y eliminar proveedores"),
+            ("can_view_materiales", "Puede ver materiales"),
+            ("can_add_edit_delete_materiales",
+             "Puede agregar, editar y eliminar materiales"),
+            ("can_view_bancas", "Puede ver banca"),
+            ("can_add_edit_delete_bancas", "Puede agregar, editar y eliminar banca"),
         ]
 
     def __str__(self):
