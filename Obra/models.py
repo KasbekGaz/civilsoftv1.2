@@ -227,6 +227,7 @@ class Volumen(models.Model):
     def save(self, *args, **kwargs):
         # Calcula el importe base
         self.importe = self.volumen * self.precio
+        self.importe_mod = self.v_mod * self.precio
 
         # Si es un registro existente
         if self.pk is not None:
