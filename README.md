@@ -35,7 +35,11 @@ Esta aplicacion es para llevar un control administrativo, control de gestion de 
 - CRUD galeria
 - Espacio para subir evidencias de progreso de cada obra
 
-> Funcionalidades nuevas se agregaran conforme a versiones integradas.
+## Integracion de manejo de Usuarios
+
+- Integracion de permisos de CRUD conforme a roles
+
+> Funcionalidades nuevas se agregaran conforme se avance.
 > Este proyecto pertenece a:
 > Oswaldo Lázaro Flores
 > Jose Irvin Petriz Velázquez
