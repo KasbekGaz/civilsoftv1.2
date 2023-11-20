@@ -106,6 +106,7 @@ class ObraViewSet(viewsets.ModelViewSet):
             # Lógica para listar gastos (para usuarios Consul)
             return super().list(request, *args, **kwargs)
         else:
+            print(f'Usuario no autorizado: {request.user}')
             return Response({'detail': 'No tiene permiso para ver obras'}, status=status.HTTP_403_FORBIDDEN)
 
 #! Vista Tarea
