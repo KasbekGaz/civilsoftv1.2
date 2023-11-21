@@ -41,7 +41,7 @@ export function ObraList () {
   return (
     <div className="bg-blue p-8 mx-10 my-10 shadow-md rounded-md text-white justify-right">
       <div className="container mx-auto p-4">
-      <h2 className="text-2xl font-semibold mb-4">Lista de Obras Registradas</h2>
+        <h2 className="text-2xl font-semibold mb-4">Lista de Obras Registradas</h2>
       
       <ul className="list-disc pl-4">
         {obras.map((obra) => (

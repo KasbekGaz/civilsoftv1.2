@@ -4,20 +4,24 @@ const Button = ({ color, text }) => {
   const getButtonStyle = () => {
     switch (color) {
       case 'green':
-        return 'bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded';
+        return 'bg-lime-600 hover:bg-lime-700 text-white font-bold py-2 px-4 rounded';
       case 'orange':
-        return 'bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded';
+        return 'bg-orange-600 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded';
       case 'red':
-        return 'bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded';
+        return 'bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded';
     case 'yellow':
-        return 'bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded';
+        return 'bg-teal-500 hover:bg-teal-600 text-white font-bold py-2 px-4 rounded';
+    case 'gold':
+      return 'bg-amber-500 hover:bg-amber-600 text-white font-bold py-2 px-4 rounded';
       default:
         return '';
     }
   };
 
   return (
-    <button className={getButtonStyle()}>{text}</button>
+    <div className='grid-cols-1'>
+      <button className={getButtonStyle()}>{text}</button>
+    </div>
   );
 };
 

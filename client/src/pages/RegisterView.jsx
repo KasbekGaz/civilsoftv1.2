@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'
-
+import Button from '../components/Button'
 const RegisterView = () => {
 
     const navigate = useNavigate();
@@ -46,7 +46,7 @@ const RegisterView = () => {
 
     return (
         <div  className="min-h-screen flex items-center justify-center">
-          <div className="bg-blue-950 p-8 shadow-md rounded-md">
+          <div className="p-8 shadow-2xl rounded-md bg-gradient-to-r from-indigo-800 to-purple-900">
             <h2 className="text-2xl font-semibold mb-4" >Registro de Usuario</h2>
             <form onSubmit={handleSubmit}>
               <label className="block mb-2">
@@ -56,23 +56,23 @@ const RegisterView = () => {
                 name="username" 
                 value={userData.username} 
                 onChange={handleChange} 
-                className="w-full border rounded-md py-2 px-3 mt-1"
+                className="bg-sky-950 w-full border rounded-md py-2 px-3 mt-1"
                 />
               </label>
               <br />
               <label className="block mb-2">
                 Contraseña:
-                <input type="password" name="password" value={userData.password} onChange={handleChange} className="w-full border rounded-md py-2 px-3 mt-1" />
+                <input type="password" name="password" value={userData.password} onChange={handleChange} className="bg-sky-950 w-full border rounded-md py-2 px-3 mt-1" />
               </label>
               <br />
               <label className="block mb-2">
                 Email:
-                <input type="email" name="email" value={userData.email} onChange={handleChange} className="w-full border rounded-md py-2 px-3 mt-1" />
+                <input type="email" name="email" value={userData.email} onChange={handleChange} className="bg-sky-950 w-full border rounded-md py-2 px-3 mt-1" />
               </label>
               <br />
               <label className="block mb-2">
                 Teléfono:
-                <input type="text" name="telefono" value={userData.telefono} onChange={handleChange} className="w-full border rounded-md py-2 px-3 mt-1"/>
+                <input type="text" name="telefono" value={userData.telefono} onChange={handleChange} className="bg-sky-950 w-full border rounded-md py-2 px-3 mt-1"/>
               </label>
               <br />
               <label className="block mb-2">
@@ -80,13 +80,13 @@ const RegisterView = () => {
                 <select 
                 name="rol" 
                 value={userData.rol} 
-                onChange={handleChange} className="w-full border rounded-md py-2 px-3 mt-1">
+                onChange={handleChange} className="bg-sky-950 w-full border rounded-md py-2 px-3 mt-1">
                   <option value="Admin">Administrador</option>
                   <option value="Consul">Consultor</option>
                 </select>
               </label>
               <br />
-              <button type="submit" className="bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-700">Registrar</button>
+              <Button type="submit" color="gold" text="Registrar" />
             </form>
           </div>
         </div>

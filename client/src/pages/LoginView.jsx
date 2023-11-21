@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
-
+import Button from '../components/Button'
 
 
 export function LoginView() {
@@ -51,15 +51,15 @@ export function LoginView() {
                     <input type="text" name="username" 
                     value={userData.username} 
                     onChange={handleChange} 
-                    className="w-full border rounded-md py-2 px-3 mt-1"/>
+                    className="w-full border rounded-md py-2 px-3 mt-1 bg-sky-950"/>
                 </label>
                 <br />
                 <label className="block mb-2" >
                     Contraseña:
-                    <input type="password" name="password" value={userData.password} onChange={handleChange} className="w-full border rounded-md py-2 px-3 mt-1"/>
+                    <input type="password" name="password" value={userData.password} onChange={handleChange} className="w-full border rounded-md py-2 px-3 mt-1 bg-sky-950"/>
                 </label>
                 <br />
-                <button type='submit' className="bg-green-500 text-white mb-2 py-2 px-6 rounded-md hover:bg-green-700"> Entrar </button>
+                    <Button color="gold" text="Entrar" type="submit" />
                 <br />
             </form>
         </div>
