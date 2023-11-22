@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 //import { useNavigate } from "react-router-dom";
 import  ObraList  from "../components/ObraList";
+import Button from '../components/Button';
+
 
 const ObraForm = () => {
     //const navigate = useNavigate();
@@ -31,7 +33,7 @@ const ObraForm = () => {
     try {
       const token = localStorage.getItem('token');
 
-      const response = await axios.post('http://127.0.0.1:8000/v1/api/obras/', obraData, {
+      const response = await axios.post('http://127.0.0.1:8000/app/api/v1/obras/', obraData, {
         headers: {
           Authorization: `Token ${token}`,
         },
@@ -59,8 +61,8 @@ const ObraForm = () => {
   };
 
   return (
-    <div className="flex items-center bg-slate-700">
-      <div className="bg-blue p-8 mx-10 my-10 shadow-md rounded-md text-white bg-gradient-to-r from-blue-500 justify-left">
+    <div className='justify-center shadow-md rounded-md'>
+      <div className="bg-blue p-8 mx-10 my-10 shadow-md rounded-md text-white justify-center">
         <h2 className="text-2xl font-semibold mb-4">Registro de Nueva Obra</h2>
         {error && <p className="text-red-500">{error}</p>}
 
@@ -72,7 +74,7 @@ const ObraForm = () => {
               name="nombre"
               value={obraData.nombre}
               onChange={handleInputChange}
-              className="w-full border rounded-md py-2 px-3 mt-1 text-black"
+              className="w-full border rounded-md py-2 px-3 mt-1 text-white bg-sky-950"
             />
           </label>
           <br />
@@ -83,7 +85,7 @@ const ObraForm = () => {
               name="localidad"
               value={obraData.localidad}
               onChange={handleInputChange}
-              className="w-full border rounded-md py-2 px-3 mt-1 text-black"
+              className="w-full border rounded-md py-2 px-3 mt-1 text-white bg-sky-950"
             />
           </label>
           <br />
@@ -94,7 +96,7 @@ const ObraForm = () => {
               name="municipio"
               value={obraData.municipio}
               onChange={handleInputChange}
-              className="w-full border rounded-md py-2 px-3 mt-1 text-black"
+              className="w-full border rounded-md py-2 px-3 mt-1 text-white bg-sky-950"
             />
           </label>
           <br />
@@ -105,7 +107,7 @@ const ObraForm = () => {
               name="dependencia"
               value={obraData.dependencia}
               onChange={handleInputChange}
-              className="w-full border rounded-md py-2 px-3 mt-1 text-black"
+              className="w-full border rounded-md py-2 px-3 mt-1 text-white bg-sky-950"
             />
           </label>
           <br />
@@ -116,7 +118,7 @@ const ObraForm = () => {
               name="fecha"
               value={obraData.fecha}
               onChange={handleInputChange}
-              className="w-full border rounded-md py-2 px-3 mt-1 text-black"
+              className="w-full border rounded-md py-2 px-3 mt-1 text-white bg-sky-950"
             />
           </label>
           <br />
@@ -124,26 +126,23 @@ const ObraForm = () => {
             Presupuesto Inicial:
             <div className="relative mt-2 rounded-md shadow-sm">
               <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                <span className="text-gray-800 sm:text-sm">$</span>
+                <span className="text-white bg-sky-950 sm:text-sm">$</span>
               </div>
               <input
                 type="text"
                 name="p_inicial"
                 value={obraData.p_inicial}
                 onChange={handleInputChange}
-                className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-black ring-1 ring-inset ring-gray-300 placeholder:text-gray-800 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                className="block w-full rounded-md border-0 py-1.5 pl-7 pr-20 text-white bg-sky-950 ring-1 ring-inset ring-gray-300 placeholder:text-white focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 placeholder="0.00"
               />
             </div>
           </label>
-          
-          <button type="submit" className="bg-yellow-500 text-white py-2 px-4 rounded-md mt-4">
-            Registrar Obra
-          </button>
+            <Button type="submit" color="green" text="Registrar" />
         </form>
       </div>
 
-      <div bg-blue p-8 mx-10 my-10 shadow-md rounded-md text-white bg-gradient-to-r from-blue-500 >
+      <div >
         <ObraList />
       </div>
       

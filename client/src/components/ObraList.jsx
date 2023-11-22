@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Button from './Button';
 
 export function ObraList () {
   const [obras, setObras] = useState([]);
@@ -39,19 +40,44 @@ export function ObraList () {
   }
 
   return (
-    <div className="bg-blue p-8 mx-10 my-10 shadow-md rounded-md text-white justify-right">
+    <div className="bg-blue p-8 mx-10 my-10 shadow-2xl rounded-md text-white justify-center">
       <div className="container mx-auto p-4">
         <h2 className="text-2xl font-semibold mb-4">Lista de Obras Registradas</h2>
-      
-      <ul className="list-disc pl-4">
-        {obras.map((obra) => (
-          <li key={obra.id} className="mb-2">
-            <strong>{obra.nombre}</strong> - {obra.localidad}, {obra.municipio} ({obra.dependencia}) - Fecha: {obra.fecha} - Presupuesto: {obra.p_inicial}
-          </li>
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Nombre</th>
+              <th>Localidad</th>
+              <th>Municipio</th>
+              <th>Dependencia</th>
+              <th>Presupuesto</th>
+              <th>Editar</th>
+              <th>Eliminar</th>
+            </tr>
+          </thead>
+          <tbody>
+          {obras.map((obra) => (
+            <tr key={obra.id}>
+              <td>{obra.id}</td>
+              <td>{obra.nombre}</td>
+              <td>{obra.localidad}</td>
+              <td>{obra.municipio}</td>
+              <td>{obra.dependencia}</td>
+              <td>{obra.p_inicial}</td>
+              <td className='mx-2'>
+                <Button color="orange" text="Editar"/>
+              </td>
+              <td>
+              <Button color="red" text="Eliminar"/>
+              </td>
+            </tr>
         ))}
-      </ul>
+          </tbody>
+        </table>
+      </div>
     </div>
-    </div>
+
   );
 };
 

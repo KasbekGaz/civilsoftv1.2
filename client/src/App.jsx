@@ -8,13 +8,10 @@ import  ObraForm  from "./pages/ObraForm";
 import Plantillas from './pages/Plantillas';
 //! componentes
 import ObraList from './components/ObraList';
-import Navbar from './components/Navbar';
-
-
+import Sidebar from './components/Sidebar';
 
 
 function App() {
-
   return (
     <>
     {/* Esto es para navegar entre lasdpaginas   */}
@@ -26,7 +23,6 @@ function App() {
         <Route path="/obras" element={<ObraList/>} />
         <Route path="/create-obra" element={<ObraForm/>} />
         <Route path="/plantilla" element={<Plantillas/>} />
-        <Route path="/Navbar" element={<Navbar/>} />
       </Routes>
     </BrowserRouter>
     </>

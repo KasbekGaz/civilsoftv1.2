@@ -26,27 +26,30 @@ const Navbar = () => {
   };
 
   return (
-  <nav>
-  <div>
-    <div>
-      <a href=""></a>
-        <i></i>
-        <span>Notificaciones</span>
+  <nav className='bg-blue-900 p-4'>
+    <div className='flex items-center justify-between text-white'>
       <div>
-        <h6>Mensajes de tareas vencidas</h6>
+        <a href="" className='felx items-center'></a>
+          <i className='mr-2'></i>
+          <span>Notificaciones</span>
+        <div className='ml-4'>
+          <h6 className='text-sm text-gray-200'>Mensajes de tareas vencidas</h6>
+        </div>
+      </div>
+      <div className='felx items-center'>
+        <a href="" className='text-white'>
+          <span>
+            Usuario Autenticado
+          </span>
+        </a>
+        <div className='ml-4'>
+          <button 
+            onClick={handleLogout}
+            className='bg-red-300 text-white px-4 py-2 rounded-md focus:outline-none hover:bg-red-600'
+          >Cerrar Sesion</button>
+        </div>
       </div>
     </div>
-    <div>
-      <a href="">
-        <span>
-          Usuario Autenticado
-        </span>
-      </a>
-      <div>
-        <button onClick={handleLogout}>Cerrar Sesion</button>
-      </div>
-    </div>
-  </div>
   </nav>
   );
 };

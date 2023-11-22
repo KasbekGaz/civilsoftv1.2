@@ -87,13 +87,11 @@ function Plantillas() {
 
     return(
 <>
-    <h1 className="text-white">hOLA mUNDO</h1>
-
+<Navbar />
+     <Sidebar />
      <div className="flex justify-center items-center h-screen">
-      <div>
-        <Sidebar />
-        <Navbar />
-      </div>
+     
+     <h1 className="text-white">hOLA mUNDO</h1>
       <form className="p-6 rounded shadow-2xl">
         {/* Botón "Crear" (verde) */}
         <Button color="green" text="Crear" />
