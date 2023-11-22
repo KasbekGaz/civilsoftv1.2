@@ -1,47 +1,53 @@
 import React, { useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
-  const [perfilOpcionesVisible, setPerfilOpcionesVisible] = useState(false);
-  const [notificacionesOpcionesVisible, setNotificacionesOpcionesVisible] = useState(false);
+  
+  const navigate = useNavigate();
 
-  const togglePerfilOpciones = () => {
-    setPerfilOpcionesVisible(!perfilOpcionesVisible);
-  };
+  const handleLogout = async () =>{
 
-  const toggleNotificacionesOpciones = () => {
-    setNotificacionesOpcionesVisible(!notificacionesOpcionesVisible);
+    try {
+      // Conectamos al backend y utilizamos el método DELETE
+      const response = await axios.delete('http://127.0.0.1:8000/app/api/v1/logout/', {
+        headers: {
+          Authorization: `Token ${localStorage.getItem('token')}`,
+        },
+      });
+
+      console.log('Sesión cerrada con éxito: ', response.data);
+      localStorage.removeItem('token');
+      navigate('/login'); // Redirigir a la página de inicio de sesión
+
+    } catch (error) {
+      console.error('Error al cerrar sesión: ', error);
+    }
   };
 
   return (
-    <nav className="bg-blue-500 p-4 text-white">
-      <div className="flex items-center justify-between">
-        {/* Sección "Perfil" */}
-        <div>
-          <span className="font-bold cursor-pointer" onClick={togglePerfilOpciones}>
-            Perfil
-          </span>
-          {perfilOpcionesVisible && (
-            <ul className="list-none ml-0">
-              <li className="cursor-pointer hover:underline">Ver Perfil</li>
-              <li className="cursor-pointer hover:underline">Cerrar Sesión</li>
-            </ul>
-          )}
-        </div>
-
-        {/* Sección "Notificaciones" */}
-        <div>
-          <span className="mx-2 font-bold cursor-pointer" onClick={toggleNotificacionesOpciones}>
-            Notificaciones
-          </span>
-          {notificacionesOpcionesVisible && (
-            <ul className="list-none ml-0">
-              <li className="cursor-pointer hover:underline">Tareas Importantes</li>
-              {/* Puedes agregar más opciones de notificaciones según tus necesidades */}
-            </ul>
-          )}
-        </div>
+  <nav>
+  <div>
+    <div>
+      <a href=""></a>
+        <i></i>
+        <span>Notificaciones</span>
+      <div>
+        <h6>Mensajes de tareas vencidas</h6>
       </div>
-    </nav>
+    </div>
+    <div>
+      <a href="">
+        <span>
+          Usuario Autenticado
+        </span>
+      </a>
+      <div>
+        <button onClick={handleLogout}>Cerrar Sesion</button>
+      </div>
+    </div>
+  </div>
+  </nav>
   );
 };
 

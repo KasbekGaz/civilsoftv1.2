@@ -4,6 +4,8 @@ import Table from '../components/Table';
 import { useState, useEffect } from 'react'; //importatnte para la Table
 import Form from "../components/Form"; //formulario
 import SearchBar from '../components/SearchBar'; //para buscar o filtar datos de una tabla
+import Navbar from '../components/Navbar';
+import Sidebar from '../components/Sidebar';
 
 
 function Plantillas() {
@@ -86,7 +88,12 @@ function Plantillas() {
     return(
 <>
     <h1 className="text-white">hOLA mUNDO</h1>
+
      <div className="flex justify-center items-center h-screen">
+      <div>
+        <Sidebar />
+        <Navbar />
+      </div>
       <form className="p-6 rounded shadow-2xl">
         {/* Botón "Crear" (verde) */}
         <Button color="green" text="Crear" />

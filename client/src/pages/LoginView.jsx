@@ -25,7 +25,7 @@ export function LoginView() {
         
         try {
             // ! Realizar la solicitud de registro al backend
-            const response = await axios.post('http://127.0.0.1:8000/login/', userData);
+            const response = await axios.post('http://127.0.0.1:8000/app/api/v1/login/', userData);
             console.log('Inicio de sesión exitoso. Token almacenado:', response.data.token);
 
             // Almacenar el token en el localStorage

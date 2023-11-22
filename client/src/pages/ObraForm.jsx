@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from "react-router-dom";
+//import { useNavigate } from "react-router-dom";
 import  ObraList  from "../components/ObraList";
 
 const ObraForm = () => {
@@ -51,7 +51,6 @@ const ObraForm = () => {
         p_inicial: 0,
       });
 
-      // Puedes agregar un mensaje de éxito o redirección aquí
      
     } catch (error) {
       console.error('Error al agregar la nueva obra:', error.response);
@@ -142,11 +141,11 @@ const ObraForm = () => {
             Registrar Obra
           </button>
         </form>
-        </div>
+      </div>
 
-        <div >
-          <ObraList />
-        </div>
+      <div bg-blue p-8 mx-10 my-10 shadow-md rounded-md text-white bg-gradient-to-r from-blue-500 >
+        <ObraList />
+      </div>
       
     </div>
 

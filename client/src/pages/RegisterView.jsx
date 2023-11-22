@@ -46,7 +46,7 @@ const RegisterView = () => {
 
     return (
         <div  className="min-h-screen flex items-center justify-center">
-          <div className="p-8 shadow-2xl rounded-md bg-gradient-to-r from-indigo-800 to-purple-900">
+          <div className="p-8 shadow-2xl rounded-md">
             <h2 className="text-2xl font-semibold mb-4" >Registro de Usuario</h2>
             <form onSubmit={handleSubmit}>
               <label className="block mb-2">
