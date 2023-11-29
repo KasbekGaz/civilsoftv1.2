@@ -26,12 +26,12 @@ const addTokenToHeaders = () => {
 
 //! Usuario peticiones --------
 //* Login
-export const loginUser = async (username, password) =>{
+export const loginUser = async (userData) =>{
     try {
         addTokenToHeaders();
     
         const apiUrl = `${apiUrlBase}/app/api/v1/login/`;
-        const response = await axios.post(apiUrl, { username, password }, apiConfig.headers);
+        const response = await axios.post(apiUrl, userData, apiConfig.headers);
     
         if (response.status >= 200 && response.status < 300) {
             const responseData = response.data;
@@ -47,7 +47,7 @@ export const loginUser = async (username, password) =>{
     }
 };
 //* Register
-export const registerUer = async (userData) =>{
+export const registerUser = async (userData) =>{
     try{
         const apiUrl = `${apiUrlBase}/app/api/v1/register/`
         const response = await axios.post(apiUrl, userData,apiConfig.headers );
@@ -167,3 +167,75 @@ export const deleteObra = async (obraId) => {
 
 
 //! Modelo Tareas -----------------------------------------
+//* Listar Tareas
+export const listTarea = async () => {
+    try {
+        addTokenToHeaders();
+        const apiUrl = `${apiUrlBase}/app/api/v1/tareas/`;
+        const response = await axios.get(apiUrl, apiConfig.headersToken);
+
+        if (response.status >= 200 && response.status < 300) {
+            const responseData = response.data;
+            return responseData;
+        } else {
+            throw new Error('Error al listar tareas !!');
+        }
+    } catch (error) {
+    console.error('Error al listar tareas:', error.message);
+    throw error;
+    }
+};
+//* Crear Tareas
+export const createTarea = async (tareaData) => {
+    try {
+        addTokenToHeaders();
+        const apiUrl = `${apiUrlBase}/app/api/v1/tareas/`;
+        const response = await axios.post(apiUrl, tareaData, apiConfig.headersToken);
+
+        if (response.status >= 200 && response.status < 300) {
+            const responseData = response.data;
+            return responseData;
+        } else {
+            throw new Error('Error al eliminar la obra !!');
+        }
+    } catch (error) {
+    console.error('Error al eliminar la obra:', error.message);
+    throw error;
+    }
+};
+//* Actualizar Tareas
+export const updateTarea = async (tareaId, tareaData) => {
+    try {
+        addTokenToHeaders();
+        const apiUrl = `${apiUrlBase}/app/api/v1/obras/${tareaId}/`;
+        const response = await axios.patch(apiUrl, tareaData, apiConfig.headersToken);
+
+        if (response.status >= 200 && response.status < 300) {
+            const responseData = response.data;
+            return responseData;
+        } else {
+            throw new Error('Error al eliminar la obra !!');
+        }
+    } catch (error) {
+    console.error('Error al eliminar la obra:', error.message);
+    throw error;
+    }
+};
+//* DELETE TAREAS
+export const deleteTarea = async (tareaId) => {
+    try {
+        addTokenToHeaders();
+        const apiUrl = `${apiUrlBase}/app/api/v1/obras/${tareaId}/`;
+        const response = await axios.delete(apiUrl, apiConfig.headersToken);
+
+        if (response.status >= 200 && response.status < 300) {
+            const responseData = response.data;
+            return responseData;
+        } else {
+            throw new Error('Error al eliminar la obra !!');
+        }
+    } catch (error) {
+    console.error('Error al eliminar la obra:', error.message);
+    throw error;
+    }
+};
