@@ -1,4 +1,4 @@
-import PublicRoutes from "../../utils/PublicRoutes";
+import PublicRoutes from '../../utils/PublicRoutes'
 
 
 
@@ -6,7 +6,7 @@ import PublicRoutes from "../../utils/PublicRoutes";
 function Home(){
     return(
         <div>
-            <div>
+            <div className='content'>
                 <PublicRoutes />
             </div>
         </div>

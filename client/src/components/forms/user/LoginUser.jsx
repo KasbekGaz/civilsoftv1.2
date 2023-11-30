@@ -5,7 +5,7 @@ import { setSession } from '../../../helper/sessionAccount'
 import Button from '../../Button'
 
 
-export function LoginView() {
+function LoginUser(){
 
     //const navigate = useNavigate();
 
@@ -76,3 +76,4 @@ export function LoginView() {
     );
 }
 
+export default LoginUser;
