@@ -1,9 +1,9 @@
-import Cookies from 'js-cookie';
+import Cookies from 'js-cookies';
 
 export const setSession = (cookieName, cookieData, hoursToExpire) => {
-  const expirationDate = new Date();
-  expirationDate.setTime(expirationDate.getTime() + hoursToExpire * 60 * 60 * 1000);
-  Cookies.set(cookieName, cookieData, { expires: expirationDate });
+    const expirationDate = new Date();
+    expirationDate.setTime(expirationDate.getTime() + hoursToExpire * 60 * 60 * 1000);
+    Cookies.set(cookieName, cookieData, { expires: expirationDate });
 };
 
 export const closeSession = () => {
