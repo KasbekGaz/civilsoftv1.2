@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import Button from './Button';
+import Button from '../../Button';
+import { listObra } from '../../../api/ApiManagment';
 
 export function ObraList () {
   const [obras, setObras] = useState([]);
@@ -10,18 +10,20 @@ export function ObraList () {
   useEffect(() => {
     const fetchObras = async () => {
       try {
-        const token = localStorage.getItem('token');
-        console.log('Token enviado: ', token);
 
-        const response = await axios.get('http://127.0.0.1:8000/app/api/v1/obras/', {
-          headers: {
-            Authorization: `Token ${token}`,
-          },
-        });
+        const token = localStorage.getItem('loggedToken');
+        console.log('Token almacenado: ', token);
 
+        const response = await listObra();
         setObras(response.data);
+        
+        console.log(response.data)
+
+
       } catch (error) {
         console.error('Error al obtener la lista de obras:', error.response);
+        console.log(response.data)
+
         setError('Error al cargar la lista de obras. Por favor, intenta de nuevo más tarde. Puede que no haya inicidado sesion');
       } finally {
         setLoading(false);

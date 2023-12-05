@@ -6,7 +6,7 @@ import Button from '../../Button'
 
 
 
-const RegisterUserView = () => {
+function RegisterUser(){
 
     const navigate = useNavigate();
 
@@ -33,7 +33,10 @@ const RegisterUserView = () => {
       try {
         const response = await registerUser(userData);
     
+        console.log(response.data)
         navigate('/login'); //! redirecciona a inicio de sesion
+        
+
     
       } catch (error) {
         console.error('Error al registrar usuario:', error);
@@ -105,4 +108,4 @@ const RegisterUserView = () => {
 
 };
 
-export default RegisterUserView;
+export default RegisterUser;
