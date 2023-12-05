@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 //import { useNavigate } from "react-router-dom";
-import  ObraList  from "../components/ObraList";
+import  ObraList  from "../components/forms/obra/ObraList";
 import Button from '../components/Button';
 
 

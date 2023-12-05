@@ -3,6 +3,7 @@ import NotFound from '../components/NotFound';
 import LoginUser from '../components/forms/user/LoginUser'
 import RegisterUser from '../components/forms/user/RegisterUser';
 import ObraList from '../components/forms/obra/ObraList';
+import ObraForm from '../pages/ObraForm'
 
 
 const PublicRoutes =() =>{
@@ -14,6 +15,7 @@ const PublicRoutes =() =>{
                     <Route path='/login' element={<LoginUser/>} />
                     <Route path='/register' element={<RegisterUser/>} />
                     <Route path='/obras' element={<ObraList/>} />
+                    <Route path='/create-obra' element={<ObraForm/>} />
                 </Routes>
             </BrowserRouter>
         </>
