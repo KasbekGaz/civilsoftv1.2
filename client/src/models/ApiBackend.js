@@ -1,26 +1,24 @@
-import Cookies from 'js-cookies'
 import axios from 'axios'
 
 const apiUrlBase = 'http://127.0.0.1:8000'
-
-
 
 const apiConfig ={
     headers: {
         'Content-Type': 'application/json'
     },
+
 };
 
 const addTokenToHeaders = () => {
-    const token = Cookies.get('loggedToken');
-    if(token){
-        apiConfig.headersToken = {
+    const token = localStorage.getItem('loggedToken');
+    if (token) {
+        apiConfig.headers = {
             'Content-Type': 'application/json',
             Authorization: `Token ${token}`,
-        }
+        };
+        console.log('Encabezados con Token:', apiConfig.headers);
     }
 };
-
 
 
 
@@ -32,15 +30,17 @@ export const loginUser = async (userData) =>{
     
         const apiUrl = `${apiUrlBase}/app/api/v1/login/`;
         const response = await axios.post(apiUrl, userData, apiConfig.headers);
-    
+
         if (response.status >= 200 && response.status < 300) {
             const responseData = response.data;
+
+            // Almacenar el token en localStorage
+            localStorage.setItem('loggedToken', responseData.token);
+
             return responseData;
         } else {
             throw new Error('Error al iniciar Sesión !!');
         }
-
-
     } catch (error) {
         console.error('Error al iniciar sesión:', error.message);
         throw error;
@@ -55,9 +55,9 @@ export const registerUser = async (userData) =>{
 
         if (response.status >= 200 && response.status < 300) {
             console.log('Usuario registrado con éxito:', response.data);
-          } else {
+        } else {
             throw new Error('Error al registrarse');
-          }
+        }
 
     }catch(error){
         console.error('Error al registrarse', error.message)
@@ -68,9 +68,12 @@ export const registerUser = async (userData) =>{
 export const logoutUser = async () =>{
     try{
         const apiUrl = `${apiUrlBase}/app/api/v1/logout/`;
-        const response = await axios.delete(apiUrl, apiConfig.headersToken);
 
-        //* DELETE generalmente no devuelven un cuerpo (body), por lo que response.data puede ser undefined.
+        localStorage.removeItem('loggedToken')
+
+        const response = await axios.delete(apiUrl, apiConfig.headers);
+
+        // DELETE generalmente no devuelven un cuerpo (body), por lo que response.data puede ser undefined.
 
         if (response.status >= 200 && response.status < 300) {
             console.log('Sesión cerrada con éxito');
@@ -91,7 +94,7 @@ export const listObra = async () =>{
     try{
         addTokenToHeaders();
         const apiUrl = `${apiUrlBase}/app/api/v1/obras/`;
-        const response = await axios.get(apiUrl, apiConfig.headersToken);
+        const response = await axios.get(apiUrl, apiConfig.headers);
 
         if (response.status >= 200 && response.status < 300) {
             const responseData = response.data;
@@ -111,7 +114,7 @@ export const createObra = async (obraData)=>{
     try{
         addTokenToHeaders();
         const apiUrl = `${apiUrlBase}/app/api/v1/obras/`;
-        const response = await axios.post(apiUrl, obraData, apiConfig.headersToken);
+        const response = await axios.post(apiUrl, obraData, apiConfig.headers);
 
 
         if (response.status >= 200 && response.status < 300) {
