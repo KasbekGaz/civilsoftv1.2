@@ -52,6 +52,7 @@ class UserLogoutView(generics.DestroyAPIView):
         tokens.delete()
         return Response({'message': 'Cierre de sesión exitoso'}, status=status.HTTP_204_NO_CONTENT)
 
+        return response
 
 #! Vista de OBRA
 
