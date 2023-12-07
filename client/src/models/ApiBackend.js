@@ -1,244 +1,91 @@
-import axios from 'axios'
+import axios from 'axios';
+import Cookies from 'js-cookie';
 
-const apiUrlBase = 'http://127.0.0.1:8000'
+const apiUrlBase = 'http://127.0.0.1:8000';
 
-const apiConfig ={
+const apiConfig = {
     headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
     },
-
 };
+
 
 const addTokenToHeaders = () => {
-    const token = localStorage.getItem('loggedToken');
+    const token = Cookies.get('Security');
     if (token) {
-        apiConfig.headers = {
-            'Content-Type': 'application/json',
-            Authorization: `Token ${token}`,
-        };
-        console.log('Encabezados con Token:', apiConfig.headers);
+        apiConfig.headers.Authorization = `Token ${token}`;
+    }else{
+        console.error('Token no encontrado en las cookies.');
     }
+    console.log('Token en headers:', apiConfig.headers.Authorization);
 };
 
-
-
-//! Usuario peticiones --------
-//* Login
-export const loginUser = async (userData) =>{
+//! Usuario login
+export const loginUser = async (userData) => {
     try {
-        addTokenToHeaders();
-    
+
         const apiUrl = `${apiUrlBase}/app/api/v1/login/`;
-        const response = await axios.post(apiUrl, userData, apiConfig.headers);
+        const response = await axios.post(apiUrl, userData, apiConfig);
 
-        if (response.status >= 200 && response.status < 300) {
-            const responseData = response.data;
-
-            // Almacenar el token en localStorage
-            localStorage.setItem('loggedToken', responseData.token);
-
-            return responseData;
-        } else {
-            throw new Error('Error al iniciar Sesión !!');
+        if (response.data && response.data.token) {
+            const token = response.data.token;
+            Cookies.set('Security', token);
+            console.log('Respuesta del servidor:', response.data);
+            console.log('Token almacenado:', token);
         }
     } catch (error) {
-        console.error('Error al iniciar sesión:', error.message);
+        console.error('Error al iniciar sesión: ', error.message);
         throw error;
     }
 };
-//* Register
-export const registerUser = async (userData) =>{
-    try{
-        const apiUrl = `${apiUrlBase}/app/api/v1/register/`
-        const response = await axios.post(apiUrl, userData,apiConfig.headers );
-        
 
-        if (response.status >= 200 && response.status < 300) {
-            console.log('Usuario registrado con éxito:', response.data);
-        } else {
-            throw new Error('Error al registrarse');
+//! User registro
+export const registerUser = async (userData) => {
+    try {
+        const apiUrl = `${apiUrlBase}/app/api/v1/register/`;
+        const response = await axios.post(apiUrl, userData, apiConfig);
+
+        if (response.data && response.data.token) {
+            const token = response.data.token;
+            Cookies.set('Security', token);
+            console.log('Respuesta del servidor:', response.data);
+            console.log('Token almacenado:', token);
         }
-
-    }catch(error){
-        console.error('Error al registrarse', error.message)
-        throw error
+    } catch (error) {
+        console.error('Error al registrarse: ', error.message);
+        throw error;
     }
 };
-//* Logout
-export const logoutUser = async () =>{
-    try{
+
+//! User logout
+export const logoutUser = async () => {
+    try {
+    // Obtén el token almacenado en las cookies
+    const token = Cookies.get('Security');
+    console.log('Token :', token);
+
+    if (token) {
+        // Agrega el token al encabezado de la solicitud
+        apiConfig.headers.Authorization = `Token ${token}`;
+
+        // Realiza la solicitud de cierre de sesión
         const apiUrl = `${apiUrlBase}/app/api/v1/logout/`;
+        const response = await axios.delete(apiUrl, apiConfig);
 
-        localStorage.removeItem('loggedToken')
+        console.log('Respuesta del Servidor: ', response.data);
 
-        const response = await axios.delete(apiUrl, apiConfig.headers);
-
-        // DELETE generalmente no devuelven un cuerpo (body), por lo que response.data puede ser undefined.
-
-        if (response.status >= 200 && response.status < 300) {
-            console.log('Sesión cerrada con éxito');
-        } else {
-            throw new Error('Error al cerrar sesión');
-        }
-    }catch(error){
-        console.error('Error al cerrar sesion:', error.message);
-        throw error;
+        // Elimina el token de las cookies después de cerrar sesión
+        Cookies.remove('Security');
+        Cookies.remove('csrftoken');
+        console.log('Token eliminado:', Cookies.get('Security'));
+        console.log('Token eliminado:', Cookies.get('csrftoken'));
+        console.log('Token eliminado:', token);
+    } else {
+        console.error('Token no encontrado en las cookies.');
     }
-};
-
-
-
-//! Modelo de Obra ------------------------------------------
-//* LISTAR OBRAS
-export const listObra = async () =>{
-    try{
-        addTokenToHeaders();
-        const apiUrl = `${apiUrlBase}/app/api/v1/obras/`;
-        const response = await axios.get(apiUrl, apiConfig.headers);
-
-        if (response.status >= 200 && response.status < 300) {
-            const responseData = response.data;
-            return responseData;
-        } else {
-            throw new Error('Error al obtener obras !!');
-        }
-
-
-    }catch(error){
-        console.error('Error al obtener la lista de obras.', error.message);
-        throw error;
-    }
-};
-//* CREAR OBRAS
-export const createObra = async (obraData)=>{
-    try{
-        addTokenToHeaders();
-        const apiUrl = `${apiUrlBase}/app/api/v1/obras/`;
-        const response = await axios.post(apiUrl, obraData, apiConfig.headers);
-
-
-        if (response.status >= 200 && response.status < 300) {
-            const responseData = response.data;
-            return responseData;
-        } else {
-            throw new Error('Error al crear la obra !!');
-        }
-
-
-    }catch(error){
-        console.error('Error al crear obra pruebe otra vez.', error.message);
-        throw error;
-    }
-};
-//* ACTUALIZAR OBRAS
-export const updateObra = async (obraId, obraData) => {
-    try {
-        addTokenToHeaders();
-        const apiUrl = `${apiUrlBase}/app/api/v1/obras/${obraId}/`;
-        const response = await axios.patch(apiUrl, obraData, apiConfig.headersToken);
-
-        if (response.status >= 200 && response.status < 300) {
-            const responseData = response.data;
-            return responseData;
-        } else {
-            throw new Error('Error al actualizar la obra !!');
-        }
     } catch (error) {
-    console.error('Error al actualizar la obra:', error.message);
+    console.error('Error al cerrar sesión: ', error.message);
     throw error;
     }
 };
 
-//* DELETE OBRAS
-export const deleteObra = async (obraId) => {
-    try {
-        addTokenToHeaders();
-        const apiUrl = `${apiUrlBase}/app/api/v1/obras/${obraId}/`;
-        const response = await axios.delete(apiUrl, apiConfig.headersToken);
-
-        if (response.status >= 200 && response.status < 300) {
-            const responseData = response.data;
-            return responseData;
-        } else {
-            throw new Error('Error al eliminar la obra !!');
-        }
-    } catch (error) {
-    console.error('Error al eliminar la obra:', error.message);
-    throw error;
-    }
-};
-
-
-//! Modelo Tareas -----------------------------------------
-//* Listar Tareas
-export const listTarea = async () => {
-    try {
-        addTokenToHeaders();
-        const apiUrl = `${apiUrlBase}/app/api/v1/tareas/`;
-        const response = await axios.get(apiUrl, apiConfig.headersToken);
-
-        if (response.status >= 200 && response.status < 300) {
-            const responseData = response.data;
-            return responseData;
-        } else {
-            throw new Error('Error al listar tareas !!');
-        }
-    } catch (error) {
-    console.error('Error al listar tareas:', error.message);
-    throw error;
-    }
-};
-//* Crear Tareas
-export const createTarea = async (tareaData) => {
-    try {
-        addTokenToHeaders();
-        const apiUrl = `${apiUrlBase}/app/api/v1/tareas/`;
-        const response = await axios.post(apiUrl, tareaData, apiConfig.headersToken);
-
-        if (response.status >= 200 && response.status < 300) {
-            const responseData = response.data;
-            return responseData;
-        } else {
-            throw new Error('Error al eliminar la obra !!');
-        }
-    } catch (error) {
-    console.error('Error al eliminar la obra:', error.message);
-    throw error;
-    }
-};
-//* Actualizar Tareas
-export const updateTarea = async (tareaId, tareaData) => {
-    try {
-        addTokenToHeaders();
-        const apiUrl = `${apiUrlBase}/app/api/v1/obras/${tareaId}/`;
-        const response = await axios.patch(apiUrl, tareaData, apiConfig.headersToken);
-
-        if (response.status >= 200 && response.status < 300) {
-            const responseData = response.data;
-            return responseData;
-        } else {
-            throw new Error('Error al eliminar la obra !!');
-        }
-    } catch (error) {
-    console.error('Error al eliminar la obra:', error.message);
-    throw error;
-    }
-};
-//* DELETE TAREAS
-export const deleteTarea = async (tareaId) => {
-    try {
-        addTokenToHeaders();
-        const apiUrl = `${apiUrlBase}/app/api/v1/obras/${tareaId}/`;
-        const response = await axios.delete(apiUrl, apiConfig.headersToken);
-
-        if (response.status >= 200 && response.status < 300) {
-            const responseData = response.data;
-            return responseData;
-        } else {
-            throw new Error('Error al eliminar la obra !!');
-        }
-    } catch (error) {
-    console.error('Error al eliminar la obra:', error.message);
-    throw error;
-    }
-};

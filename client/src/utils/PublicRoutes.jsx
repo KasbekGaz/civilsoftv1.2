@@ -1,10 +1,8 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import NotFound from '../components/NotFound';
-import LoginUser from '../components/forms/user/LoginUser'
-import RegisterUser from '../components/forms/user/RegisterUser';
-import ObraList from '../components/forms/obra/ObraList';
-import ObraForm from '../pages/ObraForm'
-
+import Login from '../pages/Login'
+import Register from '../pages/Register'
+import Logout from '../pages/Logout';
 
 const PublicRoutes =() =>{
     return(
@@ -12,10 +10,10 @@ const PublicRoutes =() =>{
             <BrowserRouter>
                 <Routes>
                     <Route path='/*' element={<NotFound/>}/>
-                    <Route path='/login' element={<LoginUser/>} />
-                    <Route path='/register' element={<RegisterUser/>} />
-                    <Route path='/obras' element={<ObraList/>} />
-                    <Route path='/create-obra' element={<ObraForm/>} />
+                    <Route path='/login' element={<Login/>} />
+                    <Route path='/register' element={<Register/>} />
+                    <Route path='/logout' element={<Logout/>} />
+                    
                 </Routes>
             </BrowserRouter>
         </>
