@@ -5,7 +5,7 @@ import  ObraList  from "../components/forms/obra/ObraList";
 import Button from '../components/Button';
 
 
-const ObraForm = () => {
+function ObraForm  () {
     //const navigate = useNavigate();
 
 
@@ -21,44 +21,27 @@ const ObraForm = () => {
   const [error, setError] = useState(null);
 
   const handleInputChange = (e) => {
-    setObraData({
-      ...obraData,
-      [e.target.name]: e.target.value,
-    });
+    const { name, value } = e.target;
+    setObraData((prevData) => ({ ...prevData, [name]: value }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
-      const token = localStorage.getItem('token');
+      // Llama a la función de creación de obra del backend
+      const response = await createObra(obraData);
+      console.log('Obra creada con éxito:', response);
 
-      const response = await axios.post('http://127.0.0.1:8000/app/api/v1/obras/', obraData, {
-        headers: {
-          Authorization: `Token ${token}`,
-        },
-      });
+      // Puedes agregar aquí la lógica de redirección si es necesario
+      //navigate('/ruta-de-redireccion');
 
-      console.log('Obra registrada:', response.data)
-
-      //navigate('/Obras')
-
-      // Limpiar el formulario después de enviar la obra
-      setObraData({
-        nombre: '',
-        localidad: '',
-        municipio: '',
-        dependencia: '',
-        fecha: '',
-        p_inicial: 0,
-      });
-
-     
     } catch (error) {
-      console.error('Error al agregar la nueva obra:', error.response);
-      setError('Error al registrar la nueva obra. Por favor, intenta de nuevo más tarde.');
+      console.error('Error al crear obra: ', error.message);
+      // Actualiza el estado de error para mostrar un mensaje al usuario
+      setError('Error al crear obra. Verifica los datos ingresados.');
     }
   };
+
 
   return (
     <div className='justify-center shadow-md rounded-md'>
@@ -141,11 +124,6 @@ const ObraForm = () => {
             <Button type="submit" color="green" text="Registrar" />
         </form>
       </div>
-
-      <div >
-        <ObraList />
-      </div>
-      
     </div>
 
   );

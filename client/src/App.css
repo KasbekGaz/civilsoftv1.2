@@ -4,3 +4,12 @@
   padding: 2rem;
   text-align: center;
 }
+.sidebar {
+  position: fixed;
+  left: 0; /* o right: 0; según el lado que desees */
+  top: 0;
+  bottom: 0;
+  width: 200px; /* ajusta el ancho según tus necesidades */
+  background-color: #333; /* color de fondo */
+  padding: 16px;
+}
