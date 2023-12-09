@@ -30,3 +30,23 @@ export const logoutUser = async () => {
         throw error;
     }
 };
+
+//! Obra
+export const listObra = async () => {
+    try {
+        return await ApiBackend.listObra();
+    } catch (error) {
+        
+        console.error('Error al listar las Obras: ', error.message);
+        throw error;
+    }
+};
+
+export const createObra = async (obraData) =>{
+    try{
+        return await ApiBackend.createObra(obraData);
+    }catch(error){
+        console.error('Error al crear la Obra: ', error.message);
+        throw error;
+    }
+};
