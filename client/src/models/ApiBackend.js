@@ -1,124 +1,56 @@
 import axios from 'axios';
-import Cookies from 'js-cookie';
+//import Cookies from 'js-cookie';
 
-const apiUrlBase = 'http://127.0.0.1:8000';
+const apiUrlBase = 'http://127.0.0.1:8000/app/api/v1';
 
-const getToken = () => Cookies.get('Security'); //* obtener token
-
-// funcion para config de la API
-const getApiConfig = () => {
-    const token = getToken();
-
-const headers = {
-    'Content-Type': 'application/json',
-};
-
-// Agrega el token a los encabezados si está presente
-if (token) {
-    headers['Authorization'] = `Token ${token}`;
-}
-
-return {
-    headers,
-};
-};
-
+const apiUrlBase2 = 'http://127.0.0.1:8000/contacs/api/v1'
 
 
 
 //! Usuario login
-export const loginUser = async (userData) => {
+async function loginUser(username, password) {
     try {
-
-        const apiUrl = `${apiUrlBase}/app/api/v1/login/`;
-        const response = await axios.post(apiUrl, userData, getApiConfig());
-
-        if (response.data && response.data.token) {
-            const token = response.data.token;
-            Cookies.set('Security', token);
-            console.log('Respuesta del servidor:', response.data);
-            console.log('Token almacenado:', token);
-        }
+        const response = await axios.post(`${apiUrlBase}/login/`, { username, password });
+        return response.data.token;
     } catch (error) {
-        console.error('Error al iniciar sesión: ', error.message);
-        throw error;
+        throw new Error('Error al iniciar sesión');
+        }
     }
-};
 
 //! User registro
-export const registerUser = async (userData) => {
+async function registerUser(userData) {
     try {
-        const apiUrl = `${apiUrlBase}/app/api/v1/register/`;
-        const response = await axios.post(apiUrl, userData, getApiConfig());
-
-        if (response.data && response.data.token) {
-            const token = response.data.token;
-            Cookies.set('Security', token);
-            console.log('Respuesta del servidor:', response.data);
-            console.log('Token almacenado:', token);
-        }
+        const response = await axios.post(`${apiUrlBase}/register/`, { userData});
+        return response.data;
     } catch (error) {
-        console.error('Error al registrarse: ', error.message);
-        throw error;
+        throw new Error('Error al registrar usuario');
     }
-};
+}
 
 //! User logout
-export const logoutUser = async () => {
+async function logoutUser(token) {
     try {
-            // Obtén el token almacenado en las cookies
-            const token = Cookies.get('Security');
-            console.log('Token:', token);
-    
-            if (token) {
-                // Agrega el token al encabezado de la solicitud
-                const apiConfig = getApiConfig();
-                apiConfig.headers.Authorization = `Token ${token}`;
-    
-                // Realiza la solicitud de cierre de sesión
-                const apiUrl = `${apiUrlBase}/app/api/v1/logout/`;
-                await axios.delete(apiUrl, apiConfig);
-    
-                // Elimina el token de las cookies después de cerrar sesión
-                Cookies.remove('Security');
-                Cookies.remove('csrftoken');
-                console.log('Token eliminado:', Cookies.get('Security'));
-                console.log('Token eliminado:', Cookies.get('csrftoken'));
-            } else {
-                console.error('Token no encontrado en las cookies.');
-            }
-    
-    } catch (error) {
-    console.error('Error al cerrar sesión: ', error.message);
-    throw error;
-    }
-};
-
-//! Obra endpoints
-export const listObra = async () =>{
-    try{
-        const apiUrl = `${apiUrlBase}/app/api/v1/obras/`;
-        const response = await axios.get(apiUrl, getApiConfig());
+        const response = await axios.delete(`${apiUrlBase}//logout/`, null, {
+            headers: { Authorization: `Token ${token}` },
+        });
         return response.data;
-    }catch(error){
-        console.error('Error al cargar obras: ', error.message);
-        throw error;
+    } catch (error) {
+        throw new Error('Error al cerrar sesión');
     }
-};
-export const createObra = async (obraData) =>{
-    try{
-        const apiUrl = `${apiUrlBase}/app/api/v1/obras/`;
-        const response = await axios.post(apiUrl, obraData,  getApiConfig())
+}
 
-            // Verifica si la respuesta contiene datos y devuelve esos datos
-        if (response.data) {
-            console.log('Obra creada con éxito:', response.data);
-            return response.data;
-        } else {
-            console.warn('La respuesta no contiene datos:', response);
-        }
-    }catch(error){
-        console.error('Error al crear obra: ', error.message);
-        throw error;
-    }
-};
+async function exampleUsage() {
+    const token = await login('tuUsuario', 'tuContraseña');
+    console.log('Token de acceso:', token);
+
+    const registroUsuario = await register('nuevoUsuario', 'nuevaContraseña');
+    console.log('Registro de usuario:', registroUsuario);
+
+    const resultadoLogout = await logout(token);
+    console.log('Resultado del logout:', resultadoLogout);
+
+
+
+}
+
+exampleUsage();
