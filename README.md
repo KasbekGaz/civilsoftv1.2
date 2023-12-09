@@ -40,6 +40,7 @@ Esta aplicacion es para llevar un control administrativo, control de gestion de 
 - Integracion de permisos de CRUD conforme a roles
 
 > Funcionalidades nuevas se agregaran conforme se avance.
+> Para poder levantar el proyecto de Python necesita requirements.tx (pip install r- "requirements.txt)
 > Este proyecto pertenece a:
 > Oswaldo Lázaro Flores
 > Jose Irvin Petriz Velázquez
