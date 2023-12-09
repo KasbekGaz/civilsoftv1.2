@@ -4,42 +4,20 @@ import { listObra } from '../../../api/ApiManagment';
 
 export function ObraList () {
   const [obras, setObras] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchObras = async () => {
+    const fetchData = async () => {
       try {
-
-        const token = localStorage.getItem('loggedToken');
-        console.log('Token almacenado: ', token);
-
-        const response = await listObra();
-        setObras(response.data);
-        
-        console.log(response.data)
-
-
+        const obrasData = await listObra();
+        setObras(obrasData);
       } catch (error) {
-        console.error('Error al obtener la lista de obras:', error.response);
-        console.log(response.data)
-
-        setError('Error al cargar la lista de obras. Por favor, intenta de nuevo más tarde. Puede que no haya inicidado sesion');
-      } finally {
-        setLoading(false);
+        console.error('Error al obtener la lista de obras: ', error.message);
       }
     };
 
-    fetchObras();
+    fetchData();
   }, []);
 
-  if (loading) {
-    return <p>Cargando obras...</p>;
-  }
-
-  if (error) {
-    return <p>Error: {error}</p>;
-  }
 
   return (
     <div className="bg-blue p-8 mx-10 my-10 shadow-2xl rounded-md text-white justify-center">
@@ -56,6 +34,7 @@ export function ObraList () {
               <th>Presupuesto</th>
               <th>Editar</th>
               <th>Eliminar</th>
+              <th>Detalles</th>
             </tr>
           </thead>
           <tbody>
@@ -72,6 +51,9 @@ export function ObraList () {
               </td>
               <td>
               <Button color="red" text="Eliminar"/>
+              </td>
+              <td>
+              <Button color="gold" text="Detalles"/>
               </td>
             </tr>
         ))}
