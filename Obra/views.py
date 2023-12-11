@@ -52,7 +52,6 @@ class UserLogoutView(generics.DestroyAPIView):
         tokens.delete()
         return Response({'message': 'Cierre de sesión exitoso'}, status=status.HTTP_204_NO_CONTENT)
 
-        return response
 
 #! Vista de OBRA
 
@@ -94,8 +93,8 @@ class ObraViewSet(viewsets.ModelViewSet):
         if request.user.is_authenticated and request.user.rol == 'Admin':
             # Lógica para eliminar un gasto (para usuarios Admin)
             response = super().destroy(request, *args, **kwargs)
-            response.data['message'] = 'La obra se ha eliminado exitosamente.'
-            return response
+
+            return Response({'message': 'La obra se ha eliminado exitosamente.'}, status=status.HTTP_204_NO_CONTENT)
         else:
             return Response({'detail': 'No tiene permiso para eliminar obras'}, status=status.HTTP_403_FORBIDDEN)
 
