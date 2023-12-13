@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'
+import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import APIbackend from '../api/APIbackend';
 
-
-const ObraForm = () =>{
+const UpdateObraForm = () => {
+    const { id } = useParams();
     const navigate = useNavigate();
 
     const [obraData, setObraData] = useState({
@@ -15,42 +15,56 @@ const ObraForm = () =>{
         p_inicial: '',
     });
 
+    useEffect(() => {
+        // Cargar datos de la obra al montar el componente
+        const fetchObraData = async () => {
+            try {
+                const obra = await APIbackend.getObraById(id);
+                setObraData({
+                    nombre: obra.nombre,
+                    localidad: obra.localidad,
+                    municipio: obra.municipio,
+                    dependencia: obra.dependencia,
+                    fecha: obra.fecha,
+                    p_inicial: obra.p_inicial,
+                });
+            } catch (error) {
+                console.error('Error al obtener datos de la obra:', error.message);
+            }
+        };
+
+        fetchObraData();
+    }, [id]);
+
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-        setObraData((prevData) => ({
-            ...prevData,
-            [name]: value,
-        }));
+        setObraData({ ...obraData, [name]: value });
     };
 
-    const handleCreateObra = async () =>{
-        try{
-            const response = await APIbackend.createObra(obraData);
-
-            console.log('Obra Creada', response);
-
+    const handleUpdateObra = async () => {
+        try {
+            await APIbackend.updateObra(id, obraData);
+            alert('Obra actualizada correctamente');
             navigate('/dashboard');
-
-        }catch(error){
-            console.error('Error al crear la obra: ', error.message);
+        } catch (error) {
+            console.error('Error al actualizar la obra:', error.message);
         }
-    }
+    };
+    return (
+        <div>
+            <h2>Actualizando Obra "{obraData.nombre}"</h2>
 
-return (
-    <div>
-        <h2>Crear Obra</h2>
-
-        <form>
+            <form>
             <label>
             Nombre:
             <input
                 type="text"
                 name="nombre"
-                value={obraData.nombre}
+                value={obraData.nombre || ''}
                 onChange={handleInputChange}
             />
             </label>
-            <tr/>
+
             <label>
             Localidad:
             <input
@@ -60,7 +74,7 @@ return (
                 onChange={handleInputChange}
             />
             </label>
-            <tr/>
+
             <label>
             Municipio:
             <input
@@ -70,7 +84,7 @@ return (
                 onChange={handleInputChange}
             />
             </label>
-            <tr/>
+
             <label>
             Dependencia:
             <input
@@ -80,7 +94,7 @@ return (
                 onChange={handleInputChange}
             />
             </label>
-            <tr/>
+
             <label>
             Fecha:
             <input
@@ -90,7 +104,7 @@ return (
                 onChange={handleInputChange}
             />
             </label>
-            <tr/>
+
             <label>
             Presupuesto:
             <input
@@ -100,17 +114,15 @@ return (
                 onChange={handleInputChange}
             />
             </label>
-            <tr/>
+
             
-            <button 
-            className='bg-green-400'
-            type="button" onClick={handleCreateObra}>
-            Crear Obra
-            </button>
-        </form>
-    </div>
-);
 
-}
+                <button className='bg-orange-400' type="button" onClick={handleUpdateObra}>
+                    Actualizar Obra
+                </button>
+            </form>
+        </div>
+    );
+};
 
-export default ObraForm;
+export default UpdateObraForm;
