@@ -8,11 +8,12 @@ from .models import CustomUser, Obra, Tarea, Gasto, Galeria, Volumen
 # * serializadores
 from .serializers import CustomUserSerializer, ObraSerializer, TareaSerializer, GastoSerializer, GaleriaSerializer, VolumenSerializer
 
-
 # Create your views here.
 
 #! Vistas USUARIOS
 # *Registrar Usuario
+
+
 class CreateUserView(generics.CreateAPIView):
     queryset = CustomUser.objects.all()
     serializer_class = CustomUserSerializer
@@ -55,7 +56,6 @@ class UserLogoutView(generics.DestroyAPIView):
 
 #! Vista de OBRA
 
-
 class ObraViewSet(viewsets.ModelViewSet):
     queryset = Obra.objects.all()
     serializer_class = ObraSerializer
@@ -67,12 +67,14 @@ class ObraViewSet(viewsets.ModelViewSet):
 
     def create(self, request, *args, **kwargs):
         if request.user.is_authenticated and request.user.rol == 'Admin':
-            # Lógica para crear un gasto (para usuarios Admin)
             response = super().create(request, *args, **kwargs)
             response.data['message'] = 'La obra se ha creado exitosamente.'
             return response
-
+        elif request.user.is_authenticated and request.user.rol == 'Consul':
+            print(f'Usuario no autorizado: {request.user}')
+            return Response({'detail': 'No tiene permiso para crear obras'}, status=status.HTTP_403_FORBIDDEN)
         else:
+            print(f'Usuario no autorizado: {request.user}')
             return Response({'detail': 'No tiene permiso para crear obras'}, status=status.HTTP_403_FORBIDDEN)
 
     def update(self, request, *args, **kwargs):
