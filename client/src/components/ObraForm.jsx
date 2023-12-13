@@ -40,7 +40,7 @@ return (
     <div>
         <h2>Crear Obra</h2>
 
-        <form>
+        <form  className="flex flex-col justify-center items-center" >
             <label>
             Nombre:
             <input
@@ -50,7 +50,7 @@ return (
                 onChange={handleInputChange}
             />
             </label>
-            <tr/>
+
             <label>
             Localidad:
             <input
@@ -60,7 +60,7 @@ return (
                 onChange={handleInputChange}
             />
             </label>
-            <tr/>
+
             <label>
             Municipio:
             <input
@@ -70,7 +70,7 @@ return (
                 onChange={handleInputChange}
             />
             </label>
-            <tr/>
+
             <label>
             Dependencia:
             <input
@@ -80,7 +80,7 @@ return (
                 onChange={handleInputChange}
             />
             </label>
-            <tr/>
+
             <label>
             Fecha:
             <input
@@ -90,7 +90,7 @@ return (
                 onChange={handleInputChange}
             />
             </label>
-            <tr/>
+
             <label>
             Presupuesto:
             <input
@@ -100,7 +100,7 @@ return (
                 onChange={handleInputChange}
             />
             </label>
-            <tr/>
+
             
             <button 
             className='bg-green-400'
