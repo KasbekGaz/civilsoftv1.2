@@ -4,10 +4,16 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './views/Home';
 import Login from './views/Login';
 import Dashboard from './views/Dashboard';
+
 import ObraForm from './components/ObraForm';
 import UpdateObraForm from './components/UpdateObraForm';
+import DetallesObra from './views/DetallesObra';
+
+import TareaView from './views/TareaView';
+
 
 const App = () => {
+  
   return (
     <Router>
       <Routes>
@@ -16,6 +22,12 @@ const App = () => {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/create-obra" element={<ObraForm />} />
         <Route path="/update-obra/:id" element={<UpdateObraForm />} />
+
+        <Route path="/details-obra/:obraId/:obraNombre" element={<DetallesObra />} />
+
+        <Route path="/create-tarea/:id" element={<TareaView />} />
+
+        
       </Routes>
     </Router>
   );
