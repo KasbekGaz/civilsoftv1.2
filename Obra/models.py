@@ -1,6 +1,6 @@
 from django.utils import timezone
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
 # Create your models here.
 
@@ -44,35 +44,8 @@ class CustomUser(AbstractBaseUser):
     USERNAME_FIELD = 'username'
     EMAIL_FIELD = 'email'
 
-    '''
-    class Meta:
-        permissions = [
-            ("can_view_obras", "Puede ver obras"),
-            ("can_add_edit_delete_obras", "Puede agregar, editar y eliminar obras"),
-            ("can_view_tareas", "Puede ver tareas"),
-            ("can_add_edit_delete_tareas", "Puede agregar, editar y eliminar tareas"),
-            ("can_view_gastos", "Puede ver gastos"),
-            ("can_add_edit_delete_gastos", "Puede agregar, editar y eliminar gastos"),
-            ("can_view_galerias", "Puede ver archivos"),
-            ("can_add_edit_delete_galerias",
-             "Puede agregar, editar y eliminar archivos"),
-            ("can_view_volumenes", "Puede ver volumenes"),
-            ("can_add_edit_delete_volumenes",
-             "Puede agregar, editar y eliminar volumenes"),
-            # ! Contacs app permissions
-            ("can_view_proveedores", "Puede ver proveedores"),
-            ("can_add_edit_delete_proveedores",
-             "Puede agregar, editar y eliminar proveedores"),
-            ("can_view_materiales", "Puede ver materiales"),
-            ("can_add_edit_delete_materiales",
-             "Puede agregar, editar y eliminar materiales"),
-            ("can_view_bancas", "Puede ver banca"),
-            ("can_add_edit_delete_bancas", "Puede agregar, editar y eliminar banca"),
-        ]
-    '''
-
     def __str__(self):
-        return f"{self.nombre} ({self.rol})"
+        return f"{self.username} ({self.rol})"
 
 
 #! Modelo Obra
