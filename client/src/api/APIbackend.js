@@ -48,7 +48,7 @@ const APIbackend = {
         }
     },
 
-  // Obras peticiones
+  //! OBRA peticiones
     
     listObra: async () =>{
         try {
@@ -87,7 +87,13 @@ const APIbackend = {
     
     getObraById: async (id) => {
         try {
-            const response = await instance.get(`/obras/${id}/`);
+
+            const token = localStorage.getItem('token');
+            console.log('Token:', token);
+
+            const response = await instance.get(`/obras/${id}/`, {
+                headers: { Authorization: `Token ${token}` },
+            });
         
             console.log('Response Data:', response.data);
 
@@ -133,6 +139,63 @@ const APIbackend = {
     
         } catch (error) {
             console.error(`Error al eliminar la obra con ID ${id}:`, error.message);
+            throw error;
+        }
+    },
+
+    //!TAREA peticiones
+
+    listTarea: async () =>{
+        try {
+            const token = localStorage.getItem('token');
+            console.log('Token:', token);
+            const response = await instance.get('/tareas/', {
+            headers: { Authorization: `Token ${token}` },
+        });
+        console.log(response.data)
+        return response.data;
+        
+        } catch (error) {
+            console.error('Algo salio mal al listar tareas', error.message);
+        throw error;
+        }
+    },
+
+    createTarea: async (tareaData) =>{
+        try {
+            const token = localStorage.getItem('token');
+            console.log('Token:', token);
+    
+            const response = await instance.post('/tareas/', tareaData, {
+                headers: { Authorization: `Token ${token}` },
+            });
+    
+            console.log(response.data);
+    
+            return response.data;
+        } catch (error) {
+            console.error('No se pudo crear Tarea: ', error.message);
+            throw error;
+        }
+    },
+
+    listTareaByObra: async (obraId) => {
+        try {
+
+            const token = localStorage.getItem('token');
+            console.log(token);
+
+            const response = await instance.get(`/tareas/?obra=${obraId}`, {
+                headers: { Authorization: `Token ${token}` },
+            });
+
+            console.log(response.data);
+
+            return response.data;
+
+
+        } catch (error) {
+            console.error('Error al obtener la lista de tareas por obra:', error.message);
             throw error;
         }
     }
