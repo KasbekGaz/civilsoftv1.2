@@ -53,9 +53,7 @@ const APIbackend = {
     listObra: async () =>{
         try {
             const token = localStorage.getItem('token');
-            
             console.log('Token:', token);
-
             const response = await instance.get('/obras/', {
             headers: { Authorization: `Token ${token}` },
         });
@@ -68,25 +66,77 @@ const APIbackend = {
         }
     },
 
-    createObra: async (obraData) =>{
+    createObra: async (obraData) => {
+        try {
+            const token = localStorage.getItem('token');
+            console.log('Token:', token);
+    
+            const response = await instance.post('/obras/', obraData, {
+                headers: { Authorization: `Token ${token}` },
+            });
+    
+            console.log(response.data);
+    
+            return response.data;
+        } catch (error) {
+            console.error('No se pudo crear Obra: ', error.message);
+            throw error;
+        }
+    },
+
+    
+    getObraById: async (id) => {
+        try {
+            const response = await instance.get(`/obras/${id}/`);
+        
+            console.log('Response Data:', response.data);
+
+            return response.data;
+        } catch (error) {
+
+            console.error(`Error al obtener los detalles de la obra con ID ${id}:`, error.message);
+
+            throw error;
+        }
+    }, 
+    
+
+    updateObra: async (id, obraData) => {
         try{
             const token = localStorage.getItem('token');
-
             console.log('Token:', token);
-
-            const response = await instance.post('/obras/', {
-                headers: { Authorization: `Token ${token}`}
+            
+            const response = await instance.put(`/obras/${id}/`,obraData,{
+                headers: { Authorization: `Token ${token}` },
             });
 
-        console.log(response.data);
-
-        return response.data;
+            console.log(response.data);
+            return response.data;
 
         }catch(error){
-            console.error('No se pudo crear Obra: ', error.message)
+            console.error(`Error al actualizar la obra con ID ${id}:`, error.message);
+            throw error;
+        }
+    },
+
+    deleteObra: async (id) => {
+        try {
+            const token = localStorage.getItem('token');
+            console.log('Token:', token);
+    
+            const response = await instance.delete(`/obras/${id}/`, {
+                headers: { Authorization: `Token ${token}` },
+            });
+    
+            console.log(response.data);
+            return response.data;
+    
+        } catch (error) {
+            console.error(`Error al eliminar la obra con ID ${id}:`, error.message);
             throw error;
         }
     }
+
 
 
 };
