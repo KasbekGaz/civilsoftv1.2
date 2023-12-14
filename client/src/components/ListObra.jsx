@@ -20,8 +20,8 @@ const ListObra = () => {
         }
     };
 
-    const handleDetalles = (obraId, obraNombre) =>{
-        navigate(`/details-obra/${obraId}/${encodeURIComponent(obraNombre)}`)
+    const handleDetalles = (obraId) =>{
+        navigate(`/details-obra/${obraId}`)
     }
 
     const handleActualizar = (obraId) => {
@@ -78,7 +78,7 @@ return (
             <td>{obra.p_inicial}</td>
             <td> 
                 <button className='bg-red-300'
-                onClick={() => handleDetalles(obra.id, obra.nombre)}>
+                onClick={() => handleDetalles(obra.id)}>
                     Detalles
                 </button>
             </td>

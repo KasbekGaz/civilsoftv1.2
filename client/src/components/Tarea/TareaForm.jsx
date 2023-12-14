@@ -7,7 +7,7 @@ const TareaFrom = ({ obraId }) =>{
     const [tareaData, setTareaData] = useState({
         Fvence: '',
         Fcreado: '',
-        Fcompletado: '',
+        Fcompletado: null,
         titulo: '',
         descripcion: '',
         estado: 'no_completado',
@@ -24,6 +24,8 @@ const TareaFrom = ({ obraId }) =>{
 
     const handleCreateTarea = async () => {
         try {
+
+            console.log(tareaData);
             const response = await APIbackend.createTarea(tareaData);
             console.log('Tarea creada: ', response);
             alert('Tarea agregada correctamente');
@@ -78,21 +80,18 @@ return(
                 />
             </label>
 
-
             <label className="mb-4">
-                Obra:
+                Estado de la tarea:
                 <select
-                    name="obraId"
-                    value={tareaData.obraId}
+                    name="estado"
+                    value={tareaData.estado}
                     onChange={handleInputChange}
                 >
-                    <option value={null}>Seleccionar Obra</option>
-                    {tareaData.obras && tareaData.obras.map((obra) => (
-                        <option key={obra.id} value={obra.id}>{obra.nombre}</option>
-                    ))}
+                    <option value="no_completado">Incompleta</option>
+                    <option value="completado">Completada</option>
+                    <option value="vencida">Vencida</option>
                 </select>
             </label>
-
 
             <button
                 className='bg-green-400'

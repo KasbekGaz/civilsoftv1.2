@@ -28,7 +28,7 @@ const ObraForm = () =>{
             const response = await APIbackend.createObra(obraData);
 
             console.log('Obra Creada', response);
-
+            alert('Obra creada correctamente');
             navigate('/dashboard');
 
         }catch(error){

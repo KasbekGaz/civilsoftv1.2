@@ -7,12 +7,12 @@ const DetallesObra = () => {
     const [obraData, setObraData] = useState({});
     const navigate = useNavigate();
 
-    useEffect(() => {
-        fetchObraDetails();
-    }, [id]);
+
 
     const fetchObraDetails = async () => {
         try {
+            console.log(id);
+            
             const obraData = await APIbackend.getObraById(id);
             setObraData(obraData);
         } catch (error) {
@@ -20,12 +20,19 @@ const DetallesObra = () => {
         }
     };
 
+
+    useEffect(() => {
+        fetchObraDetails();
+    }, [id]);
+
+
     const handleBack = () => {
         navigate('/dashboard');
     };
 
-    const handleTarea = ({id}) => {
-        navigate(`/create-tarea/${id}`);
+    const handleTarea = () => {
+            console.log('El id:', id);
+        navigate(`/details-tarea/${id}`);
     };
 
 
@@ -41,11 +48,11 @@ const DetallesObra = () => {
                 <div name="Seccion de Presupusto" className="grid grid-cols-2 md:grid-cols-2">
 
                     <div className="bg-slate-400 p-4 rounded-md">
-                        <h2 className="text-xl font-semibold mb-2">Total de gastos $Numero x</h2>
+                        <h2 className="text-xl font-semibold mb-2">Total de gastos $ {obraData.total_gastos }</h2>
                     </div>
 
                     <div className="bg-slate-400 p-4 rounded-md">
-                        <h2 className="text-xl font-semibold mb-2">Presupuesto Inicial $Numero x</h2>
+                        <h2 className="text-xl font-semibold mb-2">Presupuesto Inicial $ {obraData.p_inicial}</h2>
                     </div>
                 </div>
 

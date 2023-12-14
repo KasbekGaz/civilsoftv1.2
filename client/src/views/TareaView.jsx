@@ -1,32 +1,45 @@
 import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import APIbackend from "../api/APIbackend";
+import { useNavigate, useParams } from "react-router-dom";
 import TareaList from "../components/Tarea/TareaList";
 import TareaForm from "../components/Tarea/TareaForm";
+import APIbackend from "../api/APIbackend";
 
 const TareaView = () => {
     const { id } = useParams();
-    const navigate = useNavigate();
     const [obraData, setObraData] = useState({});
 
-    useEffect(() => {
-        const fetchObraData = async () => {
-            try {
-                const obra = await APIbackend.getObraById(id);
-                setObraData(obra);
-            } catch (error) {
-                console.error('Error al obtener datos de la obra:', error.message);
-            }
-        };
+    const [obraId, setObraId] = useState(null);
 
-        fetchObraData();
-    }, [id]);
+    const navigate = useNavigate();
 
-    const handleBack = () => {
-        navigate('/dashboard');
+    const fetchObraDetails = async () => {
+        try {
+            console.log(id);
+            
+            const obraData = await APIbackend.getObraById(id);
+            setObraData(obraData);
+
+            setObraId(id);
+
+            console.log(id);
+            
+        } catch (error) {
+            console.error('Error al obtener los detalles de la obra:', error.message);
+        }
     };
 
-    console.log('ID de la obra en TareaView:', id);
+
+
+
+    useEffect(() => {
+        fetchObraDetails();
+    }, [id]);
+
+
+    const handleBack = () => {
+        navigate(`/dashboard`)
+    };
+
     return (
         <div>
             <h1>Proyecto "{obraData.nombre}"</h1>
@@ -38,14 +51,13 @@ const TareaView = () => {
             </button>
 
             <div>
-                {/* Asegúrate de pasar el ID de la obra a TareaForm */}
-                <TareaForm obraId={id} />
+                {obraId && <TareaForm obraId={obraId} />}
             </div>
 
             <div>
-                {/* Asegúrate de pasar el ID de la obra a TareaList */}
-                <TareaList obraId={id} />
+                {obraId && <TareaList obraId={obraId} />}
             </div>
+
         </div>
     );
 };

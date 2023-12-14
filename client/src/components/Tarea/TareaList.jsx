@@ -7,17 +7,24 @@ const TareaList = ({ obraId }) =>{
     const [tareas, setTareas] = useState([]);
 
     useEffect(() => {
-        const fetchTareas = async () => {
-            try {
-                const tareaData = await APIbackend.listTareaByObra(obraId);
-                setTareas(tareaData);
-            } catch (error) {
-                console.error('Error al obtener la lista de Tareas: ', error.message);
-            }
-        };
-
         fetchTareas();
-    }, [obraId]);
+    }, []);
+
+
+    const fetchTareas = async () => {
+        try {
+            
+            console.log(obraId);
+
+            const tareaData = await APIbackend.listTareaByObra(obraId);
+            setTareas(tareaData);
+            
+            console.log('id:', obraId,'Datos tareadata:', tareaData)
+        } catch (error) {
+            console.error('Error al obtener la lista de Tareas: ', error.message);
+        }
+    };
+
 
 return (
     <div>

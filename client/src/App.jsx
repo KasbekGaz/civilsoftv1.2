@@ -23,9 +23,9 @@ const App = () => {
         <Route path="/create-obra" element={<ObraForm />} />
         <Route path="/update-obra/:id" element={<UpdateObraForm />} />
 
-        <Route path="/details-obra/:obraId/:obraNombre" element={<DetallesObra />} />
+        <Route path="/details-obra/:id" element={<DetallesObra />} />
 
-        <Route path="/create-tarea/:id" element={<TareaView />} />
+        <Route path="/details-tarea/:id" element={<TareaView />} />
 
         
       </Routes>
