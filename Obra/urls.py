@@ -1,6 +1,19 @@
 from rest_framework.routers import DefaultRouter
 from django.urls import path, include
-from .views import ObraViewSet, TareaVista, GastoViewSet, GaleriaViewSet, VolumenViewSet
+from .views import (
+    ObraViewSet,
+    TareaVista,
+    GastoViewSet,
+    GaleriaViewSet,
+    VolumenViewSet,
+    # * Llamadas TAREAS
+    ListarTareabyObra,
+    CreateTareabyObra,
+    UpdateTareabyObra,
+    DeleteTareabyObra,
+    # * Llamadas CRUD GASTOS
+)
+
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -14,6 +27,17 @@ router.register(r'volumen', VolumenViewSet, basename='comparativa_volumen')
 
 urlpatterns = [
     path('api/v1/', include(router.urls)),
+    # * Tareas CRUD por Id Obra
+    path('api/v1/tareasbyObra/<int:obra_id>/', ListarTareabyObra.as_view()),
+    path('api/v1/create-tarea-for-obra/<int:obra_id>/',
+         CreateTareabyObra.as_view()),
+    path('api/v1/update-tarea-for-obra/<int:obra_id>/<int:pk>/',
+         UpdateTareabyObra.as_view()),
+    path('api/v1/delete-tarea-for-obra/<int:obra_id>/<int:pk>/',
+         DeleteTareabyObra.as_view()),
+    # *
+
+
 ]
 
 if settings.DEBUG:
