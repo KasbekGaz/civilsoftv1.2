@@ -111,9 +111,7 @@ class ObraViewSet(viewsets.ModelViewSet):
             print(f'Usuario no autorizado: {request.user}')
             return Response({'detail': 'No tiene permiso para ver obras'}, status=status.HTTP_403_FORBIDDEN)
 
-#! Vista Tarea
-
-
+#! Vista Tarea --------------------------------------------------------------
 class TareaVista(viewsets.ModelViewSet):
     queryset = Tarea.objects.all()
     serializer_class = TareaSerializer
@@ -159,6 +157,69 @@ class TareaVista(viewsets.ModelViewSet):
             return super().list(request, *args, **kwargs)
         else:
             return Response({'detail': 'No tiene permiso para ver Tareas'}, status=status.HTTP_403_FORBIDDEN)
+
+# ? VISTAS DE TAREA PARA CRUD BAJO ID OBRA ASOCIADA
+class ListarTareabyObra(generics.ListAPIView):  # * Listar Tareas por Obra_id
+    serializer_class = TareaSerializer
+
+    def get_queryset(self):
+        obra_id = self.kwargs['obra_id']
+        return Tarea.objects.filter(obra_id=obra_id)
+
+    def list(self, request, *args, **kwargs):
+        obra_id = self.kwargs['obra_id']
+
+        if request.user.is_authenticated and request.user.rol in ['Admin', 'Consul']:
+            queryset = self.get_queryset()
+            serializer = self.get_serializer(queryset, many=True)
+            return Response(serializer.data)
+        else:
+            return Response({'detail': 'No tiene permisos para ver estos datos'},
+                            status=status.HTTP_403_FORBIDDEN)
+
+
+class CreateTareabyObra(generics.CreateAPIView):  # * Crear tareas por Obra_id
+    queryset = Tarea.objects.all()
+    serializer_class = TareaSerializer
+
+    def perform_create(self, serializer):
+        # Asignamos la obra ants de guardar la tarea
+        obra_id = self.kwargs.get('obra_id')
+        serializer.save(obra_id=obra_id)
+
+    def create(self, request, *args, **kwargs):
+        if request.user.is_authenticated and request.user.rol == 'Admin':
+            return super().create(request, *args, **kwargs)
+        else:
+            return Response({
+                'detail': 'No tiene permisos para crear Tareas'},
+                status=status.HTTP_403_FORBIDDEN)
+
+class UpdateTareabyObra(generics.UpdateAPIView): #* Actualizar tarea por Obra_id
+    queryset = Tarea.objects.all()
+    serializer_class = TareaSerializer
+
+    def perform_update(self, serializer):
+        obra_id = self.kwargs.get('obra_id')
+        serializer.dave(obra_id=obra_id)
+
+    def update(self, request, *args, **kwargs):
+        if request.user.is_authenticated and request.user.rol == 'Admin':
+            return super().update(request, *args, **kwargs)
+        else:
+            return Response({'detail': 'No tiene permisos para actualizar Tareas'},
+                            status=status.HTTP_403_FORBIDDEN)
+
+class DeleteTareabyObra(generics.DestroyAPIView): #* Eliminar tarea por Obra_id
+    queryset = Tarea.objects.all()
+    serializer_class = TareaSerializer
+
+    def delete(self, request, *args, **kwargs):
+        if request.user.is_authenticated and request.user.rol == 'Admin':
+            return super().delete(request, *args, **kwargs)
+        else: 
+            return Response({'detail': 'No tiene permisos para eliminar Tareas'},
+                            status=status.HTTP_403_FORBIDDEN)
 
 #! vistas GASTO
 
