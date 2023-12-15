@@ -7,7 +7,6 @@ import APIbackend from "../api/APIbackend";
 const TareaView = () => {
     const { id } = useParams();
     const [obraData, setObraData] = useState({});
-
     const [obraId, setObraId] = useState(null);
 
     const navigate = useNavigate();
@@ -28,7 +27,16 @@ const TareaView = () => {
         }
     };
 
-
+    const fetchTareas = async () => {
+        if (obraId) {
+            try {
+                const tareaData = await APIbackend.listTareaByObra(obraId);
+                setTareas(tareaData);
+            } catch (error) {
+                console.error('Error al obtener la lista de Tareas: ', error.message);
+            }
+        }
+    };
 
 
     useEffect(() => {
@@ -50,9 +58,9 @@ const TareaView = () => {
                 Regresar
             </button>
 
-            <div>
+        <div>
                 {obraId && <TareaForm obraId={obraId} />}
-            </div>
+            </div> 
 
             <div>
                 {obraId && <TareaList obraId={obraId} />}
