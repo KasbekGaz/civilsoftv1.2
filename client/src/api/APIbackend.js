@@ -144,48 +144,14 @@ const APIbackend = {
     },
 
     //!TAREA peticiones
-
-    listTarea: async () =>{
-        try {
-            const token = localStorage.getItem('token');
-            console.log('Token:', token);
-            const response = await instance.get('/tareas/', {
-            headers: { Authorization: `Token ${token}` },
-        });
-        console.log(response.data)
-        return response.data;
-        
-        } catch (error) {
-            console.error('Algo salio mal al listar tareas', error.message);
-        throw error;
-        }
-    },
-
-    createTarea: async (tareaData) =>{
-        try {
-            const token = localStorage.getItem('token');
-            console.log('Token:', token);
-    
-            const response = await instance.post('/tareas/', tareaData, {
-                headers: { Authorization: `Token ${token}` },
-            });
-    
-            console.log(response.data);
-    
-            return response.data;
-        } catch (error) {
-            console.error('No se pudo crear Tarea: ', error.message);
-            throw error;
-        }
-    },
-
+    //* Listar tareas a obra sociada
     listTareaByObra: async (obraId) => {
         try {
 
             const token = localStorage.getItem('token');
             console.log(token);
 
-            const response = await instance.get(`/tareas/?obra=${obraId}`, {
+            const response = await instance.get(`/tareasbyObra/${obraId}/`, {
                 headers: { Authorization: `Token ${token}` },
             });
 
@@ -198,8 +164,58 @@ const APIbackend = {
             console.error('Error al obtener la lista de tareas por obra:', error.message);
             throw error;
         }
-    }
+    },
 
+    createTareabyObra: async (obraId, tareaData) =>{
+        try {
+            const token = localStorage.getItem('token');
+            console.log('Token:', token);
+    
+            const response = await instance.post(`/create-tarea-for-obra/${obraId}/`, tareaData, {
+                headers: { Authorization: `Token ${token}` },
+            });
+    
+            console.log(response.data);
+            return response.data;
+    
+        } catch (error) {
+            console.error('No se pudo crear Tarea: ', error.message);
+            throw error;
+        }
+    },
+
+    updateTareaForObra: async (obraId, tareaId, tareaData) => {
+        try {
+            const token = localStorage.getItem('token');
+            const response = await instance.put(`/update-tarea-for-obra/${obraId}/${tareaId}/`, tareaData, {
+            headers: { Authorization: `Token ${token}` },
+            });
+    
+            console.log(response.data);
+            return response.data;
+
+        } catch (error) {
+            console.error('Error al actualizar la tarea para la obra:', error.message);
+            throw error;
+        }
+    },
+    
+    //* Eliminar tarea
+    deleteTareaForObra: async (obraId, tareaId) => {
+        try {
+            const token = localStorage.getItem('token');
+            const response = await instance.delete(`/delete-tarea-for-obra/${obraId}/${tareaId}/`, {
+                headers: { Authorization: `Token ${token}` },
+            });
+    
+            console.log(response.data);
+            return response.data;
+
+        } catch (error) {
+            console.error('Error al eliminar la tarea para la obra:', error.message);
+            throw error;
+        }
+    },
 
 
 };
