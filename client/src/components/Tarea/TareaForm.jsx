@@ -24,12 +24,27 @@ const TareaFrom = ({ obraId }) =>{
 
     const handleCreateTarea = async () => {
         try {
-
             console.log(tareaData);
-            const response = await APIbackend.createTarea(tareaData);
+            
+            const response = await APIbackend.createTareabyObra(obraId, tareaData);
+            
             console.log('Tarea creada: ', response);
+
             alert('Tarea agregada correctamente');
             // Puedes agregar lógica adicional si es necesario
+
+            // Limpiar el formulario
+            setTareaData({
+                Fvence: '',
+                Fcreado: '',
+                Fcompletado: null,
+                titulo: '',
+                descripcion: '',
+                estado: 'no_completado',
+                obra: obraId,
+            });
+
+
         } catch (error) {
             console.error('Error al crear la TAREA', error.message);
         }
@@ -47,6 +62,7 @@ return(
                     name="Fvence"
                     value={tareaData.Fvence}
                     onChange={handleInputChange}
+                    className="ml-4"
                 />
             </label>
 

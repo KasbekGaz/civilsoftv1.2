@@ -38,10 +38,10 @@ const ObraForm = () =>{
 
 return (
     <div>
-        <h2>Crear Obra</h2>
+        <h1>Registrar Nueva Obra</h1>
 
         <form  className="flex flex-col justify-center items-center" >
-            <label>
+            <label className='mb-4'>
             Nombre:
             <input
                 type="text"
@@ -51,7 +51,7 @@ return (
             />
             </label>
 
-            <label>
+            <label className='mb-4'>
             Localidad:
             <input
                 type="text"
@@ -61,7 +61,7 @@ return (
             />
             </label>
 
-            <label>
+            <label className='mb-4'>
             Municipio:
             <input
                 type="text"
@@ -71,7 +71,7 @@ return (
             />
             </label>
 
-            <label>
+            <label className='mb-4'>
             Dependencia:
             <input
                 type="text"
@@ -81,7 +81,7 @@ return (
             />
             </label>
 
-            <label>
+            <label className='mb-4'>
             Fecha:
             <input
                 type="date"
@@ -91,7 +91,7 @@ return (
             />
             </label>
 
-            <label>
+            <label className='mb-4'>
             Presupuesto:
             <input
                 type="number"
