@@ -12,6 +12,10 @@ from .views import (
     UpdateTareabyObra,
     DeleteTareabyObra,
     # * Llamadas CRUD GASTOS
+    ListarGastobyObra,
+    CreateGastobyObra,
+    UpdateGastobyObra,
+    DeleteGastobyObra
 )
 
 from django.conf import settings
@@ -27,7 +31,7 @@ router.register(r'volumen', VolumenViewSet, basename='comparativa_volumen')
 
 urlpatterns = [
     path('api/v1/', include(router.urls)),
-    # * Tareas CRUD por Id Obra
+    # * Tareas CRUD por Id Obra----------------------------------------------------------
     path('api/v1/tareasbyObra/<int:obra_id>/', ListarTareabyObra.as_view()),
     path('api/v1/create-tarea-for-obra/<int:obra_id>/',
          CreateTareabyObra.as_view()),
@@ -35,8 +39,19 @@ urlpatterns = [
          UpdateTareabyObra.as_view()),
     path('api/v1/delete-tarea-for-obra/<int:obra_id>/<int:pk>/',
          DeleteTareabyObra.as_view()),
-    # *
-
+    # *Gastos CRUD por id obra----------------------------------------------------------
+    path('api/v1/gastosbyObra/<int:obra_id>/', ListarGastobyObra.as_view()),
+    path('api/v1/create-gasto-for-obra/<int:obra_id>/',
+         CreateGastobyObra.as_view()),
+    path('api/v1/update-gasto-for-obra/<int:obra_id>/<int:pk>/',
+         UpdateGastobyObra.as_view()),
+    path('api/v1/delete-gasto-for-obra/<int:obra_id>/<int:pk>/',
+         DeleteGastobyObra.as_view()),
+    # * GALERIA CRUD por id obra --------------------------------------------
+    path('', ),
+    path('', ),
+    path('', ),
+    path('', ),
 
 ]
 
