@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import TareaList from "../components/Tarea/TareaList";
-import TareaForm from "../components/Tarea/TareaForm";
 import APIbackend from "../api/APIbackend";
+import TareaForm from "../components/Tarea/TareaForm";
 
 const TareaView = () => {
     const { id } = useParams();
@@ -27,16 +27,6 @@ const TareaView = () => {
         }
     };
 
-    const fetchTareas = async () => {
-        if (obraId) {
-            try {
-                const tareaData = await APIbackend.listTareaByObra(obraId);
-                setTareas(tareaData);
-            } catch (error) {
-                console.error('Error al obtener la lista de Tareas: ', error.message);
-            }
-        }
-    };
 
 
     useEffect(() => {
@@ -58,10 +48,9 @@ const TareaView = () => {
                 Regresar
             </button>
 
-        <div>
-                {obraId && <TareaForm obraId={obraId} />}
-            </div> 
-
+            <div>
+            {obraId && <TareaForm obraId={obraId} />}
+            </div>
             <div>
                 {obraId && <TareaList obraId={obraId} />}
             </div>

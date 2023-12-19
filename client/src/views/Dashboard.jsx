@@ -8,7 +8,6 @@ const Dashboard = () => {
     const [isAuthenticated, setAuthenticated] = useState(true);
 
     useEffect(() => {
-        // Aquí podrías realizar alguna lógica adicional al cargar el dashboard
     }, []);
 
     const handleLogout = async () => {

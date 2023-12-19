@@ -26,6 +26,7 @@ const App = () => {
         <Route path="/details-obra/:id" element={<DetallesObra />} />
 
         <Route path="/details-tarea/:id" element={<TareaView />} />
+        
 
         
       </Routes>

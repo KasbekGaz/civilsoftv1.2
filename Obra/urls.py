@@ -47,11 +47,7 @@ urlpatterns = [
          UpdateGastobyObra.as_view()),
     path('api/v1/delete-gasto-for-obra/<int:obra_id>/<int:pk>/',
          DeleteGastobyObra.as_view()),
-    # * GALERIA CRUD por id obra --------------------------------------------
-    path('', ),
-    path('', ),
-    path('', ),
-    path('', ),
+    # * GALERIA CRUD por id obra ---------------------------------------
 
 ]
 

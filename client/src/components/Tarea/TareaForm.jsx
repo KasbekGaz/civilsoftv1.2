@@ -3,7 +3,11 @@ import APIbackend from '../../api/APIbackend';
 
 
 
-const TareaFrom = ({ obraId }) =>{
+const TareaForm = ({ obraId }) =>{
+
+    
+    console.log("obraId en TareaForm:", obraId);
+
     const [tareaData, setTareaData] = useState({
         Fvence: '',
         Fcreado: '',
@@ -32,7 +36,6 @@ const TareaFrom = ({ obraId }) =>{
 
             alert('Tarea agregada correctamente');
             // Puedes agregar lógica adicional si es necesario
-
             // Limpiar el formulario
             setTareaData({
                 Fvence: '',
@@ -122,4 +125,4 @@ return(
 
 };
 
-export default TareaFrom;
+export default TareaForm;
