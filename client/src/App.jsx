@@ -10,10 +10,11 @@ import UpdateObraForm from './components/UpdateObraForm';
 import DetallesObra from './views/DetallesObra';
 
 import TareaView from './views/TareaView';
+import UpdateTarea from './components/Tarea/UpdateTarea';
 
 
 const App = () => {
-  
+
   return (
     <Router>
       <Routes>
@@ -26,6 +27,7 @@ const App = () => {
         <Route path="/details-obra/:id" element={<DetallesObra />} />
 
         <Route path="/details-tarea/:id" element={<TareaView />} />
+        <Route path={"/update-tarea-by-obra/:obraId/:tareaId"} element={<UpdateTarea />} />
         
 
         

@@ -144,6 +144,26 @@ const APIbackend = {
     },
 
     //!TAREA peticiones
+    getTareaById: async (id) => {
+        try {
+
+            const token = localStorage.getItem('token');
+            console.log('Token:', token);
+
+            const response = await instance.get(`/tareas/${id}/`, {
+                headers: { Authorization: `Token ${token}` },
+            });
+        
+            console.log('Response Data:', response.data);
+
+            return response.data;
+        } catch (error) {
+
+            console.error(`Error al obtener los detalles de la tarea con ID ${id}:`, error.message);
+
+            throw error;
+        }
+    }, 
     //* Listar tareas a obra sociada
     listTareaByObra: async (obraId) => {
         try {
