@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import APIbackend from "../../api/APIbackend";
+import { useNavigate } from "react-router-dom";
 
 
 
 const TareaList = ({ obraId }) =>{
     const [tareas, setTareas] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetchTareas();
@@ -19,11 +21,26 @@ const TareaList = ({ obraId }) =>{
             const tareaData = await APIbackend.listTareaByObra(obraId);
             setTareas(tareaData);
             
-            console.log('id:', obraId,'Datos tareadata:', tareaData)
+            console.log('id:', obraId,'Datos tareadata:', tareaData);
         } catch (error) {
             console.error('Error al obtener la lista de Tareas: ', error.message);
         }
     };
+
+    const handleActualizar = (obraId, tareaId) =>{
+        console.log('Datos que entrar: ', obraId, tareaId); 
+        navigate(`/update-tarea-by-obra/${obraId}/${tareaId}`);
+    };
+
+    const handleEliminar = async (obraId, tareaId) => {
+        try{
+            await APIbackend.deleteTareaForObra(obraId, tareaId);
+            fetchTareas();
+        }catch(error){
+            console.error('Error al eliminar la tarea:', error.message);
+        }
+    };
+
 
 
 return (
@@ -55,11 +72,11 @@ return (
                 <td>{tarea.estado}</td>
                 <td>
                     <button className='bg-orange-400'
-                    onClick={() => handleActualizar(tarea.id)}>
+                    onClick={() => handleActualizar(obraId, tarea.id)}>
                         Actualizar
                     </button>
                     <button className='bg-red-600'
-                    onClick={() => handleEliminar(tarea.id) }
+                    onClick={() => handleEliminar(obraId, tarea.id) }
                         >
                         Eliminar
                     </button>
