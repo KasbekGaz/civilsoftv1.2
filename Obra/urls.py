@@ -15,7 +15,13 @@ from .views import (
     ListarGastobyObra,
     CreateGastobyObra,
     UpdateGastobyObra,
-    DeleteGastobyObra
+    DeleteGastobyObra,
+    # * Llamadas CRUD Galeria
+    ListarGaleriaporObra,
+    CreateGaleriabyObra,
+    UpdateGaleriabyObra,
+    DeleteGaleriabyObra,
+
 )
 
 from django.conf import settings
@@ -48,6 +54,15 @@ urlpatterns = [
     path('api/v1/delete-gasto-for-obra/<int:obra_id>/<int:pk>/',
          DeleteGastobyObra.as_view()),
     # * GALERIA CRUD por id obra ---------------------------------------
+    path('api/v1/galeriabyObra/<int:obra_id>/',
+         ListarGaleriaporObra.as_view()),
+    path('api/v1/create-galeria-for-obra/<int:obra_id>/',
+         CreateGaleriabyObra.as_view()),
+    path('api/v1/update-galeria-for-obra/<int:obra_id>/<int:pk>/',
+         UpdateGaleriabyObra.as_view()),
+    path('api/v1/delete-gasleria-for-obra/<int:obra_id>/<int:pk>/',
+         DeleteGaleriabyObra.as_view()),
+
 
 ]
 
