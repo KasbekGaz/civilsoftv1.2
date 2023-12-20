@@ -485,9 +485,81 @@ class GaleriaViewSet(viewsets.ModelViewSet):
                 {"detail": "No tiene permiso para ver archivos"},
                 status=status.HTTP_403_FORBIDDEN,
             )
+# ? VISTAS DE GASTOS PARA CRUD BAJO ID OBRA ASOCIADA
 
+
+class ListarGaleriaporObra(generics.ListAPIView):  # * Listar Galeria por Obra_id
+    serializer_class = GaleriaSerializer
+
+    def get_queryset(self):
+        obra_id = self.kwargs["obra_id"]
+        return Galeria.objects.filter(obra_id=obra_id)
+
+    def list(self, request, *args, **kwargs):
+        obra_id = self.kwargs["obra_id"]
+
+        if request.user.is_authenticated and request.user.rol in ["Admin", "Consul"]:
+            queryset = self.get_queryset()
+            serializer = self.get_serializer(queryset, many=True)
+            return Response(serializer.data)
+        else:
+            return Response(
+                {"detail": "No tiene permisos para ver estos datos."},
+                status=status.HTTP_403_FORBIDDEN
+            )
+
+
+class CreateGaleriabyObra(generics.CreateAPIView):  # * Crear galeria por Obra_id
+    queryset = Galeria.objects.all()
+    serializer_class = GaleriaSerializer
+
+    def perform_create(self, serializer):
+        obra_id = self.kwargs.get("obra_id")
+        serializer.save(obra_id=obra_id)
+
+    def create(self, request, *args, **kwargs):
+        if request.user.is_authenticated and request.user.rol == "Admin":
+            return super().create(request, *args, **kwargs)
+        else:
+            return Response(
+                {"details": "No tienes permisos para guardar imagenes."}, status=status.HTTP_403_FORBIDDEN
+            )
+
+
+# * Actualizar Galeria por Obra_id
+class UpdateGaleriabyObra(generics.UpdateAPIView):
+    queryset = Galeria.objects.all()
+    serializer_class = GaleriaSerializer
+
+    def perform_update(self, serializer):
+        obra_id = self.kwargs.get("obra_id")
+        serializer.save(obra_id=obra_id)
+
+    def update(self, request, *args, **kwargs):
+        if request.user.is_authenticated and request.user.rol == "Admin":
+            return super().update(request, *args, **kwargs)
+        else:
+            return Response(
+                {"detail": "No tienen permisos de actualizar esta Galeria"}, status=status.HTTP_403_FORBIDDEN
+            )
+
+
+# * Eliminar Galeria pod Obra_id
+class DeleteGaleriabyObra(generics.DestroyAPIView):
+    queryset = Galeria.objects.all()
+    serializer_class = GaleriaSerializer
+
+    def delete(self, request, *args, **kwargs):
+        if request.user.is_authenticated and request.user.rol == "Admin":
+            return super().delete(request, *args, **kwargs)
+        else:
+            return Response(
+                {"detail": "No tiene permisos para eliminar la Galeria"}, status=status.HTTP_403_FORBIDDEN
+            )
 
 #! Vista Volumen
+
+
 class VolumenViewSet(viewsets.ModelViewSet):
     queryset = Volumen.objects.all()
     serializer_class = VolumenSerializer
