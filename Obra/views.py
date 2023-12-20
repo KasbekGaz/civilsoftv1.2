@@ -425,7 +425,7 @@ class DeleteGastobyObra(generics.DestroyAPIView):  # * Eliminar tarea por Obra_i
             )
 
 
-#! Vista Galeria
+#! Vista Galeria -----------------------------------------------------------
 class GaleriaViewSet(viewsets.ModelViewSet):
     queryset = Galeria.objects.all()
     serializer_class = GaleriaSerializer
