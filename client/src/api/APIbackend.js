@@ -49,7 +49,7 @@ const APIbackend = {
     },
 
   //! OBRA peticiones
-    
+    //* Listar OBRAS
     listObra: async () =>{
         try {
             const token = localStorage.getItem('token');
@@ -65,7 +65,7 @@ const APIbackend = {
         throw error;
         }
     },
-
+    //* CREAR una obra
     createObra: async (obraData) => {
         try {
             const token = localStorage.getItem('token');
@@ -83,8 +83,7 @@ const APIbackend = {
             throw error;
         }
     },
-
-    
+    //* Pedimos datos de una obra en concreto
     getObraById: async (id) => {
         try {
 
@@ -106,7 +105,7 @@ const APIbackend = {
         }
     }, 
     
-
+    //* Actualizar un obra
     updateObra: async (id, obraData) => {
         try{
             const token = localStorage.getItem('token');
@@ -124,7 +123,7 @@ const APIbackend = {
             throw error;
         }
     },
-
+    //* ELIMINAR una obra
     deleteObra: async (id) => {
         try {
             const token = localStorage.getItem('token');
@@ -144,6 +143,7 @@ const APIbackend = {
     },
 
     //!TAREA peticiones
+    //* Listar TAREAS por obra_id
     getTareaById: async (id) => {
         try {
 
@@ -185,7 +185,7 @@ const APIbackend = {
             throw error;
         }
     },
-
+    //* CREAR tareas por obra_id
     createTareabyObra: async (obraId, tareaData) =>{
         try {
             const token = localStorage.getItem('token');
@@ -203,7 +203,7 @@ const APIbackend = {
             throw error;
         }
     },
-
+    //* ACTUALIZAR tarae por obra_id
     updateTareaForObra: async (obraId, tareaId, tareaData) => {
         try {
             const token = localStorage.getItem('token');
@@ -236,6 +236,118 @@ const APIbackend = {
             throw error;
         }
     },
+
+    //! GASTOS CRUD
+    //* Pedimos lista de TAREAS por obra_id
+    listGastoByObra: async (obraId) => {
+        try {
+
+            const token = localStorage.getItem('token');
+            console.log(token);
+
+            const response = await instance.get(`/gastosbyObra/${obraId}/`, {
+                headers: { Authorization: `Token ${token}` },
+            });
+
+            console.log(response.data);
+
+            return response.data;
+
+
+        } catch (error) {
+            console.error('Error al obtener la lista de tareas por obra:', error.message);
+            throw error;
+        }
+    },
+    //* CREAR un gasto a una obra_id
+    createTareabyObra: async (obraId, gastoData) =>{
+        try {
+            const token = localStorage.getItem('token');
+            console.log('Token:', token);
+    
+            const response = await instance.post(`/create-gasto-for-obra/${obraId}/`, gastoData, {
+                headers: { Authorization: `Token ${token}` },
+            });
+    
+            console.log(response.data);
+            return response.data;
+    
+        } catch (error) {
+            console.error('No se pudo guardar el Gasto: ', error.message);
+            throw error;
+        }
+    },
+    //* ACTUALIAR un gasto por obra_id
+    updateTareaForObra: async (obraId, gastoId, gastoData) => {
+        try {
+            const token = localStorage.getItem('token');
+            const response = await instance.put(`/update-gasto-for-obra/${obraId}/${gastoId}/`, gastoData, {
+            headers: { Authorization: `Token ${token}` },
+            });
+    
+            console.log(response.data);
+            return response.data;
+
+        } catch (error) {
+            console.error('Error al actualizar el Gasto:', error.message);
+            throw error;
+        }
+    },
+    //* ELIMINAR un gasto por obra_id
+    deleteGastoForObra: async (obraId, gastoId) =>{
+        try{
+            const token = localStorage.getItem('token');
+            const response = await instance.delete(`/delete-gasto-for-obra/${obraId}/${gastoId}`,
+            {
+                headers: {Authorization: `Token ${token}`},
+            });
+
+            console.log(response.data);
+            return response.data;
+
+        }catch(error){
+            console.error('Error al borrar el Gasto: ', error.message);
+            throw error;
+        }
+    },
+    //!  CRUD de Galeria
+    //* Listar la galeria por obra_id
+    ListGaleriaByObra: async (obraId) => {
+        try{
+            const token = localStorage.getItem('token');
+            console.log(token);
+
+            const response = await instance.get(`/galeriabyObra/${obraId}`,{
+                headers: { Authorization: `Token ${token}` },
+            });
+
+            console.log(response.data)
+            return response.data;
+
+        }catch(error){
+
+        }
+    },
+    //* CREAR galeria por obra_id
+    CreateGaleriabyObra: async (obraId, galeriaData) => {
+        try{
+            const token = localStorage.getItem('token');
+            console.log('Token:', token);
+
+            const response = await instance.post(`/create-galeria-for-obra/${obraId}`, galeriaData, {
+                headers: { Authorization: `Token ${token}` },
+            });
+            
+            console.log(response.data);
+            return response.data;
+
+        }catch(error){
+            console.error('No se pudo agregar la galeria: ', error.message);
+            throw error;
+        }
+    },
+    //* ACTUALIZAR galeria por obra_id
+    
 
 
 };
