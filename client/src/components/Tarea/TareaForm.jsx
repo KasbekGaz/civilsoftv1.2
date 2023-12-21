@@ -3,9 +3,7 @@ import APIbackend from '../../api/APIbackend';
 
 
 
-const TareaForm = ({ obraId }) =>{
-
-    
+const TareaForm = ({ obraId }) =>{    
     console.log("obraId en TareaForm:", obraId);
 
     const [tareaData, setTareaData] = useState({
@@ -55,7 +53,7 @@ const TareaForm = ({ obraId }) =>{
 
 return(
 <div>
-    <h2>Crear Nueva tarea </h2>
+    <h1>Crear Nueva tarea </h1>
 
         <form  className="flex flex-col justify-center items-center">
             <label className="mb-4">
