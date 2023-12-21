@@ -60,7 +60,7 @@ urlpatterns = [
          CreateGaleriabyObra.as_view()),
     path('api/v1/update-galeria-for-obra/<int:obra_id>/<int:pk>/',
          UpdateGaleriabyObra.as_view()),
-    path('api/v1/delete-gasleria-for-obra/<int:obra_id>/<int:pk>/',
+    path('api/v1/delete-galeria-for-obra/<int:obra_id>/<int:pk>/',
          DeleteGaleriabyObra.as_view()),
 
 
