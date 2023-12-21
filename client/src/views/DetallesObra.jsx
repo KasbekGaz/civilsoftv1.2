@@ -73,7 +73,7 @@ const DetallesObra = () => {
                         </div>
                     </div>
 
-                    <div className="bg-lime-400 p-4 rounded-md">
+                    <div className="bg-violet-400 p-4 rounded-md">
                         <div>
                             <h3 className="text-lg font-semibold mb-2">Control Administrativo</h3>
                             <button className="bg-yellow-500 py-2 px-4">Ver más</button>
