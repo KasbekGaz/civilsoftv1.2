@@ -29,14 +29,14 @@ const TareaView = () => {
 
 
 
+    const handleBack = () => {
+        navigate(`/dashboard`)
+    };
+
     useEffect(() => {
         fetchObraDetails();
     }, [id]);
 
-
-    const handleBack = () => {
-        navigate(`/dashboard`)
-    };
 
     return (
         <div>
@@ -45,7 +45,7 @@ const TareaView = () => {
             <h2>Control de Tareas:</h2>
             
             <button className="bg-green-400 py-2 px-4 mb-4" onClick={handleBack}>
-                Regresar
+                Regresar Al Inicio
             </button>
 
             <div>
