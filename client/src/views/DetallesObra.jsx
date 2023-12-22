@@ -31,9 +31,14 @@ const DetallesObra = () => {
     };
 
     const handleTarea = () => {
-            console.log('El id:', id);
+        console.log('El id:', id);
         navigate(`/details-tarea/${id}`);
     };
+
+    const handleControlAdmin = () => {
+        console.log('El id: ', id);
+        navigate(`/control-gastos/${id}`);
+    }
 
 
     return (
@@ -76,7 +81,9 @@ const DetallesObra = () => {
                     <div className="bg-violet-400 p-4 rounded-md">
                         <div>
                             <h3 className="text-lg font-semibold mb-2">Control Administrativo</h3>
-                            <button className="bg-yellow-500 py-2 px-4">Ver más</button>
+                            <button className="bg-yellow-500 py-2 px-4"
+                                onClick={handleControlAdmin}
+                            >Ver más</button>
                         </div>
                     </div>
                 </div>
