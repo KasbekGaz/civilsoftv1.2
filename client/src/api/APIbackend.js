@@ -260,12 +260,12 @@ const APIbackend = {
         }
     },
     //* CREAR un gasto a una obra_id
-    createGastobyObra: async (obraId, gastoData) =>{
+    createGastobyObra: async (id, gastoData) =>{
         try {
             const token = localStorage.getItem('token');
             console.log('Token:', token);
     
-            const response = await instance.post(`/create-gasto-for-obra/${obraId}/`, gastoData, {
+            const response = await instance.post(`/create-gasto-for-obra/${id}/`, gastoData, {
                 headers: { Authorization: `Token ${token}` },
             });
     
