@@ -239,7 +239,7 @@ const APIbackend = {
 
     //! GASTOS CRUD
     //* Pedimos lista de TAREAS por obra_id
-    listGastoByObra: async (obraId) => {
+    listGastobyObra: async (obraId) => {
         try {
 
             const token = localStorage.getItem('token');
@@ -260,7 +260,7 @@ const APIbackend = {
         }
     },
     //* CREAR un gasto a una obra_id
-    createTareabyObra: async (obraId, gastoData) =>{
+    createGastobyObra: async (obraId, gastoData) =>{
         try {
             const token = localStorage.getItem('token');
             console.log('Token:', token);
@@ -278,7 +278,7 @@ const APIbackend = {
         }
     },
     //* ACTUALIAR un gasto por obra_id
-    updateTareaForObra: async (obraId, gastoId, gastoData) => {
+    updateGastobyObra: async (obraId, gastoId, gastoData) => {
         try {
             const token = localStorage.getItem('token');
             const response = await instance.put(`/update-gasto-for-obra/${obraId}/${gastoId}/`, gastoData, {
@@ -294,12 +294,12 @@ const APIbackend = {
         }
     },
     //* ELIMINAR un gasto por obra_id
-    deleteGastoForObra: async (obraId, gastoId) =>{
+    deleteGastobyObra: async (obraId, gastoId) =>{
         try{
             const token = localStorage.getItem('token');
             const response = await instance.delete(`/delete-gasto-for-obra/${obraId}/${gastoId}`,
             {
-                headers: {Authorization: `Token ${token}`},
+                headers: { Authorization: `Token ${token}` },
             });
 
             console.log(response.data);
@@ -312,7 +312,7 @@ const APIbackend = {
     },
     //!  CRUD de Galeria
     //* Listar la galeria por obra_id
-    ListGaleriaByObra: async (obraId) => {
+    ListGaleriabyObra: async (obraId) => {
         try{
             const token = localStorage.getItem('token');
             console.log(token);
@@ -325,7 +325,8 @@ const APIbackend = {
             return response.data;
 
         }catch(error){
-
+            console.log('No se pudo cargar los datos de la galeria:', error.message);
+            throw error;
         }
     },
     //* CREAR galeria por obra_id
@@ -347,7 +348,36 @@ const APIbackend = {
         }
     },
     //* ACTUALIZAR galeria por obra_id
-    
+    updateGaleriabyObra: async (obraId, galeriaId, galeriaData) =>{
+        try{
+            const token = localStorage.getItem('token');
+            const response = await instance.put(`/update-galeria-for-obra/${obraId}/${galeriaId}`, galeriaData, {
+                headers: { Authorization: `Token ${token}` },
+            });
+
+            console.log(response.data);
+            return response.data;
+        }catch(error){
+            console.error('Error al actualizar la Galeria: ', error.message);
+            throw error;
+        }
+    },
+    //* ELIMINAR galeria por obra_id
+    deleteGaleriabyObra: async (obraId, galeriaId) =>{
+        try{
+            const token = localStorage.getItem('token');
+            const response = await instance.delete(`/delete-galeria-for-obra/${obraId}/${galeriaId}`, {
+                headers: { Authorization: `Token ${token}` }
+            });
+
+            console.log(response.data);
+            return response.data;
+        }catch(error){
+            console.error('Error al borrar la Galeria', error.message);
+            throw error;
+        }
+    },
+    //! CRUD de Volumenes
 
 
 };
