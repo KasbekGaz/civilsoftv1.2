@@ -143,7 +143,7 @@ const APIbackend = {
     },
 
     //!TAREA peticiones
-    //* Listar TAREAS por obra_id
+    //* Listar TAREAS por su id
     getTareaById: async (id) => {
         try {
 
@@ -238,22 +238,32 @@ const APIbackend = {
     },
 
     //! GASTOS CRUD
-    //* Pedimos lista de TAREAS por obra_id
-    listGastobyObra: async (obraId) => {
-        try {
-
+    //* Obtener un gasto por su id
+    getGastoById: async (gastoId) => {
+        try{
+            console.log('Id que entra:', gastoId);
             const token = localStorage.getItem('token');
-            console.log(token);
-
-            const response = await instance.get(`/gastosbyObra/${obraId}/`, {
+            console.log('Token:', token);
+            const response = await instance.get(`/gastos/${gastoId}/`, {
                 headers: { Authorization: `Token ${token}` },
             });
-
-            console.log(response.data);
-
+            console.log('Response Data:', response.data);
             return response.data;
-
-
+        }catch(error){
+            console.error(`Error al obtener los detalles del Gasto con ID ${gastoId}:`, error.message);
+            throw error;
+        }
+    },
+    //* Pedimos lista de TAREAS por obra_id
+    listGastobyObra: async (id) => {
+        try {
+            const token = localStorage.getItem('token');
+            console.log(token);
+            const response = await instance.get(`/gastosbyObra/${id}/`, {
+                headers: { Authorization: `Token ${token}` },
+            });
+            console.log(response.data);
+            return response.data;
         } catch (error) {
             console.error('Error al obtener la lista de tareas por obra:', error.message);
             throw error;
@@ -278,13 +288,12 @@ const APIbackend = {
         }
     },
     //* ACTUALIAR un gasto por obra_id
-    updateGastobyObra: async (obraId, gastoId, gastoData) => {
+    updateGastobyObra: async (id, gastoId, gastoData) => {
         try {
             const token = localStorage.getItem('token');
-            const response = await instance.put(`/update-gasto-for-obra/${obraId}/${gastoId}/`, gastoData, {
+            const response = await instance.put(`/update-gasto-for-obra/${id}/${gastoId}/`, gastoData, {
             headers: { Authorization: `Token ${token}` },
             });
-    
             console.log(response.data);
             return response.data;
 
@@ -294,10 +303,10 @@ const APIbackend = {
         }
     },
     //* ELIMINAR un gasto por obra_id
-    deleteGastobyObra: async (obraId, gastoId) =>{
+    deleteGastobyObra: async (id, gastoId) =>{
         try{
             const token = localStorage.getItem('token');
-            const response = await instance.delete(`/delete-gasto-for-obra/${obraId}/${gastoId}`,
+            const response = await instance.delete(`/delete-gasto-for-obra/${id}/${gastoId}`,
             {
                 headers: { Authorization: `Token ${token}` },
             });
@@ -311,6 +320,8 @@ const APIbackend = {
         }
     },
     //!  CRUD de Galeria
+    //* GEt una galeria por su id
+
     //* Listar la galeria por obra_id
     ListGaleriabyObra: async (obraId) => {
         try{
