@@ -12,6 +12,7 @@ import DetallesObra from './views/DetallesObra';
 import TareaView from './views/TareaView';
 import UpdateTarea from './components/Tarea/UpdateTarea';
 import ControlAdmin from './views/ControlAdmin';
+import UpdateGasto from './components/Gasto/UpdateGasto';
 
 
 const App = () => {
@@ -24,14 +25,14 @@ const App = () => {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/create-obra" element={<ObraForm />} />
         <Route path="/update-obra/:id" element={<UpdateObraForm />} />
-
+          {/* Vista de Aciones para una OBRA */}
         <Route path="/details-obra/:id" element={<DetallesObra />} />
-
+          {/* Vista control de TAREAS */}
         <Route path="/details-tarea/:id" element={<TareaView />} />
         <Route path={"/update-tarea-by-obra/:obraId/:tareaId"} element={<UpdateTarea />} />
-        
+        {/* Vista de control GASTOS */}
         <Route path={"/control-gastos/:id"} element={<ControlAdmin/>} />
-        
+        <Route path="/update-gasto-by-obra/:id/:gastoId" element={<UpdateGasto/>}/>
       </Routes>
     </Router>
   );
