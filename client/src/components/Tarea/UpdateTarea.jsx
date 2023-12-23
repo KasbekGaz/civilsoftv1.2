@@ -27,6 +27,7 @@ const UpdateTarea = () => {
         const fetchTareaData = async () => {
             try {
                 const tarea = await APIbackend.getTareaById(tareaId);
+                console.log(tarea);
                 setTareaData({
                     titulo: tarea.titulo,
                     descripcion: tarea.descripcion,
