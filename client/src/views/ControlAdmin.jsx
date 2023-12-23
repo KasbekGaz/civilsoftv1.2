@@ -5,8 +5,9 @@ import APIbackend from "../api/APIbackend";
 
 
 const ControlAdmin = () => {
-    const { id } = useParams();
+    const { id } = useParams(); //* id es de obra
     const [obraData, setObraData] = useState({});
+    const [ gastos, setGastos ] = useState([]);
 
 
     const navigate = useNavigate();
@@ -33,7 +34,7 @@ const ControlAdmin = () => {
         proveedor: '',
         concepto: '',
         descripcion: '',
-        categoria: '',
+        categoria: 'Administracion',
         facturado: 'No Facturado',
         Tipo: 'Efectivo',
         importe: '0',
@@ -59,11 +60,12 @@ const ControlAdmin = () => {
                 proveedor: '',
                 concepto: '',
                 descripcion: '',
-                categoria: '',
+                categoria: 'Administracion',
                 facturado: 'No Facturado',
                 Tipo: 'Efectivo',
                 importe: '0',
             });
+            fetchGastos();
         }catch(error){
             console.error('Error al crear Gasto', error.message);
         }
@@ -72,8 +74,39 @@ const ControlAdmin = () => {
     
     useEffect(() => {
         fetchObraDetails(); //*Obtener datos de la obra
+        fetchGastos();
 
     }, [id])
+
+    //! Para listar los gastos por id obra
+    const fetchGastos = async () =>{
+        try{
+            console.log(id); //obra_id
+            const gastoData = await APIbackend.listGastobyObra(id);
+            setGastos(gastoData);
+            console.log('id:', id , 'Datos Obtenidos: ', gastoData);
+
+        }catch(error){
+            console.error('Error al listar gastos', error.message)
+        }
+    };
+    //! Para Actualizar gasto por su id
+    const handleActualizar = (id, gastoId) =>{
+        console.log('Datos que entran', id , gastoId);
+        navigate(`/update-gasto-by-obra/${id}/${gastoId}`);
+    };
+    //! Para Eliminar un gasto por su id
+    const handleEliminar = async (id, gastoId) => {
+        try{
+            await APIbackend.deleteGastobyObra(id, gastoId);
+            alert('Eliminaste el gasto con exito!!')
+            fetchGastos();
+        }catch(error){
+            console.error('Error al eliminar el gasto', error.message);
+        }
+    };
+
+
     return(
         <div>
             <h1>Control de gastos para: </h1>
@@ -183,7 +216,51 @@ const ControlAdmin = () => {
                 </form>
             </div>
 
-            <div class="Tabla de contenido">
+            <div class="Tabla-de-contenido">
+                <h1>Lista de gastos</h1>
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Fecha</th>
+                            <th>Proveedor</th>
+                            <th>Concepto</th>
+                            <th>Descripción</th>
+                            <th>Categoria</th>
+                            <th>Facturado</th>
+                            <th>Tipo de Gasto</th>
+                            <th>Importe $ </th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {gastos.map((gasto) => (
+                            <tr key={gasto.id} >
+                                <td>{gasto.id}</td>
+                                <td>{gasto.fecha}</td>
+                                <td>{gasto.proveedor}</td>
+                                <td>{gasto.concepto}</td>
+                                <td>{gasto.descripcion}</td>
+                                <td>{gasto.categoria}</td>
+                                <td>{gasto.facturado}</td>
+                                <td>{gasto.Tipo}</td>
+                                <td>{gasto.importe}</td>
+                                <td>
+                                    <button className="bg-orange-400"
+                                    onClick={() => handleActualizar(id, gasto.id)}>
+                                        Actualizar
+                                    </button>
+
+                                    <button className="bg-red-600"
+                                    onClick={() => handleEliminar(id, gasto.id)}>
+                                        Eliminar
+                                    </button>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
 
             </div>
 
