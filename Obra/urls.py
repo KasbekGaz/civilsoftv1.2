@@ -21,6 +21,12 @@ from .views import (
     CreateGaleriabyObra,
     UpdateGaleriabyObra,
     DeleteGaleriabyObra,
+    # * Llamadas CRUD Volumen
+    ListarVolumenPorObra,
+    CreateVolumenbyObra,
+    UpdateVolumenbyObra,
+    DeleteVolumenbyObra,
+
 
 )
 
@@ -62,6 +68,15 @@ urlpatterns = [
          UpdateGaleriabyObra.as_view()),
     path('api/v1/delete-galeria-for-obra/<int:obra_id>/<int:pk>/',
          DeleteGaleriabyObra.as_view()),
+    # * VOLUMEN CRUD por id obra ---------------------------------------
+    path('api/v1/volumenbyObra/<int:obra_id>/',
+         ListarVolumenPorObra.as_view()),
+    path('api/v1/create-volumen-for-obra/<int:obra_id>/',
+         CreateVolumenbyObra.as_view()),
+    path('api/v1/update-volumen-for-obra/<int:obra_id>/<int:pk>/',
+         UpdateVolumenbyObra.as_view()),
+    path('api/v1/delete-volumen-for-obra/<int:obra_id>/<int:pk>/',
+         DeleteVolumenbyObra.as_view()),
 
 
 ]
