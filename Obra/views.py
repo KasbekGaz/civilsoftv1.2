@@ -619,3 +619,78 @@ class VolumenViewSet(viewsets.ModelViewSet):
                 {"detail": "No tiene permiso para ver volumenes"},
                 status=status.HTTP_403_FORBIDDEN,
             )
+
+# ? VISTA DE VOLUMEN PARA CRUD BAJO ID OBRA ASOCIADA
+
+
+class ListarVolumenPorObra(generics.ListAPIView):  # *Listar Volumen por Obra_id
+    serializer_class = VolumenSerializer
+
+    def get_queryset(self):
+        obra_id = self.kwargs["obra_id"]
+        return Volumen.objects.filter(obra_id=obra_id)
+
+    def list(self, request, *args, **kwargs):
+        obra_id = self.kwargs["obra_id"]
+
+        if request.user.is_authenticated and request.user.rol in ["Admin", "Consul"]:
+            queryset = self.get_queryset()
+            serializer = self.get_serializer(queryset, many=True)
+            return Response(serializer.data)
+        else:
+            return Response(
+                {"detail": "No tiene permisos para ver estos datos"},
+                status=status.HTTP_403_FORBIDDEN
+            )
+
+
+# * Crear un volumen por Obra_id
+class CreateVolumenbyObra(generics.CreateAPIView):
+    queryset = Volumen.objects.all()
+    serializer_class = VolumenSerializer
+
+    def perform_create(self, serializer):
+        obra_id = self.kwargs.get("obra_id")
+        serializer.save(obra_id=obra_id)
+
+    def create(self, request, *args, **kwargs):
+        if request.user.is_authenticated and request.user.rol == "Admin":
+            return super().create(request, *args, **kwargs)
+        else:
+            return Response(
+                {"details": "No tienes permisos para crear volumenes."}, status=status.HTTP_403_FORBIDDEN
+            )
+
+# * Atualizar Volumen por Obra_Id
+
+
+class UpdateVolumenbyObra(generics.UpdateAPIView):
+    queryset = Volumen.objects.all()
+    serializer_class = VolumenSerializer
+
+    def perform_update(self, serializer):
+        obra_id = self.kwargs.get("obra_id")
+        serializer.save(obra_id=obra_id)
+
+    def update(self, request, *args, **kwargs):
+        if request.user.is_authenticated and request.user.rol == "Admin":
+            return super().update(request, *args, **kwargs)
+        else:
+            return Response(
+                {"detail": "No tienen permisos de actualizar volumenes"}, status=status.HTTP_403_FORBIDDEN
+            )
+
+# * Eliminar Volumen por Obra_Id
+
+
+class DeleteVolumenbyObra(generics.DestroyAPIView):
+    queryset = Volumen.objects.all()
+    serializer_class = VolumenSerializer
+
+    def delete(self, request, *args, **kwargs):
+        if request.user.is_authenticated and request.user.rol == "Admin":
+            return super().delete(request, *args, **kwargs)
+        else:
+            return Response(
+                {"detail": "No tiene permisos para eliminar este Volumen"}, status=status.HTTP_403_FORBIDDEN
+            )
