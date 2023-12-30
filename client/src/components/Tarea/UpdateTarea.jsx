@@ -4,10 +4,10 @@ import { useNavigate, useParams } from "react-router-dom";
 
 
 const UpdateTarea = () => {
-    const { obraId, tareaId } = useParams();
+    const { id, tareaId } = useParams();
     const navigate = useNavigate();
 
-    console.log('Obraid en UpdateTarea:', obraId);
+    console.log('Id de la obra:', id);
     console.log('Tarea que se actualiza:', tareaId);
 
     const [tareaData, setTareaData] = useState({
@@ -17,13 +17,13 @@ const UpdateTarea = () => {
         titulo: '',
         descripcion: '',
         estado: 'no_completado',
-        obra: obraId,
+        obra: id,
     });
 
 
 
     useEffect(() => {
-        // Cargar datos de la otarea al comprobar el componente
+        //* Cargar datos de la otarea al comprobar el componente
         const fetchTareaData = async () => {
             try {
                 const tarea = await APIbackend.getTareaById(tareaId);
@@ -32,6 +32,7 @@ const UpdateTarea = () => {
                     titulo: tarea.titulo,
                     descripcion: tarea.descripcion,
                     Fvence: tarea.Fvence,
+                    Fcreado: tarea.Fcreado,
                     Fcompletado: tarea.Fcompletado,
                     estado: tarea.estado,
                     obra: tarea.obra,
@@ -52,12 +53,12 @@ const UpdateTarea = () => {
 
     const handleUpdateTarea = async () => {
         try{
-            console.log('Datos que entran: ', obraId, tareaId, tareaData);
-            await APIbackend.updateTareaForObra(obraId, tareaId, tareaData );
+            console.log('Datos que entran: ', id, tareaId, tareaData);
+            await APIbackend.updateTareaForObra(id, tareaId, tareaData );
             alert('Tarea actualizada correctamente !!');
-            navigate(`/details-tarea/${obraId}`)
+            navigate(`/control-tarea/${id}`)
         }catch(error){
-
+            console.error('Error al actualizar datos.', error.message);
         }
     }
 
