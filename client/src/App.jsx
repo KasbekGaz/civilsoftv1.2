@@ -28,8 +28,8 @@ const App = () => {
           {/* Vista de Aciones para una OBRA */}
         <Route path="/details-obra/:id" element={<DetallesObra />} />
           {/* Vista control de TAREAS */}
-        <Route path="/details-tarea/:id" element={<TareaView />} />
-        <Route path={"/update-tarea-by-obra/:obraId/:tareaId"} element={<UpdateTarea />} />
+        <Route path="/control-tarea/:id" element={<TareaView />} />
+        <Route path={"/update-tarea-by-obra/:id/:tareaId"} element={<UpdateTarea />} />
         {/* Vista de control GASTOS */}
         <Route path={"/control-gastos/:id"} element={<ControlAdmin/>} />
         <Route path="/update-gasto-by-obra/:id/:gastoId" element={<UpdateGasto/>}/>
