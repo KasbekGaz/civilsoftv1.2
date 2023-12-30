@@ -167,19 +167,14 @@ const APIbackend = {
     //* Listar tareas a obra sociada
     listTareaByObra: async (obraId) => {
         try {
-
             const token = localStorage.getItem('token');
             console.log(token);
 
             const response = await instance.get(`/tareasbyObra/${obraId}/`, {
                 headers: { Authorization: `Token ${token}` },
             });
-
             console.log(response.data);
-
             return response.data;
-
-
         } catch (error) {
             console.error('Error al obtener la lista de tareas por obra:', error.message);
             throw error;
@@ -207,6 +202,7 @@ const APIbackend = {
     updateTareaForObra: async (obraId, tareaId, tareaData) => {
         try {
             const token = localStorage.getItem('token');
+            console.log('Token:', token);
             const response = await instance.put(`/update-tarea-for-obra/${obraId}/${tareaId}/`, tareaData, {
             headers: { Authorization: `Token ${token}` },
             });
