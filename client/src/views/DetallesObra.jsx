@@ -32,7 +32,7 @@ const DetallesObra = () => {
 
     const handleTarea = () => {
         console.log('El id:', id);
-        navigate(`/details-tarea/${id}`);
+        navigate(`/control-tarea/${id}`);
     };
 
     const handleControlAdmin = () => {
