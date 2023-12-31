@@ -24,7 +24,7 @@ return (
     <h1>Dashboard</h1>
     {isAuthenticated ? (
     <div>
-        <p>Bienvenido al dashboard. Aquí puedes agregar contenido relevante.</p>
+        <p>Bienvenido al dashboard.!! </p>
         <button onClick={handleLogout}>Cerrar sesión</button>
         <div className="dashboard-section">
         <ListObra />
