@@ -43,7 +43,7 @@ const ListObra = () => {
 
 return (
 <div>
-    <h2>Lista de Obras</h2>
+    <h1>Lista de Obras</h1>
 
     <Link to="/create-obra" >
         <button
