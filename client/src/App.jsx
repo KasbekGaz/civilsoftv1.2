@@ -11,8 +11,10 @@ import DetallesObra from './views/DetallesObra';
 
 import TareaView from './views/TareaView';
 import UpdateTarea from './components/Tarea/UpdateTarea';
+
 import ControlAdmin from './views/ControlAdmin';
 import UpdateGasto from './components/Gasto/UpdateGasto';
+import ControlObra from './views/ControlObra';
 
 
 const App = () => {
@@ -31,8 +33,10 @@ const App = () => {
         <Route path="/control-tarea/:id" element={<TareaView />} />
         <Route path={"/update-tarea-by-obra/:id/:tareaId"} element={<UpdateTarea />} />
         {/* Vista de control GASTOS */}
-        <Route path={"/control-gastos/:id"} element={<ControlAdmin/>} />
-        <Route path="/update-gasto-by-obra/:id/:gastoId" element={<UpdateGasto/>}/>
+        <Route path="/control-gastos/:id" element={<ControlAdmin/>} />
+        <Route path={"/update-gasto-by-obra/:id/:gastoId"} element={<UpdateGasto/>}/>
+        {/* Vista de vontrol de Volumenes */}
+        <Route path="/control-obra/:id" element={<ControlObra/>}/>
       </Routes>
     </Router>
   );
