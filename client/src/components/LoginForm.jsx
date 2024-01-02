@@ -33,7 +33,8 @@ return (
         <input type="password" {...register('password', { required: true })} />
         </label>
         <br />
-        <button type="submit">Iniciar sesión</button>
+        <button className="rounded-full bg-yellow-400 py-2 px-4 mb-4"
+        type="submit">Iniciar sesión</button>
     </form>
 );
 };
