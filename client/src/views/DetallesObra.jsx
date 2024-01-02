@@ -40,6 +40,11 @@ const DetallesObra = () => {
         navigate(`/control-gastos/${id}`);
     }
 
+    const handleControlObra = () =>{
+        console.log('El id:', id);
+        navigate(`/control-obra/${id}`);
+    }
+
 
     return (
         <div className="proyecto">
@@ -74,7 +79,7 @@ const DetallesObra = () => {
                     <div className="bg-gray-600 p-4 rounded-md">
                         <div>
                             <h3 className="text-lg font-semibold mb-2">Control de Obra</h3>
-                            <button className="bg-yellow-500 py-2 px-4">Ver más</button>
+                            <button className="bg-yellow-500 py-2 px-4" onClick={handleControlObra}>Ver más</button>
                         </div>
                     </div>
 
