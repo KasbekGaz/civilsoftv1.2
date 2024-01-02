@@ -47,7 +47,7 @@ return (
 
     <Link to="/create-obra" >
         <button
-        className='bg-yellow-600'
+        className='bg-yellow-600 rounded-full'
         >Registrar Nueva Obra</button>
     </Link>
 
