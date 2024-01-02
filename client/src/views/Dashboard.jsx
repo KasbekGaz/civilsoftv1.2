@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import APIbackend from '../api/APIbackend';
 import ListObra from '../components/ListObra';
 
@@ -19,6 +19,17 @@ const Dashboard = () => {
         }
     };
 
+    const navigate = useNavigate();
+
+    const handleLogin = () => {
+        navigate('/login')
+    };
+
+    const handleRegister = () => {
+        navigate('/register')
+    };
+
+
 return (
 <div>
     <h1>Dashboard</h1>
@@ -36,15 +47,17 @@ return (
     ) : (
     <div>
         <p>No has iniciado sesión. Debes iniciar sesión para acceder o registrate si es el caso.</p>
-        <button className="hover:bg-yellow-500 rounded-full bg-yellow-400 py-2 px-4 mb-4 ml-4 mr-4">
-            <Link to="/login">
-                Iniciar sesión
-            </Link>
+        <button 
+            className="hover:bg-yellow-600 rounded-full bg-yellow-400 py-2 px-4 mb-4 ml-4 mr-4"
+            onClick={handleLogin}
+                >
+            Iniciar Sesión
         </button>
-        <button className="hover:bg-yellow-500 rounded-full bg-yellow-400 py-2 px-4 mb-4 ml-4 mr-4">
-            <Link to="/register">
-                Registrarse
-            </Link>
+        <button 
+            className="hover:bg-yellow-600 rounded-full bg-yellow-400 py-2 px-4 mb-4 ml-4 mr-4"
+            onClick={handleRegister}
+            >
+            Registrarse
         </button>
     </div>
     )}
