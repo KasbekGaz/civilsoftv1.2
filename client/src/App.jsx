@@ -3,17 +3,19 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './views/Home';
 import Login from './views/Login';
+import RegisterUser from './views/RegisterUser';
 import Dashboard from './views/Dashboard';
-
+//* Rutas de obras
 import ObraForm from './components/ObraForm';
 import UpdateObraForm from './components/UpdateObraForm';
 import DetallesObra from './views/DetallesObra';
-
+//* Rutas de Tareas
 import TareaView from './views/TareaView';
 import UpdateTarea from './components/Tarea/UpdateTarea';
-
+//* Rutas de Gasto
 import ControlAdmin from './views/ControlAdmin';
 import UpdateGasto from './components/Gasto/UpdateGasto';
+//* Rutas de Volumen
 import ControlObra from './views/ControlObra';
 
 
@@ -24,6 +26,7 @@ const App = () => {
       <Routes>
         < Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<RegisterUser/>}/>
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/create-obra" element={<ObraForm />} />
         <Route path="/update-obra/:id" element={<UpdateObraForm />} />
