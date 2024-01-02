@@ -211,7 +211,7 @@ const APIbackend = {
             return response.data;
 
         } catch (error) {
-            console.error('Error al actualizar la tarea para la obra:', error.message);
+            console.error('Error al actualizar la tarea:', error.message);
             throw error;
         }
     },
@@ -302,7 +302,7 @@ const APIbackend = {
     deleteGastobyObra: async (id, gastoId) =>{
         try{
             const token = localStorage.getItem('token');
-            const response = await instance.delete(`/delete-gasto-for-obra/${id}/${gastoId}`,
+            const response = await instance.delete(`/delete-gasto-for-obra/${id}/${gastoId}/`,
             {
                 headers: { Authorization: `Token ${token}` },
             });
@@ -316,15 +316,13 @@ const APIbackend = {
         }
     },
     //!  CRUD de Galeria
-    //* GEt una galeria por su id
-
     //* Listar la galeria por obra_id
     ListGaleriabyObra: async (obraId) => {
         try{
             const token = localStorage.getItem('token');
             console.log(token);
 
-            const response = await instance.get(`/galeriabyObra/${obraId}`,{
+            const response = await instance.get(`/galeriabyObra/${obraId}/`,{
                 headers: { Authorization: `Token ${token}` },
             });
 
@@ -342,7 +340,7 @@ const APIbackend = {
             const token = localStorage.getItem('token');
             console.log('Token:', token);
 
-            const response = await instance.post(`/create-galeria-for-obra/${obraId}`, galeriaData, {
+            const response = await instance.post(`/create-galeria-for-obra/${obraId}/`, galeriaData, {
                 headers: { Authorization: `Token ${token}` },
             });
             
@@ -358,7 +356,7 @@ const APIbackend = {
     updateGaleriabyObra: async (obraId, galeriaId, galeriaData) =>{
         try{
             const token = localStorage.getItem('token');
-            const response = await instance.put(`/update-galeria-for-obra/${obraId}/${galeriaId}`, galeriaData, {
+            const response = await instance.put(`/update-galeria-for-obra/${obraId}/${galeriaId}/`, galeriaData, {
                 headers: { Authorization: `Token ${token}` },
             });
 
@@ -373,7 +371,7 @@ const APIbackend = {
     deleteGaleriabyObra: async (obraId, galeriaId) =>{
         try{
             const token = localStorage.getItem('token');
-            const response = await instance.delete(`/delete-galeria-for-obra/${obraId}/${galeriaId}`, {
+            const response = await instance.delete(`/delete-galeria-for-obra/${obraId}/${galeriaId}/`, {
                 headers: { Authorization: `Token ${token}` }
             });
 
@@ -385,7 +383,72 @@ const APIbackend = {
         }
     },
     //! CRUD de Volumenes
+    //* Listar volumenes por id obra
+    ListarVolumenbyObra: async (obraId) => {
+        try{
+            const token = localStorage.getItem('token');
+            console.log(token);
 
+            const response = await instance.get(`/volumenbyObra/${obraId}/`,{
+                headers: { Authorization: `Token ${token}` },
+            });
+
+            console.log(response.data)
+            return response.data;
+
+        }catch(error){
+            console.log('No se pudo cargar los datos en comparativa de volumenes:', error.message);
+            throw error;
+        }
+    },
+    //* Crear un volumen para una obra segun su id
+    CreateVolumenbyObra: async (obraId, volumenData) => {
+        try{
+            const token = localStorage.getItem('token');
+            console.log('Token:', token);
+
+            const response = await instance.post(`/create-volumen-for-obra/${obraId}/`, volumenData, {
+                headers: { Authorization: `Token ${token}` },
+            });
+            
+            console.log(response.data);
+            return response.data;
+
+        }catch(error){
+            console.error('No se pudo agregar el volumen: ', error.message);
+            throw error;
+        }
+    },
+    //* Actualizar un volumen segun una la obra id
+    updateVolumenbyObra: async (obraId, volumenId, volumenData) =>{
+        try{
+            const token = localStorage.getItem('token');
+            const response = await instance.put(`/update-volumen-for-obra/${obraId}/${volumenId}/`, volumenData, {
+                headers: { Authorization: `Token ${token}` },
+            });
+
+            console.log(response.data);
+            return response.data;
+        }catch(error){
+            console.error('Error al actualizar el volumen: ', error.message);
+            throw error;
+        }
+    },
+    //* Eliminar volumen por obra_id y su propio id
+    deleteVolumenbyObra: async (obraId, volumenId) =>{
+        try{
+            const token = localStorage.getItem('token');
+            const response = await instance.delete(`/delete-volumen-for-obra/${obraId}/${volumenId}/`, {
+                headers: { Authorization: `Token ${token}` }
+            });
+
+            console.log(response.data);
+            return response.data;
+        }catch(error){
+            console.error('Error al borrar el volumen', error.message);
+            throw error;
+        }
+    },
 
 };
 
