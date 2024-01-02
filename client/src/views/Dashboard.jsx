@@ -25,15 +25,27 @@ return (
     {isAuthenticated ? (
     <div>
         <p>Bienvenido al dashboard.!! </p>
-        <button onClick={handleLogout}>Cerrar sesión</button>
+        <button 
+            onClick={handleLogout}
+            className="hover:bg-red-500 rounded-full bg-yellow-400 py-2 px-4 mb-4 ml-4 mr-4"
+            >Cerrar sesión</button>
         <div className="dashboard-section">
         <ListObra />
         </div>
     </div>
     ) : (
     <div>
-        <p>No has iniciado sesión. Debes iniciar sesión para acceder al dashboard.</p>
-        <button><Link to="/login">Iniciar sesión</Link></button>
+        <p>No has iniciado sesión. Debes iniciar sesión para acceder o registrate si es el caso.</p>
+        <button className="hover:bg-yellow-500 rounded-full bg-yellow-400 py-2 px-4 mb-4 ml-4 mr-4">
+            <Link to="/login">
+                Iniciar sesión
+            </Link>
+        </button>
+        <button className="hover:bg-yellow-500 rounded-full bg-yellow-400 py-2 px-4 mb-4 ml-4 mr-4">
+            <Link to="/register">
+                Registrarse
+            </Link>
+        </button>
     </div>
     )}
 </div>
