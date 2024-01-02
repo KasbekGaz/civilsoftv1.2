@@ -41,6 +41,7 @@ const APIbackend = {
     registerUser: async (userData) => {
         try {
         const response = await instance.post('/register/', userData);
+        console.log('Datos:', response.data)
         return response.data;
         } catch (error) {
         console.error('Error en la solicitud de registro de usuario:', error.message);
