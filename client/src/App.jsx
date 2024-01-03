@@ -17,6 +17,7 @@ import ControlAdmin from './views/ControlAdmin';
 import UpdateGasto from './components/Gasto/UpdateGasto';
 //* Rutas de Volumen
 import ControlObra from './views/ControlObra';
+import UpdateVolumen from './components/Volumen/UpdateVolumen';
 
 
 const App = () => {
@@ -40,6 +41,7 @@ const App = () => {
         <Route path={"/update-gasto-by-obra/:id/:gastoId"} element={<UpdateGasto/>}/>
         {/* Vista de vontrol de Volumenes */}
         <Route path="/control-obra/:id" element={<ControlObra/>}/>
+        <Route path="/update-volumen-by-obra/:id/:volumenId" element={<UpdateVolumen />} />
       </Routes>
     </Router>
   );
