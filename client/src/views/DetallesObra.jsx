@@ -93,9 +93,9 @@ const DetallesObra = () => {
                     </div>
                 </div>
 
-                <div className="bg-blue-200 p-4 rounded-md col-span-2">
+                <div className="bg-violet-600 p-4 rounded-md col-span-2">
                     <h2 className="text-xl font-semibold mb-2">Galeria</h2>
-                    <button className="bg-blue-500 py-2 px-4">Agregar Foto</button>
+                    <button className="bg-yellow-500 py-2 px-4">Agregar Foto</button>
                 </div>
             </div>
         </div>
