@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import APIbackend from "../api/APIbackend";
 
@@ -34,15 +34,12 @@ const ControlObra =  () =>{
         codigo: '',
         unidad: '',
         concepto: '',
-        estado: '',
+        estado: 'Sin cambio',
         //* Cantidad Contratada
         volumen: '0',
         precio: '0',
-        importe: '',
         //* Cantidad Ejecutada
         v_mod: '0',
-        importe_mod: '',
-        diferencia: '',
 
     });
     const handleInputChange = (e) =>{
@@ -60,25 +57,22 @@ const ControlObra =  () =>{
             console.log('Gasto creado: ', response);
             alert('Gasto agregado correctamente!');
             //*Para limpiar el formulario----
-            setGastoData({
+            setVolumenData({
                 obra: id,
                 codigo: '',
                 unidad: '',
                 concepto: '',
-                estado: '',
+                estado: 'Sin cambio',
                 //* Cantidad Contratada
                 volumen: '0',
                 precio: '0',
-                importe: '',
                 //* Cantidad Ejecutada
                 v_mod: '0',
-                importe_mod: '',
-                diferencia: '',
                 
             });
             fetchVolumen();
         }catch(error){
-            console.error('Error al crear Gasto', error.message);
+            console.error('Error al agregar el concepto!', error.message);
         }
     };
 
@@ -90,7 +84,6 @@ const ControlObra =  () =>{
 //! Listar los volumenes por id obra
 const fetchVolumen = async () =>{
     try{
-        console.log(id); //obra_id
         const volumenData = await APIbackend.ListarVolumenbyObra(id);
         setVolumen(volumenData);
         console.log('Obra:', id, 'Datos Obtenidos: ', volumenData);
@@ -107,9 +100,10 @@ const handleActualizar = (id, volumenId) =>{
 //! Para Eliminar volumen por su di
 const handleEliminar = async (id, volumenId) => {
     try{
-        await APIbackend.deleteGastobyObra(id, volumenId);
+        console.log('Datos que entran', id, volumenId);
+        await APIbackend.deleteVolumenbyObra(id, volumenId);
         alert('Eliminaste el concepto con exito!!')
-        fetchGastos();
+        fetchVolumen();
     }catch(error){
         console.error('Error al eliminar el gasto', error.message);
     }
@@ -124,10 +118,135 @@ return(
             onClick={handleBack}>
             Regresar a las acciones
         </button>
+        <div>
+            <h1>Agregar Concepto</h1>
+            <form className="flex flex-col justify-center items-center mt-2">
+                <label className="mb-4">
+                    Código:
+                    <input className="ml-2"
+                        type="text" 
+                        name="codigo"
+                        value={volumenData.codigo}
+                        onChange={handleInputChange}
+                        />
+                </label>
+                <label className="mb-4">
+                    Unidad:
+                    <input className="ml-2"
+                        type="text" 
+                        name="unidad"
+                        value={volumenData.unidad}
+                        onChange={handleInputChange}
+                        />
+                </label>
+                <label className="mb-4">
+                    Concepto:
+                    <input className="ml-2"
+                        type="text" 
+                        name="concepto"
+                        value={volumenData.concepto}
+                        onChange={handleInputChange}
+                        />
+                </label>
+                <label className="mb-4">
+                    Estado del Concepto:
+                    <select 
+                        name="estado" 
+                        value={volumenData.estado}
+                        onChange={handleInputChange}>
+                            <option value="Sin cambio">Sin Cambío</option>
+                            <option value="Deduccion">Deduccíon</option>
+                            <option value="Adicional">Adicional</option>
+                            <option value="Extraordinario">Extraordinario</option>
+                    </select>
+                </label>
+                <h2>Cantidad Contratada</h2>
+                <label className="mb-4">
+                    Volumen:
+                        <input className="ml-2"
+                            type="number" 
+                            name="volumen"
+                            value={volumenData.volumen} 
+                            onChange={handleInputChange}/>
+                </label>
+                <label className="mb-4">
+                    Precio $ :
+                        <input className="ml-2"
+                            type="number" 
+                            name="precio"
+                            value={volumenData.precio} 
+                            onChange={handleInputChange}/>
+                </label>
+                <h2>Cantidad Ejecutada</h2>
+                <label className="mb-4">
+                    Volumen Modificado:
+                        <input className="ml-2"
+                            type="number" 
+                            name="v_mod"
+                            value={volumenData.v_mod} 
+                            onChange={handleInputChange}/>
+                </label>
+
+                <button
+                    className="bg-green-400"
+                    type="button"
+                    onClick={handleCreateVolumen}>
+                        Agregar Concepto
+                </button>
+
+            </form>
+        </div>
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Código</th>
+                        <th>Unidad</th>
+                        <th>Concepto</th>
+                        <th>Estado</th>
+                        <th>Cantidad Contratada</th>
+                        <th>Precio $ </th>
+                        <th>Importe de Contratado</th>
+                        <th>Cantidad Ejecutada</th>
+                        <th>Importe de Ejecutado</th>
+                        <th>Diferencia</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {volumen.map((vol) => (
+                        <tr key={vol.id}>
+                            <td>{vol.id}</td>
+                            <td>{vol.codigo}</td>
+                            <td>{vol.unidad}</td>
+                            <td>{vol.concepto}</td>
+                            <td>{vol.estado}</td>
+                            <td>{vol.volumen}</td>
+                            <td>{vol.precio}</td>
+                            <td>{vol.importe}</td>
+                            <td>{vol.v_mod}</td>
+                            <td>{vol.importe_mod}</td>
+                            <td>{vol.diferencia}</td>
+                            <td>
+                                <button className='bg-orange-400'
+                                onClick={() => handleActualizar(id, vol.id)}>
+                                    Actualizar
+                                </button>
+                                <button className='bg-red-600'
+                                onClick={() => handleEliminar(id, vol.id) }
+                                    >
+                                    Eliminar
+                                </button>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>
 
     </div>
 );
-
 
 };
 
