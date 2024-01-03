@@ -317,6 +317,22 @@ const APIbackend = {
         }
     },
     //!  CRUD de Galeria
+     //* Obtener un gasto por su id
+    getGaleriaById: async (GaleriaId) => {
+        try{
+            console.log('Id que entra:', GaleriaId);
+            const token = localStorage.getItem('token');
+            console.log('Token:', token);
+            const response = await instance.get(`/galeria/${GaleriaId}/`, {
+                headers: { Authorization: `Token ${token}` },
+            });
+            console.log('Response Data:', response.data);
+            return response.data;
+        }catch(error){
+            console.error(`Error al obtener los detalles del Gasto con ID ${GaleriaId}:`, error.message);
+            throw error;
+        }
+    },
     //* Listar la galeria por obra_id
     ListGaleriabyObra: async (obraId) => {
         try{
@@ -384,6 +400,22 @@ const APIbackend = {
         }
     },
     //! CRUD de Volumenes
+    //* Obtener un gasto por su id
+    getVolumenById: async (volumenId) => {
+        try{
+            console.log('Id que entra:', volumenId);
+            const token = localStorage.getItem('token');
+            console.log('Token:', token);
+            const response = await instance.get(`/volumen/${volumenId}/`, {
+                headers: { Authorization: `Token ${token}` },
+            });
+            console.log('Response Data:', response.data);
+            return response.data;
+        }catch(error){
+            console.error(`Error al obtener los detalles del Gasto con ID ${volumenId}:`, error.message);
+            throw error;
+        }
+    },
     //* Listar volumenes por id obra
     ListarVolumenbyObra: async (obraId) => {
         try{
