@@ -244,6 +244,22 @@ return(
                 </tbody>
             </table>
         </div>
+        <div name="Seccion de Totales de Importes"
+            className="grid grid-cols-2 md:grid-cols-2">
+            <div className="bg-gray-500 p-4 rounded-md">
+                <h1 className="text-xl font-semibold mb-2 mt-2">
+                    Total Importes Cantidad Contratada $
+                    { obraData.total_importes }
+                </h1>
+            </div >
+            <div className="bg-gray-500 p-4 rounded-md">
+                <h1 className="text-xl font-semibold mb-2 mt-2">
+                    Total Importes Cantidad Ejecutada $
+                    { obraData.total_importes_mod }
+                </h1>
+            </div>
+
+        </div>
 
     </div>
 );
