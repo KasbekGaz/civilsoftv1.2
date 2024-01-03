@@ -29,7 +29,7 @@ const UpdateGasto = () =>{
         //* Cargar los datos antes de comprobar el componente
         const fetchGastoData = async () => {
             try{
-                const gasto = await APIbackend.getGastoById(gastoId)
+                const gasto = await APIbackend.getGastoById(gastoId);
                 console.log(gasto);
                 setGastoData({
                     obra: gasto.obra,
