@@ -341,6 +341,7 @@ const APIbackend = {
 
             const response = await instance.get(`/galeriabyObra/${obraId}/`,{
                 headers: { Authorization: `Token ${token}` },
+                'Content-Type': 'multipart/form-data',
             });
 
             console.log(response.data)
@@ -359,6 +360,7 @@ const APIbackend = {
 
             const response = await instance.post(`/create-galeria-for-obra/${obraId}/`, galeriaData, {
                 headers: { Authorization: `Token ${token}` },
+                        'Content-Type': 'multipart/form-data',
             });
             
             console.log(response.data);
@@ -366,7 +368,8 @@ const APIbackend = {
 
         }catch(error){
             console.error('No se pudo agregar la galeria: ', error.message);
-            throw error;
+            console.log('Error details:', error.response.data);
+            
         }
     },
     //* ACTUALIZAR galeria por obra_id
