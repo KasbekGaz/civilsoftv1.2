@@ -3,7 +3,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import APIbackend from "../api/APIbackend";
 
 const ControlGaleria = () => {
-    const { id } = useParams(); // id de obra
+    const { id } = useParams(); //* id de obra
+    const [obraData, setObraData] = useState({});
     const [archivo, setArchivo] = useState(null);
     const [descripcion, setDescripcion] = useState('');
     const [fecha, setFecha] = useState('');
@@ -11,10 +12,26 @@ const ControlGaleria = () => {
 
     const navigate = useNavigate();
 
+    const fetchObraDetails = async () => {
+        try{
+            console.log(id);
+            const obraData = await APIbackend.getObraById(id);
+            setObraData(obraData);
+
+        }catch(error){
+            console.error('Error al obtener datos.', error.message);
+        }
+    };
+
+    const handleBack = () =>{
+        console.log('El id:', id);
+        navigate(`/details-obra/${id}`);
+    };
+
     const handleFileChange = (e) => {
         setArchivo(e.target.files[0]);
     };
-
+//! Para crear la galeria --------------------- 
     const handleSubmit = async (e) => {
         e.preventDefault();
         const formData = new FormData();
@@ -35,7 +52,7 @@ const ControlGaleria = () => {
         setDescripcion('');
         setFecha('');
     };
-
+//! Para listar las fotos de una obra
     const fetchImages = async () => {
         try {
         const response = await APIbackend.ListGaleriabyObra(id);
@@ -47,12 +64,36 @@ const ControlGaleria = () => {
     };
 
     useEffect(() => {
+        fetchObraDetails();
         fetchImages();
     }, [id]);
+
+    //! Para Actualizar gasto por su id
+    const handleActualizar = (id, galeriaId) =>{
+        console.log('Datos que entran', id , galeriaId);
+        navigate(`/update-galeria-by-obra/${id}/${galeriaId}`);
+    };
+    //! Para Eliminar un gasto por su id
+    const handleEliminar = async (id, galeriaId) => {
+        try{
+            await APIbackend.deleteGaleriabyObra(id, galeriaId);
+            alert('Eliminaste el gasto con exito!!')
+            fetchImages();
+        }catch(error){
+            console.error('Error al eliminar el gasto', error.message);
+        }
+    };
 
 return (
 <div>
     <h1>Control de Galeria</h1>
+    <h1>Proyecto "{obraData.nombre}" </h1>
+
+        <button className="bg-green-400 py-2 px-4 mb-4"
+            onClick={handleBack}
+            > 
+            Regresar a las Acciones
+        </button>
 
     <div>
     <form onSubmit={handleSubmit} className="flex flex-col justify-center items-center mt-2">
@@ -89,6 +130,15 @@ return (
             <div className="font-bold text-xl mb-2">{image.descripcion}</div>
             <p className="text-white text-base">{image.fecha}</p>
         </div>
+            <button className="bg-orange-400"
+            onClick={() => handleActualizar(id, image.id)}>
+                Actualizar
+            </button>
+
+            <button className="bg-red-600"
+            onClick={() => handleEliminar(id, image.id)}>
+                Eliminar
+            </button>
         </div>
     ))}
     </div>
