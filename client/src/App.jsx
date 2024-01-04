@@ -18,6 +18,8 @@ import UpdateGasto from './components/Gasto/UpdateGasto';
 //* Rutas de Volumen
 import ControlObra from './views/ControlObra';
 import UpdateVolumen from './components/Volumen/UpdateVolumen';
+//* Rutas de Galeria
+import ControlGaleria from './views/ControlGaleria';
 
 
 const App = () => {
@@ -39,9 +41,11 @@ const App = () => {
         {/* Vista de control GASTOS */}
         <Route path="/control-gastos/:id" element={<ControlAdmin/>} />
         <Route path={"/update-gasto-by-obra/:id/:gastoId"} element={<UpdateGasto/>}/>
-        {/* Vista de vontrol de Volumenes */}
+        {/* Vista de control de Volumenes */}
         <Route path="/control-obra/:id" element={<ControlObra/>}/>
         <Route path="/update-volumen-by-obra/:id/:volumenId" element={<UpdateVolumen />} />
+        {/** Vista de control de galeria*/}
+        <Route path="/control-galeria/:id" element={<ControlGaleria />}/>
       </Routes>
     </Router>
   );
