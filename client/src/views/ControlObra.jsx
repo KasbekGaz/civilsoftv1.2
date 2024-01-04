@@ -89,7 +89,7 @@ const fetchVolumen = async () =>{
         console.log('Obra:', id, 'Datos Obtenidos: ', volumenData);
 
     }catch(error){
-        console.error('Error al listar volumenes');
+        console.error('Error al listar volumenes', error.message);
     }
 }
 //! Para actualizar volumen por su id
