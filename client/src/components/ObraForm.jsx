@@ -34,11 +34,19 @@ const ObraForm = () =>{
         }catch(error){
             console.error('Error al crear la obra: ', error.message);
         }
-    }
+    };
+
+    const handleBack = () =>{
+        navigate('/dashboard');
+    };
 
 return (
     <div>
         <h1>Registrar Nueva Obra</h1>
+
+        <button className="bg-green-400 py-2 px-4 mb-4" onClick={handleBack}>
+            Regresar
+        </button>
 
         <form  className="flex flex-col justify-center items-center" >
             <label className='mb-4'>

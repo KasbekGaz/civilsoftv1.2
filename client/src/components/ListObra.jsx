@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import APIbackend from '../api/APIbackend';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 
 const ListObra = () => {
@@ -41,15 +41,19 @@ const ListObra = () => {
         }
     };
 
+    const handleCreateObra = () =>{
+        navigate('/create-obra');
+    };
+
 return (
 <div>
     <h1>Lista de Obras</h1>
 
-    <Link to="/create-obra" >
+
         <button
-        className='bg-yellow-600 rounded-full'
-        >Registrar Nueva Obra</button>
-    </Link>
+        className='hover:bg-green-600 rounded-full bg-yellow-600 py-2 px-4 mb-4 ml-4 mr-4' onClick={handleCreateObra}>
+            Registrar Nueva Obra
+        </button>
 
 
     <table className='table-fixed'>
