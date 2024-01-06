@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import APIbackend from '../api/APIbackend';
 import ListObra from '../components/ListObra';
 
@@ -9,6 +9,10 @@ const Dashboard = () => {
 
     useEffect(() => {
     }, []);
+
+    const handleProveedores = () =>{
+        navigate('/control-proveedores');
+    };
 
     const handleLogout = async () => {
         try {
@@ -32,10 +36,15 @@ const Dashboard = () => {
 
 return (
 <div>
-    <h1>Dashboard</h1>
+    <h1>Civilsoft</h1>
     {isAuthenticated ? (
     <div>
-        <p>Bienvenido al dashboard.!! </p>
+        <p>Bienvenido.!! </p>
+        <button 
+            onClick={handleProveedores}
+            className='hover:bg-green-500 rounded-full bg-purple-700 py-2 px-4 mb-4 ml-4 mr-4'>
+                    Control de Proveedores
+        </button>
         <button 
             onClick={handleLogout}
             className="hover:bg-red-500 rounded-full bg-yellow-400 py-2 px-4 mb-4 ml-4 mr-4"
