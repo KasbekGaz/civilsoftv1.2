@@ -20,6 +20,9 @@ import ControlObra from './views/ControlObra';
 import UpdateVolumen from './components/Volumen/UpdateVolumen';
 //* Rutas de Galeria
 import ControlGaleria from './views/ControlGaleria';
+//* Rutas de Proveedores
+import ProveedorsView from './views/ProveedoresView';
+import RegisterProv from './components/proveedor/RegisterProv';
 
 
 const App = () => {
@@ -46,6 +49,9 @@ const App = () => {
         <Route path="/update-volumen-by-obra/:id/:volumenId" element={<UpdateVolumen />} />
         {/** Vista de control de galeria*/}
         <Route path="/control-galeria/:id" element={<ControlGaleria />}/>
+        {/** Vista de control de Proveedores*/}
+        <Route path="/control-proveedores" element={<ProveedorsView />}/>
+        <Route path="/create-prov" element={<RegisterProv />} />
       </Routes>
     </Router>
   );
