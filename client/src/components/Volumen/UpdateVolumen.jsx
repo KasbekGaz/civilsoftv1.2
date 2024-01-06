@@ -14,7 +14,7 @@ const UpdateVolumen = () =>{
         codigo: '',
         unidad: '',
         concepto: '',
-        estado: 'Sin cambio',
+        estado: '',
         //* Cantidad Contratada
         volumen: '0',
         precio: '0',
