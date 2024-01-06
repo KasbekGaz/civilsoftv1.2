@@ -31,10 +31,8 @@ const ListObra = () => {
     const handleEliminar = async (obraId) => {
         try {
             await APIbackend.deleteObra(obraId);
-            
+            alert('Obra Eliminada');
             fetchObras(); // actualizamos la lista de obras
-
-
         } catch (error) {
             console.error('Error al eliminar la obra:', error.message);
             
