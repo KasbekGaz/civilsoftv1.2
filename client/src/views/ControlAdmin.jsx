@@ -118,7 +118,7 @@ const ControlAdmin = () => {
             Regresar a las Acciones
             </button>
 
-            <div class="Formulario">
+            <div>
                 <form className="flex flex-col justify-center items-center">
                     <label className="mb-4">
                     Fecha :
@@ -216,7 +216,7 @@ const ControlAdmin = () => {
                 </form>
             </div>
 
-            <div class="Tabla-de-contenido">
+            <div>
                 <h1>Lista de gastos</h1>
 
                 <table>
