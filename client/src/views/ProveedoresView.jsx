@@ -64,6 +64,7 @@ const ProveedorsView = () =>{
             await APIbackend.deleteP(id);
             alert('Proveedor Eliminado');
             fetchProv();
+            fetchMaterial();
         }catch(error){
             console.error('Error al eliminar el proveedor:', error.message);
         }
