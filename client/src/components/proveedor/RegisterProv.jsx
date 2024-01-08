@@ -42,9 +42,8 @@ const RegisterProv = () =>{
 return(
     <div>
         <h1>Registrar Nuevo Proveedor</h1>
-        <button 
-            className="bg-green-400 py-2 px-4 m-4"
-            onClick={handleBack}>
+        <button  className="bg-green-400 py-2 px-4 m-4"
+            onClick={handleBack} >
             Regresar
         </button>
 
