@@ -25,6 +25,9 @@ import ProveedorsView from './views/ProveedoresView';
 import RegisterProv from './components/proveedor/RegisterProv';
 import UpdateProv from './components/proveedor/UpdateProv';
 import DetallesProv from './views/DetallesProv';
+//* rutas de banca y materiales
+import UpdateBanca from './components/banca/UpdateBanca';
+import UpdateMaterial from './components/material/UpdateMaterial';
 
 
 const App = () => {
@@ -56,6 +59,10 @@ const App = () => {
         <Route path="/details-prov/:id" element={<DetallesProv />} />
         <Route path="/create-prov" element={<RegisterProv />} />
         <Route path="/update-prov/:id" element={<UpdateProv />} />
+        {/** Vista de Material*/}
+        <Route path="/update-material-by-obra/:id/:mId" element={<UpdateMaterial />}/>
+        {/** Vista de Banca*/}
+        <Route path="/update-banca-by-obra/:id/:bId" element={<UpdateBanca />}/>
       </Routes>
     </Router>
   );
