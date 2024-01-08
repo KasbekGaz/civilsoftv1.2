@@ -23,6 +23,8 @@ import ControlGaleria from './views/ControlGaleria';
 //* Rutas de Proveedores
 import ProveedorsView from './views/ProveedoresView';
 import RegisterProv from './components/proveedor/RegisterProv';
+import UpdateProv from './components/proveedor/UpdateProv';
+import DetallesProv from './views/DetallesProv';
 
 
 const App = () => {
@@ -51,7 +53,9 @@ const App = () => {
         <Route path="/control-galeria/:id" element={<ControlGaleria />}/>
         {/** Vista de control de Proveedores*/}
         <Route path="/control-proveedores" element={<ProveedorsView />}/>
+        <Route path="/details-prov/:id" element={<DetallesProv />} />
         <Route path="/create-prov" element={<RegisterProv />} />
+        <Route path="/update-prov/:id" element={<UpdateProv />} />
       </Routes>
     </Router>
   );
