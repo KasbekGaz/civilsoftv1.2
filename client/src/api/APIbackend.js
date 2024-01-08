@@ -602,6 +602,26 @@ const APIbackend = {
             throw error;
         }
     },
+    getMaterialById: async (id) => {
+        try {
+
+            const token = localStorage.getItem('token');
+            console.log('Token:', token);
+
+            const response = await instanceC.get(`/materiales/${id}/`, {
+                headers: { Authorization: `Token ${token}` },
+            });
+        
+            console.log('Response Data:', response.data);
+
+            return response.data;
+        } catch (error) {
+
+            console.error(`Error al obtener los detalles del material ${id}:`, error.message);
+
+            throw error;
+        }
+    },
     //* Listar Materiales segun la id del proveedor
     listMaterial: async (id) => {
         try {
@@ -683,6 +703,27 @@ const APIbackend = {
             return response.data;
         } catch (error) {
             console.error('Error al obtener la lista de banca:', error.message);
+            throw error;
+        }
+    },
+    //* Banca por su Id
+    getBancaById: async (id) => {
+        try {
+
+            const token = localStorage.getItem('token');
+            console.log('Token:', token);
+
+            const response = await instanceC.get(`/banca/${id}/`, {
+                headers: { Authorization: `Token ${token}` },
+            });
+        
+            console.log('Response Data:', response.data);
+
+            return response.data;
+        } catch (error) {
+
+            console.error(`Error al obtener los datos de la banca ${id}:`, error.message);
+
             throw error;
         }
     },
