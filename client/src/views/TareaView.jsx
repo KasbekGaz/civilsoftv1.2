@@ -105,121 +105,127 @@ const handleEliminar = async (id, tareaId) => {
 };
     return (
         <div>
-            <h1>Proyecto "{obraData.nombre}"</h1>
-
-            <h2>Control de Tareas:</h2>
+            <h1 className="text-3xl font-bold tracking-tight text-white sm:text-3xl">Proyecto "{obraData.nombre}"</h1>
             
-            <button className="bg-green-400 py-2 px-4 mb-4" onClick={handleBack}>
+            <button className="text-center font-semibold rounded-full bg-green-400 hover:bg-green-700 py-2 px-4 mb-4 mt-4" onClick={handleBack}>
                 Regresar a las Acciones
             </button>
-            <h1>Agregar una nueva Tarea: </h1>
-            <div>
-                <form  className="flex flex-col justify-center items-center">
-                    <label className="mb-4">
-                        Fecha Vencimiento:
-                        <input
-                            type="date"
-                            name="Fvence"
-                            value={tareaData.Fvence}
-                            onChange={handleInputChange}
-                            className="ml-4"
-                        />
-                    </label>
 
-                    <label className="mb-4">
-                        Fecha creada en:
-                        <input
-                            type="date"
-                            name="Fcreado"
-                            value={tareaData.Fcreado}
-                            onChange={handleInputChange}
-                        />
-                    </label>
+            <h1 className="text-3xl font-bold tracking-tight text-white sm:text-3xl">Control de Tareas</h1>
+            
+            <div className="grid grid-cols-2 md:grid-cols-2">
+                <div className="container bg-violet-950- border border-violet-600 rounded-lg drop-shadow-xl">
+                    <h1 className="text-2xl font-semibold tracking-tight text-white sm:text-2xl"> Agregar Nueva tarea </h1>
+                    <form  className="flex flex-col justify-center items-center">
+                        <label className="block my-2 font-medium">
+                            Fecha Vencimiento:
+                        </label>
+                            <input
+                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                type="date"
+                                name="Fvence"
+                                value={tareaData.Fvence}
+                                onChange={handleInputChange}
+                                />
 
-                    <label className="mb-4">
-                        Titulo:
-                        <input
-                            type="text"
-                            name="titulo"
-                            value={tareaData.titulo}
-                            onChange={handleInputChange}
-                        />
-                    </label>
+                        <label className="block my-2 font-medium">
+                            Fecha creada en:
+                        </label>
+                            <input
+                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                type="date"
+                                name="Fcreado"
+                                value={tareaData.Fcreado}
+                                onChange={handleInputChange}
+                                />
 
-                    <label className="mb-4">
-                        Descripcion:
-                        <input
-                            type="text"
-                            name="descripcion"
-                            value={tareaData.descripcion}
-                            onChange={handleInputChange}
-                        />
-                    </label>
+                        <label className="block my-2 font-medium">
+                            Titulo:
+                        </label>
+                            <input
+                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                type="text"
+                                name="titulo"
+                                value={tareaData.titulo}
+                                onChange={handleInputChange}
+                            />
 
-                    <label className="mb-4">
-                        Estado de la tarea:
-                        <select
-                            name="estado"
-                            value={tareaData.estado}
-                            onChange={handleInputChange}
+                        <label className="block my-2 font-medium">
+                            Descripcion:
+                        </label>
+                            <textarea
+                                    type="text"
+                                    name="descripcion"
+                                    value={tareaData.descripcion}
+                                    onChange={handleInputChange}
+                                />
+
+                        <label className="mb-4">
+                            Estado de la tarea:
+                            <select
+                                name="estado"
+                                value={tareaData.estado}
+                                onChange={handleInputChange}
+                            >
+                                <option value="no_completado">Incompleta</option>
+                                <option value="completado">Completada</option>
+                                <option value="vencida">Vencida</option>
+                            </select>
+                        </label>
+
+                        <button
+                            className='bg-green-400'
+                            type="button"
+                            onClick={handleCreateTarea}
                         >
-                            <option value="no_completado">Incompleta</option>
-                            <option value="completado">Completada</option>
-                            <option value="vencida">Vencida</option>
-                        </select>
-                    </label>
-
-                    <button
-                        className='bg-green-400'
-                        type="button"
-                        onClick={handleCreateTarea}
-                    >
-                        Crear Tarea
-                    </button>
-                </form>
+                            Crear Tarea
+                        </button>
+                    </form>
+                </div>
+                <div className="ml-8">
+                    <h1> Tabla de Tareas </h1>
+                    
+                    <table>
+                        <thead>
+                            <tr>
+                            <th>ID</th>
+                            <th>Fecha Creada</th>
+                            <th>Fecha Vencimiento</th>
+                            <th>Fecha Completado</th>
+                            <th>Titulo</th>
+                            <th>Descripcion</th>
+                            <th>Estado de la Tarea</th>
+                            <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {tareas.map((tarea) => (
+                            <tr key={tarea.id}>
+                                <td>{tarea.id}</td>
+                                <td>{tarea.Fvence}</td>
+                                <td>{tarea.Fcreado}</td>
+                                <td>{tarea.Fcompletado}</td>
+                                <td>{tarea.titulo}</td>
+                                <td>{tarea.descripcion}</td>
+                                <td>{tarea.estado}</td>
+                                <td>
+                                    <button className='bg-orange-400'
+                                    onClick={() => handleActualizar(id, tarea.id)}>
+                                        Actualizar
+                                    </button>
+                                    <button className='bg-red-600'
+                                    onClick={() => handleEliminar(id, tarea.id) }
+                                        >
+                                        Eliminar
+                                    </button>
+                                </td>
+                                
+                            </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            <div>
-                <table>
-                    <thead>
-                        <tr>
-                        <th>ID</th>
-                        <th>Fecha Creada</th>
-                        <th>Fecha Vencimiento</th>
-                        <th>Fecha Completado</th>
-                        <th>Titulo</th>
-                        <th>Descripcion</th>
-                        <th>Estado de la Tarea</th>
-                        <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {tareas.map((tarea) => (
-                        <tr key={tarea.id}>
-                            <td>{tarea.id}</td>
-                            <td>{tarea.Fvence}</td>
-                            <td>{tarea.Fcreado}</td>
-                            <td>{tarea.Fcompletado}</td>
-                            <td>{tarea.titulo}</td>
-                            <td>{tarea.descripcion}</td>
-                            <td>{tarea.estado}</td>
-                            <td>
-                                <button className='bg-orange-400'
-                                onClick={() => handleActualizar(id, tarea.id)}>
-                                    Actualizar
-                                </button>
-                                <button className='bg-red-600'
-                                onClick={() => handleEliminar(id, tarea.id) }
-                                    >
-                                    Eliminar
-                                </button>
-                            </td>
-                            
-                        </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
-
         </div>
     );
 };

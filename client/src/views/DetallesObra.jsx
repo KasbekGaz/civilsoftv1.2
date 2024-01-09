@@ -52,30 +52,42 @@ const DetallesObra = () => {
 
 
     return (
-        <div className="proyecto">
-            <h1 className="text-3xl font-bold mb-4">Detalles de la Obra: "{obraData.nombre}"</h1>
-            <button className="bg-green-400 py-2 px-4 mb-4" onClick={handleBack}>
+        <div className=" container mx-5 my-8  bg-violet-950- border border-violet-600 rounded-lg drop-shadow-xl">
+
+            <h1 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+                Detalles de la Obra:
+            </h1>
+
+            <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">"{obraData.nombre}"</h2>
+
+            <button className="text-center font-semibold rounded-full bg-green-400 hover:bg-green-700 py-2 px-4 mb-4 mt-4" onClick={handleBack}>
                 Regresar
             </button>
 
-            <div className="">
+            <div className="container">
 
-                <div name="Seccion de Presupusto" className="grid grid-cols-2 md:grid-cols-2">
+                <div className="grid grid-cols-2 md:grid-cols-2">
 
                     <div className="bg-slate-400 p-4 rounded-md">
-                        <h2 className="text-xl font-semibold mb-2">Total de gastos $ {obraData.total_gastos }</h2>
+                        <h2 className="text-3xl font-semibold mb-2">Total de gastos </h2>
+                        <span className="text-2xl font-semibold text-white" >
+                            $ {obraData.total_gastos }
+                        </span>
                     </div>
 
                     <div className="bg-slate-400 p-4 rounded-md">
-                        <h2 className="text-xl font-semibold mb-2">Presupuesto Inicial $ {obraData.p_inicial}</h2>
+                        <h2 className="text-3xl font-semibold mb-2">Presupuesto Inicial</h2>
+                        <span className="text-2xl font-semibold text-white">
+                            $ {obraData.p_inicial}
+                        </span>
                     </div>
                 </div>
 
                 <div className='grid grid-cols-3'>
                     <div className="bg-sky-300 p-4 rounded-md">
                         <div>
-                            <h3 className="text-lg font-semibold mb-2">Tareas</h3>
-                            <button className="bg-yellow-500 py-2 px-4"
+                            <h3 className="text-3xl font-semibold mb-2">Tareas</h3>
+                            <button className="text-center font-semibold rounded-full bg-yellow-500 py-2 px-4 mb-4 mt-4 hover:bg-green-500"
                                     onClick={handleTarea}
                             >Ver más</button>
                         </div>
@@ -83,15 +95,15 @@ const DetallesObra = () => {
 
                     <div className="bg-gray-600 p-4 rounded-md">
                         <div>
-                            <h3 className="text-lg font-semibold mb-2">Control de Obra</h3>
-                            <button className="bg-yellow-500 py-2 px-4" onClick={handleControlObra}>Ver más</button>
+                            <h3 className="text-3xl font-semibold mb-2">Control de Obra</h3>
+                            <button className="text-center font-semibold rounded-full bg-yellow-500 py-2 px-4 mb-4 mt-4 hover:bg-green-500" onClick={handleControlObra}>Ver más</button>
                         </div>
                     </div>
 
                     <div className="bg-violet-400 p-4 rounded-md">
                         <div>
-                            <h3 className="text-lg font-semibold mb-2">Control Administrativo</h3>
-                            <button className="bg-yellow-500 py-2 px-4"
+                            <h3 className=" mx-auto text-3xl font-semibold mb-2">Control Administrativo</h3>
+                            <button className="text-center font-semibold rounded-full bg-yellow-500 py-2 px-4 mb-4 mt-4 hover:bg-green-500"
                                 onClick={handleControlAdmin}
                             >Ver más</button>
                         </div>
@@ -99,8 +111,8 @@ const DetallesObra = () => {
                 </div>
 
                 <div className="bg-violet-600 p-4 rounded-md col-span-2">
-                    <h2 className="text-xl font-semibold mb-2">Galeria</h2>
-                    <button className="bg-yellow-500 py-2 px-4"
+                    <h2 className="text-3xl font-semibold mb-2">Galeria</h2>
+                    <button className="text-center font-semibold rounded-full bg-yellow-500 py-2 px-4 mb-4 mt-4 hover:bg-green-500"
                         onClick={handleControlGaleria}>Agregar Foto</button>
                 </div>
             </div>

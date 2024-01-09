@@ -22,19 +22,28 @@ const LoginForm = () => {
     };
 
 return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-        <label>
+    <form
+        className="flex flex-col justify-center items-center"
+        onSubmit={handleSubmit(onSubmit)}>
+        <label className="block my-2 font-medium">
         Usuario:
-        <input type="text" {...register('username', { required: true })} />
         </label>
-        <br />
-        <label>
+        <input 
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            type="text" {...register('username', { required: true })} />
+        <label 
+            className="block my-2 font-medium">
         Contraseña:
-        <input type="password" {...register('password', { required: true })} />
         </label>
-        <br />
-        <button className="rounded-full bg-yellow-400 py-2 px-4 mb-4 ml-4"
-        type="submit">Iniciar sesión</button>
+        <input 
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            type="password" {...register('password', { required: true })} />
+
+        <button 
+            className="text-center font-semibold rounded-full bg-yellow-500 py-2 px-4 mb-4 mt-4 hover:bg-yellow-700"
+            type="submit">
+            Iniciar sesión
+        </button>
     </form>
 );
 };

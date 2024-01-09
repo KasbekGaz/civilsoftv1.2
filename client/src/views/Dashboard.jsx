@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import APIbackend from '../api/APIbackend';
 import ListObra from '../components/ListObra';
 
@@ -36,18 +36,20 @@ const Dashboard = () => {
 
 return (
 <div>
-    <h1>Civilsoft</h1>
+    <h1 
+        className="text-3xl font-bold tracking-tight text-white sm:text-4xl">Civilsoft</h1>
     {isAuthenticated ? (
     <div>
-        <p>Bienvenido.!! </p>
+        <p 
+            className="text-1xl font-bold tracking-tight text-white sm:text-1xl">Bienvenido al dashboard. !! </p>
         <button 
             onClick={handleProveedores}
-            className='hover:bg-green-500 rounded-full bg-purple-700 py-2 px-4 mb-4 ml-4 mr-4'>
+            className="text-center font-semibold rounded-full bg-purple-500 py-2 px-4 mb-4 mt-4 hover:bg-green-400 mx-4">
                     Control de Proveedores
         </button>
         <button 
             onClick={handleLogout}
-            className="hover:bg-red-500 rounded-full bg-yellow-400 py-2 px-4 mb-4 ml-4 mr-4"
+            className="text-center font-semibold rounded-full bg-yellow-500 py-2 px-4 mb-4 mt-4 hover:bg-red-700"
             >Cerrar sesión</button>
         <div className="dashboard-section">
         <ListObra />

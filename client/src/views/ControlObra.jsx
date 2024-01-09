@@ -71,6 +71,7 @@ const ControlObra =  () =>{
                 
             });
             fetchVolumen();
+            fetchObraDetails();
         }catch(error){
             console.error('Error al agregar el concepto!', error.message);
         }

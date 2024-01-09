@@ -37,7 +37,7 @@ const ControlAdmin = () => {
         categoria: 'Administracion',
         facturado: 'No Facturado',
         Tipo: 'Efectivo',
-        importe: '0',
+        importe: '',
     });
     const handleInputChange = (e) =>{
         const { name, value } = e.target;
@@ -66,6 +66,7 @@ const ControlAdmin = () => {
                 importe: '0',
             });
             fetchGastos();
+            fetchObraDetails(); 
         }catch(error){
             console.error('Error al crear Gasto', error.message);
         }

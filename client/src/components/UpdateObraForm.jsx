@@ -50,74 +50,90 @@ const UpdateObraForm = () => {
             console.error('Error al actualizar la obra:', error.message);
         }
     };
+
+    const handleBack = () =>{
+        navigate('/dashboard');
+    };
+
     return (
-        <div>
-            <h2>Actualizando Obra "{obraData.nombre}"</h2>
+        <div className=" container mx-4 my-4 max-w-sm p-6 bg-violet-950- border border-violet-600 rounded-lg drop-shadow-xl">
 
-            <form>
-            <label>
+            <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+                Actualizando Obra "{obraData.nombre}"
+                </h2>
+
+                <button className="text-center font-semibold rounded-full bg-green-400 hover:bg-green-700 py-2 px-4 mb-4 mt-4" onClick={handleBack}>
+                    Regresar
+                </button>
+
+            <form className="flex flex-col justify-center items-center">
+            <label className="block my-2 font-medium">
             Nombre:
-            <input
-                type="text"
-                name="nombre"
-                value={obraData.nombre || ''}
-                onChange={handleInputChange}
-            />
             </label>
+                <input
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    type="text"
+                    name="nombre"
+                    value={obraData.nombre || ''}
+                    onChange={handleInputChange}
+                />
 
-            <label>
+            <label className="block my-2 font-medium">
             Localidad:
-            <input
-                type="text"
-                name="localidad"
-                value={obraData.localidad}
-                onChange={handleInputChange}
-            />
             </label>
+                <input
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    type="text"
+                    name="localidad"
+                    value={obraData.localidad}
+                    onChange={handleInputChange}
+                />
 
-            <label>
+            <label className="block my-2 font-medium">
             Municipio:
-            <input
-                type="text"
-                name="municipio"
-                value={obraData.municipio}
-                onChange={handleInputChange}
-            />
             </label>
+                <input
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    type="text"
+                    name="municipio"
+                    value={obraData.municipio}
+                    onChange={handleInputChange}
+                />
 
-            <label>
+            <label className="block my-2 font-medium">
             Dependencia:
-            <input
-                type="text"
-                name="dependencia"
-                value={obraData.dependencia}
-                onChange={handleInputChange}
-            />
             </label>
+                <input 
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    type="text"
+                    name="dependencia"
+                    value={obraData.dependencia}
+                    onChange={handleInputChange}
+                />
 
-            <label>
+            <label className="block my-2 font-medium">
             Fecha:
-            <input
-                type="date"
-                name="fecha"
-                value={obraData.fecha}
-                onChange={handleInputChange}
-            />
             </label>
+                <input
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    type="date"
+                    name="fecha"
+                    value={obraData.fecha}
+                    onChange={handleInputChange}
+                />
 
-            <label>
+            <label className="block my-2 font-medium">
             Presupuesto:
-            <input
-                type="number"
-                name="p_inicial"
-                value={obraData.p_inicial || ''}
-                onChange={handleInputChange}
-            />
             </label>
+                <input
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    type="number"
+                    name="p_inicial"
+                    value={obraData.p_inicial || ''}
+                    onChange={handleInputChange}
+                />
 
-            
-
-                <button className='bg-orange-400' type="button" onClick={handleUpdateObra}>
+                <button className="text-center font-semibold rounded-full bg-yellow-500 py-2 px-4 mb-4 mt-4 hover:bg-green-500" type="button" onClick={handleUpdateObra}>
                     Actualizar Obra
                 </button>
             </form>

@@ -15,10 +15,10 @@ const Home = () => {
 
 
 return (
-    <div className="container  rounded-3xl bg-gradient-to-r from-violet-800 via-fuchsia-800 to-pink-900 drop-shadow-xl mx-auto max-w-7xl py-24 sm:px-6 sm:py-32 lg:px-8">
+    <div className="container  rounded-3xl bg-gradient-to-r from-violet-800 via-fuchsia-800 to-pink-900 drop-shadow-xl mx-auto my-auto max-w-7xl py-24 sm:px-6 sm:py-32 lg:px-8">
         <h1 
-            className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
-                Bienvenido a la aplicación</h1>
+            className=" mx-4 text-3xl font-bold tracking-tight text-white sm:text-4xl">
+                Bienvenido a CivilSoft</h1>
         <p 
             className=" mb-6 text-1xl font-bold tracking-tight text-white sm:text-1xl">
                 ¡Comienza tu viaje aquí! Inicia sesion o Registrate.</p>

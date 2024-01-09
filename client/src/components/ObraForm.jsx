@@ -41,77 +41,84 @@ const ObraForm = () =>{
     };
 
 return (
-    <div>
-        <h1>Registrar Nueva Obra</h1>
+    <div className=" container mx-4 my-4 max-w-sm p-6 bg-violet-950- border border-violet-600 rounded-lg drop-shadow-xl">
+        <h1 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">Registrar Nueva Obra</h1>
 
-        <button className="bg-green-400 py-2 px-4 mb-4" onClick={handleBack}>
+        <button className="text-center font-semibold rounded-full bg-green-400 hover:bg-green-700 py-2 px-4 mb-4 mt-4" onClick={handleBack}>
             Regresar
         </button>
 
         <form  className="flex flex-col justify-center items-center" >
-            <label className='mb-4'>
+            <label className="block my-2 font-medium">
             Nombre:
-            <input
-                type="text"
-                name="nombre"
-                value={obraData.nombre}
-                onChange={handleInputChange}
-            />
             </label>
+                <input 
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    type="text"
+                    name="nombre"
+                    value={obraData.nombre}
+                    onChange={handleInputChange}
+                />
 
-            <label className='mb-4'>
+            <label className="block my-2 font-medium">
             Localidad:
-            <input
-                type="text"
-                name="localidad"
-                value={obraData.localidad}
-                onChange={handleInputChange}
-            />
             </label>
+                <input
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    type="text"
+                    name="localidad"
+                    value={obraData.localidad}
+                    onChange={handleInputChange}
+                />
 
-            <label className='mb-4'>
+            <label className="block my-2 font-medium">
             Municipio:
-            <input
-                type="text"
-                name="municipio"
-                value={obraData.municipio}
-                onChange={handleInputChange}
-            />
             </label>
+                <input
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    type="text"
+                    name="municipio"
+                    value={obraData.municipio}
+                    onChange={handleInputChange}
+                />
 
-            <label className='mb-4'>
+            <label className="block my-2 font-medium">
             Dependencia:
-            <input
-                type="text"
-                name="dependencia"
-                value={obraData.dependencia}
-                onChange={handleInputChange}
-            />
             </label>
+                <input
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    type="text"
+                    name="dependencia"
+                    value={obraData.dependencia}
+                    onChange={handleInputChange}
+                />
 
-            <label className='mb-4'>
+            <label className="block my-2 font-medium">
             Fecha:
-            <input
-                type="date"
-                name="fecha"
-                value={obraData.fecha}
-                onChange={handleInputChange}
-            />
             </label>
+                <input
+                    className=" text-center bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    type="date"
+                    name="fecha"
+                    value={obraData.fecha}
+                    onChange={handleInputChange}
+                />
 
-            <label className='mb-4'>
+            <label className="block my-2 font-medium">
             Presupuesto:
-            <input
-                type="number"
-                name="p_inicial"
-                value={obraData.p_inicial || ''}
-                onChange={handleInputChange}
-            />
             </label>
+                <input
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    type="number"
+                    name="p_inicial"
+                    placeholder='$ 00.0'
+                    value={obraData.p_inicial || ''}
+                    onChange={handleInputChange}
+                />
 
             
             <button 
-            className='bg-green-400'
+            className="text-center font-semibold rounded-full bg-yellow-500 py-2 px-4 mb-4 mt-4 hover:bg-green-500"
             type="button" onClick={handleCreateObra}>
             Crear Obra
             </button>
