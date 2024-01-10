@@ -154,15 +154,17 @@ const handleEliminar = async (id, tareaId) => {
                             Descripcion:
                         </label>
                             <textarea
+                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  
                                     type="text"
                                     name="descripcion"
                                     value={tareaData.descripcion}
                                     onChange={handleInputChange}
                                 />
 
-                        <label className="mb-4">
+                        <label className="block my-2 font-medium">
                             Estado de la tarea:
                             <select
+                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 name="estado"
                                 value={tareaData.estado}
                                 onChange={handleInputChange}
@@ -174,7 +176,7 @@ const handleEliminar = async (id, tareaId) => {
                         </label>
 
                         <button
-                            className='bg-green-400'
+                            className=" text-center font-semibold rounded-full bg-yellow-500 py-2 px-4 mb-4 mt-4 hover:bg-green-500"
                             type="button"
                             onClick={handleCreateTarea}
                         >
@@ -182,7 +184,7 @@ const handleEliminar = async (id, tareaId) => {
                         </button>
                     </form>
                 </div>
-                <div className="ml-8">
+                <div className="container ml-8 rounded-lg drop-shadow-xl">
                     <h1> Tabla de Tareas </h1>
                     
                     <table>
@@ -209,11 +211,11 @@ const handleEliminar = async (id, tareaId) => {
                                 <td>{tarea.descripcion}</td>
                                 <td>{tarea.estado}</td>
                                 <td>
-                                    <button className='bg-orange-400'
+                                    <button className="text-center font-semibold rounded-full bg-orange-500 py-2 px-4 mb-4 mt-4 hover:bg-orange-600"
                                     onClick={() => handleActualizar(id, tarea.id)}>
                                         Actualizar
                                     </button>
-                                    <button className='bg-red-600'
+                                    <button className="text-center font-semibold rounded-full bg-red-500 py-2 px-4 mb-4 mt-4 hover:bg-red-600"
                                     onClick={() => handleEliminar(id, tarea.id) }
                                         >
                                         Eliminar
