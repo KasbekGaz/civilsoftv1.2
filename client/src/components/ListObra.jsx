@@ -57,7 +57,7 @@ return (
 
     <div className="relative overflow-x-auto">
         <table className="w-full text-left rtl:text-right text-white">
-        <thead className="text-sm text-white-700 uppercase">
+        <thead className="text-sm text-white uppercase">
             <tr className="bg-gray-800 border-b">
             <th scope="col" className="px-6 py-3 text-center rounded-s-2xl">ID</th>
             <th scope="col" className="px-6 py-3 text-center">Nombre</th>

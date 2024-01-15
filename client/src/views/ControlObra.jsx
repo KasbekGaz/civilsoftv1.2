@@ -34,7 +34,7 @@ const ControlObra =  () =>{
         codigo: '',
         unidad: '',
         concepto: '',
-        estado: 'Sin cambio',
+        estado: '',
         //* Cantidad Contratada
         volumen: '0',
         precio: '0',
@@ -62,7 +62,7 @@ const ControlObra =  () =>{
                 codigo: '',
                 unidad: '',
                 concepto: '',
-                estado: 'Sin cambio',
+                estado: '',
                 //* Cantidad Contratada
                 volumen: '0',
                 precio: '0',
@@ -112,154 +112,157 @@ const handleEliminar = async (id, volumenId) => {
 
 return(
     <div>
-        <h1>Comparativa de volumenes</h1>
-        <h1>Proyecto "{obraData.nombre}"</h1>
+        <h1 className="text-3xl font-bold tracking-tight text-white sm:text-3xl">Comparativa de volumenes</h1>
+        <h1 className="text-3xl font-bold tracking-tight text-white sm:text-3xl">Proyecto "{obraData.nombre}"</h1>
 
-        <button className="bg-green-400 py-2 px-4 mb-4"
+        <button className="text-center font-semibold rounded-full bg-green-400 hover:bg-green-700 py-2 px-4 mb-4 mt-4"
             onClick={handleBack}>
             Regresar a las acciones
         </button>
-        <div>
-            <h1>Agregar Concepto</h1>
-            <form className="flex flex-col justify-center items-center mt-2">
-                <label className="mb-4">
-                    Código:
-                    <input className="ml-2"
-                        type="text" 
-                        name="codigo"
-                        value={volumenData.codigo}
-                        onChange={handleInputChange}
-                        />
-                </label>
-                <label className="mb-4">
-                    Unidad:
-                    <input className="ml-2"
-                        type="text" 
-                        name="unidad"
-                        value={volumenData.unidad}
-                        onChange={handleInputChange}
-                        />
-                </label>
-                <label className="mb-4">
-                    Concepto:
-                    <input className="ml-2"
-                        type="text" 
-                        name="concepto"
-                        value={volumenData.concepto}
-                        onChange={handleInputChange}
-                        />
-                </label>
-                <label className="mb-4">
-                    Estado del Concepto:
-                    <select 
-                        name="estado" 
-                        value={volumenData.estado}
-                        onChange={handleInputChange}>
-                            <option value="Sin cambio">Sin Cambío</option>
-                            <option value="Deduccion">Deduccíon</option>
-                            <option value="Adicional">Adicional</option>
-                            <option value="Extraordinario">Extraordinario</option>
-                    </select>
-                </label>
-                <h2>Cantidad Contratada</h2>
-                <label className="mb-4">
-                    Volumen:
-                        <input className="ml-2"
-                            type="number" 
-                            name="volumen"
-                            value={volumenData.volumen} 
-                            onChange={handleInputChange}/>
-                </label>
-                <label className="mb-4">
-                    Precio $ :
-                        <input className="ml-2"
-                            type="number" 
-                            name="precio"
-                            value={volumenData.precio} 
-                            onChange={handleInputChange}/>
-                </label>
-                <h2>Cantidad Ejecutada</h2>
-                <label className="mb-4">
-                    Volumen Modificado:
-                        <input className="ml-2"
-                            type="number" 
-                            name="v_mod"
-                            value={volumenData.v_mod} 
-                            onChange={handleInputChange}/>
-                </label>
 
-                <button
-                    className="bg-green-400"
-                    type="button"
-                    onClick={handleCreateVolumen}>
-                        Agregar Concepto
-                </button>
 
-            </form>
-        </div>
-        <div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Código</th>
-                        <th>Unidad</th>
-                        <th>Concepto</th>
-                        <th>Estado</th>
-                        <th>Cantidad Contratada</th>
-                        <th>Precio $ </th>
-                        <th>Importe de Contratado</th>
-                        <th>Cantidad Ejecutada</th>
-                        <th>Importe de Ejecutado</th>
-                        <th>Diferencia</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {volumen.map((vol) => (
-                        <tr key={vol.id}>
-                            <td>{vol.id}</td>
-                            <td>{vol.codigo}</td>
-                            <td>{vol.unidad}</td>
-                            <td>{vol.concepto}</td>
-                            <td>{vol.estado}</td>
-                            <td>{vol.volumen}</td>
-                            <td>{vol.precio}</td>
-                            <td>{vol.importe}</td>
-                            <td>{vol.v_mod}</td>
-                            <td>{vol.importe_mod}</td>
-                            <td>{vol.diferencia}</td>
-                            <td>
-                                <button className='bg-orange-400'
-                                onClick={() => handleActualizar(id, vol.id)}>
-                                    Actualizar
-                                </button>
-                                <button className='bg-red-600'
-                                onClick={() => handleEliminar(id, vol.id) }
-                                    >
-                                    Eliminar
-                                </button>
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-        </div>
-        <div name="Seccion de Totales de Importes"
-            className="grid grid-cols-2 md:grid-cols-2">
-            <div className="bg-gray-500 p-4 rounded-md">
-                <h1 className="text-xl font-semibold mb-2 mt-2">
-                    Total Importes Cantidad Contratada $
-                    { obraData.total_importes }
-                </h1>
-            </div >
-            <div className="bg-gray-500 p-4 rounded-md">
-                <h1 className="text-xl font-semibold mb-2 mt-2">
-                    Total Importes Cantidad Ejecutada $
-                    { obraData.total_importes_mod }
-                </h1>
+        <div className="grid grid-cols-2 gap-8 mx-auto max-w-4xl">
+            <div className="w-full flex-auto border border-violet-600 drop-shadow-xl rounded-2xl">
+                <h1 className="text-2xl font-semibold tracking-tight text-white sm:text-2xl">Agregar Concepto</h1>
+                <form className="flex flex-col justify-center items-center mt-2">
+                    <label className="block my-2 font-medium">
+                        Código:
+                    </label>
+                    <input className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            type="text" 
+                            name="codigo"
+                            value={volumenData.codigo}
+                            onChange={handleInputChange}
+                            />
+                    <label className="block my-2 font-medium">
+                        Unidad:
+                    </label>
+                    <input className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            type="text" 
+                            name="unidad"
+                            value={volumenData.unidad}
+                            onChange={handleInputChange}
+                            />
+                    <label className="block my-2 font-medium">
+                        Concepto:
+                    </label>
+                    <input className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            type="text" 
+                            name="concepto"
+                            value={volumenData.concepto}
+                            onChange={handleInputChange}
+                            />
+                    <label className="block my-2 font-medium">
+                        Estado del Concepto:
+                    </label>
+                    <select className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            name="estado" 
+                            value={volumenData.estado}
+                            onChange={handleInputChange}>
+                                <option value="Sin cambio">Sin Cambío</option>
+                                <option value="Deduccion">Deduccíon</option>
+                                <option value="Adicional">Adicional</option>
+                                <option value="Extraordinario">Extraordinario</option>
+                        </select>
+                    <h2 className="text-2xl font-semibold tracking-tight text-white sm:text-2xl">Cantidad Contratada</h2>
+                    <label className="block my-2 font-medium">
+                        Volumen:
+                    </label>
+                    <input className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                type="number" 
+                                name="volumen"
+                                value={volumenData.volumen} 
+                                onChange={handleInputChange}/>
+                    <label className="block my-2 font-medium">
+                        Precio $ :
+                    </label>
+                    <input className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                type="number" 
+                                name="precio"
+                                value={volumenData.precio} 
+                                onChange={handleInputChange}/>
+                    <h2 className="text-2xl font-semibold tracking-tight text-white sm:text-2xl">Cantidad Ejecutada</h2>
+                    <label className="block my-2 font-medium">
+                        Volumen Modificado:
+                    </label>
+                    <input className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                type="number" 
+                                name="v_mod"
+                                value={volumenData.v_mod} 
+                                onChange={handleInputChange}/>
+
+                    <button
+                        className=" text-center font-semibold rounded-full bg-yellow-500 py-2 px-4 mb-4 mt-4 hover:bg-green-500"
+                        type="button"
+                        onClick={handleCreateVolumen}>
+                            Agregar Concepto
+                    </button>
+
+                </form>
             </div>
-
+            <div className="w-full drop-shadow-xl">
+                <h1 className="text-3xl font-bold tracking-tight text-white sm:text-3xl">Tabla de Conceptos</h1>
+                <table className="w-full text-left rtl:text-right text-white">
+                    <thead className="text-sm text-white uppercase">
+                        <tr className="bg-gray-800 border-b">
+                            <th scope="col" className="px-6 py-3 text-center rounded-s-2xl">ID</th>
+                            <th scope="col" className="px-6 py-3 text-center">Código</th>
+                            <th scope="col" className="px-6 py-3 text-center">Unidad</th>
+                            <th scope="col" className="px-6 py-3 text-center">Concepto</th>
+                            <th scope="col" className="px-6 py-3 text-center">Estado</th>
+                            <th scope="col" className="px-6 py-3 text-center">Cantidad Contratada</th>
+                            <th scope="col" className="px-6 py-3 text-center">Precio $ </th>
+                            <th scope="col" className="px-6 py-3 text-center">Importe de Contratado</th>
+                            <th scope="col" className="px-6 py-3 text-center">Cantidad Ejecutada</th>
+                            <th scope="col" className="px-6 py-3 text-center">Importe de Ejecutado</th>
+                            <th scope="col" className="px-6 py-3 text-center">Diferencia</th>
+                            <th scope="col" className="px-6 py-3 text-center rounded-e-2xl">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {volumen.map((vol) => (
+                            <tr className="bg-gray-600 border-b" key={vol.id}>
+                                <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{vol.id}</td>
+                                <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{vol.codigo}</td>
+                                <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{vol.unidad}</td>
+                                <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{vol.concepto}</td>
+                                <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{vol.estado}</td>
+                                <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{vol.volumen}</td>
+                                <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{vol.precio}</td>
+                                <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{vol.importe}</td>
+                                <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{vol.v_mod}</td>
+                                <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{vol.importe_mod}</td>
+                                <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{vol.diferencia}</td>
+                                <td>
+                                    <button className="text-center font-semibold rounded-full bg-orange-500 py-2 px-4 mb-4 mt-4 hover:bg-orange-600"
+                                    onClick={() => handleActualizar(id, vol.id)}>
+                                        Actualizar
+                                    </button>
+                                    <button className="text-center font-semibold rounded-full bg-red-500 py-2 px-4 mb-4 mt-4 hover:bg-red-600"
+                                    onClick={() => handleEliminar(id, vol.id) }
+                                        >
+                                        Eliminar
+                                    </button>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+                <div className="grid grid-cols-2 md:grid-cols-2">
+                    <div className="bg-gray-500 p-4 rounded-md">
+                        <h1 className="text-xl font-semibold mb-2 mt-2">
+                            Total Importes Cantidad Contratada $
+                            { obraData.total_importes }
+                        </h1>
+                    </div >
+                    <div className="bg-gray-500 p-4 rounded-md">
+                        <h1 className="text-xl font-semibold mb-2 mt-2">
+                            Total Importes Cantidad Ejecutada $
+                            { obraData.total_importes_mod }
+                        </h1>
+                    </div>
+                </div> 
+            </div>
         </div>
 
     </div>

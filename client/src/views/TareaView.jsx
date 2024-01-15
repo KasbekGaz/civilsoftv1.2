@@ -113,10 +113,10 @@ const handleEliminar = async (id, tareaId) => {
 
             <h1 className="text-3xl font-bold tracking-tight text-white sm:text-3xl">Control de Tareas</h1>
             
-            <div className="grid grid-cols-2 md:grid-cols-2">
-                <div className="container bg-violet-950- border border-violet-600 rounded-lg drop-shadow-xl">
+            <div className="grid grid-cols-2 gap-8 mx-auto max-w-4xl">
+                <div className="w-full flex-auto border border-violet-600 drop-shadow-xl rounded-2xl">
                     <h1 className="text-2xl font-semibold tracking-tight text-white sm:text-2xl"> Agregar Nueva tarea </h1>
-                    <form  className="flex flex-col justify-center items-center">
+                    <form  className="flex flex-col justify-center items-center w-auto">
                         <label className="block my-2 font-medium">
                             Fecha Vencimiento:
                         </label>
@@ -157,6 +157,7 @@ const handleEliminar = async (id, tareaId) => {
                                     className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"  
                                     type="text"
                                     name="descripcion"
+                                    placeholder="Describir la tarea brevemente"
                                     value={tareaData.descripcion}
                                     onChange={handleInputChange}
                                 />
@@ -184,32 +185,32 @@ const handleEliminar = async (id, tareaId) => {
                         </button>
                     </form>
                 </div>
-                <div className="container ml-8 rounded-lg drop-shadow-xl">
-                    <h1> Tabla de Tareas </h1>
-                    
-                    <table>
-                        <thead>
-                            <tr>
-                            <th>ID</th>
-                            <th>Fecha Creada</th>
-                            <th>Fecha Vencimiento</th>
-                            <th>Fecha Completado</th>
-                            <th>Titulo</th>
-                            <th>Descripcion</th>
-                            <th>Estado de la Tarea</th>
-                            <th>Acciones</th>
+
+                <div className="w-full drop-shadow-xl">
+                    <h1 className="text-3xl font-bold tracking-tight text-white sm:text-3xl" > Tabla de Tareas </h1>
+                    <table className="w-full text-left rtl:text-right text-white">
+                        <thead className="text-sm text-white uppercase">
+                            <tr className="bg-gray-800 border-b">
+                            <th scope="col" className="px-6 py-3 text-center rounded-s-2xl">ID</th>
+                            <th scope="col" className="px-6 py-3 text-center">Fecha Creada</th>
+                            <th scope="col" className="px-6 py-3 text-center">Fecha Vencimiento</th>
+                            <th scope="col" className="px-6 py-3 text-center">Fecha Completado</th>
+                            <th scope="col" className="px-6 py-3 text-center">Titulo</th>
+                            <th scope="col" className="px-6 py-3 text-center">Descripcion</th>
+                            <th scope="col" className="px-6 py-3 text-center">Estado de la Tarea</th>
+                            <th scope="col" className="px-6 py-3 text-center rounded-e-2xl">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             {tareas.map((tarea) => (
-                            <tr key={tarea.id}>
-                                <td>{tarea.id}</td>
-                                <td>{tarea.Fvence}</td>
-                                <td>{tarea.Fcreado}</td>
-                                <td>{tarea.Fcompletado}</td>
-                                <td>{tarea.titulo}</td>
-                                <td>{tarea.descripcion}</td>
-                                <td>{tarea.estado}</td>
+                            <tr className="bg-gray-600 border-b"  key={tarea.id}>
+                                <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{tarea.id}</td>
+                                <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{tarea.Fvence}</td>
+                                <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{tarea.Fcreado}</td>
+                                <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{tarea.Fcompletado}</td>
+                                <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{tarea.titulo}</td>
+                                <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{tarea.descripcion}</td>
+                                <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{tarea.estado}</td>
                                 <td>
                                     <button className="text-center font-semibold rounded-full bg-orange-500 py-2 px-4 mb-4 mt-4 hover:bg-orange-600"
                                     onClick={() => handleActualizar(id, tarea.id)}>
@@ -221,7 +222,6 @@ const handleEliminar = async (id, tareaId) => {
                                         Eliminar
                                     </button>
                                 </td>
-                                
                             </tr>
                             ))}
                         </tbody>

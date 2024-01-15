@@ -109,167 +109,179 @@ const ControlAdmin = () => {
 
 
     return(
-        <div>
-            <h1>Control de gastos para: </h1>
-            <h1>Proyecto "{obraData.nombre}"</h1>
+        <div >
+            <h1 className="text-3xl font-bold tracking-tight text-white sm:text-3xl">Control de gastos para: </h1>
+            <h1 className="text-3xl font-bold tracking-tight text-white sm:text-3xl">Proyecto "{obraData.nombre}"</h1>
             
-            <button className="bg-green-400 py-2 px-4 mb-4"
+            <button className="text-center font-semibold rounded-full bg-green-400 hover:bg-green-700 py-2 px-4 mb-4 mt-4"
             onClick={handleBack}
             > 
             Regresar a las Acciones
             </button>
 
-            <div>
-                <form className="flex flex-col justify-center items-center">
-                    <label className="mb-4">
-                    Fecha :
-                        <input
-                            type="date"
-                            name="fecha"
-                            value={gastoData.fecha}
-                            onChange={handleInputChange}
-                            className="ml-4"
-                        />
-                    </label>
+            <div  className="grid grid-cols-2 gap-8 mx-auto max-w-4xl">
+                <div className="w-full flex-auto border border-violet-600 drop-shadow-xl rounded-2xl">
 
-                    <label className="mb-4">
-                        Proveedor :
-                        <input 
-                            type="text" 
-                            name="proveedor"
-                            value={gastoData.proveedor}
-                            onChange={handleInputChange}
-                            className="ml-4"/>
-                    </label>
+                    <h1 className="text-2xl font-semibold tracking-tight text-white sm:text-2xl">Agregar Gasto</h1>
 
-                    <label className="mb-4">
-                        Concepto :
-                        <input 
-                            type="text" 
-                            name="concepto"
-                            value={gastoData.concepto}
-                            onChange={handleInputChange}
-                            className="ml-4"/>
-                    </label>
+                    <form className="flex flex-col justify-center items-center mt-2">
+                        <label className="block my-2 font-medium">
+                        Fecha :
+                            <input
+                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                type="date"
+                                name="fecha"
+                                value={gastoData.fecha}
+                                onChange={handleInputChange}
+                            />
+                        </label>
 
-                    <label className="mb-4">
-                        Descripcion :
-                        <input 
-                            type="text" 
-                            name="descripcion"
-                            value={gastoData.descripcion}
-                            onChange={handleInputChange}
-                            className="ml-4"/>
-                    </label>
+                        <label className="block my-2 font-medium">
+                            Proveedor :
+                            <input 
+                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                type="text" 
+                                name="proveedor"
+                                value={gastoData.proveedor}
+                                onChange={handleInputChange}
+                                />
+                        </label>
 
-                    <label className="mb-4">
-                        Categoria del Gasto :
-                        <select
-                            name="categoria"
-                            value={gastoData.categoria}
-                            onChange={handleInputChange}>
-                                <option value="Administracion">Administración</option>
-                                <option value="Mano de obra">Mano de Obra</option>
-                                <option value="Materiales">Materiales</option>
-                                <option value="Viaticos">Viáticos</option>
-                                <option value="Varios">Varios</option>
-                        </select>
-                    </label>
+                        <label className="block my-2 font-medium">
+                            Concepto :
+                            <input 
+                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                type="text" 
+                                name="concepto"
+                                value={gastoData.concepto}
+                                onChange={handleInputChange}
+                                />
+                        </label>
 
-                    <label className="mb-4">
-                        Facturado :
-                        <select 
-                            name="facturado"
-                            value={gastoData.facturado}
-                            onChange={handleInputChange}>
-                                <option value="Facturado">Facturado</option>
-                                <option value="No Facturado"> No Facturado</option>
+                        <label className="block my-2 font-medium">
+                            Descripcion :
+                            <textarea 
+                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                type="text" 
+                                name="descripcion"
+                                value={gastoData.descripcion}
+                                onChange={handleInputChange}
+                                />
+                        </label>
+
+                        <label className="block my-2 font-medium">
+                            Categoria del Gasto :
+                            <select
+                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                name="categoria"
+                                value={gastoData.categoria}
+                                onChange={handleInputChange}>
+                                    <option value="Administracion">Administración</option>
+                                    <option value="Mano de obra">Mano de Obra</option>
+                                    <option value="Materiales">Materiales</option>
+                                    <option value="Viaticos">Viáticos</option>
+                                    <option value="Varios">Varios</option>
                             </select>
-                    </label>
+                        </label>
 
-                    <label className="mb-4">
-                        Tipo de Gasto :
-                        <select 
-                            name="Tipo"
-                            value={gastoData.Tipo}
-                            onChange={handleInputChange}>
-                                <option value="Efectivo">Efectivo</option>
-                                <option value="Transferencia">Transferencia</option>
-                            </select>
-                    </label>
+                        <label className="block my-2 font-medium">
+                            Facturado :
+                            <select 
+                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                name="facturado"
+                                value={gastoData.facturado}
+                                onChange={handleInputChange}>
+                                    <option value="Facturado">Facturado</option>
+                                    <option value="No Facturado"> No Facturado</option>
+                                </select>
+                        </label>
 
-                    <label className="mb-4">
-                        Importe $ :
-                        <input 
-                            type="number"
-                            name="importe"
-                            value={gastoData.importe || ''}
-                            onChange={handleInputChange}/>
-                    </label>
+                        <label className="block my-2 font-medium">
+                            Tipo de Gasto :
+                            <select 
+                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                name="Tipo"
+                                value={gastoData.Tipo}
+                                onChange={handleInputChange}>
+                                    <option value="Efectivo">Efectivo</option>
+                                    <option value="Transferencia">Transferencia</option>
+                                </select>
+                        </label>
 
-                    <button
-                        className="bg-green-400"
-                        type="button"
-                        onClick={handleCreateGasto}>
-                        Agregar Nuevo Gasto
-                    </button>
+                        <label className="block my-2 font-medium">
+                            Importe $ :
+                            <input 
+                                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                type="number"
+                                name="importe"
+                                placeholder="$00.0"
+                                value={gastoData.importe || ''}
+                                onChange={handleInputChange}/>
+                        </label>
 
-                </form>
-            </div>
+                        <button
+                            className=" text-center font-semibold rounded-full bg-yellow-500 py-2 px-4 mb-4 mt-4 hover:bg-green-500"
+                            type="button"
+                            onClick={handleCreateGasto}>
+                            Agregar Nuevo Gasto
+                        </button>
 
-            <div>
-                <h1>Lista de gastos</h1>
+                    </form>
+                </div>
 
-                <table>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Fecha</th>
-                            <th>Proveedor</th>
-                            <th>Concepto</th>
-                            <th>Descripción</th>
-                            <th>Categoria</th>
-                            <th>Facturado</th>
-                            <th>Tipo de Gasto</th>
-                            <th>Importe $ </th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {gastos.map((gasto) => (
-                            <tr key={gasto.id} >
-                                <td>{gasto.id}</td>
-                                <td>{gasto.fecha}</td>
-                                <td>{gasto.proveedor}</td>
-                                <td>{gasto.concepto}</td>
-                                <td>{gasto.descripcion}</td>
-                                <td>{gasto.categoria}</td>
-                                <td>{gasto.facturado}</td>
-                                <td>{gasto.Tipo}</td>
-                                <td>{gasto.importe}</td>
-                                <td>
-                                    <button className="bg-orange-400"
-                                    onClick={() => handleActualizar(id, gasto.id)}>
-                                        Actualizar
-                                    </button>
+                <div className="w-full drop-shadow-xl">
+                    <h1 className="text-2xl font-semibold tracking-tight text-white sm:text-2xl">Tabla de gastos</h1>
 
-                                    <button className="bg-red-600"
-                                    onClick={() => handleEliminar(id, gasto.id)}>
-                                        Eliminar
-                                    </button>
-                                </td>
+                    <table className="w-full text-left rtl:text-right text-white">
+                        <thead className="text-sm text-white uppercase">
+                            <tr className="bg-gray-800 border-b">
+                                <th scope="col" className="px-6 py-3 text-center rounded-s-2xl">ID</th>
+                                <th scope="col" className="px-6 py-3 text-center">Fecha</th>
+                                <th scope="col" className="px-6 py-3 text-center">Proveedor</th>
+                                <th scope="col" className="px-6 py-3 text-center">Concepto</th>
+                                <th scope="col" className="px-6 py-3 text-center">Descripción</th>
+                                <th scope="col" className="px-6 py-3 text-center">Categoria</th>
+                                <th scope="col" className="px-6 py-3 text-center">Facturado</th>
+                                <th scope="col" className="px-6 py-3 text-center">Tipo de Gasto</th>
+                                <th scope="col" className="px-6 py-3 text-center">Importe $ </th>
+                                <th scope="col" className="px-6 py-3 text-center rounded-e-2xl">Acciones</th>
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            {gastos.map((gasto) => (
+                                <tr className="bg-gray-600 border-b" key={gasto.id} >
+                                    <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{gasto.id}</td>
+                                    <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{gasto.fecha}</td>
+                                    <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{gasto.proveedor}</td>
+                                    <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{gasto.concepto}</td>
+                                    <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{gasto.descripcion}</td>
+                                    <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{gasto.categoria}</td>
+                                    <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{gasto.facturado}</td>
+                                    <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{gasto.Tipo}</td>
+                                    <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{gasto.importe}</td>
+                                    <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">
+                                        <button className="text-center font-semibold rounded-full bg-orange-500 py-2 px-4 mb-4 mt-4 hover:bg-orange-600"
+                                        onClick={() => handleActualizar(id, gasto.id)}>
+                                            Actualizar
+                                        </button>
 
-                <div name="Seccion de Total_gastos"
-                    className="grid grid-cols-2 md:grid-cols-2">
-                    <div className="bg-gray-500 p-4 rounded-md">
-                        <h1 className="text-xl font-semibold mb-2 mt-2">
-                            Total de Gastos $
-                            { obraData.total_gastos }
-                        </h1>
+                                        <button className="text-center font-semibold rounded-full bg-red-500 py-2 px-4 mb-4 mt-4 hover:bg-red-600"
+                                        onClick={() => handleEliminar(id, gasto.id)}>
+                                            Eliminar
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+
+                    <div className="grid grid-cols-2 md:grid-cols-2">
+                        <div className="bg-gray-500 p-4 rounded-md">
+                            <h1 className="text-xl font-semibold mb-2 mt-2">
+                                Total de Gastos $
+                                { obraData.total_gastos }
+                            </h1>
+                        </div>
                     </div>
                 </div>
             </div>
