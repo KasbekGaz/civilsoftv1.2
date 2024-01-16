@@ -41,16 +41,13 @@ const UpdateProv = () =>{
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-        setProvData((prevData) => ({
-            ...prevData,
-            [name]: value,
-        }));
+        setProvData({ ...provData, [name]: value });
     };
 
     const handleUpdateProv = async () =>{
         try{
-            console.log(provData);
-            const response = await APIbackend.updateP(provData);
+            console.log(id, provData);
+            const response = await APIbackend.updateP(id, provData);
             console.log('datos:', response);
             alert('Proveedor actualizado correctamente');
             navigate('/control-proveedores');

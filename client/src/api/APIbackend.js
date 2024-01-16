@@ -555,7 +555,7 @@ const APIbackend = {
         try{
             const token = localStorage.getItem('token');
             console.log('Token:', token);
-            
+            console.log("datos", id,  infoData);
             const response = await instanceC.put(`/proveedores/${id}/`,infoData,{
                 headers: { Authorization: `Token ${token}` },
             });
