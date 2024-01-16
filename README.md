@@ -39,8 +39,22 @@ Esta aplicacion es para llevar un control administrativo, control de gestion de 
 
 - Integracion de permisos de CRUD conforme a roles
 
-> Funcionalidades nuevas se agregaran conforme se avance.
-> Para poder levantar el proyecto de Python necesita requirements.tx (pip install r- "requirements.txt)
+## Tecnologias Usadas en Frontend
+
+- Vite.js
+- React
+- Tailwind CSS
+- Axios
+
+## Tenologias Usadas en Backend
+
+- Python
+- Django Rest Framework
+- Django Base
+- Sqlite3 (base de datos)
+
+> Para levantar backend requirements.tx (pip install r- "requirements.txt)
+> Para levantar el frontend debera posicionarse en la carpeta "client" y ejecutar "npm run dev"
 > Este proyecto pertenece a:
 > Oswaldo Lázaro Flores
 > Jose Irvin Petriz Velázquez
