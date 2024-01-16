@@ -160,158 +160,192 @@ const DetallesProv = () => {
 return(
     <div>
         <h1> Detalles del Proveedor: </h1>
-            <button className="bg-green-400 py-2 px-2 mb-4"
+            <button className="text-center font-semibold rounded-full bg-green-400 hover:bg-green-700 py-2 px-4 mb-4 mt-4"s
                 onClick={handleBack} >
                 Regresar
             </button>
         <div className="Proveedor">
-            <h1> {provData.nombre_comercial} </h1>
-            <h2> Razón Social: {provData.razon_social} </h2>
-            <h2> Télefono: {provData.telefono} </h2>
-            <h2> Correo: {provData.correo} </h2>
-            <h2> RFC: {provData.coderfc} </h2>
-            <h2> Descripción: {provData.descripcion} </h2>
+            <label className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <h1 className="text-3xl font-semibold tracking-tight text-white sm:text-3xl"> {provData.nombre_comercial} </h1>
+            </label>
+            <label className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <h1 className="text-2xl font-semibold tracking-tight text-white sm:text-2xl"> {provData.razon_social} </h1>
+            </label>
+            <label className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <h1 className="text-2xl font-semibold tracking-tight text-white sm:text-2xl"> {provData.telefono} </h1>
+            </label>
+            <label className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <h1 className="text-2xl font-semibold tracking-tight text-white sm:text-2xl"> {provData.correo} </h1>
+            </label>
+            <label className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <h1 className="text-2xl font-semibold tracking-tight text-white sm:text-2xl"> {provData.coderfc} </h1>
+            </label>
+            <label className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <h1 className="text-2xl font-semibold tracking-tight text-white sm:text-2xl"> {provData.descripcion} </h1>
+            </label>
         </div>
-        <div className="">
-            <h1>Agregar Materiales ofertados por el Proveedor</h1>
-            <form className="flex flex-col justify-center items-center">
-                <label className="mb-4">
-                    Unidad:
-                    <input 
-                        className="ml-4"
-                        type="text"
-                        name="unidad"
-                        value={materialData.unidad}
-                        onChange={handleInputChange} />
-                </label>
-                <label className="mb-4">
-                    Material:
-                    <input 
-                        className="ml-4"
-                        type="text"
-                        name="material"
-                        value={materialData.material}
-                        onChange={handleInputChange} />
-                </label>
-                <label className="mb-4">
-                    Precio:
-                    <input 
-                        className="ml-4"
-                        type="number"
-                        name="precio"
-                        value={materialData.precio}
-                        onChange={handleInputChange} />
-                </label>
-            </form>
-            <button 
-                className="bg-green-400 py-2 px-4 mb-4 rounded-full"
-                onClick={createMaterial}>
-                Agregar Material
-            </button>
-            <table>
-                <thead>
-                    <tr>
-                        <th> ID </th>
-                        <th> Unidad </th>
-                        <th> Material </th>
-                        <th> Precio $ </th>
-                        <th> Acciones </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {material.map((m) => (
-                        <tr key={m.id} >
-                            <td>{m.id}</td>
-                            <td>{m.unidad}</td>
-                            <td>{m.material}</td>
-                            <td>{m.precio}</td>
-                            <td>
-                                <button 
-                                    className="bg-orange-400 m-2 rounded-full py-2 px-3"
-                                    onClick={() => editarMaterial(id, m.id)}>
-                                    Editar
-                                </button>
-                                <button 
-                                    className="bg-red-600 m-2 rounded-full py-2 px-3"
-                                    onClick={() => eliminarMaterial(id, m.id)}>
-                                    Eliminar
-                                </button>
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-        </div>
-        <div className="Banca">
-            <h1>Agregar Informacion Bancaria</h1>
-            <form className="flex flex-col justify-center items-center">
-            <label className="mb-4">
-                    Nombre del Banco:
-                    <input 
-                        className="ml-4"
-                        type="text"
-                        name="banco"
-                        value={infobanca.banco}
-                        onChange={handleInputChangeBanca} />
-                </label>
-                <label className="mb-4">
-                    Clave del Banco:
-                    <input 
-                        className="ml-4"
-                        type="text"
-                        name="clave_banco"
-                        value={infobanca.clave_banco}
-                        onChange={handleInputChangeBanca} />
-                </label>
-                <label className="mb-4">
-                    Cuenta de Banco:
-                    <input 
-                        className="ml-4"
-                        type="text"
-                        name="cuenta_banco"
-                        value={infobanca.cuenta_banco}
-                        onChange={handleInputChangeBanca} />
-                </label>
-            </form>
-            <button 
-                className="bg-green-400 py-2 px-4 mb-4 rounded-full"
-                onClick={createBanca}>
-                Agregar Informacion Bancaria
-            </button>
 
-            <table>
-                <thead>
-                    <tr>
-                        <th> ID </th>
-                        <th> Banco </th>
-                        <th> Cuenta de Banco </th>
-                        <th> Clave de banco </th>
-                        <th> Acciones </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {banca.map((b) => (
-                        <tr key={b.id} >
-                            <td>{b.id}</td>
-                            <td>{b.banco}</td>
-                            <td>{b.cuenta_banco}</td>
-                            <td>{b.clave_banco}</td>
-                            <td>
-                                <button 
-                                    className="bg-orange-400 m-2 rounded-full py-2 px-3"
-                                    onClick={() => editarBanca(id, b.id)}>
-                                    Editar
-                                </button>
-                                <button 
-                                    className="bg-red-600 m-2 rounded-full py-2 px-3"
-                                    onClick={() => eliminarBanca(id, b.id)}>
-                                    Eliminar
-                                </button>
-                            </td>
+        <div className="grid grid-cols-2 gap-8 mx-auto max-w-4xl">
+
+            <div className="w-full flex-auto border border-violet-600 drop-shadow-xl rounded-2xl">
+
+                <h1 className="text-2xl font-semibold tracking-tight text-white sm:text-2xl">Agregar Materiales ofertados por el Proveedor</h1>
+
+                <form className="flex flex-col justify-center items-center">
+                    <label className="block my-2 font-medium">
+                        Unidad:
+                        <input
+                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+                            type="text"
+                            name="unidad"
+                            value={materialData.unidad}
+                            onChange={handleInputChange} />
+                    </label>
+                    <label className="block my-2 font-medium">
+                        Material:
+                        <input
+                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            type="text"
+                            name="material"
+                            value={materialData.material}
+                            onChange={handleInputChange} />
+                    </label>
+                    <label className="block my-2 font-medium">
+                        Precio:
+                        <input 
+                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            type="number"
+                            name="precio"
+                            value={materialData.precio}
+                            onChange={handleInputChange} />
+                    </label>
+                </form>
+                <button 
+                    className=" text-center font-semibold rounded-full bg-yellow-500 py-2 px-4 mb-4 mt-4 hover:bg-green-500"
+                    onClick={createMaterial}>
+                    Agregar Material
+                </button>
+
+
+            </div>
+
+            <div className="w-full drop-shadow-xl">
+                <h1 className="text-2xl font-semibold tracking-tight text-white sm:text-2xl">Tabla Materiales</h1>
+                <table className="w-full text-left rtl:text-right text-white">
+                    <thead className="text-sm text-white uppercase">
+                        <tr className="bg-gray-800 border-b">
+                            <th scope="col" className="px-6 py-3 text-center rounded-s-2xl"> ID </th>
+                            <th scope="col" className="px-6 py-3 text-center"> Unidad </th>
+                            <th scope="col" className="px-6 py-3 text-center"> Material </th>
+                            <th scope="col" className="px-6 py-3 text-center"> Precio $ </th>
+                            <th scope="col" className="px-6 py-3 text-center rounded-e-2xl"> Acciones </th>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {material.map((m) => (
+                            <tr className="bg-gray-600 border-b" key={m.id} >
+                                <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{m.id}</td>
+                                <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{m.unidad}</td>
+                                <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{m.material}</td>
+                                <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{m.precio}</td>
+                                <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">
+                                    <button 
+                                        className="text-center font-semibold rounded-full bg-orange-500 py-2 px-4 mb-4 mt-4 hover:bg-orange-600"
+                                        onClick={() => editarMaterial(id, m.id)}>
+                                        Editar
+                                    </button>
+                                    <button 
+                                        className="text-center font-semibold rounded-full bg-red-500 py-2 px-4 mb-4 mt-4 hover:bg-red-600"
+                                        onClick={() => eliminarMaterial(id, m.id)}>
+                                        Eliminar
+                                    </button>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div className="grid grid-cols-2 gap-8 mx-auto max-w-4xl">
+
+            <div className="w-full flex-auto border border-violet-600 drop-shadow-xl rounded-2xl">
+                
+                <h1 className="text-2xl font-semibold tracking-tight text-white sm:text-2xl">Agregar Informacion Bancaria</h1>
+
+                <form className="flex flex-col justify-center items-center">
+                <label className="block my-2 font-medium">
+                        Nombre del Banco:
+                        <input 
+                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            type="text"
+                            name="banco"
+                            value={infobanca.banco}
+                            onChange={handleInputChangeBanca} />
+                    </label>
+                    <label className="block my-2 font-medium">
+                        Clave del Banco:
+                        <input 
+                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            type="text"
+                            name="clave_banco"
+                            value={infobanca.clave_banco}
+                            onChange={handleInputChangeBanca} />
+                    </label>
+                    <label className="block my-2 font-medium">
+                        Cuenta de Banco:
+                        <input 
+                            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            type="text"
+                            name="cuenta_banco"
+                            value={infobanca.cuenta_banco}
+                            onChange={handleInputChangeBanca} />
+                    </label>
+                </form>
+
+                <button 
+                    className=" text-center font-semibold rounded-full bg-yellow-500 py-2 px-4 mb-4 mt-4 hover:bg-green-500"
+                    onClick={createBanca}>
+                    Agregar Informacion Bancaria
+                </button>
+            </div>
+
+            <div className="w-full drop-shadow-xl">
+                <h1  className="text-2xl font-semibold tracking-tight text-white sm:text-2xl">Tabla Informacion Bancaria</h1>
+                <table className="w-full text-left rtl:text-right text-white">
+                    <thead className="text-sm text-white uppercase">
+                        <tr  className="bg-gray-800 border-b">
+                            <th scope="col" className="px-6 py-3 text-center rounded-s-2xl"> ID </th>
+                            <th scope="col" className="px-6 py-3 text-center"> Banco </th>
+                            <th scope="col" className="px-6 py-3 text-center"> Cuenta de Banco </th>
+                            <th scope="col" className="px-6 py-3 text-center"> Clave de banco </th>
+                            <th scope="col" className="px-6 py-3 text-center rounded-e-2xl"> Acciones </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {banca.map((b) => (
+                            <tr className="bg-gray-600 border-b" key={b.id} >
+                                <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{b.id}</td>
+                                <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{b.banco}</td>
+                                <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{b.cuenta_banco}</td>
+                                <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{b.clave_banco}</td>
+                                <td>
+                                    <button 
+                                        className="text-center font-semibold rounded-full bg-orange-500 py-2 px-4 mb-4 mt-4 hover:bg-orange-600"
+                                        onClick={() => editarBanca(id, b.id)}>
+                                        Editar
+                                    </button>
+                                    <button 
+                                        className="text-center font-semibold rounded-full bg-red-500 py-2 px-4 mb-4 mt-4 hover:bg-red-600"
+                                        onClick={() => eliminarBanca(id, b.id)}>
+                                        Eliminar
+                                    </button>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
 
         </div>
     </div>
