@@ -18,6 +18,7 @@ const Dashboard = () => {
         try {
         await APIbackend.logout();
         setAuthenticated(false);
+        navigate('/')
         } catch (error) {
         console.error('Error al cerrar sesión:', error.message);
         }
