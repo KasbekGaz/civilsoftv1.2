@@ -37,7 +37,7 @@ const ControlAdmin = () => {
         categoria: 'Administracion',
         facturado: 'No Facturado',
         Tipo: 'Efectivo',
-        importe: '',
+        importe: '0',
     });
     const handleInputChange = (e) =>{
         const { name, value } = e.target;
