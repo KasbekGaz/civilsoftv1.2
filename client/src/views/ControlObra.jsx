@@ -34,7 +34,7 @@ const ControlObra =  () =>{
         codigo: '',
         unidad: '',
         concepto: '',
-        estado: '',
+        estado: 'Sin cambio',
         //* Cantidad Contratada
         volumen: '0',
         precio: '0',
@@ -62,7 +62,7 @@ const ControlObra =  () =>{
                 codigo: '',
                 unidad: '',
                 concepto: '',
-                estado: '',
+                estado: 'Sin cambio',
                 //* Cantidad Contratada
                 volumen: '0',
                 precio: '0',
@@ -111,7 +111,7 @@ const handleEliminar = async (id, volumenId) => {
 };
 
 return(
-    <div>
+    <div className="mx-auto max-w-7xl p-4">
         <h1 className="text-3xl font-bold tracking-tight text-white sm:text-3xl">Comparativa de volumenes</h1>
         <h1 className="text-3xl font-bold tracking-tight text-white sm:text-3xl">Proyecto "{obraData.nombre}"</h1>
 
@@ -121,10 +121,10 @@ return(
         </button>
 
 
-        <div className="grid grid-cols-2 gap-8 mx-auto max-w-4xl">
-            <div className="w-full flex-auto border border-violet-600 drop-shadow-xl rounded-2xl">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="flex-auto border border-violet-600 drop-shadow-xl rounded-2xl p-4">
                 <h1 className="text-2xl font-semibold tracking-tight text-white sm:text-2xl">Agregar Concepto</h1>
-                <form className="flex flex-col justify-center items-center mt-2">
+                <form className="flex flex-col mt-2">
                     <label className="block my-2 font-medium">
                         Código:
                     </label>
@@ -156,7 +156,7 @@ return(
                         Estado del Concepto:
                     </label>
                     <select className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                            name="estado" 
+                            name="estado"
                             value={volumenData.estado}
                             onChange={handleInputChange}>
                                 <option value="Sin cambio">Sin Cambío</option>
@@ -200,54 +200,56 @@ return(
 
                 </form>
             </div>
-            <div className="w-full drop-shadow-xl">
+            <div className="w-full p-4">
                 <h1 className="text-3xl font-bold tracking-tight text-white sm:text-3xl">Tabla de Conceptos</h1>
-                <table className="w-full text-left rtl:text-right text-white">
-                    <thead className="text-sm text-white uppercase">
-                        <tr className="bg-gray-800 border-b">
-                            <th scope="col" className="px-6 py-3 text-center rounded-s-2xl">ID</th>
-                            <th scope="col" className="px-6 py-3 text-center">Código</th>
-                            <th scope="col" className="px-6 py-3 text-center">Unidad</th>
-                            <th scope="col" className="px-6 py-3 text-center">Concepto</th>
-                            <th scope="col" className="px-6 py-3 text-center">Estado</th>
-                            <th scope="col" className="px-6 py-3 text-center">Cantidad Contratada</th>
-                            <th scope="col" className="px-6 py-3 text-center">Precio $ </th>
-                            <th scope="col" className="px-6 py-3 text-center">Importe de Contratado</th>
-                            <th scope="col" className="px-6 py-3 text-center">Cantidad Ejecutada</th>
-                            <th scope="col" className="px-6 py-3 text-center">Importe de Ejecutado</th>
-                            <th scope="col" className="px-6 py-3 text-center">Diferencia</th>
-                            <th scope="col" className="px-6 py-3 text-center rounded-e-2xl">Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {volumen.map((vol) => (
-                            <tr className="bg-gray-600 border-b" key={vol.id}>
-                                <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{vol.id}</td>
-                                <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{vol.codigo}</td>
-                                <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{vol.unidad}</td>
-                                <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{vol.concepto}</td>
-                                <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{vol.estado}</td>
-                                <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{vol.volumen}</td>
-                                <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{vol.precio}</td>
-                                <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{vol.importe}</td>
-                                <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{vol.v_mod}</td>
-                                <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{vol.importe_mod}</td>
-                                <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{vol.diferencia}</td>
-                                <td>
-                                    <button className="text-center font-semibold rounded-full bg-orange-500 py-2 px-4 mb-4 mt-4 hover:bg-orange-600"
-                                    onClick={() => handleActualizar(id, vol.id)}>
-                                        Actualizar
-                                    </button>
-                                    <button className="text-center font-semibold rounded-full bg-red-500 py-2 px-4 mb-4 mt-4 hover:bg-red-600"
-                                    onClick={() => handleEliminar(id, vol.id) }
-                                        >
-                                        Eliminar
-                                    </button>
-                                </td>
+                <div className="overflow-x-auto">
+                    <table className="w-full text-left rtl:text-right text-white">
+                        <thead className="text-sm text-white uppercase">
+                            <tr className="bg-gray-800 border-b">
+                                <th scope="col" className="px-6 py-3 text-center rounded-s-2xl">ID</th>
+                                <th scope="col" className="px-6 py-3 text-center">Código</th>
+                                <th scope="col" className="px-6 py-3 text-center">Unidad</th>
+                                <th scope="col" className="px-6 py-3 text-center">Concepto</th>
+                                <th scope="col" className="px-6 py-3 text-center">Estado</th>
+                                <th scope="col" className="px-6 py-3 text-center">Cantidad Contratada</th>
+                                <th scope="col" className="px-6 py-3 text-center">Precio $ </th>
+                                <th scope="col" className="px-6 py-3 text-center">Importe de Contratado</th>
+                                <th scope="col" className="px-6 py-3 text-center">Cantidad Ejecutada</th>
+                                <th scope="col" className="px-6 py-3 text-center">Importe de Ejecutado</th>
+                                <th scope="col" className="px-6 py-3 text-center">Diferencia</th>
+                                <th scope="col" className="px-6 py-3 text-center rounded-e-2xl">Acciones</th>
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            {volumen.map((vol) => (
+                                <tr className="bg-gray-600 border-b" key={vol.id}>
+                                    <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{vol.id}</td>
+                                    <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{vol.codigo}</td>
+                                    <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{vol.unidad}</td>
+                                    <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{vol.concepto}</td>
+                                    <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{vol.estado}</td>
+                                    <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{vol.volumen}</td>
+                                    <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{vol.precio}</td>
+                                    <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{vol.importe}</td>
+                                    <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{vol.v_mod}</td>
+                                    <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{vol.importe_mod}</td>
+                                    <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{vol.diferencia}</td>
+                                    <td scope="row" className="px-4 py-2 flex space-x-" >
+                                        <button className="flex-1 text-center font-semibold rounded-full bg-orange-500 py-2 px-4  hover:bg-orange-600"
+                                        onClick={() => handleActualizar(id, vol.id)}>
+                                            Actualizar
+                                        </button>
+                                        <button className="flex-1 text-center font-semibold rounded-full bg-red-500 py-2 px-4 hover:bg-red-600"
+                                        onClick={() => handleEliminar(id, vol.id) }
+                                            >
+                                            Eliminar
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
                 <div className="grid grid-cols-2 md:grid-cols-2">
                     <div className="bg-gray-500 p-4 rounded-md">
                         <h1 className="text-xl font-semibold mb-2 mt-2">
