@@ -451,6 +451,7 @@ const APIbackend = {
             const token = localStorage.getItem('token');
             console.log('Token:', token);
 
+            console.log('datos:', obraId,volumenData);
             const response = await instance.post(`/create-volumen-for-obra/${obraId}/`, volumenData, {
                 headers: { Authorization: `Token ${token}` },
             });
