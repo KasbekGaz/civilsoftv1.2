@@ -104,19 +104,23 @@ const handleEliminar = async (id, tareaId) => {
     }
 };
     return (
-        <div>
+        <div className="mx-auto max-w-7xl p-4">
+
+            <h1 className="text-3xl font-bold tracking-tight text-white sm:text-3xl">Control de Tareas</h1>
             <h1 className="text-3xl font-bold tracking-tight text-white sm:text-3xl">Proyecto "{obraData.nombre}"</h1>
             
             <button className="text-center font-semibold rounded-full bg-green-400 hover:bg-green-700 py-2 px-4 mb-4 mt-4" onClick={handleBack}>
                 Regresar a las Acciones
             </button>
 
-            <h1 className="text-3xl font-bold tracking-tight text-white sm:text-3xl">Control de Tareas</h1>
-            
-            <div className="grid grid-cols-2 gap-8 mx-auto max-w-4xl">
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+
                 <div className="w-full flex-auto border border-violet-600 drop-shadow-xl rounded-2xl">
+
                     <h1 className="text-2xl font-semibold tracking-tight text-white sm:text-2xl"> Agregar Nueva tarea </h1>
-                    <form  className="flex flex-col justify-center items-center w-auto">
+
+                    <form  className="flex flex-col justify-center items-center mt-2">
                         <label className="block my-2 font-medium">
                             Fecha Vencimiento:
                         </label>
@@ -186,46 +190,51 @@ const handleEliminar = async (id, tareaId) => {
                     </form>
                 </div>
 
-                <div className="w-full drop-shadow-xl">
+                <div className="w-full  p-4 ">
+
                     <h1 className="text-3xl font-bold tracking-tight text-white sm:text-3xl" > Tabla de Tareas </h1>
-                    <table className="w-full text-left rtl:text-right text-white">
-                        <thead className="text-sm text-white uppercase">
-                            <tr className="bg-gray-800 border-b">
-                            <th scope="col" className="px-6 py-3 text-center rounded-s-2xl">ID</th>
-                            <th scope="col" className="px-6 py-3 text-center">Fecha Creada</th>
-                            <th scope="col" className="px-6 py-3 text-center">Fecha Vencimiento</th>
-                            <th scope="col" className="px-6 py-3 text-center">Fecha Completado</th>
-                            <th scope="col" className="px-6 py-3 text-center">Titulo</th>
-                            <th scope="col" className="px-6 py-3 text-center">Descripcion</th>
-                            <th scope="col" className="px-6 py-3 text-center">Estado de la Tarea</th>
-                            <th scope="col" className="px-6 py-3 text-center rounded-e-2xl">Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {tareas.map((tarea) => (
-                            <tr className="bg-gray-600 border-b"  key={tarea.id}>
-                                <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{tarea.id}</td>
-                                <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{tarea.Fvence}</td>
-                                <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{tarea.Fcreado}</td>
-                                <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{tarea.Fcompletado}</td>
-                                <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{tarea.titulo}</td>
-                                <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{tarea.descripcion}</td>
-                                <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{tarea.estado}</td>
-                                <td>
-                                    <button className="text-center font-semibold rounded-full bg-orange-500 py-2 px-4 mb-4 mt-4 hover:bg-orange-600"
-                                    onClick={() => handleActualizar(id, tarea.id)}>
-                                        Actualizar
-                                    </button>
-                                    <button className="text-center font-semibold rounded-full bg-red-500 py-2 px-4 mb-4 mt-4 hover:bg-red-600"
-                                    onClick={() => handleEliminar(id, tarea.id) }
-                                        >
-                                        Eliminar
-                                    </button>
-                                </td>
-                            </tr>
-                            ))}
-                        </tbody>
-                    </table>
+
+                    <div className="overflow-x-auto mt-2">
+                        <table className="w-full text-left rtl:text-right text-white">
+                            <thead className="text-sm text-white uppercase">
+                                <tr className="bg-gray-800 border-b">
+                                <th scope="col" className="px-6 py-3 text-center rounded-s-2xl">ID</th>
+                                <th scope="col" className="px-6 py-3 text-center">Fecha Creada</th>
+                                <th scope="col" className="px-6 py-3 text-center">Fecha Vencimiento</th>
+                                <th scope="col" className="px-6 py-3 text-center">Fecha Completado</th>
+                                <th scope="col" className="px-6 py-3 text-center">Titulo</th>
+                                <th scope="col" className="px-6 py-3 text-center">Descripcion</th>
+                                <th scope="col" className="px-6 py-3 text-center">Estado de la Tarea</th>
+                                <th scope="col" className="px-6 py-3 text-center rounded-e-2xl">Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {tareas.map((tarea) => (
+                                <tr className="bg-gray-600 border-b"  key={tarea.id}>
+                                    <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{tarea.id}</td>
+                                    <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{tarea.Fvence}</td>
+                                    <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{tarea.Fcreado}</td>
+                                    <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{tarea.Fcompletado}</td>
+                                    <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{tarea.titulo}</td>
+                                    <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{tarea.descripcion}</td>
+                                    <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{tarea.estado}</td>
+                                    <td scope="row" className="px-4 py-2 flex space-x-">
+                                        <button className="flex-1 text-center font-semibold rounded-full bg-orange-500 py-2 px-4 mb-4 mt-4 hover:bg-orange-600"
+                                        onClick={() => handleActualizar(id, tarea.id)}>
+                                            Actualizar
+                                        </button>
+                                        <button className="flex-1 text-center font-semibold rounded-full bg-red-500 py-2 px-4 mb-4 mt-4 hover:bg-red-600"
+                                        onClick={() => handleEliminar(id, tarea.id) }
+                                            >
+                                            Eliminar
+                                        </button>
+                                    </td>
+                                </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+
                 </div>
             </div>
         </div>

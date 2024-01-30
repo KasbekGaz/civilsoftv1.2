@@ -109,7 +109,7 @@ const ControlAdmin = () => {
 
 
     return(
-        <div >
+        <div className="mx-auto max-w-7xl p-4">
             <h1 className="text-3xl font-bold tracking-tight text-white sm:text-3xl">Control de gastos para: </h1>
             <h1 className="text-3xl font-bold tracking-tight text-white sm:text-3xl">Proyecto "{obraData.nombre}"</h1>
             
@@ -119,8 +119,8 @@ const ControlAdmin = () => {
             Regresar a las Acciones
             </button>
 
-            <div  className="grid grid-cols-2 gap-8 mx-auto max-w-4xl">
-                <div className="w-full flex-auto border border-violet-600 drop-shadow-xl rounded-2xl">
+            <div  className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="w-full flex-auto border border-violet-600 drop-shadow-xl rounded-2xl p-4">
 
                     <h1 className="text-2xl font-semibold tracking-tight text-white sm:text-2xl">Agregar Gasto</h1>
 
@@ -164,6 +164,7 @@ const ControlAdmin = () => {
                                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 type="text" 
                                 name="descripcion"
+                                placeholder="Agrega una descripcion corta."
                                 value={gastoData.descripcion}
                                 onChange={handleInputChange}
                                 />
@@ -229,10 +230,12 @@ const ControlAdmin = () => {
                     </form>
                 </div>
 
-                <div className="w-full drop-shadow-xl">
-                    <h1 className="text-2xl font-semibold tracking-tight text-white sm:text-2xl">Tabla de gastos</h1>
+                <div className="w-full p-4">
 
-                    <table className="w-full text-left rtl:text-right text-white">
+                    <h1 className="text-3xl font-bold tracking-tight text-white sm:text-3xl">Tabla de gastos</h1>
+
+                    <div className="overflow-auto mt-2">
+                        <table className="w-full text-left rtl:text-right text-white">
                         <thead className="text-sm text-white uppercase">
                             <tr className="bg-gray-800 border-b">
                                 <th scope="col" className="px-6 py-3 text-center rounded-s-2xl">ID</th>
@@ -259,13 +262,13 @@ const ControlAdmin = () => {
                                     <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{gasto.facturado}</td>
                                     <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{gasto.Tipo}</td>
                                     <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{gasto.importe}</td>
-                                    <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">
-                                        <button className="text-center font-semibold rounded-full bg-orange-500 py-2 px-4 mb-4 mt-4 hover:bg-orange-600"
+                                    <td scope="row" class="px-4 py-2 flex space-x">
+                                        <button className="flex-1 text-center font-semibold rounded-full bg-orange-500 py-2 px-4 mb-4 mt-4 hover:bg-orange-600"
                                         onClick={() => handleActualizar(id, gasto.id)}>
                                             Actualizar
                                         </button>
 
-                                        <button className="text-center font-semibold rounded-full bg-red-500 py-2 px-4 mb-4 mt-4 hover:bg-red-600"
+                                        <button className="flex-1 text-center font-semibold rounded-full bg-red-500 py-2 px-4 mb-4 mt-4 hover:bg-red-600"
                                         onClick={() => handleEliminar(id, gasto.id)}>
                                             Eliminar
                                         </button>
@@ -273,7 +276,8 @@ const ControlAdmin = () => {
                                 </tr>
                             ))}
                         </tbody>
-                    </table>
+                        </table>
+                    </div>
 
                     <div className="grid grid-cols-2 md:grid-cols-2">
                         <div className="bg-gray-500 p-4 rounded-md">
