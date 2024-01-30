@@ -62,25 +62,38 @@ const UpdateTarea = () => {
         }
     }
 
+//! Regresar a la vista anterior
+    const handleBack = (id) =>{
+        navigate(`/control-tarea/${id}`);
+    }
+
     return(
-        <div>
-    <h1>Actualizar Tarea: {tareaData.titulo} </h1>
+<div className=" container mx-4 my-4 max-w-sm p-6 bg-violet-950- border border-violet-600 rounded-lg drop-shadow-xl">
+
+    <h1 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+        Actualizar Tarea: {tareaData.titulo} </h1>
+
+        <button className="text-center font-semibold rounded-full bg-green-400 hover:bg-green-700 py-2 px-4 mb-4 mt-4" 
+        onClick={() => handleBack(id)}>
+            Regresar
+        </button>
 
         <form  className="flex flex-col justify-center items-center">
-            <label className="mb-4">
+            <label className="block my-2 font-medium">
                 Fecha Vencimiento:
                 <input
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     type="date"
                     name="Fvence"
                     value={tareaData.Fvence}
                     onChange={handleInputChange}
-                    className="ml-4"
                 />
             </label>
 
-            <label className="mb-4">
+            <label className="block my-2 font-medium">
                 Fecha creada en:
                 <input
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     type="date"
                     name="Fcreado"
                     value={tareaData.Fcreado}
@@ -88,9 +101,10 @@ const UpdateTarea = () => {
                 />
             </label>
 
-            <label className="mb-4">
+            <label className="block my-2 font-medium">
                 Titulo:
                 <input
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     type="text"
                     name="titulo"
                     value={tareaData.titulo}
@@ -98,9 +112,10 @@ const UpdateTarea = () => {
                 />
             </label>
 
-            <label className="mb-4">
+            <label className="block my-2 font-medium">
                 Descripciom:
                 <input
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     type="text"
                     name="descripcion"
                     value={tareaData.descripcion}
@@ -108,9 +123,10 @@ const UpdateTarea = () => {
                 />
             </label>
 
-            <label className="mb-4">
+            <label className="block my-2 font-medium">
                 Estado de la tarea:
                 <select
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     name="estado"
                     value={tareaData.estado}
                     onChange={handleInputChange}
@@ -122,13 +138,13 @@ const UpdateTarea = () => {
             </label>
 
             <button
-                className='bg-green-400'
+                className="text-center font-semibold rounded-full bg-yellow-500 py-2 px-4 mb-4 mt-4 hover:bg-green-500" 
                 type="button"
                 onClick={handleUpdateTarea} >
                 Actualizar Tarea
             </button>
         </form>
-    </div>
+</div>
     );
 }
 

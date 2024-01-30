@@ -63,40 +63,52 @@ const UpdateVolumen = () =>{
         };
     };
 
+    const handleBack = (id) =>{
+        navigate(`/control-obra/${id}`);
+    }
+
 return(
-    <div>
-        <h1>Actualizar Concepto: {volumenData.concepto} </h1>
+    <div className=" container mx-4 my-4 max-w-sm p-6 bg-violet-950- border border-violet-600 rounded-lg drop-shadow-xl">
+        <h1 className="text-3xl font-bold tracking-tight text-white sm:text-4xl" > 
+            Actualizar Concepto: {volumenData.concepto} </h1>
+        
+        <button className="text-center font-semibold rounded-full bg-green-400 hover:bg-green-700 py-2 px-4 mb-4 mt-4" 
+        onClick={() => handleBack(id)}>
+        Regresar
+        </button>
+
         <form className="flex flex-col justify-center items-center">
-        <label className="mb-4">
+                <label className="block my-2 font-medium">
                     Código:
-                    <input className="ml-2"
+                    <input className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         type="text" 
                         name="codigo"
                         value={volumenData.codigo}
                         onChange={handleInputChange}
                         />
                 </label>
-                <label className="mb-4">
+                <label className="block my-2 font-medium">
                     Unidad:
-                    <input className="ml-2"
+                    <input className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         type="text" 
                         name="unidad"
                         value={volumenData.unidad}
                         onChange={handleInputChange}
                         />
                 </label>
-                <label className="mb-4">
+                <label className="block my-2 font-medium">
                     Concepto:
-                    <input className="ml-2"
+                    <input className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         type="text" 
                         name="concepto"
                         value={volumenData.concepto}
                         onChange={handleInputChange}
                         />
                 </label>
-                <label className="mb-4">
+                <label className="block my-2 font-medium">
                     Estado del Concepto:
                     <select 
+                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         name="estado" 
                         value={volumenData.estado}
                         onChange={handleInputChange}>
@@ -106,27 +118,27 @@ return(
                             <option value="Extraordinario">Extraordinario</option>
                     </select>
                 </label>
-                <h2>Cantidad Contratada</h2>
-                <label className="mb-4">
+                <h2 className="text-2xl font-semibold tracking-tight text-white sm:text-2xl" >Cantidad Contratada</h2>
+                <label className="block my-2 font-medium">
                     Volumen:
-                        <input className="ml-2"
+                        <input className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             type="number" 
                             name="volumen"
                             value={volumenData.volumen} 
                             onChange={handleInputChange}/>
                 </label>
-                <label className="mb-4">
+                <label className="block my-2 font-medium">
                     Precio $ :
-                        <input className="ml-2"
+                        <input className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             type="number" 
                             name="precio"
                             value={volumenData.precio} 
                             onChange={handleInputChange}/>
                 </label>
-                <h2>Cantidad Ejecutada</h2>
-                <label className="mb-4">
+                <h2 className="text-2xl font-semibold tracking-tight text-white sm:text-2xl" >Cantidad Ejecutada</h2>
+                <label className="block my-2 font-medium">
                     Volumen Modificado:
-                        <input className="ml-2"
+                        <input className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             type="number" 
                             name="v_mod"
                             value={volumenData.v_mod} 
@@ -134,10 +146,10 @@ return(
                 </label>
 
                 <button
-                    className="bg-green-400"
+                    className="text-center font-semibold rounded-full bg-yellow-500 py-2 px-4 mb-4 mt-4 hover:bg-green-500"
                     type="button"
                     onClick={handleUpdateVolumen}>
-                        Actualiar Concepto
+                        Actualizar Concepto
                 </button>
 
         </form>
