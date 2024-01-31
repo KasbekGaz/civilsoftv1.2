@@ -2,10 +2,6 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import APIbackend from "../api/APIbackend";
 
-
-
-
-
 const ControlObra =  () =>{
     const { id } = useParams(); //* id es de la obra
     const [ obraData, setObraData ] = useState({});
@@ -147,9 +143,10 @@ return(
                     <label className="block my-2 font-medium">
                         Concepto:
                     </label>
-                    <input className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    <textarea className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             type="text" 
                             name="concepto"
+                            placeholder="Describe el concepto"
                             value={volumenData.concepto}
                             onChange={handleInputChange}
                             />
@@ -238,7 +235,7 @@ return(
                                     <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{vol.v_mod}</td>
                                     <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{vol.importe_mod}</td>
                                     <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{vol.diferencia}</td>
-                                    <td scope="row" className="px-4 py-2 flex space-x-" >
+                                    <td scope="row" className="px-4 py-2 flex space-x-1 justify-items-center" >
                                         <button className="flex-1 text-center font-semibold rounded-full bg-orange-500 py-2 px-4  hover:bg-orange-600"
                                         onClick={() => handleActualizar(id, vol.id)}>
                                             Actualizar
