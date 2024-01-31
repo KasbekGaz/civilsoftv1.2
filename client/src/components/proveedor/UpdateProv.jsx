@@ -61,10 +61,11 @@ const UpdateProv = () =>{
     };
 
 return(
-    <div>
-        <h1> Actualizar Proveedor </h1>
+    <div className=" container mx-4 my-4 max-w-sm p-6 bg-violet-950- border border-violet-600 rounded-lg drop-shadow-xl">
+        <h1 className="tittext-3xl font-bold tracking-tight text-white sm:text-4xl"> Actualizar Proveedor </h1>
+
         <button
-            className="bg-green-400 py-2 px-4 m-4"
+            className="text-center font-semibold rounded-full bg-green-400 hover:bg-green-700 py-2 px-4 mb-4 mt-4"
             onClick={handleBack}
             >
                 Regresar
@@ -72,68 +73,68 @@ return(
         
         
         <form className="flex flex-col justify-center items-center">
-            <label className="mb-4">
+            <label className="block my-2 font-medium">
                     Nombre Comercial:
                     <input 
                         type="text"
                         name="nombre_comercial"
                         value={provData.nombre_comercial}
                         onChange={handleInputChange}
-                        className="ml-4"
+                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     />
             </label>
-            <label className="mb-4">
+            <label className="block my-2 font-medium">
                     Razón Social:
                     <input 
                         type="text"
                         name="razon_social"
                         value={provData.razon_social}
                         onChange={handleInputChange}
-                        className="ml-4"
+                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     />
             </label>
-            <label className="mb-4">
+            <label className="block my-2 font-medium">
                     Télefono:
                     <input 
                         type="number"
                         name="telefono"
                         value={provData.telefono}
                         onChange={handleInputChange}
-                        className="ml-4"
+                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     />
             </label>
-            <label className="mb-4">
+            <label className="block my-2 font-medium">
                     Correo:
                     <input 
                         type="text"
                         name="correo"
                         value={provData.correo}
                         onChange={handleInputChange}
-                        className="ml-4"
+                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     />
             </label>
-            <label className="mb-4">
+            <label className="block my-2 font-medium">
                     RFC:
                     <input 
                         type="text"
                         name="coderfc"
                         value={provData.coderfc}
                         onChange={handleInputChange}
-                        className="ml-4"
+                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     />
             </label>
-            <label className="mb-4">
+            <label className="block my-2 font-medium">
                     Descripcion:
-                    <input 
+                    <textarea 
                         type="text"
                         name="descripcion"
                         value={provData.descripcion}
                         onChange={handleInputChange}
-                        className="ml-4"
+                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     />
             </label>
             <button 
-                className="bg-green-400"
+                className="text-center font-semibold rounded-full bg-yellow-500 py-2 px-4 mb-4 mt-4 hover:bg-green-500"
                 type="button"
                 onClick={handleUpdateProv}>
                 Actualizar Proveedor
