@@ -153,6 +153,25 @@ const APIbackend = {
 
     //!TAREA peticiones
     //* Listar TAREAS por su id
+    getAllTareas: async () =>{
+        try{
+            const token = localStorage.getItem('token');
+            console.log('Token:', token);
+
+            const response = await instance.get(`/tareas/`,{
+                headers: { Authorization: `Token ${token}` },
+            });
+
+            console.log('Response data:', response.data);
+
+            return response.data;
+
+        }catch(error){
+            console.error('Error al obetener todas las tareas');
+            throw error;
+        }
+    },
+
     getTareaById: async (id) => {
         try {
 
