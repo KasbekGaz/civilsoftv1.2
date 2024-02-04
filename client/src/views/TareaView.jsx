@@ -211,13 +211,13 @@ const handleEliminar = async (id, tareaId) => {
                             <tbody>
                                 {tareas.map((tarea) => (
                                 <tr className="bg-gray-600 border-b"  key={tarea.id}>
-                                    <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{tarea.id}</td>
-                                    <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{tarea.Fvence}</td>
-                                    <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{tarea.Fcreado}</td>
-                                    <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{tarea.Fcompletado}</td>
-                                    <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{tarea.titulo}</td>
-                                    <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{tarea.descripcion}</td>
-                                    <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{tarea.estado}</td>
+                                    <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{tarea.id}</td>
+                                    <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{tarea.Fvence}</td>
+                                    <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{tarea.Fcreado}</td>
+                                    <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{tarea.Fcompletado}</td>
+                                    <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{tarea.titulo}</td>
+                                    <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{tarea.descripcion}</td>
+                                    <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{tarea.estado}</td>
                                     <td scope="row" className="px-4 py-2 flex space-x-">
                                         <button className="flex-1 text-center font-semibold rounded-full bg-orange-500 py-2 px-4 mb-4 mt-4 hover:bg-orange-600"
                                         onClick={() => handleActualizar(id, tarea.id)}>
