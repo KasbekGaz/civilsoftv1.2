@@ -73,13 +73,13 @@ return (
         <tbody>
             {obras.map((obra) => (
             <tr className="bg-gray-600 border-b" key={obra.id}>
-                <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{obra.id}</td>
-                <td scope="row" class="px-4 py-2 text-white text-right text-base font-semibold" >{obra.nombre}</td>
-                <td scope="row" class="px-4 py-2 text-white text-right text-base font-semibold" >{obra.localidad}</td>
-                <td scope="row" class="px-4 py-2 text-white text-right text-base font-semibold" >{obra.municipio}</td>
-                <td scope="row" class="px-4 py-2 text-white text-right text-base font-semibold" >{obra.dependencia}</td>
-                <td scope="row" class="px-4 py-2 text-white text-justify text-base font-semibold">{obra.fecha}</td>
-                <td scope="row" class="px-4 py-2 text-white text-justify text-base font-semibold">{obra.p_inicial}</td>
+                <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{obra.id}</td>
+                <td scope="row" className="px-4 py-2 text-white text-right text-base font-semibold" >{obra.nombre}</td>
+                <td scope="row" className="px-4 py-2 text-white text-right text-base font-semibold" >{obra.localidad}</td>
+                <td scope="row" className="px-4 py-2 text-white text-right text-base font-semibold" >{obra.municipio}</td>
+                <td scope="row" className="px-4 py-2 text-white text-right text-base font-semibold" >{obra.dependencia}</td>
+                <td scope="row" className="px-4 py-2 text-white text-justify text-base font-semibold">{obra.fecha}</td>
+                <td scope="row" className="px-4 py-2 text-white text-justify text-base font-semibold">{obra.p_inicial}</td>
                 <td> 
                     <button className="text-center font-semibold rounded-full bg-fuchsia-500 py-2 px-4 mb-4 mt-4 hover:bg-fuchsia-600"
                     onClick={() => handleDetalles(obra.id)}>
