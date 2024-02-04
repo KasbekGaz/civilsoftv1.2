@@ -82,9 +82,9 @@ return(
             <h1 className="text-2xl font-bold tracking-tight text-white sm:text-2xl">Lista de Materiales Ofertados: </h1>
 
             <div className="my-2">
-                <div class="relative">
-                    <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                        <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                <div className="relative">
+                    <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                        <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
                         </svg>
                     </div>
@@ -114,11 +114,11 @@ return(
                     <tbody>
                     {filteredMaterial.map((m) => (
                         <tr className="bg-gray-600 border-b" key={m.id}>
-                            <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{m.id}</td>
-                            <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{m.unidad}</td>
-                            <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{m.material}</td>
-                            <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{m.precio}</td>
-                            <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{m.proveedor_nombre_comercial}</td>
+                            <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{m.id}</td>
+                            <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{m.unidad}</td>
+                            <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{m.material}</td>
+                            <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{m.precio}</td>
+                            <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{m.proveedor_nombre_comercial}</td>
                         </tr>
                     ))}
                     </tbody>
@@ -136,8 +136,8 @@ return(
 
             <div className="my-2">
                 <div className="relative">
-                    <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                    <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                            <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
                             </svg>
                     </div>
@@ -168,12 +168,12 @@ return(
                 <tbody>
                     {filteredProv.map((prove) => (
                         <tr className="bg-gray-600 border-b" key={prove.id}>
-                            <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{prove.id}</td>
-                            <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{prove.nombre_comercial}</td>
-                            <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{prove.razon_social}</td>
-                            <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{prove.telefono}</td>
-                            <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{prove.correo}</td>
-                            <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{prove.coderfc}</td>
+                            <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{prove.id}</td>
+                            <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{prove.nombre_comercial}</td>
+                            <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{prove.razon_social}</td>
+                            <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{prove.telefono}</td>
+                            <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{prove.correo}</td>
+                            <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{prove.coderfc}</td>
                             <td scope="row">
                                 <button 
                                     className="text-center font-semibold rounded-full bg-fuchsia-500 py-2 px-4 mb-4 mt-4 hover:bg-fuchsia-600"
