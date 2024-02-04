@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import APIbackend from '../api/APIbackend';
 import ListObra from '../components/ListObra';
+import CalendarView from './CalendarView';
+import AllTareasView from './AllTareasView';
 
 
 const Dashboard = () => {
@@ -36,6 +38,7 @@ const Dashboard = () => {
 
 
 return (
+
 <div>
     <h1 
         className="text-3xl font-bold tracking-tight text-white sm:text-4xl">Civilsoft</h1>
@@ -52,6 +55,17 @@ return (
             onClick={handleLogout}
             className="text-center font-semibold rounded-full bg-yellow-500 py-2 px-4 mb-4 mt-4 hover:bg-red-700"
             >Cerrar sesión</button>
+
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div>
+                <AllTareasView/>
+            </div>
+            <div>
+                <CalendarView/>
+            </div>
+        </div>
+
         <div className="dashboard-section">
         <ListObra />
         </div>
