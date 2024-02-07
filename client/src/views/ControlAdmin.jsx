@@ -107,6 +107,8 @@ const ControlAdmin = () => {
         }
     };
 
+    //! Buscador por Concepto, Categoria y Factura o no
+
 
     return(
         <div className="mx-auto max-w-7xl p-4">
@@ -235,6 +237,9 @@ const ControlAdmin = () => {
                     <h1 className="text-3xl font-bold tracking-tight text-white sm:text-3xl">Tabla de gastos</h1>
 
                     <div className="overflow-auto mt-2">
+
+                        
+
                         <table className="w-full text-left rtl:text-right text-white">
                         <thead className="text-sm text-white uppercase">
                             <tr className="bg-gray-800 border-b">
