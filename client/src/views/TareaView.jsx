@@ -103,6 +103,13 @@ const handleEliminar = async (id, tareaId) => {
         console.log('Error al eliminar el gasto', error.message);
     }
 };
+
+//! Buscador de tareas
+    const [searchTerm, setSearchTerm] = useState('');
+    const filteredTarea = tareas.filter((tarea) =>
+        tarea.titulo.toLowerCase().includes(searchTerm.toLowerCase())
+    )
+
     return (
         <div className="mx-auto max-w-7xl p-4">
 
@@ -194,29 +201,47 @@ const handleEliminar = async (id, tareaId) => {
 
                     <h1 className="text-3xl font-bold tracking-tight text-white sm:text-3xl" > Tabla de Tareas </h1>
 
+                    <div className="my-2">
+                        <div className="relative">
+                            <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                                    <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                        <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                                    </svg>
+                                </div>
+                            <input
+                            className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            type="text"
+                            placeholder="Buscar por Titulo de la Tarea"
+                            id="search"
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                            />
+                        </div>
+                    </div>
+
                     <div className="overflow-x-auto mt-2">
                         <table className="w-full text-left rtl:text-right text-white">
                             <thead className="text-sm text-white uppercase">
                                 <tr className="bg-gray-800 border-b">
                                 <th scope="col" className="px-6 py-3 text-center rounded-s-2xl">ID</th>
+                                <th scope="col" className="px-6 py-3 text-center">Titulo</th>
+                                <th scope="col" className="px-6 py-3 text-center">Descripcion</th>
                                 <th scope="col" className="px-6 py-3 text-center">Fecha Creada</th>
                                 <th scope="col" className="px-6 py-3 text-center">Fecha Vencimiento</th>
                                 <th scope="col" className="px-6 py-3 text-center">Fecha Completado</th>
-                                <th scope="col" className="px-6 py-3 text-center">Titulo</th>
-                                <th scope="col" className="px-6 py-3 text-center">Descripcion</th>
                                 <th scope="col" className="px-6 py-3 text-center">Estado de la Tarea</th>
                                 <th scope="col" className="px-6 py-3 text-center rounded-e-2xl">Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {tareas.map((tarea) => (
+                                {filteredTarea.map((tarea) => (
                                 <tr className="bg-gray-600 border-b"  key={tarea.id}>
                                     <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{tarea.id}</td>
+                                    <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{tarea.titulo}</td>
+                                    <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{tarea.descripcion}</td>
                                     <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{tarea.Fvence}</td>
                                     <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{tarea.Fcreado}</td>
                                     <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{tarea.Fcompletado}</td>
-                                    <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{tarea.titulo}</td>
-                                    <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{tarea.descripcion}</td>
                                     <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{tarea.estado}</td>
                                     <td scope="row" className="px-4 py-2 flex space-x-">
                                         <button className="flex-1 text-center font-semibold rounded-full bg-orange-500 py-2 px-4 mb-4 mt-4 hover:bg-orange-600"
