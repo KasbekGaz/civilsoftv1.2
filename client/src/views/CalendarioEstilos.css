@@ -1,0 +1,55 @@
+/* calendarDarkMode.css */
+/* Estilos generales del calendario */
+.react-calendar {
+    max-width: 400px;
+    margin: 0 auto;
+    font-family: 'Arial', sans-serif;
+    background-color: #333; /* Gris oscuro */
+    color: #fff; /* Texto blanco */
+}
+
+/* Estilos del encabezado del calendario */
+.react-calendar__navigation {
+    background-color: #000; /* Negro */
+    color: #fff; /* Texto blanco */
+}
+
+/* Estilos de las flechas de navegación del encabezado */
+.react-calendar__navigation__arrow {
+    color: #fff; /* Flechas blancas */
+}
+
+/* Estilos del texto del mes y año en el encabezado */
+.react-calendar__navigation__label {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+/* Estilos de los días de la semana */
+.react-calendar__month-view__weekdays {
+    display: flex;
+    justify-content: space-around;
+    background-color: #333; /* Gris oscuro */
+    color: #fff; /* Texto blanco */
+    padding: 8px;
+}
+
+/* Estilos de cada día de la semana */
+.react-calendar__month-view__days__day {
+    margin: 2px;
+    padding: 8px;
+    cursor: pointer;
+    color: #fff; /* Números blancos */
+}
+
+/* Estilo del cuadro seleccionado en el día actual */
+.react-calendar__tile--now {
+    background-color: gold; /* Dorado */
+    color: #333; /* Texto oscuro */
+}
+
+/* Estilo del cuadro seleccionado en otros días */
+.react-calendar__tile--active {
+    background-color: #87CEFA; /* Azul claro */
+    color: #333; /* Texto oscuro */
+}
