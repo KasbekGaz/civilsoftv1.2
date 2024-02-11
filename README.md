@@ -53,7 +53,7 @@ Esta aplicacion es para llevar un control administrativo, control de gestion de 
 - Django Base
 - Sqlite3 (base de datos)
 
-> Para levantar backend requirements.tx (pip install r- "requirements.txt)
+> Para levantar backend requirements.tx (pip install -r requirements.txt)
 > Para levantar el frontend debera posicionarse en la carpeta "client" y ejecutar "npm run dev"
 > Este proyecto pertenece a:
 > Oswaldo Lázaro Flores
