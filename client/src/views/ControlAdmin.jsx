@@ -108,6 +108,27 @@ const ControlAdmin = () => {
     };
 
     //! Buscador por Concepto, Categoria y Factura o no
+    const [filtroCategoria, setFiltroCategoria] = useState('');
+    const [filtroFacturado, setFiltroFacturado] = useState('');
+    const [filtroTipoGasto, setFiltroTipoGasto] = useState('');
+    const [filtroConcepto, setFiltroConcepto] = useState('');
+
+    //* funcion para manejar cambios en el input busqueda por CATEGORIA
+    const handleFiltroCategoria = (event) => {
+        setFiltroCategoria(event.target.value);
+    };
+    //* Funcion para cambios en filtro Facturado
+    const handleFiltroFacturado = (event) => {
+        setFiltroFacturado(event.target.value);
+    };
+    //* Funcoin para cambios en filtro Tipo de Gasto
+    const handleFiltroTipoGasto = (event) => {
+        setFiltroTipoGasto(event.target.value);
+    };
+    //* Funcion para busqueda de Concepto
+    const handleFiltroConcepto = (event) => {
+        setFiltroConcepto(event.target.value);
+    };
 
 
     return(
@@ -236,10 +257,67 @@ const ControlAdmin = () => {
 
                     <h1 className="text-3xl font-bold tracking-tight text-white sm:text-3xl">Tabla de gastos</h1>
 
+                        <div>
+                            <div className="relative">
+                                    <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                                        <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+                                        </svg>
+                                    </div>
+                                <input
+                                    className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    type="text"
+                                    placeholder="Buscar por Concepto"
+                                    value={filtroConcepto}
+                                    onChange={handleFiltroConcepto}
+                                />
+                            </div>
+
+                            <div className="relative">
+                                <label className="block my-2 font-medium">
+                                    Filtrar por Categoria:
+                                </label>
+                                <select 
+                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+                                    value={filtroCategoria} onChange={handleFiltroCategoria}>
+                                    <option value="">Todas las categorías</option>
+                                    <option value="Administracion">Administración</option>
+                                    <option value="Mano de obra">Mano de obra</option>
+                                    <option value="Materiales">Materiales</option>
+                                    <option value="Viaticos">Viáticos</option>
+                                    <option value="Varios">Varios</option>
+                                </select>
+                            </div>
+
+                            <div className="realtive">
+                                <label className="block my-2 font-medium">
+                                    Filtrar por Facturado 0 No facturado:
+                                </label>  
+                                <select 
+                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    value={filtroFacturado} onChange={handleFiltroFacturado}>
+                                    <option value="">Todas las Categorias</option>
+                                    <option value="Facturado">Facturado</option>
+                                    <option value="No Facturado">No Facturado</option>
+                                </select>
+                            </div>
+
+                            <div className="relative">
+                                <label className="block my-2 font-medium">
+                                    Filtrar por Tipo de Gasto:
+                                </label>
+                                <select
+                                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    value={filtroTipoGasto} onChange={handleFiltroTipoGasto}>
+                                    <option value="">Todas las Categorias</option>
+                                    <option value="Transferencia">Transferencia</option>
+                                    <option value="Efectivo">Efectivo</option>
+                                </select>
+                            </div>
+
+                        </div>
+
                     <div className="overflow-auto mt-2">
-
-                        
-
                         <table className="w-full text-left rtl:text-right text-white">
                         <thead className="text-sm text-white uppercase">
                             <tr className="bg-gray-800 border-b">
@@ -256,7 +334,12 @@ const ControlAdmin = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {gastos.map((gasto) => (
+                            {gastos.filter(gasto => 
+                       (filtroCategoria === '' || gasto.categoria === filtroCategoria) && // Filtro por categoría
+                       (filtroFacturado === '' || gasto.facturado === filtroFacturado) && // Filtro por estado de facturado
+                       (filtroConcepto === '' || gasto.concepto.toLowerCase().includes(filtroConcepto.toLowerCase())) && 
+                        (filtroTipoGasto === '' || gasto.Tipo === filtroTipoGasto) 
+                    ).map((gasto) => (
                                 <tr className="bg-gray-600 border-b" key={gasto.id} >
                                     <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{gasto.id}</td>
                                     <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{gasto.fecha}</td>
