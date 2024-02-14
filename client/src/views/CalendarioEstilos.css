@@ -45,11 +45,22 @@
 /* Estilo del cuadro seleccionado en el día actual */
 .react-calendar__tile--now {
     background-color: gold; /* Dorado */
-    color: #333; /* Texto oscuro */
+    color: rgb(19, 236, 73); /* Texto oscuro */
 }
 
 /* Estilo del cuadro seleccionado en otros días */
 .react-calendar__tile--active {
     background-color: #87CEFA; /* Azul claro */
     color: #333; /* Texto oscuro */
+}
+
+/* Estilo del cuadro seleccionado en el día actual con la fecha */
+.react-calendar__month-view__days__day--active {
+    background-color: gold; /* Dorado */
+    color: #fff; /* Texto blanco */
+} 
+
+/* Estilo del número del día en otros días */
+.react-calendar__tile--active .react-calendar__month-view__days__day {
+    color: #fff; /* Texto blanco */
 }
