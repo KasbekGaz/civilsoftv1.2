@@ -59,17 +59,20 @@ class Obra(models.Model):
     dependencia = models.CharField(max_length=255)
     fecha = models.DateField()
     p_inicial = models.DecimalField(max_digits=10, decimal_places=2, default=0)
-    #! campo que se dllenan con modelo gasto
+    #! Total gastos de una obra (volumen)
     total_gastos = models.DecimalField(
         max_digits=10, decimal_places=2, default=0, editable=False)
-    #! campos que se llenan con modelo volumen
+    #! Total importes e importe modificados de una obra (volumen)
     total_importes = models.DecimalField(
         max_digits=10, decimal_places=2, default=0, editable=False)
     total_importes_mod = models.DecimalField(
         max_digits=10, decimal_places=2, default=0, editable=False)
+    #! Total de diferencias (volumen)
+    total_diferencia = models.DecimalField(
+        max_digits=10, decimal_places=2, default=0, editable=False)
 
     def __str__(self):
-        return f"{self.nombre} ({self.total_gastos}) ({self.total_importes}) ({self.total_importes_mod})"
+        return f"{self.nombre} ({self.total_gastos}) ({self.total_importes}) ({self.total_importes_mod}) ({self.total_diferencia})"
 
 
 #! Modelo Tarea
@@ -254,11 +257,13 @@ class Volumen(models.Model):
         # actualizamos totales:
         self.actualizar_total_importes()
         self.actualizar_total_importes_mod()
+        self.actualizar_total_diferencia()
 
     def delete(self, *args, **kwargs):
         super(Volumen, self).delete(*args, **kwargs)
         self.actualizar_total_importes()
         self.actualizar_total_importes_mod()
+        self.actualizar_total_diferencia()
 
     #! actualiza valores para la suma del total importe
 
@@ -274,6 +279,13 @@ class Volumen(models.Model):
         total_importes_mod = Volumen.objects.filter(obra=self.obra).aggregate(
             total_importes_mod=models.Sum('importe_mod'))['total_importes_mod'] or 0
         self.obra.total_importes_mod = total_importes_mod
+        self.obra.save()
+
+    #! Actualizar valores de suma Total diferencia
+    def actualizar_total_diferencia(self):
+        total_diferencia = Volumen.objects.filter(obra=self.obra).aggregate(
+            total_diferencia=models.Sum('diferencia'))['total_diferencia'] or 0
+        self.obra.total_diferencia = total_diferencia
         self.obra.save()
 
     def __str__(self):
