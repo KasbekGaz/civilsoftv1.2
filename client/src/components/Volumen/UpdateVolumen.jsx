@@ -14,7 +14,6 @@ const UpdateVolumen = () =>{
         codigo: '',
         unidad: '',
         concepto: '',
-        estado: '',
         //* Cantidad Contratada
         volumen: '0',
         precio: '0',
@@ -33,7 +32,6 @@ const UpdateVolumen = () =>{
                     codigo: volumen.codigo,
                     unidad: volumen.unidad,
                     concepto: volumen.concepto,
-                    estado: volumen.estado,
                     volumen: volumen.volumen,
                     precio: volumen.precio,
                     v_mod: volumen.v_mod
@@ -104,19 +102,6 @@ return(
                         value={volumenData.concepto}
                         onChange={handleInputChange}
                         />
-                </label>
-                <label className="block my-2 font-medium">
-                    Estado del Concepto:
-                    <select 
-                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        name="estado" 
-                        value={volumenData.estado}
-                        onChange={handleInputChange}>
-                            <option value="Sin cambio">Sin Cambío</option>
-                            <option value="Deduccion">Deduccíon</option>
-                            <option value="Adicional">Adicional</option>
-                            <option value="Extraordinario">Extraordinario</option>
-                    </select>
                 </label>
                 <h2 className="text-2xl font-semibold tracking-tight text-white sm:text-2xl" >Cantidad Contratada</h2>
                 <label className="block my-2 font-medium">
