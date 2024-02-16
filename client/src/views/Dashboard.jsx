@@ -66,7 +66,7 @@ return (
             </div>
         </div>
 
-        <div className="dashboard-section">
+        <div className="grid grid-cols-1 md:grid-cols-1 gap-8">
         <ListObra />
         </div>
     </div>
