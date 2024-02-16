@@ -164,30 +164,45 @@ return(
                 onClick={handleBack} >
                 Regresar
             </button>
-        <div className="Proveedor">
-            <label className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                <h1 className="text-3xl font-semibold tracking-tight text-white sm:text-3xl"> {provData.nombre_comercial} </h1>
+        <div className="my-2 items-center text-center">
+            <label className="bg-gray-400 border border-gray-300  text-sm rounded-lg block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
+                <h3 className="text-2xl font-semibold tracking-tight text-white sm:text-2xl"> {provData.nombre_comercial} </h3>
             </label>
-            <label className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                <h1 className="text-2xl font-semibold tracking-tight text-white sm:text-2xl"> {provData.razon_social} </h1>
+            <h3 className="block my-2 font-medium">
+                Razon Social:
+            </h3>
+            <label className="bg-gray-400 border border-gray-300  text-sm rounded-lg block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
+                <h3 className="text-base font-semibold tracking-tight text-white sm:text-xl"> {provData.razon_social} </h3>
             </label>
-            <label className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                <h1 className="text-2xl font-semibold tracking-tight text-white sm:text-2xl"> {provData.telefono} </h1>
+            <h3 className="block my-2 font-medium">
+                Número:
+            </h3>
+            <label className="bg-gray-400 border border-gray-300  text-sm rounded-lg block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
+                <h3 className="text-base font-semibold tracking-tight text-white sm:text-xl"> {provData.telefono} </h3>
             </label>
-            <label className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                <h1 className="text-2xl font-semibold tracking-tight text-white sm:text-2xl"> {provData.correo} </h1>
+            <h3 className="block my-2 font-medium">
+                Correo:
+            </h3>
+            <label className="bg-gray-400 border border-gray-300  text-sm rounded-lg block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
+                <h3 className="text-base font-semibold tracking-tight text-white sm:text-xl"> {provData.correo} </h3>
             </label>
-            <label className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                <h1 className="text-2xl font-semibold tracking-tight text-white sm:text-2xl"> {provData.coderfc} </h1>
+            <h3 className="block my-2 font-medium">
+                RFC:
+            </h3>
+            <label className="bg-gray-400 border border-gray-300  text-sm rounded-lg block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
+                <h3 className="text-base font-semibold tracking-tight text-white sm:text-xl"> {provData.coderfc} </h3>
             </label>
-            <label className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                <h1 className="text-2xl font-semibold tracking-tight text-white sm:text-2xl"> {provData.descripcion} </h1>
+            <h3 className="block my-2 font-medium">
+                Descripcion:
+            </h3>
+            <label className="bg-gray-400 border border-gray-300  text-sm rounded-lg block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
+                <h3 className="text-base font-semibold tracking-tight text-white sm:text-xl"> {provData.descripcion} </h3>
             </label>
         </div>
 
-        <div className="grid grid-cols-2 gap-8 mx-auto max-w-4xl">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
 
-            <div className="w-full flex-auto border border-violet-600 drop-shadow-xl rounded-2xl">
+            <div className="flex-auto border border-violet-600 drop-shadow-xl rounded-2xl p-4">
 
                 <h1 className="text-2xl font-semibold tracking-tight text-white sm:text-2xl">Agregar Materiales ofertados por el Proveedor</h1>
 
@@ -229,7 +244,7 @@ return(
 
             </div>
 
-            <div className="w-full drop-shadow-xl">
+            <div className="w-full p-4 drop-shadow-xl">
                 <h1 className="text-2xl font-semibold tracking-tight text-white sm:text-2xl">Tabla Materiales</h1>
                 <table className="w-full text-left rtl:text-right text-white">
                     <thead className="text-sm text-white uppercase">
@@ -248,7 +263,7 @@ return(
                                 <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{m.unidad}</td>
                                 <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{m.material}</td>
                                 <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{m.precio}</td>
-                                <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">
+                                <td scope="row" className="px-4 py-2 flex space-x-1 justify-items-center">
                                     <button 
                                         className="text-center font-semibold rounded-full bg-orange-500 py-2 px-4 mb-4 mt-4 hover:bg-orange-600"
                                         onClick={() => editarMaterial(id, m.id)}>
@@ -267,11 +282,11 @@ return(
             </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-8 mx-auto max-w-4xl">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
 
-            <div className="w-full flex-auto border border-violet-600 drop-shadow-xl rounded-2xl">
+            <div className="flex-auto border border-violet-600 drop-shadow-xl rounded-2xl p-4">
                 
-                <h1 className="text-2xl font-semibold tracking-tight text-white sm:text-2xl">Agregar Informacion Bancaria</h1>
+                <h1 className="text-3xl font-bold tracking-tight text-white sm:text-3xl">Agregar Informacion Bancaria</h1>
 
                 <form className="flex flex-col justify-center items-center">
                 <label className="block my-2 font-medium">
@@ -301,16 +316,17 @@ return(
                             value={infobanca.cuenta_banco}
                             onChange={handleInputChangeBanca} />
                     </label>
-                </form>
 
-                <button 
+                    <button 
                     className=" text-center font-semibold rounded-full bg-yellow-500 py-2 px-4 mb-4 mt-4 hover:bg-green-500"
                     onClick={createBanca}>
                     Agregar Informacion Bancaria
-                </button>
+                    </button>
+
+                </form>
             </div>
 
-            <div className="w-full drop-shadow-xl">
+            <div className="w-full p-4 drop-shadow-xl">
                 <h1  className="text-2xl font-semibold tracking-tight text-white sm:text-2xl">Tabla Informacion Bancaria</h1>
                 <table className="w-full text-left rtl:text-right text-white">
                     <thead className="text-sm text-white uppercase">
@@ -329,7 +345,7 @@ return(
                                 <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{b.banco}</td>
                                 <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{b.cuenta_banco}</td>
                                 <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{b.clave_banco}</td>
-                                <td>
+                                <td scope="row" className="px-4 py-2 flex space-x-1 justify-items-center">
                                     <button 
                                         className="text-center font-semibold rounded-full bg-orange-500 py-2 px-4 mb-4 mt-4 hover:bg-orange-600"
                                         onClick={() => editarBanca(id, b.id)}>
