@@ -101,6 +101,7 @@ const handleEliminar = async (id, volumenId) => {
         await APIbackend.deleteVolumenbyObra(id, volumenId);
         alert('Eliminaste el concepto con exito!!')
         fetchVolumen();
+        fetchObraDetails(); //para actualizar el campo total diferencia
     }catch(error){
         console.error('Error al eliminar el gasto', error.message);
     }
@@ -172,6 +173,15 @@ return(
                                 <option value="Adicional">Adicional</option>
                                 <option value="Extraordinario">Extraordinario</option>
                         </select>
+                    <label className="block my-2 font-medium">
+                        Precio $ :
+                    </label>
+                    <input className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                type="number" 
+                                name="precio"
+                                value={volumenData.precio} 
+                                onChange={handleInputChange}/>
+
                     <h2 className="text-2xl font-semibold tracking-tight text-white sm:text-2xl">Cantidad Contratada</h2>
                     <label className="block my-2 font-medium">
                         Volumen:
@@ -181,14 +191,7 @@ return(
                                 name="volumen"
                                 value={volumenData.volumen} 
                                 onChange={handleInputChange}/>
-                    <label className="block my-2 font-medium">
-                        Precio $ :
-                    </label>
-                    <input className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                type="number" 
-                                name="precio"
-                                value={volumenData.precio} 
-                                onChange={handleInputChange}/>
+                    
                     <h2 className="text-2xl font-semibold tracking-tight text-white sm:text-2xl">Cantidad Ejecutada</h2>
                     <label className="block my-2 font-medium">
                         Volumen Modificado:
@@ -241,12 +244,12 @@ return(
                                 <th scope="col" className="px-6 py-3 text-center">Unidad</th>
                                 <th scope="col" className="px-6 py-3 text-center">Concepto</th>
                                 <th scope="col" className="px-6 py-3 text-center">Estado</th>
-                                <th scope="col" className="px-6 py-3 text-center">Cantidad Contratada</th>
                                 <th scope="col" className="px-6 py-3 text-center">Precio $ </th>
-                                <th scope="col" className="px-6 py-3 text-center">Importe de Contratado</th>
-                                <th scope="col" className="px-6 py-3 text-center">Cantidad Ejecutada</th>
-                                <th scope="col" className="px-6 py-3 text-center">Importe de Ejecutado</th>
-                                <th scope="col" className="px-6 py-3 text-center">Diferencia</th>
+                                <th scope="col" className="bg-lime-600 px-6 py-3 text-center">Cantidad Contratada</th>
+                                <th scope="col" className="bg-lime-600 px-6 py-3 text-center">Importe Contratado</th>
+                                <th scope="col" className="bg-orange-500 px-6 py-3 text-center">Cantidad Ejecutada</th>
+                                <th scope="col" className="bg-orange-500  px-6 py-3 text-center">Importe Ejecutado</th>
+                                <th scope="col" className="bg-red-500 px-6 py-3 text-center">Diferencia</th>
                                 <th scope="col" className="px-6 py-3 text-center rounded-e-2xl">Acciones</th>
                             </tr>
                         </thead>
@@ -258,8 +261,8 @@ return(
                                     <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{vol.unidad}</td>
                                     <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{vol.concepto}</td>
                                     <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{vol.estado}</td>
-                                    <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{vol.volumen}</td>
                                     <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{vol.precio}</td>
+                                    <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{vol.volumen}</td>
                                     <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{vol.importe}</td>
                                     <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{vol.v_mod}</td>
                                     <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{vol.importe_mod}</td>
@@ -282,18 +285,24 @@ return(
                 </div>
 
                 <div className="grid grid-cols-2 md:grid-cols-2">
-                    <div className="bg-gray-500 p-4 rounded-md">
+                    <div className="bg-lime-600 p-4 rounded-md">
                         <h1 className="text-xl font-semibold mb-2 mt-2">
                             Total Importes Cantidad Contratada $
                             { obraData.total_importes }
                         </h1>
                     </div >
-                    <div className="bg-gray-500 p-4 rounded-md">
+                    <div className="bg-orange-500 p-4 rounded-md">
                         <h1 className="text-xl font-semibold mb-2 mt-2">
                             Total Importes Cantidad Ejecutada $
                             { obraData.total_importes_mod }
                         </h1>
                     </div>
+                    <div className="bg-red-500 p-4 rounded-md">
+                        <h1 className="text-xl font-semibold mb-2 mt-2">
+                            Total de Diferencias $
+                            { obraData.total_diferencia }
+                        </h1>
+                    </div >
                 </div>
                 
             </div>
