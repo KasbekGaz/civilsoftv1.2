@@ -6,6 +6,7 @@ from .views import (
     GastoViewSet,
     GaleriaViewSet,
     VolumenViewSet,
+    AbonoViewSet,
     # * Llamadas TAREAS
     ListarTareabyObra,
     CreateTareabyObra,
@@ -26,6 +27,11 @@ from .views import (
     CreateVolumenbyObra,
     UpdateVolumenbyObra,
     DeleteVolumenbyObra,
+    # * Llamadas CRUD Abono
+    ListarAbonoPorObra,
+    CreateAbonobyObra,
+    UpdateAbonoyObra,
+    DeleteAbonobyObra
 
 
 )
@@ -39,6 +45,7 @@ router.register(r'tareas', TareaVista)
 router.register(r'gastos', GastoViewSet, basename='gasto')
 router.register(r'galeria', GaleriaViewSet, basename='galeria'),
 router.register(r'volumen', VolumenViewSet, basename='comparativa_volumen')
+router.register(r'abono', AbonoViewSet)
 
 
 urlpatterns = [
@@ -77,8 +84,15 @@ urlpatterns = [
          UpdateVolumenbyObra.as_view()),
     path('api/v1/delete-volumen-for-obra/<int:obra_id>/<int:pk>/',
          DeleteVolumenbyObra.as_view()),
-
-
+    # * ABONO CRUD por di obra ----------------------------------------
+    path('api/v1/abonobyObra/<int:obra_id>/',
+         ListarAbonoPorObra.as_view()),
+    path('api/v1/create-abono-for-obra/<int:obra_id>/',
+         CreateAbonobyObra.as_view()),
+    path('api/v1/update-abono-for-obra/<int:obra_id>/<int:pk>/',
+         UpdateAbonoyObra.as_view()),
+    path('api/v1/delete-abono-for-obra/<int:obra_id>/<int:pk>/',
+         DeleteAbonobyObra.as_view()),
 ]
 
 if settings.DEBUG:
