@@ -513,6 +513,91 @@ const APIbackend = {
             throw error;
         }
     },
+    //! CRUD de ABONO ----------------------------------------------
+    //* Obtener un abonos por su id
+    getAbonoById: async (abonoId) => {
+        try{
+            console.log('Id que entra:', abonoId);
+            const token = localStorage.getItem('token');
+            console.log('Token:', token);
+            const response = await instance.get(`/abono/${abonoId}/`, {
+                headers: { Authorization: `Token ${token}` },
+            });
+
+            console.log('Response Data:', response.data);
+            return response.data;
+        }catch(error){
+            console.error(`Error al obtener los detalles del Gasto con ID ${volumenId}:`, error.message);
+            throw error;
+        }
+    },
+    //* Listar abonos por id obra
+    ListarAbonobyObra: async (obraId) => {
+        try{
+            const token = localStorage.getItem('token');
+            console.log(token);
+
+            const response = await instance.get(`/abonobyObra/${obraId}/`,{
+                headers: { Authorization: `Token ${token}` },
+            });
+
+            console.log(response.data)
+            return response.data;
+
+        }catch(error){
+            console.log('No se pudo cargar los datos en abonos:', error.message);
+            throw error;
+        }
+    },
+    //* Crear un abono para una obra segun su id
+    CreateAbonobyObra: async (obraId, abonoData) => {
+        try{
+            const token = localStorage.getItem('token');
+            console.log('Token:', token);
+
+            console.log('datos:', obraId,abonoData);
+            const response = await instance.post(`/create-abono-for-obra/${obraId}/`, abonoData, {
+                headers: { Authorization: `Token ${token}` },
+            });
+            
+            console.log(response.data);
+            return response.data;
+
+        }catch(error){
+            console.error('No se pudo agregar el abono: ', error.message);
+            throw error;
+        }
+    },
+    //* Actualizar un abono segun una la obra id
+    updateAbonobyObra: async (obraId, abonoId, abonoData) =>{
+        try{
+            const token = localStorage.getItem('token');
+            const response = await instance.put(`/update-abono-for-obra/${obraId}/${abonoId}/`, abonoData, {
+                headers: { Authorization: `Token ${token}` },
+            });
+
+            console.log(response.data);
+            return response.data;
+        }catch(error){
+            console.error('Error al actualizar el volumen: ', error.message);
+            throw error;
+        }
+    },
+    //* Eliminar abono por obra_id y su propio id
+    deleteAbonobyObra: async (obraId, abonoId) =>{
+        try{
+            const token = localStorage.getItem('token');
+            const response = await instance.delete(`/delete-abono-for-obra/${obraId}/${abonoId}/`, {
+                headers: { Authorization: `Token ${token}` }
+            });
+
+            console.log(response.data);
+            return response.data;
+        }catch(error){
+            console.error('Error al borrar el volumen', error.message);
+            throw error;
+        }
+    },
     //! Proveedores peticiones -------------------------------------
     //* Listar Proveedores
     listP: async () =>{
