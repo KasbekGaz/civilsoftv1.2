@@ -5,7 +5,7 @@ from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
 
 # * modelos
-from .models import CustomUser, Obra, Tarea, Gasto, Galeria, Volumen
+from .models import CustomUser, Obra, Tarea, Gasto, Galeria, Volumen, Abono
 
 # * serializadores
 from .serializers import (
@@ -15,6 +15,7 @@ from .serializers import (
     GastoSerializer,
     GaleriaSerializer,
     VolumenSerializer,
+    AbonoSerializer
 )
 
 # Create your views here.
@@ -557,7 +558,7 @@ class DeleteGaleriabyObra(generics.DestroyAPIView):
                 {"detail": "No tiene permisos para eliminar la Galeria"}, status=status.HTTP_403_FORBIDDEN
             )
 
-#! Vista Volumen
+#! Vista Volumen-------------------------------
 
 
 class VolumenViewSet(viewsets.ModelViewSet):
@@ -684,6 +685,144 @@ class UpdateVolumenbyObra(generics.UpdateAPIView):
 
 
 class DeleteVolumenbyObra(generics.DestroyAPIView):
+    queryset = Volumen.objects.all()
+    serializer_class = VolumenSerializer
+
+    def delete(self, request, *args, **kwargs):
+        if request.user.is_authenticated and request.user.rol == "Admin":
+            return super().delete(request, *args, **kwargs)
+        else:
+            return Response(
+                {"detail": "No tiene permisos para eliminar este Volumen"}, status=status.HTTP_403_FORBIDDEN
+            )
+
+
+class AbonoViewSet(viewsets.ModelViewSet):
+    queryset = Abono.objects.all()
+    serializer_class = AbonoSerializer
+    # * Definimos metodos HTTP permitidos en la vista
+    http_method_names = ["get", "post", "put", "patch", "delete"]
+
+    # * logica para el manejo de roles
+
+    def create(self, request, *args, **kwargs):
+        if request.user.is_authenticated and request.user.rol == "Admin":
+            # Lógica para crear un gasto (para usuarios Admin)
+            return super().create(request, *args, **kwargs)
+        else:
+            return Response(
+                {"detail": "No tiene permiso para crear abonos"},
+                status=status.HTTP_403_FORBIDDEN,
+            )
+
+    def update(self, request, *args, **kwargs):
+        if request.user.is_authenticated and request.user.rol == "Admin":
+            # Lógica para actualizar un gasto (para usuarios Admin)
+            return super().update(request, *args, **kwargs)
+        else:
+            return Response(
+                {"detail": "No tiene permiso para actualizar abonos"},
+                status=status.HTTP_403_FORBIDDEN,
+            )
+
+    def partial_update(self, request, *args, **kwargs):
+        if request.user.is_authenticated and request.user.rol == "Admin":
+            # Lógica para actualizar parcialmente un gasto (para usuarios Admin)
+            return super().partial_update(request, *args, **kwargs)
+        else:
+            return Response(
+                {"detail": "No tiene permiso para actualizar abonos"},
+                status=status.HTTP_403_FORBIDDEN,
+            )
+
+    def destroy(self, request, *args, **kwargs):
+        if request.user.is_authenticated and request.user.rol == "Admin":
+            # Lógica para eliminar un gasto (para usuarios Admin)
+            return super().destroy(request, *args, **kwargs)
+        else:
+            return Response(
+                {"detail": "No tiene permiso para eliminar abonos"},
+                status=status.HTTP_403_FORBIDDEN,
+            )
+
+    def list(self, request, *args, **kwargs):
+        if request.user.is_authenticated and request.user.rol == "Admin":
+            # Lógica para listar gastos (para usuarios Admin)
+            return super().list(request, *args, **kwargs)
+        elif request.user.is_authenticated and request.user.rol == "Consul":
+            # Lógica para listar gastos (para usuarios Consul)
+            return super().list(request, *args, **kwargs)
+        else:
+            return Response(
+                {"detail": "No tiene permiso para ver abonos"},
+                status=status.HTTP_403_FORBIDDEN,
+            )
+
+# ? Peticiones de ABONO
+
+
+class ListarAbonoPorObra(generics.ListAPIView):  # *Listar Abono por Obra_id
+    serializer_class = VolumenSerializer
+
+    def get_queryset(self):
+        obra_id = self.kwargs["obra_id"]
+        return Abono.objects.filter(obra_id=obra_id)
+
+    def list(self, request, *args, **kwargs):
+        obra_id = self.kwargs["obra_id"]
+
+        if request.user.is_authenticated and request.user.rol in ["Admin", "Consul"]:
+            queryset = self.get_queryset()
+            serializer = self.get_serializer(queryset, many=True)
+            return Response(serializer.data)
+        else:
+            return Response(
+                {"detail": "No tiene permisos para ver estos datos"},
+                status=status.HTTP_403_FORBIDDEN
+            )
+
+# * Crear un Abono por Obra_id
+
+
+class CreateAbonobyObra(generics.CreateAPIView):
+    queryset = Abono.objects.all()
+    serializer_class = AbonoSerializer
+
+    def perform_create(self, serializer):
+        obra_id = self.kwargs.get("obra_id")
+        serializer.save(obra_id=obra_id)
+
+    def create(self, request, *args, **kwargs):
+        if request.user.is_authenticated and request.user.rol == "Admin":
+            return super().create(request, *args, **kwargs)
+        else:
+            return Response(
+                {"details": "No tienes permisos para crear ABONOS."}, status=status.HTTP_403_FORBIDDEN
+            )
+
+# * Atualizar Volumen por Obra_Id
+
+
+class UpdateAbonoyObra(generics.UpdateAPIView):
+    queryset = Abono.objects.all()
+    serializer_class = AbonoSerializer
+
+    def perform_update(self, serializer):
+        obra_id = self.kwargs.get("obra_id")
+        serializer.save(obra_id=obra_id)
+
+    def update(self, request, *args, **kwargs):
+        if request.user.is_authenticated and request.user.rol == "Admin":
+            return super().update(request, *args, **kwargs)
+        else:
+            return Response(
+                {"detail": "No tienen permisos de actualizar Abonos"}, status=status.HTTP_403_FORBIDDEN
+            )
+
+# * Eliminar Volumen por Obra_Id
+
+
+class DeleteAbonobyObra(generics.DestroyAPIView):
     queryset = Volumen.objects.all()
     serializer_class = VolumenSerializer
 
