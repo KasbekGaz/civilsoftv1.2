@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import CustomUser, Obra, Tarea, Gasto, Galeria, Volumen
+from .models import CustomUser, Obra, Tarea, Gasto, Galeria, Volumen, Abono
 
 
 class CustomUserSerializer(serializers.ModelSerializer):
@@ -51,4 +51,10 @@ class GaleriaSerializer(serializers.ModelSerializer):
 class VolumenSerializer(serializers.ModelSerializer):
     class Meta:
         model = Volumen
+        fields = '__all__'
+
+
+class AbonoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Abono
         fields = '__all__'
