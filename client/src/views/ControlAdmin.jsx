@@ -6,8 +6,9 @@ import APIbackend from "../api/APIbackend";
 
 const ControlAdmin = () => {
     const { id } = useParams(); //* id es de obra
-    const [obraData, setObraData] = useState({});
-    const [ gastos, setGastos ] = useState([]);
+    const [obraData, setObraData] = useState({}); //*datos de la obra
+    const [ gastos, setGastos ] = useState([]); //* datos de gastos de uan obra
+    const [abonos, setAbonos] = useState([]);
 
 
     const navigate = useNavigate();
@@ -37,7 +38,7 @@ const ControlAdmin = () => {
         categoria: 'Administracion',
         facturado: 'No Facturado',
         Tipo: 'Efectivo',
-        importe: '0',
+        importe: '',
     });
     const handleInputChange = (e) =>{
         const { name, value } = e.target;
@@ -46,7 +47,21 @@ const ControlAdmin = () => {
             [name]: value,
         }));
     };
-
+    //! Formulario de ABONO
+    const [abonoData, setAbonoData] = useState({
+        obra: id,
+        fecha: '',
+        descripcion: '',
+        importe: '',
+    });
+    const handleInputAbono = (e) =>{
+        const { name, value } = e.target;
+        setAbonoData((prevData) => ({
+            ...prevData,
+            [name]: value,
+        }))
+    };
+    //! Crear un GASTO
     const handleCreateGasto = async () => {
         try{
             console.log(gastoData);
@@ -63,7 +78,7 @@ const ControlAdmin = () => {
                 categoria: 'Administracion',
                 facturado: 'No Facturado',
                 Tipo: 'Efectivo',
-                importe: '0',
+                importe: '',
             });
             fetchGastos();
             fetchObraDetails(); 
@@ -71,13 +86,31 @@ const ControlAdmin = () => {
             console.error('Error al crear Gasto', error.message);
         }
     };
-
+    //! Crear un ABONO
+    const handleCreateAbono = async () =>{
+        try{
+            console.log(abonoData);
+            const response = await APIbackend.CreateAbonobyObra(id, abonoData);
+            console.log('Abono Creado', response);
+            alert('Abono creado correctamente!');
+            //* Limpiar formulario
+            setAbonoData({
+                obra: id,
+                fecha: '',
+                descripcion: '',
+                importe: ''
+            });
+            fetchAbonos();
+            fetchObraDetails();
+        }catch(error){
+            console.error('Error al crear Abono', error.message);
+        }
+    };
     
     useEffect(() => {
         fetchObraDetails(); //*Obtener datos de la obra
         fetchGastos(); //* obtener gastos de la obra
         fetchAbonos(); //* Obtener abonos de la obra
-
     }, [id])
 
     //! Para listar los gastos por id obra
@@ -130,19 +163,35 @@ const ControlAdmin = () => {
     const handleFiltroConcepto = (event) => {
         setFiltroConcepto(event.target.value);
     };
-
+// ? Acciones de ABONO ------------------------
     //! Para listar los ABONOS por id obra
     const fetchAbonos = async () =>{
         try{
             console.log(id); //obra_id
             const abonoData = await APIbackend.ListarAbonobyObra(id);
-            setGastos(abonoData);
+            setAbonos(abonoData);
             console.log('id:', id , 'Abonos Obtenidos: ', abonoData);
 
         }catch(error){
             console.error('Error al listar abonos', error.message)
         }
     };
+    //! Actualizar ABONO
+    const ActualizarAbono = (id, abonoId) =>{
+        console.log('Datos que entran', id , abonoId);
+        navigate(`/update-abono-by-obra/${id}/${abonoId}`);
+    };
+    //! Para Eliminar un ABONO por su id
+    const EliminarAbono = async (id, abonoId) => {
+        try{
+            await APIbackend.deleteAbonobyObra(id, abonoId);
+            alert('Eliminaste el ABONO con exito!!')
+            fetchAbonos();
+        }catch(error){
+            console.error('Error al eliminar el abono', error.message);
+        }
+    };
+
 
 
     return(
@@ -355,16 +404,16 @@ const ControlAdmin = () => {
                         (filtroTipoGasto === '' || gasto.Tipo === filtroTipoGasto) 
                     ).map((gasto) => (
                                 <tr className="bg-gray-600 border-b" key={gasto.id} >
-                                    <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{gasto.id}</td>
-                                    <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{gasto.fecha}</td>
-                                    <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{gasto.proveedor}</td>
-                                    <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{gasto.concepto}</td>
-                                    <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{gasto.descripcion}</td>
-                                    <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{gasto.categoria}</td>
-                                    <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{gasto.facturado}</td>
-                                    <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{gasto.Tipo}</td>
-                                    <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{gasto.importe}</td>
-                                    <td scope="row" class="px-4 py-2 flex space-x">
+                                    <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{gasto.id}</td>
+                                    <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{gasto.fecha}</td>
+                                    <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{gasto.proveedor}</td>
+                                    <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{gasto.concepto}</td>
+                                    <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{gasto.descripcion}</td>
+                                    <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{gasto.categoria}</td>
+                                    <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{gasto.facturado}</td>
+                                    <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{gasto.Tipo}</td>
+                                    <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{gasto.importe}</td>
+                                    <td scope="row" className="px-4 py-2 flex space-x">
                                         <button className="flex-1 text-center font-semibold rounded-full bg-orange-500 py-2 px-4 mb-4 mt-4 hover:bg-orange-600"
                                         onClick={() => handleActualizar(id, gasto.id)}>
                                             Actualizar
@@ -402,29 +451,36 @@ const ControlAdmin = () => {
                         <input 
                             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             type="date"
-                            name="fecha"/>
+                            name="fecha"
+                            value={abonoData.fecha}
+                            onChange={handleInputAbono}/>
                     </label>
-                    <label className="">
-                        Descripncion:
+                    <label className="block my-2 font-medium">
+                        Descripcion:
                         <textarea 
                             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             type="text"
                             name="descripcion"
-                            placeholder="Comentarios"></textarea>
+                            placeholder="Comentarios"
+                            value={abonoData.descripcion}
+                            onChange={handleInputAbono}></textarea>
                     </label>
-                    <label className="">
+                    <label className="block my-2 font-medium">
                         Importe $ :
                         <input 
                             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             type="number"
                             name="importe"
                             placeholder="$00.0"
+                            value={abonoData.importe}
+                            onChange={handleInputAbono}
                             />
                     </label>
 
                     <button
-                        className=" text-center font-semibold rounded-full bg-yellow-500 py-2 px-4 mb-4 mt-4 hover:bg-green-500"
-                        type="button">
+                        className="text-center font-semibold rounded-full bg-yellow-500 py-2 px-4 mb-4 mt-4 hover:bg-green-500"
+                        type="button"
+                        onClick={handleCreateAbono}>
                         Agregar Abono
                     </button>
                 </form>
@@ -443,10 +499,33 @@ const ControlAdmin = () => {
                                 </tr>
                             </thead>
                             <tbody>
+                            {abonos.map((abono) => (
+                                <tr className="bg-gray-600 border-b" key={abono.id} >
+                                    <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{abono.id}</td>
+                                    <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{abono.fecha}</td>
+                                    <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{abono.descripcion}</td>
+                                    <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{abono.importe}</td>
+                                    <td scope="row" className="px-4 py-2 flex space-x">
+                                        <button className="flex-1 text-center font-semibold rounded-full bg-orange-500 py-2 px-4 mb-4 mt-4 hover:bg-orange-600"
+                                        onClick={() => ActualizarAbono(id, abono.id)}
+                                        >
+                                            Actualizar
+                                        </button>
 
+                                        <button className="flex-1 text-center font-semibold rounded-full bg-red-500 py-2 px-4 mb-4 mt-4 hover:bg-red-600"
+                                        onClick={()=> EliminarAbono(id, abono.id)}
+                                        >
+                                            Eliminar
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))}
                             </tbody>
                         </table>
                     </div>
+
+
+
             </div>
         </div>
 
