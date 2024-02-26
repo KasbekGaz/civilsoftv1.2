@@ -1,22 +1,33 @@
-/* calendarDarkMode.css */
+/* calendarStyles.css */
+
 /* Estilos generales del calendario */
 .react-calendar {
     max-width: 400px;
     margin: 0 auto;
     font-family: 'Arial', sans-serif;
-    background-color: #333; /* Gris oscuro */
-    color: #fff; /* Texto blanco */
+    background-color: #585858;
+}
+
+/* Estilos de las celdas del calendario */
+.react-calendar__tile {
+    background-color: #161616;
+    color: #ffffff;
+}
+
+/* Estilos de las celdas activas (cuando se selecciona una fecha) */
+.react-calendar__tile--active {
+    background-color: #fde71df6;
 }
 
 /* Estilos del encabezado del calendario */
 .react-calendar__navigation {
-    background-color: #000; /* Negro */
-    color: #fff; /* Texto blanco */
+    background-color: #5f6264;
+    color: #fff;
 }
 
 /* Estilos de las flechas de navegación del encabezado */
 .react-calendar__navigation__arrow {
-    color: #fff; /* Flechas blancas */
+    color: #ffffff;
 }
 
 /* Estilos del texto del mes y año en el encabezado */
@@ -29,8 +40,8 @@
 .react-calendar__month-view__weekdays {
     display: flex;
     justify-content: space-around;
-    background-color: #333; /* Gris oscuro */
-    color: #fff; /* Texto blanco */
+    background-color: #5e5d5d;
+    color: #fff;
     padding: 8px;
 }
 
@@ -39,28 +50,17 @@
     margin: 2px;
     padding: 8px;
     cursor: pointer;
-    color: #fff; /* Números blancos */
+    color: #ffffff;
 }
 
 /* Estilo del cuadro seleccionado en el día actual */
 .react-calendar__tile--now {
-    background-color: gold; /* Dorado */
-    color: rgb(19, 236, 73); /* Texto oscuro */
+    background-color: gold !important; /* Dorado */
+    color: #333; /* Texto oscuro */
 }
 
 /* Estilo del cuadro seleccionado en otros días */
 .react-calendar__tile--active {
-    background-color: #87CEFA; /* Azul claro */
-    color: #333; /* Texto oscuro */
-}
-
-/* Estilo del cuadro seleccionado en el día actual con la fecha */
-.react-calendar__month-view__days__day--active {
-    background-color: gold; /* Dorado */
-    color: #fff; /* Texto blanco */
-} 
-
-/* Estilo del número del día en otros días */
-.react-calendar__tile--active .react-calendar__month-view__days__day {
-    color: #fff; /* Texto blanco */
+    background-color: #476170; /* Azul claro */
+    color: white;
 }
