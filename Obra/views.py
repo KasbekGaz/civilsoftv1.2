@@ -762,7 +762,7 @@ class AbonoViewSet(viewsets.ModelViewSet):
 
 
 class ListarAbonoPorObra(generics.ListAPIView):  # *Listar Abono por Obra_id
-    serializer_class = VolumenSerializer
+    serializer_class = AbonoSerializer
 
     def get_queryset(self):
         obra_id = self.kwargs["obra_id"]
@@ -823,13 +823,13 @@ class UpdateAbonoyObra(generics.UpdateAPIView):
 
 
 class DeleteAbonobyObra(generics.DestroyAPIView):
-    queryset = Volumen.objects.all()
-    serializer_class = VolumenSerializer
+    queryset = Abono.objects.all()
+    serializer_class = AbonoSerializer
 
     def delete(self, request, *args, **kwargs):
         if request.user.is_authenticated and request.user.rol == "Admin":
             return super().delete(request, *args, **kwargs)
         else:
             return Response(
-                {"detail": "No tiene permisos para eliminar este Volumen"}, status=status.HTTP_403_FORBIDDEN
+                {"detail": "No tiene permisos para eliminar este Abonos"}, status=status.HTTP_403_FORBIDDEN
             )
