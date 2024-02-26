@@ -28,6 +28,8 @@ import DetallesProv from './views/DetallesProv';
 //* rutas de banca y materiales
 import UpdateBanca from './components/banca/UpdateBanca';
 import UpdateMaterial from './components/material/UpdateMaterial';
+//* rutas de Abono
+import UpdateAbono from './components/Abono/UpdateAbono';
 
 
 const App = () => {
@@ -62,7 +64,9 @@ const App = () => {
         {/** Vista de Material*/}
         <Route path="/update-material-by-obra/:id/:mId" element={<UpdateMaterial />}/>
         {/** Vista de Banca*/}
-        <Route path="/update-banca-by-obra/:id/:bId" element={<UpdateBanca />}/>
+        <Route path="/update-banca-by-obra/:id/:abonoId" element={<UpdateBanca />}/>
+        {/** Vista de Banca*/}
+        <Route path="/update-abono-by-obra/:id/:abonoId" element={<UpdateAbono />}/>
       </Routes>
     </Router>
   );
