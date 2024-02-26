@@ -297,5 +297,5 @@ class Volumen(models.Model):
 class Abono(models.Model):
     obra = models.ForeignKey(Obra, on_delete=models.CASCADE)
     fecha = models.DateField()
-    descripcion = models.CharField(max_length=255)
+    descripcion = models.TextField(blank=True)
     importe = models.DecimalField(max_digits=10, decimal_places=2, default=0)
