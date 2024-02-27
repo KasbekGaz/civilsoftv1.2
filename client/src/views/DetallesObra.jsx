@@ -51,16 +51,17 @@ const DetallesObra = () => {
     };
 
 
-    return (
-        <div className=" container mx-5 my-8  bg-violet-950- border border-violet-600 rounded-lg drop-shadow-xl">
+return (
+    <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className=" container mx-5 my-8  bg-indigo-950 border border-violet-900 rounded-2xl drop-shadow-xl">
 
-            <h1 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
-                Detalles de la Obra:
-            </h1>
+        <h1 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
+            Detalles de la Obra:
+        </h1>
 
-            <button className="text-center font-semibold rounded-full bg-green-400 hover:bg-green-700 py-2 px-4 mb-4 mt-4" onClick={handleBack}>
-                Regresar
-            </button>
+        <button className="text-center font-semibold rounded-full bg-green-400 hover:bg-green-700 py-2 px-4 mb-4 mt-4" onClick={handleBack}>
+            Regresar
+        </button>
 
             <div className="container">
 
@@ -69,7 +70,7 @@ const DetallesObra = () => {
                         Nombre:
                     </h3>
                     <label className="bg-gray-400 border border-gray-300  text-sm rounded-lg block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
-                        <h3 className="text-2xl font-semibold tracking-tight text-white sm:text-2xl">{obraData.nombre}</h3>
+                        <h3 className="text-2xl font-semibold tracking-tight text-white sm:text-2xl"> {obraData.nombre} </h3>
                     </label>
 
                     <h3 className="block my-2 font-medium">
@@ -97,42 +98,44 @@ const DetallesObra = () => {
 
                 <div className="grid grid-cols-2 md:grid-cols-2">
 
-                    <div className="bg-slate-400 p-4 rounded-md">
-                        <h2 className="text-3xl font-semibold mb-2">Total de gastos </h2>
-                        <span className="text-2xl font-semibold text-white" >
+                    <div className="bg-slate-600 p-4 rounded-md border border-black">
+                        <h2 className="text-3xl font-semibold mb-2 text-white">Total de gastos </h2>
+                        <span className="text-3xl font-semibold text-white" >
                             $ {obraData.total_gastos }
                         </span>
                     </div>
 
-                    <div className="bg-slate-400 p-4 rounded-md">
-                        <h2 className="text-3xl font-semibold mb-2">Presupuesto Inicial</h2>
-                        <span className="text-2xl font-semibold text-white">
+                    <div className="bg-slate-600 p-4 rounded-md border border-black">
+                        <h2 className="text-3xl font-semibold mb-2 text-white">Presupuesto Inicial</h2>
+                        <span className="text-3xl font-semibold text-white">
                             $ {obraData.p_inicial}
                         </span>
                     </div>
                 </div>
 
                 <div className='grid grid-cols-3'>
-                    <div className="bg-sky-300 p-4 rounded-md">
+                    <div className="bg-indigo-950 p-4 rounded-md border border-black">
                         <div>
                             <h3 className="text-3xl font-semibold mb-2">Tareas</h3>
-                            <i className="fi fi-br-to-do"></i>
+                            <img src="/tareas.svg" alt="Icon" className="mx-auto max-w-40 h-40"/>
                             <button className="text-center font-semibold rounded-full bg-yellow-500 py-2 px-4 mb-4 mt-4 hover:bg-green-500"
                                     onClick={handleTarea}
                             >Ver más</button>
                         </div>
                     </div>
 
-                    <div className="bg-gray-600 p-4 rounded-md">
+                    <div className="bg-indigo-950 p-4 rounded-md border border-black">
                         <div>
                             <h3 className="text-3xl font-semibold mb-2">Control de Obra</h3>
+                            <img src="/control-obra.svg" alt="Icon" className="mx-auto max-w-40 h-40"/>
                             <button className="text-center font-semibold rounded-full bg-yellow-500 py-2 px-4 mb-4 mt-4 hover:bg-green-500" onClick={handleControlObra}>Ver más</button>
                         </div>
                     </div>
 
-                    <div className="bg-violet-400 p-4 rounded-md">
+                    <div className="bg-indigo-950 p-4 rounded-md border border-black">
                         <div>
-                            <h3 className=" mx-auto text-3xl font-semibold mb-2">Control Administrativo</h3>
+                            <h3 className="text-3xl font-semibold mb-2">Control Administrativo</h3>
+                            <img src="/admin-money.svg" alt="Icon" className="mx-auto max-w-40 h-40"/>
                             <button className="text-center font-semibold rounded-full bg-yellow-500 py-2 px-4 mb-4 mt-4 hover:bg-green-500"
                                 onClick={handleControlAdmin}
                             >Ver más</button>
@@ -140,14 +143,16 @@ const DetallesObra = () => {
                     </div>
                 </div>
 
-                <div className="bg-violet-600 p-4 rounded-md col-span-2">
+                <div className="bg-indigo-950 p-4 rounded-md col-span-2 border border-black">
                     <h2 className="text-3xl font-semibold mb-2">Galeria</h2>
+                    <img src="/galeria.svg" alt="Icon" className="mx-auto max-w-40 h-40"/>
                     <button className="text-center font-semibold rounded-full bg-yellow-500 py-2 px-4 mb-4 mt-4 hover:bg-green-500"
                         onClick={handleControlGaleria}>Agregar Foto</button>
                 </div>
             </div>
         </div>
-    );
+    </div>
+);
 };
 
 export default DetallesObra;

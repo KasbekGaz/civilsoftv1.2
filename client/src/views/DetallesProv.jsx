@@ -259,10 +259,10 @@ return(
                     <tbody>
                         {material.map((m) => (
                             <tr className="bg-gray-600 border-b" key={m.id} >
-                                <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{m.id}</td>
-                                <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{m.unidad}</td>
-                                <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{m.material}</td>
-                                <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{m.precio}</td>
+                                <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{m.id}</td>
+                                <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{m.unidad}</td>
+                                <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{m.material}</td>
+                                <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{m.precio}</td>
                                 <td scope="row" className="px-4 py-2 flex space-x-1 justify-items-center">
                                     <button 
                                         className="text-center font-semibold rounded-full bg-orange-500 py-2 px-4 mb-4 mt-4 hover:bg-orange-600"
@@ -341,10 +341,10 @@ return(
                     <tbody>
                         {banca.map((b) => (
                             <tr className="bg-gray-600 border-b" key={b.id} >
-                                <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{b.id}</td>
-                                <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{b.banco}</td>
-                                <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{b.cuenta_banco}</td>
-                                <td scope="row" class="px-4 py-2 text-white text-center text-base font-semibold">{b.clave_banco}</td>
+                                <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{b.id}</td>
+                                <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{b.banco}</td>
+                                <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{b.cuenta_banco}</td>
+                                <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{b.clave_banco}</td>
                                 <td scope="row" className="px-4 py-2 flex space-x-1 justify-items-center">
                                     <button 
                                         className="text-center font-semibold rounded-full bg-orange-500 py-2 px-4 mb-4 mt-4 hover:bg-orange-600"
