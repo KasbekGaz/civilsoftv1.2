@@ -30,14 +30,14 @@ return (
         </label>
         <input 
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            type="text" {...register('username', { required: true })} />
+            type="text" {...register('username', { required: true })} required/>
         <label 
             className="block my-2 font-medium">
         Contraseña:
         </label>
         <input 
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            type="password" {...register('password', { required: true })} />
+            type="password" {...register('password', { required: true })} required/>
 
         <button 
             className="text-center font-semibold rounded-full bg-yellow-500 py-2 px-4 mb-4 mt-4 hover:bg-yellow-700"
