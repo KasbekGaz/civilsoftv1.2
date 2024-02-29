@@ -84,6 +84,7 @@ const ControlAdmin = () => {
             fetchObraDetails(); 
         }catch(error){
             console.error('Error al crear Gasto', error.message);
+            alert('Porfavor verifique que los campos estan completos');
         }
     };
     //! Crear un ABONO
@@ -104,6 +105,7 @@ const ControlAdmin = () => {
             fetchObraDetails();
         }catch(error){
             console.error('Error al crear Abono', error.message);
+            alert('Porfavor verifique que los campos estan completos');
         }
     };
     
@@ -206,7 +208,7 @@ const ControlAdmin = () => {
         </button>
 
         <div  className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="w-full flex-auto border border-violet-600 drop-shadow-xl rounded-2xl p-4">
+            <div className="w-full flex-auto bg-indigo-950 border border-black drop-shadow-xl rounded-2xl p-4">
 
                 <h1 className="text-2xl font-semibold tracking-tight text-white sm:text-2xl">Agregar Gasto</h1>
 
@@ -316,9 +318,9 @@ const ControlAdmin = () => {
                 </form>
             </div>
 
-            <div className="w-full p-4">
+            <div className="w-full p-4 bg-indigo-950 border border-black drop-shadow-xl rounded-2xl">
 
-                <h1 className="text-3xl font-bold tracking-tight text-white sm:text-3xl">Tabla de gastos</h1>
+                <h1 className="text-2xl font-bold tracking-tight text-white sm:text-2xl">Tabla de gastos</h1>
 
                     <div>
                         <div className="relative">
@@ -441,9 +443,9 @@ const ControlAdmin = () => {
             </div>
         </div>
 
-        <h1 className="my-3 text-3xl font-bold tracking-tight text-white sm:text-3xl"> Control de Abonos de {obraData.nombre } </h1>
+        <h1 className="my-3 text-3xl font-bold tracking-tight text-white sm:text-3xl"> Control de Abonos de "{obraData.nombre }" </h1>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="w-full flex-auto border border-violet-600 drop-shadow-xl rounded-2xl p-4">
+            <div className="w-full flex-auto bg-indigo-950 border border-black drop-shadow-xl rounded-2xl p-4">
                 <h1 className="text-2xl font-semibold tracking-tight text-white sm:text-2xl">Agregar Abono</h1>
                 <form  className="flex flex-col justify-center items-center mt-2">
                     <label  className="block my-2 font-medium">
@@ -485,8 +487,8 @@ const ControlAdmin = () => {
                     </button>
                 </form>
             </div>
-            <div className="w-full p-4">
-                <h1 className="text-3xl font-bold tracking-tight text-white sm:text-3xl">Tabla de Abonos</h1>
+            <div className="w-full p-4 bg-indigo-950 border border-black drop-shadow-xl rounded-2xl">
+                <h1 className="text-2xl font-bold tracking-tight text-white sm:text-2xl">Tabla de Abonos</h1>
                     <div className="overflow-auto mt-2">
                         <table className="w-full text-left rtl:text-right text-white">
                             <thead className="text-sm text-white uppercase">

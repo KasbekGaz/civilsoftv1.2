@@ -36,7 +36,7 @@ return(
                         <tr className="bg-gray-600 border-b" key={tarea.id} >
                             <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{tarea.obra}</td>
                             <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{tarea.titulo}</td>
-                            <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{tarea.Fvence}</td>
+                            <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold bg-red-500">{tarea.Fvence}</td>
                         </tr>
                     ))}
                 </tbody>

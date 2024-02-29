@@ -3,8 +3,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import APIbackend from "../api/APIbackend";
 
 
-
-
 const DetallesProv = () => {
     const { id } = useParams();
     const [ provData, setProvData ] = useState({});
@@ -98,6 +96,7 @@ const DetallesProv = () => {
 
         }catch(error){
             console.error('Error al agregar el material');
+            alert('!Compruebe que todos los campos estan completos!');
         }
     };
     //! Agregar Banca a un proveedor
@@ -109,7 +108,8 @@ const DetallesProv = () => {
         }));
     };
     const createBanca = async () =>{
-        console.log(id,infobanca);
+        try{
+            console.log(id,infobanca);
             const response = await APIbackend.createBanca(id, infobanca);
             console.log('datos banca creado', response);
             alert('Se Agrego la informacion correctamente !!');
@@ -123,6 +123,10 @@ const DetallesProv = () => {
             });
             
             fetchBanca();
+        }catch(error){
+            console.error('Error al agregar el material');
+            alert('!Compruebe que todos los campos estan completos!');
+        }
     };
     //! Editar un material
     const editarMaterial = (id, mId) =>{
@@ -160,7 +164,7 @@ const DetallesProv = () => {
 return(
     <div>
         <h1> Detalles del Proveedor: </h1>
-            <button className="text-center font-semibold rounded-full bg-green-400 hover:bg-green-700 py-2 px-4 mb-4 mt-4"s
+            <button className="text-center font-semibold rounded-full bg-green-400 hover:bg-green-700 py-2 px-4 mb-4 mt-4"
                 onClick={handleBack} >
                 Regresar
             </button>
@@ -202,7 +206,7 @@ return(
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
 
-            <div className="flex-auto border border-violet-600 drop-shadow-xl rounded-2xl p-4">
+            <div className="flex-auto bg-indigo-950 border border-black drop-shadow-xl rounded-2xl p-4">
 
                 <h1 className="text-2xl font-semibold tracking-tight text-white sm:text-2xl">Agregar Materiales ofertados por el Proveedor</h1>
 
@@ -244,47 +248,49 @@ return(
 
             </div>
 
-            <div className="w-full p-4 drop-shadow-xl">
+            <div className="w-full p-4  bg-indigo-950 border border-black drop-shadow-xl rounded-2xl">
                 <h1 className="text-2xl font-semibold tracking-tight text-white sm:text-2xl">Tabla Materiales</h1>
-                <table className="w-full text-left rtl:text-right text-white">
-                    <thead className="text-sm text-white uppercase">
-                        <tr className="bg-gray-800 border-b">
-                            <th scope="col" className="px-6 py-3 text-center rounded-s-2xl"> ID </th>
-                            <th scope="col" className="px-6 py-3 text-center"> Unidad </th>
-                            <th scope="col" className="px-6 py-3 text-center"> Material </th>
-                            <th scope="col" className="px-6 py-3 text-center"> Precio $ </th>
-                            <th scope="col" className="px-6 py-3 text-center rounded-e-2xl"> Acciones </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {material.map((m) => (
-                            <tr className="bg-gray-600 border-b" key={m.id} >
-                                <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{m.id}</td>
-                                <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{m.unidad}</td>
-                                <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{m.material}</td>
-                                <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{m.precio}</td>
-                                <td scope="row" className="px-4 py-2 flex space-x-1 justify-items-center">
-                                    <button 
-                                        className="text-center font-semibold rounded-full bg-orange-500 py-2 px-4 mb-4 mt-4 hover:bg-orange-600"
-                                        onClick={() => editarMaterial(id, m.id)}>
-                                        Editar
-                                    </button>
-                                    <button 
-                                        className="text-center font-semibold rounded-full bg-red-500 py-2 px-4 mb-4 mt-4 hover:bg-red-600"
-                                        onClick={() => eliminarMaterial(id, m.id)}>
-                                        Eliminar
-                                    </button>
-                                </td>
+                <div className="overflow-auto mt-2">
+                    <table className="w-full text-left rtl:text-right text-white">
+                        <thead className="text-sm text-white uppercase">
+                            <tr className="bg-gray-800 border-b">
+                                <th scope="col" className="px-6 py-3 text-center rounded-s-2xl"> ID </th>
+                                <th scope="col" className="px-6 py-3 text-center"> Unidad </th>
+                                <th scope="col" className="px-6 py-3 text-center"> Material </th>
+                                <th scope="col" className="px-6 py-3 text-center"> Precio $ </th>
+                                <th scope="col" className="px-6 py-3 text-center rounded-e-2xl"> Acciones </th>
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            {material.map((m) => (
+                                <tr className="bg-gray-600 border-b" key={m.id} >
+                                    <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{m.id}</td>
+                                    <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{m.unidad}</td>
+                                    <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{m.material}</td>
+                                    <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{m.precio}</td>
+                                    <td scope="row" className="px-4 py-2 flex space-x-1 justify-items-center">
+                                        <button 
+                                            className="text-center font-semibold rounded-full bg-orange-500 py-2 px-4 mb-4 mt-4 hover:bg-orange-600"
+                                            onClick={() => editarMaterial(id, m.id)}>
+                                            Editar
+                                        </button>
+                                        <button 
+                                            className="text-center font-semibold rounded-full bg-red-500 py-2 px-4 mb-4 mt-4 hover:bg-red-600"
+                                            onClick={() => eliminarMaterial(id, m.id)}>
+                                            Eliminar
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
 
-            <div className="flex-auto border border-violet-600 drop-shadow-xl rounded-2xl p-4">
+            <div className="flex-auto bg-indigo-950 border border-black drop-shadow-xl rounded-2xl p-4">
                 
                 <h1 className="text-3xl font-bold tracking-tight text-white sm:text-3xl">Agregar Informacion Bancaria</h1>
 
@@ -326,41 +332,43 @@ return(
                 </form>
             </div>
 
-            <div className="w-full p-4 drop-shadow-xl">
+            <div className="w-full p-4  bg-indigo-950 border border-black drop-shadow-xl rounded-2xl">
                 <h1  className="text-2xl font-semibold tracking-tight text-white sm:text-2xl">Tabla Informacion Bancaria</h1>
-                <table className="w-full text-left rtl:text-right text-white">
-                    <thead className="text-sm text-white uppercase">
-                        <tr  className="bg-gray-800 border-b">
-                            <th scope="col" className="px-6 py-3 text-center rounded-s-2xl"> ID </th>
-                            <th scope="col" className="px-6 py-3 text-center"> Banco </th>
-                            <th scope="col" className="px-6 py-3 text-center"> Cuenta de Banco </th>
-                            <th scope="col" className="px-6 py-3 text-center"> Clave de banco </th>
-                            <th scope="col" className="px-6 py-3 text-center rounded-e-2xl"> Acciones </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {banca.map((b) => (
-                            <tr className="bg-gray-600 border-b" key={b.id} >
-                                <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{b.id}</td>
-                                <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{b.banco}</td>
-                                <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{b.cuenta_banco}</td>
-                                <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{b.clave_banco}</td>
-                                <td scope="row" className="px-4 py-2 flex space-x-1 justify-items-center">
-                                    <button 
-                                        className="text-center font-semibold rounded-full bg-orange-500 py-2 px-4 mb-4 mt-4 hover:bg-orange-600"
-                                        onClick={() => editarBanca(id, b.id)}>
-                                        Editar
-                                    </button>
-                                    <button 
-                                        className="text-center font-semibold rounded-full bg-red-500 py-2 px-4 mb-4 mt-4 hover:bg-red-600"
-                                        onClick={() => eliminarBanca(id, b.id)}>
-                                        Eliminar
-                                    </button>
-                                </td>
+                <div className="overflow-auto mt-2">
+                    <table className="w-full text-left rtl:text-right text-white">
+                        <thead className="text-sm text-white uppercase">
+                            <tr  className="bg-gray-800 border-b">
+                                <th scope="col" className="px-6 py-3 text-center rounded-s-2xl"> ID </th>
+                                <th scope="col" className="px-6 py-3 text-center"> Banco </th>
+                                <th scope="col" className="px-6 py-3 text-center"> Cuenta de Banco </th>
+                                <th scope="col" className="px-6 py-3 text-center"> Clave de banco </th>
+                                <th scope="col" className="px-6 py-3 text-center rounded-e-2xl"> Acciones </th>
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            {banca.map((b) => (
+                                <tr className="bg-gray-600 border-b" key={b.id} >
+                                    <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{b.id}</td>
+                                    <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{b.banco}</td>
+                                    <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{b.cuenta_banco}</td>
+                                    <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{b.clave_banco}</td>
+                                    <td scope="row" className="px-4 py-2 flex space-x-1 justify-items-center">
+                                        <button 
+                                            className="text-center font-semibold rounded-full bg-orange-500 py-2 px-4 mb-4 mt-4 hover:bg-orange-600"
+                                            onClick={() => editarBanca(id, b.id)}>
+                                            Editar
+                                        </button>
+                                        <button 
+                                            className="text-center font-semibold rounded-full bg-red-500 py-2 px-4 mb-4 mt-4 hover:bg-red-600"
+                                            onClick={() => eliminarBanca(id, b.id)}>
+                                            Eliminar
+                                        </button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
         </div>

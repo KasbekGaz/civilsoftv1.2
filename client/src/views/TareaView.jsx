@@ -69,6 +69,7 @@ const handleCreateTarea = async () => {
         fetchTareas();
     } catch (error) {
         console.error('Error al crear la TAREA', error.message);
+        alert('!Por favor revise si todos los campos estan completos!');
     }
 };
 
@@ -123,7 +124,7 @@ const handleEliminar = async (id, tareaId) => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
 
-                <div className="w-full flex-auto border border-violet-600 drop-shadow-xl rounded-2xl">
+                <div className="w-full flex-auto bg-indigo-950 border border-black drop-shadow-xl rounded-2xl">
 
                     <h1 className="text-2xl font-semibold tracking-tight text-white sm:text-2xl"> Agregar Nueva tarea </h1>
 
@@ -197,7 +198,7 @@ const handleEliminar = async (id, tareaId) => {
                     </form>
                 </div>
 
-                <div className="w-full  p-4 ">
+                <div className="w-full  p-4 bg-indigo-950 border border-black drop-shadow-xl rounded-2xl">
 
                     <h1 className="text-3xl font-bold tracking-tight text-white sm:text-3xl" > Tabla de Tareas </h1>
 

@@ -30,12 +30,12 @@ const ControlObra =  () =>{
         codigo: '',
         unidad: '',
         concepto: '',
-        estado: 'Sin cambio',
+        estado: '',
         //* Cantidad Contratada
-        volumen: '0',
-        precio: '0',
+        volumen: '',
+        precio: '',
         //* Cantidad Ejecutada
-        v_mod: '0',
+        v_mod: '',
 
     });
     const handleInputChange = (e) =>{
@@ -58,18 +58,19 @@ const ControlObra =  () =>{
                 codigo: '',
                 unidad: '',
                 concepto: '',
-                estado: 'Sin cambio',
+                estado: '',
                 //* Cantidad Contratada
-                volumen: '0',
-                precio: '0',
+                volumen: '',
+                precio: '',
                 //* Cantidad Ejecutada
-                v_mod: '0',
+                v_mod: '',
                 
             });
             fetchVolumen();
             fetchObraDetails();
         }catch(error){
             console.error('Error al agregar el concepto!', error.message);
+            alert('!Por favor revise si todos los datos estan completos!');
         }
     };
 
@@ -129,7 +130,7 @@ return(
 
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="flex-auto border border-violet-600 drop-shadow-xl rounded-2xl p-4">
+            <div className="flex-auto bg-indigo-950 border border-black drop-shadow-xl rounded-2xl p-4">
                 <h1 className="text-2xl font-semibold tracking-tight text-white sm:text-2xl">Agregar Concepto</h1>
 
                 <form className="flex flex-col justify-center items-center mt-2">
@@ -179,6 +180,7 @@ return(
                     <input className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 type="number" 
                                 name="precio"
+                                placeholder="$00.0"
                                 value={volumenData.precio} 
                                 onChange={handleInputChange}/>
 
@@ -212,7 +214,7 @@ return(
                 </form>
             </div>
 
-            <div className="w-full p-4 ">
+            <div className="w-full p-4 bg-indigo-950 border border-black drop-shadow-xl rounded-2xl">
 
                 <h1 className="text-3xl font-bold tracking-tight text-white sm:text-3xl">Tabla de Conceptos</h1>
 
