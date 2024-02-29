@@ -189,13 +189,13 @@ class Volumen(models.Model):
         max_length=30, choices=status, default='Sin cambio')
     # *Campos para cantidad contratada
     volumen = models.DecimalField(max_digits=10, decimal_places=2, default=0)
-    precio = models.DecimalField(max_digits=10, decimal_places=2)
+    precio = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     importe = models.DecimalField(
         max_digits=10, decimal_places=2, editable=False)
     # * campos para cantidad ejecutada
     v_mod = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     importe_mod = models.DecimalField(
-        max_digits=10, decimal_places=2, editable=False)
+        max_digits=10, decimal_places=2, editable=False, default=0)
     diferencia = models.DecimalField(
         max_digits=10, decimal_places=2, editable=False, default=0)
 
