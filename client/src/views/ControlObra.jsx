@@ -30,7 +30,7 @@ const ControlObra =  () =>{
         codigo: '',
         unidad: '',
         concepto: '',
-        estado: '',
+        estado: 'Sin cambio',
         //* Cantidad Contratada
         volumen: '',
         precio: '',
@@ -38,27 +38,58 @@ const ControlObra =  () =>{
         v_mod: '',
 
     });
+    //* Manejo de errores en formulario
+    const [errors, setErrors] =useState({
+        codigo: false,
+        unidad: false,
+        concepto: false,
+        estado: false,
+        //* Cantidad Contratada
+        volumen: false,
+        precio: false,
+        //* Cantidad Ejecutada
+        v_mod: false,
+    });
+
     const handleInputChange = (e) =>{
         const { name, value } = e.target;
         setVolumenData((prevData) => ({
             ...prevData,
             [name]: value,
         }));
+        // Limpiar el mensaje de error cuando el usuario comienza a escribir en el campo
+        setErrors((prevErrors) => ({
+            ...prevErrors,
+            [name]: false,
+        }));
     };
     const handleCreateVolumen = async () =>{
+        //* Validar si algún campo está vacío
+        const newErrors = {};
+        let hasError = false;
+        Object.entries(volumenData).forEach(([key, value]) => {
+            if (value === '') {
+                newErrors[key] = true;
+                hasError = true;
+            }
+        });
+        if (hasError) {
+            setErrors(newErrors);
+            return;
+        }
         try{
             console.log(volumenData);
-            const response = await APIbackend.CreateVolumenbyObra(id, volumenData)
+            const response = await APIbackend.CreateVolumenbyObra(id, volumenData);
 
             console.log('Gasto creado: ', response);
             alert('Gasto agregado correctamente!');
-            //*Para limpiar el formulario----
+                //*Para limpiar el formulario----
             setVolumenData({
                 obra: id,
                 codigo: '',
                 unidad: '',
                 concepto: '',
-                estado: '',
+                estado: 'Sin cambio',
                 //* Cantidad Contratada
                 volumen: '',
                 precio: '',
@@ -70,7 +101,7 @@ const ControlObra =  () =>{
             fetchObraDetails();
         }catch(error){
             console.error('Error al agregar el concepto!', error.message);
-            alert('!Por favor revise si todos los datos estan completos!');
+            alert('!Ha ocurrido un error al crear el Concepto!');
         }
     };
 
@@ -143,6 +174,8 @@ return(
                             value={volumenData.codigo}
                             onChange={handleInputChange}
                             />
+                            {errors.codigo && <p className="text-red-500">Este campo es requerido.</p>}
+                            
                     <label className="block my-2 font-medium">
                         Unidad:
                     </label>
@@ -152,6 +185,7 @@ return(
                             value={volumenData.unidad}
                             onChange={handleInputChange}
                             />
+                            {errors.unidad && <p className="text-red-500">Este campo es requerido.</p>}
                     <label className="block my-2 font-medium">
                         Concepto:
                     </label>
@@ -162,6 +196,8 @@ return(
                             value={volumenData.concepto}
                             onChange={handleInputChange}
                             />
+                            {errors.concepto && <p className="text-red-500">Este campo es requerido.</p>}
+
                     <label className="block my-2 font-medium">
                         Estado del Concepto:
                     </label>
@@ -182,7 +218,9 @@ return(
                                 name="precio"
                                 placeholder="$00.0"
                                 value={volumenData.precio} 
-                                onChange={handleInputChange}/>
+                                onChange={handleInputChange}
+                                />
+                                {errors.precio && <p className="text-red-500">Este campo es requerido.</p>}
 
                     <h2 className="text-2xl font-semibold tracking-tight text-white sm:text-2xl">Cantidad Contratada</h2>
                     <label className="block my-2 font-medium">
@@ -192,7 +230,9 @@ return(
                                 type="number" 
                                 name="volumen"
                                 value={volumenData.volumen} 
-                                onChange={handleInputChange}/>
+                                onChange={handleInputChange}
+                                />
+                                {errors.volumen && <p className="text-red-500">Este campo es requerido.</p>}
                     
                     <h2 className="text-2xl font-semibold tracking-tight text-white sm:text-2xl">Cantidad Ejecutada</h2>
                     <label className="block my-2 font-medium">
@@ -202,10 +242,12 @@ return(
                                 type="number" 
                                 name="v_mod"
                                 value={volumenData.v_mod} 
-                                onChange={handleInputChange}/>
+                                onChange={handleInputChange}
+                                />
+                                {errors.v_mod && <p className="text-red-500">Este campo es requerido.</p>}
 
                     <button
-                        className=" text-center font-semibold rounded-full bg-yellow-500 py-2 px-4 mb-4 mt-4 hover:bg-green-500"
+                        className="text-center font-semibold rounded-full bg-yellow-500 py-2 px-4 mb-4 mt-4 hover:bg-green-500"
                         type="button"
                         onClick={handleCreateVolumen}>
                             Agregar Concepto

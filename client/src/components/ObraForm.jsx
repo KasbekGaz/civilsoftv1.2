@@ -14,6 +14,15 @@ const ObraForm = () =>{
         fecha: '',
         p_inicial: '',
     });
+//* Manejo de errores
+    const [errors, setErrors] = useState({
+        nombre: false,
+        localidad: false,
+        municipio: false,
+        dependencia: false,
+        fecha: false,
+        p_inicial: false,
+    }); 
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -21,9 +30,28 @@ const ObraForm = () =>{
             ...prevData,
             [name]: value,
         }));
+        //*Limpiar el mensaje
+        setErrors((prevErrors) =>({
+            ...prevErrors,
+            [name]: false,
+        }));
     };
 
     const handleCreateObra = async () =>{
+        //* Validar si algún campo está vacío
+        const newErrors = {};
+        let hasError = false;
+        Object.entries(obraData).forEach(([key, value]) => {
+            if (value === '') {
+                newErrors[key] = true;
+                hasError = true;
+            }
+        });
+        if (hasError) {
+            setErrors(newErrors);
+            return;
+        }
+        //*Peticion al backend
         try{
             const response = await APIbackend.createObra(obraData);
 
@@ -33,7 +61,7 @@ const ObraForm = () =>{
 
         }catch(error){
             console.error('Error al crear la obra: ', error.message);
-            alert('!Por favor revise si todos los datos estan completos!');
+            alert('!Ha ocurrido un error al crear la obra!');
         }
     };
 
@@ -47,7 +75,7 @@ return (
         <div className="mx-auto my-6 max-w-sm p-6 bg-indigo-950 border border-black rounded-lg shadow-xl">
             <h1 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">Registrar Nueva Obra</h1>
 
-            <button className="text-center font-semibold rounded-full bg-green-400 hover:bg-green-700 py-2 px-4 mb-4 mt-4" onClick={handleBack}>
+            <button className="text-center font-semibold rounded-full bg-green-400 hover:bg-green-700 py-2 px-4 mb-4 mt-4" onClick={handleBack} >
             Regresar
             </button>
 
@@ -62,6 +90,7 @@ return (
                     value={obraData.nombre}
                     onChange={handleInputChange}
                 />
+                {errors.nombre && <p className="text-red-600">Este campo es requerido!</p> }
 
                 <label className="block my-2 font-medium">
                     Localidad:
@@ -73,6 +102,7 @@ return (
                     value={obraData.localidad}
                     onChange={handleInputChange}
                 />
+                {errors.localidad && <p className="text-red-600">Este campo es requerido!</p> }
 
                 <label className="block my-2 font-medium">
                     Municipio:
@@ -84,6 +114,7 @@ return (
                     value={obraData.municipio}
                     onChange={handleInputChange}
                 />
+                {errors.municipio && <p className="text-red-600">Este campo es requerido!</p> }
 
                 <label className="block my-2 font-medium">
                     Dependencia:
@@ -95,6 +126,7 @@ return (
                     value={obraData.dependencia}
                     onChange={handleInputChange}
                 />
+                {errors.dependencia && <p className="text-red-600">Este campo es requerido!</p> }
 
                 <label className="block my-2 font-medium">
                     Fecha:
@@ -106,6 +138,7 @@ return (
                     value={obraData.fecha}
                     onChange={handleInputChange}
                 />
+                {errors.fecha && <p className="text-red-600">Este campo es requerido!</p> }
 
                 <label className="block my-2 font-medium">
                     Presupuesto:
@@ -118,6 +151,7 @@ return (
                     value={obraData.p_inicial || ''}
                     onChange={handleInputChange}
                 />
+                {errors.p_inicial && <p className="text-red-600">Este campo es requerido!</p> }
 
                 <button 
                     className="text-center font-semibold rounded-full bg-yellow-500 py-2 px-4 mb-4 mt-4 hover:bg-green-500"

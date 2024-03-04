@@ -38,6 +38,15 @@ const [tareaData, setTareaData] = useState({
     estado: 'no_completado',
     obra: id,
 });
+//* Manjeo de errores en formulario
+const [errors, setErrors] =useState({
+    Fvence: false,
+    Fcreado: false,
+    Fcompletado: false,
+    titulo: false,
+    descripcion: false,
+    estado: false,
+});
 
 const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -45,9 +54,28 @@ const handleInputChange = (e) => {
         ...prevData,
         [name]: value,
     }));
+    // Limpiar el mensaje de error cuando el usuario comienza a escribir en el campo
+    setErrors((prevErrors) => ({
+        ...prevErrors,
+        [name]: false,
+    }));
 };
 
 const handleCreateTarea = async () => {
+    // Validar si algún campo está vacío
+    const newErrors = {};
+    let hasError = false;
+    Object.entries(tareaData).forEach(([key, value]) => {
+        if (value === '') {
+            newErrors[key] = true;
+            hasError = true;
+        }
+    });
+    if (hasError) {
+        setErrors(newErrors);
+        return;
+    }
+
     try {
         console.log(tareaData);
         
@@ -69,7 +97,7 @@ const handleCreateTarea = async () => {
         fetchTareas();
     } catch (error) {
         console.error('Error al crear la TAREA', error.message);
-        alert('!Por favor revise si todos los campos estan completos!');
+        alert('!Ha ocurrido un error al crear la Tarea!');
     }
 };
 
@@ -139,6 +167,7 @@ const handleEliminar = async (id, tareaId) => {
                                 value={tareaData.Fvence}
                                 onChange={handleInputChange}
                                 />
+                                {errors.Fvence && <p className="text-red-600">Este campo es requerido!</p> }
 
                         <label className="block my-2 font-medium">
                             Fecha creada en:
@@ -150,6 +179,7 @@ const handleEliminar = async (id, tareaId) => {
                                 value={tareaData.Fcreado}
                                 onChange={handleInputChange}
                                 />
+                                {errors.Fcreado && <p className="text-red-600">Este campo es requerido!</p> }
 
                         <label className="block my-2 font-medium">
                             Titulo:
@@ -161,6 +191,7 @@ const handleEliminar = async (id, tareaId) => {
                                 value={tareaData.titulo}
                                 onChange={handleInputChange}
                             />
+                            {errors.titulo && <p className="text-red-600">Este campo es requerido!</p> }
 
                         <label className="block my-2 font-medium">
                             Descripcion:
@@ -173,6 +204,7 @@ const handleEliminar = async (id, tareaId) => {
                                     value={tareaData.descripcion}
                                     onChange={handleInputChange}
                                 />
+                                {errors.descripcion && <p className="text-red-600">Este campo es requerido!</p> }
 
                         <label className="block my-2 font-medium">
                             Estado de la tarea:
