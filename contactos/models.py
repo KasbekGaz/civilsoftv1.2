@@ -7,7 +7,7 @@ class Proveedor(models.Model):
     nombre_comercial = models.CharField(max_length=255)
     razon_social = models.CharField(max_length=255)
     telefono = models.CharField(max_length=15)
-    correo = models.CharField(max_length=20)
+    correo = models.CharField(max_length=50)
     coderfc = models.CharField(max_length=13)
     descripcion = models.TextField()
 
