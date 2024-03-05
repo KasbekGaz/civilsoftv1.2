@@ -40,11 +40,25 @@ const ControlAdmin = () => {
         Tipo: 'Efectivo',
         importe: '',
     });
+    //* Manejo de errores en formulario
+    const [errors, setErrors] = useState({
+        fecha: false,
+        proveedor: false,
+        concepto: false,
+        descripcion: false,
+        importe: false,
+    });
+
     const handleInputChange = (e) =>{
         const { name, value } = e.target;
         setGastoData((prevData) => ({
             ...prevData,
             [name]: value,
+        }));
+        //limpiar mensaje de error cuando empezamos escribir
+        setErrors((prevErrors) => ({
+            ...prevErrors,
+            [name]: false,
         }));
     };
     //! Formulario de ABONO
@@ -63,6 +77,20 @@ const ControlAdmin = () => {
     };
     //! Crear un GASTO
     const handleCreateGasto = async () => {
+        //*validar se algun campo esta vacio
+        const newErrors = {};
+        let hasError = false;
+        Object.entries(gastoData).forEach(([key, value]) =>{
+            if (value===''){
+                newErrors[key] = true;
+                hasError = true;
+            }
+        });
+        if (hasError){
+            setErrors(newErrors);
+            return;
+        }
+
         try{
             console.log(gastoData);
             const response = await APIbackend.createGastobyObra(id, gastoData);
@@ -222,6 +250,7 @@ const ControlAdmin = () => {
                             value={gastoData.fecha}
                             onChange={handleInputChange}
                         />
+                        {errors.fecha && <p className="text-red-600">Este campo es requerido!</p>}
                     </label>
 
                     <label className="block my-2 font-medium">
@@ -233,6 +262,7 @@ const ControlAdmin = () => {
                             value={gastoData.proveedor}
                             onChange={handleInputChange}
                             />
+                            {errors.proveedor && <p className="text-red-600">Este campo es requerido!</p>}
                     </label>
 
                     <label className="block my-2 font-medium">
@@ -244,6 +274,7 @@ const ControlAdmin = () => {
                             value={gastoData.concepto}
                             onChange={handleInputChange}
                             />
+                            {errors.concepto && <p className="text-red-600">Este campo es requerido!</p>}
                     </label>
 
                     <label className="block my-2 font-medium">
@@ -256,6 +287,7 @@ const ControlAdmin = () => {
                             value={gastoData.descripcion}
                             onChange={handleInputChange}
                             />
+                            {errors.descripcion && <p className="text-red-600">Este campo es requerido!</p>}
                     </label>
 
                     <label className="block my-2 font-medium">
@@ -306,6 +338,7 @@ const ControlAdmin = () => {
                             placeholder="$00.0"
                             value={gastoData.importe || ''}
                             onChange={handleInputChange}/>
+                            {errors.importe && <p className="text-red-600">Este campo es requerido!</p>}
                     </label>
 
                     <button
