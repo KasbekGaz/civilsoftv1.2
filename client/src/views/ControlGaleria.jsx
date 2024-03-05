@@ -40,6 +40,8 @@ const ControlGaleria = () => {
         formData.append('fecha', fecha);
         formData.append('obra', id);
 
+        console.log('Datos:', formData);
+
         try {
         await APIbackend.CreateGaleriabyObra(id, formData);
         fetchImages();
@@ -85,63 +87,64 @@ const ControlGaleria = () => {
     };
 
 return (
-<div>
-    <h1>Control de Galeria</h1>
-    <h1>Proyecto "{obraData.nombre}" </h1>
+<div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-white">Control de Galeria</h1>
+            <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-white">Proyecto "{obraData.nombre}" </h1>
 
-        <button className="bg-green-400 py-2 px-4 mb-4"
-            onClick={handleBack}
-            > 
-            Regresar a las Acciones
-        </button>
+                <button className="block w-full text-center font-semibold rounded-full bg-green-400 hover:bg-green-700 py-2 px-4 my-4"
+                    onClick={handleBack}
+                    > 
+                    Regresar a las Acciones
+                </button>
 
-    <div>
-    <form onSubmit={handleSubmit} className="flex flex-col justify-center items-center mt-2">
-        <label className="block mb-2">Seleccionar imagen:</label>
-        <input type="file" onChange={handleFileChange} className="mb-4" required />
-        <label className="block mb-2">Descripción:</label>
-        <input
-        type="text"
-        value={descripcion}
-        onChange={(e) => setDescripcion(e.target.value)}
-        className="mb-4 p-2 border border-gray-300 rounded-md"
-        required
-        />
-        <label className="block mb-2">Fecha:</label>
-        <input
-        type="date"
-        value={fecha}
-        onChange={(e) => setFecha(e.target.value)}
-        className="mb-4 p-2 border border-gray-300 rounded-md"
-        required
-        />
+        <div className="mx-auto my-6 max-w-sm p-6 bg-indigo-950 border border-black rounded-lg shadow-xl">
+            <form onSubmit={handleSubmit} encType="multipart/form-data" className="flex flex-col justify-center items-center mt-2">
+                <label className="block mb-2">Seleccionar imagen:</label>
+                <input type="file" onChange={handleFileChange} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
+                <label className="block mb-2">Descripción:</label>
+                <input
+                type="text"
+                value={descripcion}
+                onChange={(e) => setDescripcion(e.target.value)}
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="Describe la actividad"
+                required
+                />
+                <label className="block mb-2">Fecha:</label>
+                <input
+                type="date"
+                value={fecha}
+                onChange={(e) => setFecha(e.target.value)}
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                required
+                />
 
-        <button type="submit" className="mt-2 bg-blue-500 text-white p-2 rounded-md">
-        Agregar Imagen
-        </button>
-    </form>
-    </div>
-
-    <div className="flex flex-wrap">
-    {images.map((image) => (
-        <div className="max-w-sm rounded overflow-hidden shadow-lg m-4" key={image.id}>
-        <img src={image.archivo} alt={image.descripcion} className="w-full h-64 object-cover" />
-        <div className="px-6 py-4">
-            <div className="font-bold text-xl mb-2">{image.descripcion}</div>
-            <p className="text-white text-base">{image.fecha}</p>
+                <button type="submit" className="text-center font-semibold rounded-full bg-yellow-500 py-2 px-4 mb-4 mt-4 hover:bg-green-500">
+                Agregar Imagen
+                </button>
+            </form>
         </div>
-            <button className="bg-orange-400"
-            onClick={() => handleActualizar(id, image.id)}>
-                Actualizar
-            </button>
 
-            <button className="bg-red-600"
-            onClick={() => handleEliminar(id, image.id)}>
-                Eliminar
-            </button>
+        <div className="flex flex-wrap p-4 bg-indigo-950 border border-black drop-shadow-xl rounded-2xl">
+            {images.map((image) => (
+                <div className="max-w-sm rounded overflow-hidden shadow-lg m-4 border border-black" key={image.id}>
+                <img src={image.archivo} alt={image.descripcion} className="w-full h-64 object-cover" />
+                <div className="px-6 py-4">
+                    <div className="font-bold text-xl mb-2">{image.descripcion}</div>
+                    <p className="text-white text-base">{image.fecha}</p>
+                </div>
+                    <button className="flex-1 text-center font-semibold rounded-full bg-orange-500 py-2 px-4 mb-4 mt-4 hover:bg-orange-600"
+                    onClick={() => handleActualizar(id, image.id)}>
+                        Actualizar
+                    </button>
+
+                    <button className="flex-1 text-center font-semibold rounded-full bg-red-500 py-2 px-4 mb-4 mt-4 hover:bg-red-600"
+                    onClick={() => handleEliminar(id, image.id)}>
+                        Eliminar
+                    </button>
+                </div>
+            ))}
         </div>
-    ))}
-    </div>
 </div>
 );
 };

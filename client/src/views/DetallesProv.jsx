@@ -218,6 +218,9 @@ return(
                     Regresar
                 </button>
         <div className="my-2 items-center text-center">
+        <h3 className="block my-2 font-medium">
+                Nombre Comercial:
+            </h3>
             <label className="bg-gray-400 border border-gray-300  text-sm rounded-lg block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
                 <h3 className="text-2xl font-semibold tracking-tight text-white sm:text-2xl"> {provData.nombre_comercial} </h3>
             </label>

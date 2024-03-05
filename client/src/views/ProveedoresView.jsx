@@ -162,10 +162,8 @@ return(
                         <tr className="bg-gray-800 border-b">
                             <th scope="col" className="px-6 py-3 text-center rounded-tl-lg">ID</th>
                             <th scope="col" className="px-6 py-3 text-center">Nombre Comercial</th>
-                            <th scope="col" className="px-6 py-3 text-center">Razón Social</th>
                             <th scope="col" className="px-6 py-3 text-center">Telefono</th>
                             <th scope="col" className="px-6 py-3 text-center">Correo</th>
-                            <th scope="col" className="px-6 py-3 text-center">RFC</th>
                             <th  scope="col" className="px-6 py-3 text-center rounded-tr-lg">Acciones</th>
                         </tr>
                     </thead>
@@ -174,10 +172,8 @@ return(
                             <tr className="bg-gray-600 border-b" key={prove.id}>
                                 <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{prove.id}</td>
                                 <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{prove.nombre_comercial}</td>
-                                <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{prove.razon_social}</td>
                                 <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{prove.telefono}</td>
                                 <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{prove.correo}</td>
-                                <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{prove.coderfc}</td>
                                 <td scope="row" className="px-4 py-2 flex space-x-1 justify-items-center">
                                     <button 
                                         className="text-center font-semibold rounded-full bg-fuchsia-500 py-2 px-4 mb-4 mt-4 hover:bg-fuchsia-600"
