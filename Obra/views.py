@@ -3,6 +3,7 @@ from rest_framework import generics, permissions
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
+from rest_framework.parsers import MultiPartParser
 
 # * modelos
 from .models import CustomUser, Obra, Tarea, Gasto, Galeria, Volumen, Abono
@@ -426,7 +427,7 @@ class DeleteGastobyObra(generics.DestroyAPIView):  # * Eliminar tarea por Obra_i
             )
 
 
-#! Vista Galeria -----------------------------------------------------------
+#! Vista Galeria ---------------------
 class GaleriaViewSet(viewsets.ModelViewSet):
     queryset = Galeria.objects.all()
     serializer_class = GaleriaSerializer
@@ -513,6 +514,8 @@ class ListarGaleriaporObra(generics.ListAPIView):  # * Listar Galeria por Obra_i
 class CreateGaleriabyObra(generics.CreateAPIView):  # * Crear galeria por Obra_id
     queryset = Galeria.objects.all()
     serializer_class = GaleriaSerializer
+    # Agregamos MultiPartParser para manejar archivos adjuntos
+    parser_classes = [MultiPartParser]
 
     def perform_create(self, serializer):
         obra_id = self.kwargs.get("obra_id")
@@ -523,7 +526,8 @@ class CreateGaleriabyObra(generics.CreateAPIView):  # * Crear galeria por Obra_i
             return super().create(request, *args, **kwargs)
         else:
             return Response(
-                {"details": "No tienes permisos para guardar imagenes."}, status=status.HTTP_403_FORBIDDEN
+                {"details": "No tienes permisos para guardar imágenes."},
+                status=status.HTTP_403_FORBIDDEN
             )
 
 
