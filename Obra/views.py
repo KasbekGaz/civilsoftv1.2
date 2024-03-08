@@ -4,6 +4,8 @@ from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.authtoken.models import Token
 from rest_framework.response import Response
 from rest_framework.parsers import MultiPartParser
+from openpyxl import Workbook
+from django.http import HttpResponse
 
 # * modelos
 from .models import CustomUser, Obra, Tarea, Gasto, Galeria, Volumen, Abono
@@ -837,3 +839,35 @@ class DeleteAbonobyObra(generics.DestroyAPIView):
             return Response(
                 {"detail": "No tiene permisos para eliminar este Abonos"}, status=status.HTTP_403_FORBIDDEN
             )
+
+
+def generar_excel_gastos_obra(obra_id):
+    # * Obtener la obra
+    obra = Obra.objects.get(id=obra_id)
+    # * Obtener todos los obejetos Gasto
+    gastos = Gasto.objects.filter(obra__id=obra_id)
+    # * Creamos un nuevo libro y una hoja
+    workbook = Workbook()
+    sheet = workbook.active
+    # * Agregar encabezados
+    encabezados = ['Obra', 'Fecha', 'Descripción',
+                   'Concepto', 'Categoria', 'Importe', 'Total Importes']
+    for col_num, encabezado in enumerate(encabezados, 1):
+        sheet.cell(row=1, column=col_num, value=encabezado)
+    # * Agregar datos en las filas
+    for row_num, gasto in enumerate(gastos, 2):
+        sheet.cell(row=row_num, column=1, value=gasto.fecha)
+        sheet.cell(row=row_num, column=2, value=gasto.descripcion)
+        sheet.cell(row=row_num, column=3, value=gasto.concepto)
+        sheet.cell(row=row_num, column=4, value=gasto.categoria)
+        sheet.cell(row=row_num, column=5, value=float(gasto.importe))
+        sheet.cell(row=row_num, column=6, value=gasto.obra.nombre)
+        sheet.cell(row=row_num, column=7, value=float(gasto.total_importe))
+
+    # * Configurar la respuesta del archivo Excel
+    response = HttpResponse(
+        content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+    response['Content-Disposition'] = f'attachment; filename=gastos_obra_{obra.nombre}.xlsx'
+    workbook.save(response)
+
+    return response
