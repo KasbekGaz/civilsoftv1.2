@@ -32,9 +32,6 @@ from .views import (
     CreateAbonobyObra,
     UpdateAbonoyObra,
     DeleteAbonobyObra,
-    # * EXCEL export
-    generar_excel_gastos_obra,
-
 
 )
 
@@ -94,9 +91,7 @@ urlpatterns = [
     path('api/v1/update-abono-for-obra/<int:obra_id>/<int:pk>/',
          UpdateAbonoyObra.as_view()),
     path('api/v1/delete-abono-for-obra/<int:obra_id>/<int:pk>/',
-         DeleteAbonobyObra.as_view()),
-    # * Rutas para generar EXCELS
-    path('api/v1/generar_excel_gastos/<int:obra_id>', generar_excel_gastos_obra),
+         DeleteAbonobyObra.as_view())
 ]
 
 if settings.DEBUG:
