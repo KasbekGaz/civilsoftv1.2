@@ -1,6 +1,21 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import APIbackend from "../api/APIbackend";
+import * as XLSX from 'xlsx';
+import { saveAs } from 'file-saver';
+
+
+
+const generarArchivoExcel = (datos, nombreArchivo) => {
+    const hojaDeTrabajo = XLSX.utils.json_to_sheet(datos);
+    const libroDeTrabajo = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(libroDeTrabajo, hojaDeTrabajo, 'Datos');
+    const datosExcel = XLSX.write(libroDeTrabajo, { bookType: 'xlsx', type: 'array' });
+    const blob = new Blob([datosExcel], { type: 'application/octet-stream' });
+    saveAs(blob, nombreArchivo + '.xlsx');
+};
+
+
 
 const ControlObra =  () =>{
     const { id } = useParams(); //* id es de la obra
@@ -146,6 +161,36 @@ const filteredConcepto = volumen.filter((vol) =>
     vol.codigo.toString().toLowerCase().includes(searchTerm.toLowerCase())
 );
 
+const handleGenerateExcel = () =>{
+    try{
+        const datosParaExcel = volumen.map(vol => ({
+            ID: vol.id,
+            Codigo: vol.codigo,
+            Unidad: vol.unidad,
+            Concepto: vol.concepto,
+            Estado: vol.estado,
+            Precio: parseInt(vol.precio),
+            'Cantidad Contratada': parseFloat(vol.volumen),
+            'Importe Contratado': parseFloat(vol.importe),
+            'Cantidad Ejecutada': parseFloat(vol.v_mod),
+            'Importe Ejecutado': parseFloat(vol.importe_mod),
+            Diferencia: parseFloat(vol.diferencia)
+
+        }));
+        // ! Agregar datos adiccionales
+        datosParaExcel.push({
+            'Total de Importes Cantidad Contratada': parseFloat(obraData.total_importes),
+            'Total de Importes Cantidad Ejecutada': parseFloat(obraData.total_importes_mod),
+            'Total de Diferencia': parseFloat(obraData.total_diferencia)
+        });
+        //! Generar y descargar el archivo Excel
+        generarArchivoExcel(datosParaExcel, 'tabla_volumen_conceptos'+obraData.nombre);
+
+    }catch(error){
+        console.error('Error al crear el archivo Excel', error.message);
+            alert('Ah ocurrido un error, intente de nuevo')
+    }
+};
 
 
 
@@ -346,7 +391,12 @@ return(
                             Total de Diferencias $
                             { obraData.total_diferencia }
                         </h1>
-                    </div >
+                    </div>
+                    <div className="bg-gray-500 p-4 rounded-md">
+                        <button 
+                            onClick={handleGenerateExcel}
+                            className="flex-1 text-center font-semibold rounded-full bg-emerald-600 py-2 px-4 mb-4 mt-4 hover:bg-green-700">Generar Excel</button>
+                    </div>
                 </div>
                 
             </div>

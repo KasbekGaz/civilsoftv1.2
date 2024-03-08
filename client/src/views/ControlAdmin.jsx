@@ -1,7 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import APIbackend from "../api/APIbackend";
+import * as XLSX from 'xlsx';
+import { saveAs } from 'file-saver';
 
+
+
+const generarArchivoExcel = (datos, nombreArchivo) => {
+    const hojaDeTrabajo = XLSX.utils.json_to_sheet(datos);
+    const libroDeTrabajo = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(libroDeTrabajo, hojaDeTrabajo, 'Datos');
+    const datosExcel = XLSX.write(libroDeTrabajo, { bookType: 'xlsx', type: 'array' });
+    const blob = new Blob([datosExcel], { type: 'application/octet-stream' });
+    saveAs(blob, nombreArchivo + '.xlsx');
+};
 
 
 const ControlAdmin = () => {
@@ -123,12 +135,12 @@ const ControlAdmin = () => {
             console.log('Abono Creado', response);
             alert('Abono creado correctamente!');
             //* Limpiar formulario
-            setAbonoData({
-                obra: id,
+            setAbonoData(prevData => ({
+                ...prevData,
                 fecha: '',
                 descripcion: '',
                 importe: ''
-            });
+            }));
             fetchAbonos();
             fetchObraDetails();
         }catch(error){
@@ -222,9 +234,55 @@ const ControlAdmin = () => {
         }
     };
 
+    const handleGenerarExcel = () => {
+        try{
+            //! Convertir los datos de la tabla en un formato compatible con XLSX
+            const datosParaExcel = gastos.map(gasto => ({
+                ID: gasto.id,
+                Fecha: gasto.fecha,
+                Proveedor: gasto.proveedor,
+                Concepto: gasto.concepto,
+                Descripción: gasto.descripcion,
+                Categoria: gasto.categoria,
+                Facturado: gasto.facturado,
+                'Tipo de Gasto': gasto.Tipo,
+                'Importe $': parseFloat(gasto.importe)
+            }));
+            // ! Agregar datos adiccionales
+            datosParaExcel.push({
+                'Total de Gastos': parseFloat(obraData.total_gastos),
+            });
+            //! Generar y descargar el archivo Excel
+            generarArchivoExcel(datosParaExcel, 'tabla_gastos_'+obraData.nombre);
+        }catch(error){
+            console.error('Error al crear el archivo Excel', error.message);
+            alert('Ah ocurrido un error, intente de nuevo')
+        }
+    };
+
+    const handleGenerarExcelAbono = () => {
+        try{
+            //! Convertir los datos de la tabla en un formato compatible con XLSX
+            const datosParaExcel = abonos.map(abono => ({
+                ID: abono.id,
+                Fecha: abono.fecha,
+                Descripción: abono.descripcion,
+                'Importe $': parseFloat(abono.importe)
+            }));
+            // ! Agregar datos adiccionales
+            datosParaExcel.push({
+                'Total de Abonos': parseFloat(obraData.total_abonos),
+            });
+            //! Generar y descargar el archivo Excel
+            generarArchivoExcel(datosParaExcel, 'tabla_Abonos_'+obraData.nombre);
+        }catch(error){
+            console.error('Error al crear el archivo Excel', error.message);
+            alert('Ah ocurrido un error, intente de nuevo')
+        }
+    };
 
 
-    return(
+return(
     <div className="mx-auto max-w-7xl p-4">
         <h1 className="text-3xl font-bold tracking-tight text-white sm:text-3xl">Control de gastos para: </h1>
         <h1 className="text-3xl font-bold tracking-tight text-white sm:text-3xl">Proyecto "{obraData.nombre}"</h1>
@@ -472,6 +530,11 @@ const ControlAdmin = () => {
                             { obraData.total_gastos }
                         </h1>
                     </div>
+                    <div className="bg-gray-500 p-4 rounded-md">
+                        <button 
+                            onClick={handleGenerarExcel}
+                            className="flex-1 text-center font-semibold rounded-full bg-emerald-600 py-2 px-4 mb-4 mt-4 hover:bg-green-700">Generar Excel</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -558,14 +621,25 @@ const ControlAdmin = () => {
                             </tbody>
                         </table>
                     </div>
-
-
-
+                    
+                    <div className="grid grid-cols-2 md:grid-cols-2">
+                        <div className="bg-gray-500 p-4 rounded-md">
+                            <h1 className="text-xl font-semibold mb-2 mt-2">
+                                Total de Abonos $
+                                { obraData.total_abonos }
+                            </h1>
+                        </div>
+                        <div className="bg-gray-500 p-4 rounded-md">
+                            <button 
+                                onClick={handleGenerarExcelAbono}
+                                className="flex-1 text-center font-semibold rounded-full bg-emerald-600 py-2 px-4 mb-4 mt-4 hover:bg-green-700">Generar Excel</button>
+                        </div>
+                    </div>
             </div>
         </div>
 
     </div>
-    );
+);
 };
 
 export default ControlAdmin;
