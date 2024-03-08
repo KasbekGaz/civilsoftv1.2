@@ -70,9 +70,12 @@ class Obra(models.Model):
     #! Total de diferencias (volumen)
     total_diferencia = models.DecimalField(
         max_digits=10, decimal_places=2, default=0, editable=False)
+    #! Total de Abonos (Abono)
+    total_abonos = models.DecimalField(
+        max_digits=10, decimal_places=2, default=0, editable=False)
 
     def __str__(self):
-        return f"{self.nombre} ({self.total_gastos}) ({self.total_importes}) ({self.total_importes_mod}) ({self.total_diferencia})"
+        return f"{self.nombre} ({self.total_gastos}) ({self.total_importes}) ({self.total_importes_mod}) ({self.total_diferencia}) ({self.total_abonos})"
 
 
 #! Modelo Tarea
@@ -299,3 +302,17 @@ class Abono(models.Model):
     fecha = models.DateField()
     descripcion = models.TextField(blank=True)
     importe = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+
+    def save(self, *args, **kwargs):
+        super(Abono, self).save(*args, **kwargs)  # Guarda el objeto primero
+        self.actualizar_total_abonos()
+
+    def delete(self, *args, **kwargs):
+        super(Abono, self).delete(*args, **kwargs)  # Elimina el objeto primero
+        self.actualizar_total_abonos()
+
+    def actualizar_total_abonos(self):
+        total_abonos = Abono.objects.filter(obra=self.obra).aggregate(
+            total_abonos=models.Sum('importe'))['total_abonos'] or 0
+        self.obra.total_abonos = total_abonos
+        self.obra.save()
