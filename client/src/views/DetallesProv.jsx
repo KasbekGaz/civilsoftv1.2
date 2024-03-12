@@ -6,6 +6,7 @@ import APIbackend from "../api/APIbackend";
 const DetallesProv = () => {
     const { id } = useParams();
     const [ provData, setProvData ] = useState({});
+    const [loading, setLoading] = useState(false); //* animacion de carga
     const navigate = useNavigate();
     //! formulario materiales
     const [ materialData, setMdata ] = useState({
@@ -57,22 +58,28 @@ const DetallesProv = () => {
     const fetchMaterial = async () =>{
         try{
             console.log(id); //* prov_id
+            setLoading(true);// activar animacion
             const materialData = await APIbackend.listMaterial(id);
             setMateriales(materialData);
             console.log('Materiales', materialData);
         }catch(error){
             console.error('Error al listar materiales', error.message);
+        }finally{
+            setLoading(false);//desactivar animacion
         }
     };
     //! Listar Banca del proveedor
     const fetchBanca = async () =>{
         try{
             console.log(id); //* prov_id
+            setLoading(true);//
             const bancaData = await APIbackend.listBanca(id);
             setBanca(bancaData);
             console.log('Banca', bancaData);
         }catch(error){
             console.error('Error al listar materiales', error.message);
+        }finally{
+            setLoading(false);//desactivar animacion
         }
     };
     //! Agregar un material a un proveedor
@@ -319,6 +326,7 @@ return(
                             </tr>
                         </thead>
                         <tbody>
+                            {loading && <div className="loader"></div>}
                             {material.map((m) => (
                                 <tr className="bg-gray-600 border-b" key={m.id} >
                                     <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{m.id}</td>
@@ -407,6 +415,7 @@ return(
                                 </tr>
                             </thead>
                             <tbody>
+                                {loading && <div className="loader"></div>}
                                 {banca.map((b) => (
                                     <tr className="bg-gray-600 border-b" key={b.id} >
                                         <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{b.id}</td>

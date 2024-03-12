@@ -7,6 +7,7 @@ const TareaView = () => {
     const { id } = useParams();//* id de obra
     const [obraData, setObraData] = useState({});
     const [tareas, setTareas] = useState([]);
+    const [loading, setLoading] = useState(false);//animacion carga
 
     const navigate = useNavigate();
 
@@ -78,7 +79,6 @@ const handleCreateTarea = async () => {
 
     try {
         console.log(tareaData);
-        
         const response = await APIbackend.createTareabyObra(id, tareaData);
         
         console.log('Tarea creada: ', response);
@@ -109,11 +109,14 @@ const handleCreateTarea = async () => {
 const fetchTareas = async () =>{
     try{
         console.log(id); //obra_id
+        setLoading(true); //animacion activada
         const tareaData = await APIbackend.listTareaByObra(id);
         setTareas(tareaData);
         console.log('id:', id, 'Datos Tarea:', tareaData)
     }catch(error){
         console.error('Error al listar tareas.', error.message)
+    }finally{
+        setLoading(false); //*desactivar la animacion
     }
 };
 //! Para actualizar una tarea por su id
@@ -267,6 +270,7 @@ const handleEliminar = async (id, tareaId) => {
                                 </tr>
                             </thead>
                             <tbody>
+                                {loading && <div className="loader"></div>}
                                 {filteredTarea.map((tarea) => (
                                 <tr className="bg-gray-600 border-b"  key={tarea.id}>
                                     <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{tarea.id}</td>

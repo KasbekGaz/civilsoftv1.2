@@ -21,6 +21,7 @@ const ControlObra =  () =>{
     const { id } = useParams(); //* id es de la obra
     const [ obraData, setObraData ] = useState({});
     const [ volumen, setVolumen ] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     const navigate = useNavigate();
 
@@ -128,12 +129,15 @@ const ControlObra =  () =>{
 //! Listar los volumenes por id obra
 const fetchVolumen = async () =>{
     try{
+        setLoading(true); //*
         const volumenData = await APIbackend.ListarVolumenbyObra(id);
         setVolumen(volumenData);
         console.log('Obra:', id, 'Datos Obtenidos: ', volumenData);
 
     }catch(error){
         console.error('Error al listar volumenes', error.message);
+    }finally{
+        setLoading(false)
     }
 }
 //! Para actualizar volumen por su id
@@ -343,6 +347,7 @@ return(
                             </tr>
                         </thead>
                         <tbody>
+                            {loading && <div className="loader"></div>}
                             {filteredConcepto.map((vol) => (
                                 <tr className="bg-gray-600 border-b" key={vol.id}>
                                     <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{vol.id}</td>

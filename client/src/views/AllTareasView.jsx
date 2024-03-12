@@ -3,6 +3,7 @@ import APIbackend from '../api/APIbackend';
 
 const AllTareasView = () =>{
     const [tareas, setTareas] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() =>{
         fetchTareas();
@@ -12,9 +13,11 @@ const AllTareasView = () =>{
         try{
             const tareasData = await APIbackend.getAllTareas();
             setTareas(tareasData);
+            setLoading(false);
             console.log('Tareas:', tareasData );
         }catch(error){
             console.error('Error al obtener datos', error.message);
+            setLoading(false);
         }
     }
 
@@ -32,6 +35,7 @@ return(
                     </tr>
                 </thead>
                 <tbody>
+                    {loading && <div className="loader px-4 py-4"></div>}
                     {tareas.map((tarea)=>(
                         <tr className="bg-gray-600 border-b" key={tarea.id} >
                             <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{tarea.obra}</td>

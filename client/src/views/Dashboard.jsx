@@ -40,36 +40,42 @@ const Dashboard = () => {
 return (
 
 <div>
-    <h1 
-        className="text-3xl font-bold tracking-tight text-white sm:text-4xl">Civilsoft</h1>
     {isAuthenticated ? (
-    <div>
-        <p 
-            className="text-1xl font-bold tracking-tight text-white sm:text-1xl">Bienvenido al dashboard. !! </p>
-        <button 
-            onClick={handleProveedores}
-            className="text-center font-semibold rounded-full bg-purple-500 py-2 px-4 mb-4 mt-4 hover:bg-green-400 mx-4">
-                    Control de Proveedores
-        </button>
-        <button 
-            onClick={handleLogout}
-            className="text-center font-semibold rounded-full bg-yellow-500 py-2 px-4 mb-4 mt-4 hover:bg-red-700"
-            >Cerrar sesión</button>
+        <div>
+            <div>
+                <div className=" container mx-auto flex-auto bg-indigo-950 border border-black drop-shadow-xl rounded-2xl">
+                    <h1 
+                    className="text-3xl font-bold tracking-tight text-white sm:text-4xl">Civilsoft</h1>
+                    <p 
+                        className="text-1xl font-bold tracking-tight text-white sm:text-1xl">Bienvenido al centro de control</p>
+                    <button 
+                        onClick={handleProveedores}
+                        className="text-center font-semibold rounded-full bg-purple-500 py-2 px-4 mb-4 mt-4 hover:bg-green-400 mx-4">
+                                Control de Proveedores
+                    </button>
+                    <button 
+                        onClick={handleLogout}
+                        className="text-center font-semibold rounded-full bg-yellow-500 py-2 px-4 mb-4 mt-4 hover:bg-red-700"
+                        >Cerrar sesión</button>
+                </div>
 
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div>
-                <AllTareasView/>
-            </div>
-            <div>
-                <CalendarView/>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div className="p-4 bg-indigo-950 border border-black drop-shadow-xl rounded-2xl">
+                        <AllTareasView/>
+                    </div>
+                    <div className="p-4 bg-indigo-950 border border-black drop-shadow-xl rounded-2xl">
+                        <CalendarView/>
+                    </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-1 gap-8">
+                    <div className="p-4 bg-indigo-950 border border-black drop-shadow-xl rounded-2xl">
+                    <ListObra />
+                    </div>
+                </div>
             </div>
         </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-1 gap-8">
-        <ListObra />
-        </div>
-    </div>
     ) : (
     <div>
         <p>No has iniciado sesión. Debes iniciar sesión para acceder o registrate si es el caso.</p>

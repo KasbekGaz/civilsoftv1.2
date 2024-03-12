@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 const ListObra = () => {
     const [obras, setObras] = useState([]);
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         fetchObras();
@@ -14,8 +15,10 @@ const ListObra = () => {
     const fetchObras = async () => {
         try {
         const obrasData = await APIbackend.listObra();
+        setLoading(false);
         setObras(obrasData);
         } catch (error) {
+        setLoading(false);
         console.error('Error al obtener la lista de obras:', error.message);
         }
     };
@@ -93,6 +96,7 @@ return (
                 </tr>
             </thead>
             <tbody>
+                {loading && <div className="loader px-4 py-4"></div>}
                 {filteredObra.map((obra) => (
                 <tr className="bg-gray-600 border-b" key={obra.id}>
                     <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{obra.id}</td>

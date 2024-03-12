@@ -5,6 +5,7 @@ import APIbackend from '../api/APIbackend';
 const ProveedorsView = () =>{
     const [material, setMateriales] = useState([]);
     const [prov, SetProveedor] = useState([]);
+    const [loading, setLoading] = useState(false); //animacion de carga
 
     const navigate = useNavigate();
 
@@ -19,11 +20,14 @@ const ProveedorsView = () =>{
 //! Listar materiales
     const fetchMaterial = async () => {
         try{
+            setLoading(true); //Activar animacion
             const materialData = await APIbackend.AllMateriales();
             setMateriales(materialData);
             console.log('Datos obtenidos: ', materialData);
         }catch(error){
             console.error('Error al obtener la lista de materiales', error.message);
+        }finally{
+            setLoading(false); //desactivar animacion
         }
     };
      //* Buscador material para tabla materiales
@@ -34,11 +38,14 @@ const ProveedorsView = () =>{
 //! Listar proveedores
     const fetchProv = async () =>{
         try{
+            setLoading(true);//acticvar animacion
             const proveedores = await APIbackend.listP();
             SetProveedor(proveedores);
             console.log('Datos obtenidos:', proveedores);
         }catch(error){
             console.error('Error al obtener la lista de proveedores', error.message);
+        }finally{
+            setLoading(false); //Desactivar animacion
         }
     };
     //* Buscador proveedor para tabla proveedores
@@ -72,7 +79,7 @@ const ProveedorsView = () =>{
 
 return(
 <div className="container mx-auto">
-    <div className="container mx-auto">
+    <div className="container mx-auto flex-auto bg-indigo-950 border border-black drop-shadow-xl rounded-2xl p-4">
         <h1 className="text-3xl font-bold tracking-tight text-white sm:text-3xl">Control de Proveedores</h1>
         <button className="text-center font-semibold rounded-full bg-green-400 hover:bg-green-700 py-2 px-4 mb-4 mt-4" onClick={handleBack}>
             Regresar
@@ -114,6 +121,7 @@ return(
                         </tr>
                     </thead>
                     <tbody>
+                        {loading && <div className="loader"></div>}
                         {filteredMaterial.map((m) => (
                             <tr className="bg-gray-600 border-b" key={m.id}>
                                 <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{m.id}</td>
@@ -132,7 +140,7 @@ return(
         <div className="grid grid-cols-1 md:grid-cols-1 gap-8">
             <h1 className="text-2xl mt-4 font-bold tracking-tight text-white sm:text-2xl"> Lista de Proveedores</h1>
             <button 
-                className="text-center font-semibold rounded-full bg-yellow-500 py-2 px-4 mb-4 mt-4 hover:bg-yellow-700"
+                className="text-center font-semibold rounded-full bg-yellow-500 hover:bg-yellow-600 py-2 px-4 mb-4 mt-4"
                 onClick={CreateProveedor}>
                 Registrar Nuevo Proveedor
             </button>
@@ -168,6 +176,7 @@ return(
                         </tr>
                     </thead>
                     <tbody>
+                        {loading && <div className="loader"></div>}
                         {filteredProv.map((prove) => (
                             <tr className="bg-gray-600 border-b" key={prove.id}>
                                 <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{prove.id}</td>

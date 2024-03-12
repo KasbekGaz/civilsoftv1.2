@@ -21,6 +21,7 @@ const ControlAdmin = () => {
     const [obraData, setObraData] = useState({}); //*datos de la obra
     const [ gastos, setGastos ] = useState([]); //* datos de gastos de uan obra
     const [abonos, setAbonos] = useState([]);
+    const [loading, setLoading] = useState(false);//* animacion de carga 
 
 
     const navigate = useNavigate();
@@ -159,12 +160,15 @@ const ControlAdmin = () => {
     const fetchGastos = async () =>{
         try{
             console.log(id); //obra_id
+            setLoading(true);//activar animacion
             const gastoData = await APIbackend.listGastobyObra(id);
             setGastos(gastoData);
             console.log('id:', id , 'Datos Obtenidos: ', gastoData);
 
         }catch(error){
             console.error('Error al listar gastos', error.message)
+        }finally{
+            setLoading(false)// desactivando animaicon
         }
     };
     //! Para Actualizar gasto por su id
@@ -210,12 +214,15 @@ const ControlAdmin = () => {
     const fetchAbonos = async () =>{
         try{
             console.log(id); //obra_id
+            setLoading(true); //activamos animacion
             const abonoData = await APIbackend.ListarAbonobyObra(id);
             setAbonos(abonoData);
             console.log('id:', id , 'Abonos Obtenidos: ', abonoData);
 
         }catch(error){
             console.error('Error al listar abonos', error.message)
+        }finally{
+            setLoading(false); //desactivar animacion
         }
     };
     //! Actualizar ABONO
@@ -490,6 +497,7 @@ return(
                             </tr>
                         </thead>
                         <tbody>
+                        {loading && <div className="loader"></div>}
                             {gastos.filter(gasto => 
                         (filtroCategoria === '' || gasto.categoria === filtroCategoria) && // Filtro por categoría
                         (filtroFacturado === '' || gasto.facturado === filtroFacturado) && // Filtro por estado de facturado
@@ -597,6 +605,7 @@ return(
                                 </tr>
                             </thead>
                             <tbody>
+                            {loading && <div className="loader"></div>}
                             {abonos.map((abono) => (
                                 <tr className="bg-gray-600 border-b" key={abono.id} >
                                     <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{abono.id}</td>
