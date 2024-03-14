@@ -377,8 +377,8 @@ return(
                             name="facturado"
                             value={gastoData.facturado}
                             onChange={handleInputChange}>
-                                <option value="Facturado">Facturado</option>
                                 <option value="No Facturado"> No Facturado</option>
+                                <option value="Facturado">Facturado</option>
                             </select>
                     </label>
 
