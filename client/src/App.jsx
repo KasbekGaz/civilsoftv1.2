@@ -64,7 +64,7 @@ const App = () => {
         {/** Vista de Material*/}
         <Route path="/update-material-by-obra/:id/:mId" element={<UpdateMaterial />}/>
         {/** Vista de Banca*/}
-        <Route path="/update-banca-by-obra/:id/:abonoId" element={<UpdateBanca />}/>
+        <Route path="/update-banca-by-obra/:id/:bId" element={<UpdateBanca />}/>
         {/** Vista de Banca*/}
         <Route path="/update-abono-by-obra/:id/:abonoId" element={<UpdateAbono />}/>
       </Routes>
