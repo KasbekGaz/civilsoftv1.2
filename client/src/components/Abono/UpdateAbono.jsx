@@ -55,7 +55,7 @@ const UpdateAbono = () =>{
     };
 
 return(
-    <div className="container mx-4 my-4 max-w-sm p-6 bg-violet-950- border border-violet-600 rounded-lg drop-shadow-xl">
+    <div className="container mx-4 my-4 max-w-sm p-6 bg-indigo-950 border border-black rounded-lg drop-shadow-xlxl">
 
         <h1 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">Actualizar Abono: {abonoData.descripcion}</h1>
 
@@ -102,7 +102,7 @@ return(
                         className="text-center font-semibold rounded-full bg-yellow-500 py-2 px-4 mb-4 mt-4 hover:bg-green-500"
                         type="button"
                         onClick={handleUpdateAbono}>
-                        Agregar Abono
+                        Actualizar Abono
                     </button>
         </form>
 

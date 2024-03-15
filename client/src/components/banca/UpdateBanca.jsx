@@ -21,7 +21,7 @@ const UpdateBanca = () => {
         //*Cargar datos de la banca
         const fetchBancaData = async () => {
             try{
-                console.log('Id de banca:', bId);
+                console.log('Idbanca:', bId);
                 const banca = await APIbackend.getBancaById(bId);
                 console.log(banca);
                 setBancaData({
@@ -60,7 +60,7 @@ const UpdateBanca = () => {
     };
 
     return(
-        <div className=" container mx-4 my-4 max-w-sm p-6 bg-violet-950- border border-violet-600 rounded-lg drop-shadow-xl">
+        <div className=" container mx-4 my-4 max-w-sm p-6 bg-indigo-950 border border-black rounded-lg drop-shadow-xl">
             <h1 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">Actualizar Informacion Bancaria</h1>
 
             <button className="text-center font-semibold rounded-full bg-green-400 hover:bg-green-700 py-2 px-4 mb-4 mt-4"

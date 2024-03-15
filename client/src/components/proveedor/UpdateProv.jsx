@@ -61,7 +61,7 @@ const UpdateProv = () =>{
     };
 
 return(
-    <div className=" container mx-4 my-4 max-w-sm p-6 bg-violet-950- border border-violet-600 rounded-lg drop-shadow-xl">
+    <div className=" container mx-4 my-4 max-w-sm p-6 bg-indigo-950 border border-black rounded-lg drop-shadow-xl">
         <h1 className="tittext-3xl font-bold tracking-tight text-white sm:text-4xl"> Actualizar Proveedor </h1>
 
         <button
