@@ -30,10 +30,12 @@ const ControlGaleria = () => {
 
     const handleFileChange = (e) => {
         setArchivo(e.target.files[0]);
+        console.log(archivo);
     };
 //! Para crear la galeria --------------------- 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
         const formData = new FormData();
         formData.append('archivo', archivo);
         formData.append('descripcion', descripcion);
@@ -48,7 +50,8 @@ const ControlGaleria = () => {
         } catch (error) {
         console.error('Error al agregar la imagen:', error);
         }
-
+        
+        alert('Se agregaron los datos correctamente!');
         // Limpiar el formulario
         setArchivo(null);
         setDescripcion('');
@@ -68,7 +71,7 @@ const ControlGaleria = () => {
     useEffect(() => {
         fetchObraDetails();
         fetchImages();
-    }, [id]);
+    }, [id]);   
 
     //! Para Actualizar gasto por su id
     const handleActualizar = (id, galeriaId) =>{
@@ -126,25 +129,43 @@ return (
         </div>
 
         <div className="flex flex-wrap p-4 bg-indigo-950 border border-black drop-shadow-xl rounded-2xl">
-            {images.map((image) => (
-                <div className="max-w-sm rounded overflow-hidden shadow-lg m-4 border border-black" key={image.id}>
-                <img src={image.archivo} alt={image.descripcion} className="w-full h-64 object-cover" />
-                <div className="px-6 py-4">
-                    <div className="font-bold text-xl mb-2">{image.descripcion}</div>
-                    <p className="text-white text-base">{image.fecha}</p>
-                </div>
-                    <button className="flex-1 text-center font-semibold rounded-full bg-orange-500 py-2 px-4 mb-4 mt-4 hover:bg-orange-600"
-                    onClick={() => handleActualizar(id, image.id)}>
-                        Actualizar
-                    </button>
-
-                    <button className="flex-1 text-center font-semibold rounded-full bg-red-500 py-2 px-4 mb-4 mt-4 hover:bg-red-600"
-                    onClick={() => handleEliminar(id, image.id)}>
-                        Eliminar
-                    </button>
-                </div>
-            ))}
+            <table className="w-full">
+                <thead>
+                    <th> Ruta del archivo </th>
+                    <th> Descripcion </th>
+                    <th> Fecha </th>
+                    <th> Acciones </th>
+                </thead>
+                <tbody>
+                    {images.map((image) => (
+                        <tr key={image.id}>
+                            <td >
+                            <img src={image.archivo}></img>
+                            </td>
+                            <td>
+                                {image.descripcion}
+                            </td>
+                            <td>
+                                {image.fecha}
+                            </td>
+                            <td>
+                                <div className="flex justify-between px-6">
+                                    <button className="font-semibold rounded-full bg-orange-500 py-2 px-4 mb-4 mt-4 hover:bg-orange-600"
+                                        onClick={() => handleActualizar(id, image.id)}>
+                                        Actualizar
+                                    </button>
+                                    <button className="font-semibold rounded-full bg-red-500 py-2 px-4 mb-4 mt-4 hover:bg-red-600"
+                                        onClick={() => handleEliminar(id, image.id)}>
+                                        Eliminar
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
         </div>
+
 </div>
 );
 };
