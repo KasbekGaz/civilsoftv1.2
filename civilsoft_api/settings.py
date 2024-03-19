@@ -68,6 +68,18 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+# * Configuración para manejar archivos subidos
+FILE_UPLOAD_HANDLERS = [
+    'django.core.files.uploadhandler.MemoryFileUploadHandler',
+    'django.core.files.uploadhandler.TemporaryFileUploadHandler',
+]
+
+# * Configuración de límites para archivos subidos (opcional)
+# 5 MB (tamaño máximo en bytes para datos en memoria)
+DATA_UPLOAD_MAX_MEMORY_SIZE = 5242880
+# Máximo número de campos en la solicitud POST
+DATA_UPLOAD_MAX_NUMBER_FIELDS = 1000
+
 
 ROOT_URLCONF = 'civilsoft_api.urls'
 
