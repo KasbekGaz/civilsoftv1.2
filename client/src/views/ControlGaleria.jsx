@@ -82,7 +82,7 @@ const ControlGaleria = () => {
             alert('Eliminaste el gasto con exito!!')
             fetchImages();
         }catch(error){
-            console.error('Error al eliminar el gasto', error.message);
+            console.error('Error al eliminar la(s) foto(s)', error.message);
         }
     };
 
