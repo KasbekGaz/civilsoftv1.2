@@ -167,9 +167,9 @@ class Gasto(models.Model):
 
 class Galeria(models.Model):
     obra = models.ForeignKey(Obra, on_delete=models.CASCADE)
-    descripcion = models.TextField()
-    fecha = models.DateField()
-    archivo = models.ImageField(upload_to='galeria/')
+    descripcion = models.TextField(blank=True)
+    fecha = models.DateField(default=timezone.now)
+    archivo = models.ImageField(blank=True, default='', upload_to='fotos/')
 
     def __str__(self):
         return f"{self.obra} ({self.archivo})"

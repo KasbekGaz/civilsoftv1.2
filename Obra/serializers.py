@@ -45,7 +45,7 @@ class GastoSerializer(serializers.ModelSerializer):
 class GaleriaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Galeria
-        fields = '__all__'
+        fields = ['obra', 'descripcion', 'fecha', 'archivo']
 
 
 class VolumenSerializer(serializers.ModelSerializer):
