@@ -2,6 +2,9 @@ import axios from 'axios';
 
 const API_BASE_URL = 'http://127.0.0.1:8000/app/api/v1';
 const API_BASE_URL_CONTACS = 'http://127.0.0.1:8000/contacs/api/v1';
+//manejo de archivos instancia
+const API_MEDIA_URL = 'http://127.0.0.1:8000/app/api/v1';
+
 
 const instance = axios.create({
     baseURL: API_BASE_URL,
@@ -15,6 +18,13 @@ const instanceC = axios.create({
     headers: {
         'Content-Type': 'application/json',
     },
+});
+
+const instanceMedia = axios.create({
+    baseURL: API_MEDIA_URL,
+    headers: {
+        'Content-Type': 'multipart/form-data',
+    }
 });
 
 const APIbackend = {
@@ -350,7 +360,7 @@ const APIbackend = {
             console.log('Id que entra:', GaleriaId);
             const token = localStorage.getItem('token');
             console.log('Token:', token);
-            const response = await instance.get(`/galeria/${GaleriaId}/`, {
+            const response = await instanceMedia.get(`/galeria/${GaleriaId}/`, {
                 headers: { Authorization: `Token ${token}` },
             });
             console.log('Response Data:', response.data);
@@ -366,9 +376,8 @@ const APIbackend = {
             const token = localStorage.getItem('token');
             console.log(token);
 
-            const response = await instance.get(`/galeriabyObra/${obraId}/`,{
+            const response = await instanceMedia.get(`/galeriabyObra/${obraId}/`,{
                 headers: { Authorization: `Token ${token}` },
-                'Content-Type': 'multipart/form-data',
             });
 
             console.log(response.data)
@@ -383,11 +392,10 @@ const APIbackend = {
     CreateGaleriabyObra: async (obraId, galeriaData) => {
         try{
             const token = localStorage.getItem('token');
-            console.log('Token:', token);
+            console.log('Token:', token, galeriaData);
 
-            const response = await instance.post(`/create-galeria-for-obra/${obraId}/`, galeriaData, {
+            const response = await instanceMedia.post(`/create-galeria-for-obra/${obraId}/`, galeriaData, {
                 headers: { Authorization: `Token ${token}` },
-                        'Content-Type': 'multipart/form-data',
             });
             
             console.log(response.data);
@@ -395,6 +403,7 @@ const APIbackend = {
 
         }catch(error){
             console.error('No se pudo agregar la galeria: ', error.message);
+            console.log('form-data: ', galeriaData);
             console.log('Error details:', error.response.data);
             
         }
@@ -403,7 +412,7 @@ const APIbackend = {
     updateGaleriabyObra: async (obraId, galeriaId, galeriaData) =>{
         try{
             const token = localStorage.getItem('token');
-            const response = await instance.put(`/update-galeria-for-obra/${obraId}/${galeriaId}/`, galeriaData, {
+            const response = await instanceMedia.put(`/update-galeria-for-obra/${obraId}/${galeriaId}/`, galeriaData, {
                 headers: { Authorization: `Token ${token}` },
             });
 
@@ -418,7 +427,7 @@ const APIbackend = {
     deleteGaleriabyObra: async (obraId, galeriaId) =>{
         try{
             const token = localStorage.getItem('token');
-            const response = await instance.delete(`/delete-galeria-for-obra/${obraId}/${galeriaId}/`, {
+            const response = await instanceMedia.delete(`/delete-galeria-for-obra/${obraId}/${galeriaId}/`, {
                 headers: { Authorization: `Token ${token}` }
             });
 
