@@ -45,7 +45,7 @@ return (
             <div>
                 <div className=" container mx-auto flex-auto bg-indigo-950 border border-black drop-shadow-xl rounded-2xl">
                 <div className="my-4">
-                    <img src="/CivilSoft-Home.svg" alt="Icon" className="w-20 h-auto mx-auto"/> {/* Reducido el tamaño del icono */}
+                    <img src="/CivilSoft-Home.svg" alt="Icon" className="w-20 h-auto mx-auto"/>
                 </div>
                     <h1 
                     className="text-3xl font-bold tracking-tight text-white sm:text-4xl">Civilsoft</h1>
