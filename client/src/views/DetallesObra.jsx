@@ -142,13 +142,14 @@ return (
                         </div>
                     </div>
                 </div>
-
+                {/* Aqui comentamos esto para desactivarlo----- elemento galeria----
                 <div className="bg-indigo-950 p-4 rounded-md col-span-2 border border-black">
                     <h2 className="text-2xl font-semibold mb-2">Galeria</h2>
                     <img src="/galeria.svg" alt="Icon" className="mx-auto max-w-40 h-40"/>
                     <button className="text-center font-semibold rounded-full bg-yellow-500 py-2 px-4 mb-4 mt-4 hover:bg-green-500"
                         onClick={handleControlGaleria}>Agregar Foto</button>
                 </div>
+                */}
             </div>
         </div>
     </div>
