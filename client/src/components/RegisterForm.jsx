@@ -9,7 +9,7 @@ const RegisterForm = () =>{
         password:'',
         email:'',
         telefono:'',
-        rol:'',
+        rol:'Admin',
     });
 
     const handleInputChange = (e) => {
@@ -23,7 +23,6 @@ const RegisterForm = () =>{
     const handleCreateUser = async () =>{
         try {
             const response = await APIbackend.registerUser(userData);
-
             console.log('Usuario Registrado:', response);
             alert('Se registró correctamente, sera redirigido a incio de sesión.');
             navigate('/login');
