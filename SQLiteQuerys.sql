@@ -1,0 +1,7 @@
+-- SQLite
+--DELETE FROM Obra_customuser WHERE id = 2;
+-- Se uso este para borrar un usuario
+---------
+--Usaremos el siguiente para borrar varios:
+--DELETE FROM Obra_customuser WHERE id IN (15,14,12,11,10,8,7,6,5,4,3,1);
+--Si funciono aleluya ya sabemos como manejar las querys más o menos xd
