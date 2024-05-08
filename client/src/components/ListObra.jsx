@@ -86,42 +86,44 @@ return (
                 </div>
         </div>
 
-        <table className="w-full text-left rtl:text-right text-white">
-            <thead className="text-sm text-white uppercase">
-                <tr className="bg-gray-800 border-b">
-                <th scope="col" className="px-6 py-3 text-center rounded-s-2xl">ID</th>
-                <th scope="col" className="px-6 py-3 text-center">Nombre</th>
-                <th scope="col" className="px-6 py-3 text-center">Fecha Registrado</th>
-                <th scope="col" className="px-6 py-3 text-center rounded-e-2xl">Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                {loading && <div className="loader px-4 py-4"></div>}
-                {filteredObra.map((obra) => (
-                <tr className="bg-gray-600 border-b" key={obra.id}>
-                    <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{obra.id}</td>
-                    <td scope="row" className="px-4 py-2 text-white text-right text-base font-semibold" >{obra.nombre}</td>
-                    <td scope="row" className="px-4 py-2 text-white text-justify text-base font-semibold">{obra.fecha}</td>
-                    <td scope="row" className="px-4 py-2 flex space-x-1 justify-items-center">
-                        <button className="flex-1 text-center font-semibold rounded-full bg-fuchsia-500 py-2 px-4 hover:bg-fuchsia-600"
-                        onClick={() => handleDetalles(obra.id)}>
-                            Detalles
-                        </button>
-                        <button className="flex-1 text-center font-semibold rounded-full bg-orange-500 py-2 px-4  hover:bg-orange-600"
-                        onClick={() => handleActualizar(obra.id)}>
-                            Actualizar
-                        </button>
-                        <button className="flex-1 text-center font-semibold rounded-full bg-red-500 py-2 px-4 hover:bg-red-600"
-                        onClick={() => handleEliminar(obra.id) }
-                            >
-                            Eliminar
-                        </button>
-                    </td>
-                    
-                </tr>
-                ))}
-            </tbody>
-        </table>
+        <div className="overflow-auto max-h-96">
+            <table className="w-full text-left rtl:text-right text-white">
+                <thead className="text-sm text-white uppercase">
+                    <tr className="bg-gray-800 border-b">
+                    <th scope="col" className="px-6 py-3 text-center rounded-s-2xl">ID</th>
+                    <th scope="col" className="px-6 py-3 text-center">Nombre</th>
+                    <th scope="col" className="px-6 py-3 text-center">Fecha Registrado</th>
+                    <th scope="col" className="px-6 py-3 text-center rounded-e-2xl">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {loading && <div className="loader px-4 py-4"></div>}
+                    {filteredObra.map((obra) => (
+                    <tr className="bg-gray-600 border-b" key={obra.id}>
+                        <td scope="row" className="px-4 py-2 text-white text-center text-base font-semibold">{obra.id}</td>
+                        <td scope="row" className="px-4 py-2 text-white text-right text-base font-semibold" >{obra.nombre}</td>
+                        <td scope="row" className="px-4 py-2 text-white text-justify text-base font-semibold">{obra.fecha}</td>
+                        <td scope="row" className="px-4 py-2 flex space-x-1 justify-items-center">
+                            <button className="flex-1 text-center font-semibold rounded-full bg-fuchsia-500 py-2 px-4 hover:bg-fuchsia-600"
+                            onClick={() => handleDetalles(obra.id)}>
+                                Detalles
+                            </button>
+                            <button className="flex-1 text-center font-semibold rounded-full bg-orange-500 py-2 px-4  hover:bg-orange-600"
+                            onClick={() => handleActualizar(obra.id)}>
+                                Actualizar
+                            </button>
+                            <button className="flex-1 text-center font-semibold rounded-full bg-red-500 py-2 px-4 hover:bg-red-600"
+                            onClick={() => handleEliminar(obra.id) }
+                                >
+                                Eliminar
+                            </button>
+                        </td>
+                        
+                    </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 );

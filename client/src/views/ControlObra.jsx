@@ -328,7 +328,7 @@ return(
                     </div>
                 </div>
 
-                <div className="overflow-x-auto mt-2">
+                <div className="overflow-auto max-h-96">
                     <table className="w-full text-left rtl:text-right text-white">
                         <thead className="text-sm text-white uppercase">
                             <tr className="bg-gray-800 border-b">

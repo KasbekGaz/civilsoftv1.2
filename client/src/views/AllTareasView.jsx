@@ -25,7 +25,7 @@ return(
     <div className="w-full  p-4 ">
         <h2 className="text-3xl font-bold tracking-tight text-white sm:text-4xl">
             Tareas Globales</h2>
-        <div className="overflow-x-auto mt-2">
+        <div className="overflow-auto max-h-96">
             <table className="w-full text-left rtl:text-right text-white">
                 <thead className="text-sm text-white uppercase">
                     <tr className="bg-gray-800 border-b">

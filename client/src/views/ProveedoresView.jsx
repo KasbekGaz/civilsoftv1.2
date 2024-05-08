@@ -109,7 +109,7 @@ return(
                 </div>
             </div>
 
-            <div className="overflow-x-auto">
+            <div className="overflow-auto max-h-96">
                 <table className="w-full text-left rtl:text-right text-white table-auto">
                     <thead className="text-sm text-white uppercase">
                         <tr className="bg-gray-800 border-b">
@@ -164,7 +164,7 @@ return(
                 </div>
             </div>
 
-            <div className="overflow-x-auto">
+            <div className="overflow-auto max-h-96">
                 <table className="w-full text-left rtl:text-right text-white table-auto">
                     <thead className="text-sm text-white uppercase">
                         <tr className="bg-gray-800 border-b">

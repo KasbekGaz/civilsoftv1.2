@@ -480,7 +480,7 @@ return(
 
                     </div>
 
-                <div className="overflow-auto mt-2">
+                <div className="overflow-auto max-h-96">
                     <table className="w-full text-left rtl:text-right text-white">
                         <thead className="text-sm text-white uppercase">
                             <tr className="bg-gray-800 border-b">
@@ -593,7 +593,7 @@ return(
             </div>
             <div className="w-full p-4 bg-indigo-950 border border-black drop-shadow-xl rounded-2xl">
                 <h1 className="text-2xl font-bold tracking-tight text-white sm:text-2xl">Tabla de Abonos</h1>
-                    <div className="overflow-auto mt-2">
+                    <div className="overflow-auto max-h-96">
                         <table className="w-full text-left rtl:text-right text-white">
                             <thead className="text-sm text-white uppercase">
                                 <tr className="bg-gray-800 border-b">
