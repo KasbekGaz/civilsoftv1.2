@@ -107,8 +107,15 @@ WSGI_APPLICATION = 'civilsoft_api.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        # 'NAME': BASE_DIR / 'db.sqlite3',
+        # Prueba de xampp mysql-------------------------------
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'django_example',  # nombre de la que acabamos de crear
+        'USER': 'root',  # checarlo en phpmyadmin
+        'PASSWORD': '',  # si en la tabla dice que no tiene se deja en blanco
+        'HOST': '127.0.0.1',  # 'localhost' tambien este pero recomienda el otro
+        'PORT': '3306'  # El puerto del mysql del xampp
     }
 }
 
