@@ -107,15 +107,15 @@ WSGI_APPLICATION = 'civilsoft_api.wsgi.application'
 
 DATABASES = {
     'default': {
-         'ENGINE': 'django.db.backends.sqlite3',
-         'NAME': BASE_DIR / 'db.sqlite3',
+         #'ENGINE': 'django.db.backends.sqlite3',
+         #'NAME': BASE_DIR / 'db.sqlite3',
         # Prueba de xampp mysql-------------------------------
-        #'ENGINE': 'django.db.backends.mysql',
-        #'NAME': 'django_example',  # nombre de la que acabamos de crear
-        #'USER': 'root',  # checarlo en phpmyadmin
-        #'PASSWORD': '',  # si en la tabla dice que no tiene se deja en blanco
-        #'HOST': '127.0.0.1',  # 'localhost' tambien este pero recomienda el otro
-        #'PORT': '3306'  # El puerto del mysql del xampp
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'django_example',  # nombre de la que acabamos de crear
+        'USER': 'root',  # checarlo en phpmyadmin
+        'PASSWORD': '',  # si en la tabla dice que no tiene se deja en blanco
+        'HOST': '127.0.0.1',  # 'localhost' tambien este pero recomienda el otro
+        'PORT': '3306'  # El puerto del mysql del xampp
     }
 }
 
@@ -165,5 +165,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",  # O el origen de tu frontend
+    "http://localhost:5173",  # para desarrollo
+    "http://127.0.0.1:5173",  # para desarrollo
+    "http://localhost",  # para entorno de producción o prueba en XAMPP
+    "http://127.0.0.1"  # para entorno de producción o prueba en XAMPP
 ]
