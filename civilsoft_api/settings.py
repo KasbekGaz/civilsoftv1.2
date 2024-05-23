@@ -168,5 +168,13 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",  # para desarrollo
     "http://127.0.0.1:5173",  # para desarrollo
     "http://localhost",  # para entorno de producción o prueba en XAMPP
-    "http://127.0.0.1"  # para entorno de producción o prueba en XAMPP
+    "http://127.0.0.1",  # para entorno de producción o prueba en XAMPP
+    "http://civilsoft.app",  
+    "http://192.168.0.4", # local
+    "http://192.168.0.8", #cliente
 ]
+
+CORS_ALLOW_ALL_ORIGINS = True
+
+CORS_ALLOW_CREDENTIALS = True
+
