@@ -25,7 +25,10 @@ SECRET_KEY = 'django-insecure-dhu0@b196*eu5-3ssb(bzxfav6sws)gx3v_$9pu7=5ol-qq8z5
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "192.168.100.2", #IP DEL SERVIDOR
+    "127.0.0.1", #IP DEL SERVIDOR DEL BAKCEND
+]
 
 
 # Application definition
@@ -111,10 +114,10 @@ DATABASES = {
          #'NAME': BASE_DIR / 'db.sqlite3',
         # Prueba de xampp mysql-------------------------------
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'django_example',  # nombre de la que acabamos de crear
+        'NAME': 'django_civilsoft_app',  # nombre de la bd en deploy
         'USER': 'root',  # checarlo en phpmyadmin
         'PASSWORD': '',  # si en la tabla dice que no tiene se deja en blanco
-        'HOST': '127.0.0.1',  # 'localhost' tambien este pero recomienda el otro
+        'HOST': '127.0.0.1',  # 'localhost' comunicacion con backend
         'PORT': '3306'  # El puerto del mysql del xampp
     }
 }
@@ -169,10 +172,8 @@ CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:5173",  # para desarrollo
     "http://localhost",  # para entorno de producción o prueba en XAMPP
     "http://127.0.0.1",  # para entorno de producción o prueba en XAMPP
-    "http://civilsoft.app",  
-    "http://192.168.0.4", # local
-    "http://192.168.0.8", #cliente
-    "http://192.168.1.16", #ipdoñaanita
+    "http://192.168.100.2", #ip del servidor Aldrin
+    "http://192.168.100.2:8000", #puertodel servidor
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True
