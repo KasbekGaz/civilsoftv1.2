@@ -172,6 +172,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://civilsoft.app",  
     "http://192.168.0.4", # local
     "http://192.168.0.8", #cliente
+    "http://192.168.1.16", #ipdoñaanita
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True
