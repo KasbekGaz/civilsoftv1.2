@@ -1,5 +1,6 @@
 # Comentario en .gitignore #
 # Django #
+pip
 *.log
 *.pot
 *.pyc
