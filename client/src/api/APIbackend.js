@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'http://127.0.0.1:8000/app/api/v1';
-const API_BASE_URL_CONTACS = 'http://127.0.0.1:8000/contacs/api/v1';
+const API_BASE_URL = 'http://192.168.100.2:8000/app/api/v1';
+const API_BASE_URL_CONTACS = 'http://192.168.100.2:8000/contacs/api/v1';
 //manejo de archivos instancia
-const API_MEDIA_URL = 'http://127.0.0.1:8000/app/api/v1';
+const API_MEDIA_URL = 'http://192.168.100.2:8000/app/api/v1';
 
 
 const instance = axios.create({
